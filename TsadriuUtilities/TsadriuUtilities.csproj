@@ -2,14 +2,21 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.0.7</Version>
+    <Version>1.0.8</Version>
     <Description>A small package with utilities to save a little bit of time in coding.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>Updated to net.5.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Added more functionality to StrHelper:
+IsEmpty(value) - Returns true if the string is null, empty or white space.
+IsNotEmpty(value) - Returns true if the string contains any kind of character.
+LetterUpperCase(value, index) - Returns the string with the desired uppercase letter.
+LetterLowerCase(value, index) - Returns the string with the desired lowercase letter.
+</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
+    <PackageTags>StringHelper, GenericHelper</PackageTags>
+    <Authors>Tsadriu</Authors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
