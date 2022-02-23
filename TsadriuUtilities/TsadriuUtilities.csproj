@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+    <Version>1.0.7</Version>
+    <Description>A small package with utilities to save a little bit of time in coding.</Description>
+    <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageReleaseNotes>Updated to net.5.0</PackageReleaseNotes>
+    <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\foliveira\Documents\GitHub\TsadriuUtilities\TsadriuUtilities\TsadriuUtilities\TsadriuUtilities.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\foliveira\Documents\GitHub\TsadriuUtilities\TsadriuUtilities\TsadriuUtilities\TsadriuUtilities.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

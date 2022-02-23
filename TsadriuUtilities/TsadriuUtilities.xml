@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TsadriuUtilities</name>
+    </assembly>
+    <members>
+        <member name="T:TsadriuUtilities.MultiHelper">
+            <summary>
+            A class that helps on dealing with multiple things.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.MultiHelper.ClampValue``1(``0,``0,``0)">
+            <summary>
+            Clamps a value based on its' parameters. Returns <paramref name="maxValue"/> if <paramref name="currentValue"/> is higher than it and returns <paramref name="minValue"/> if it is lower than it.
+            Supported types:
+            <see cref="T:System.DateTime"/>,
+            <see cref="T:System.Int64"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/>,
+            <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Decimal"/>.
+            </summary>
+            <param name="currentValue">Current value.</param>
+            <param name="minValue">Minimum value that the <paramref name="currentValue"/> cannot succeed.</param>
+            <param name="maxValue">Maximum value that the <paramref name="currentValue"/> cannot succeed.</param>
+            <returns>Returns the clamped result of the operation.</returns>
+            <exception cref="T:System.NotImplementedException">Throws <see cref="T:System.NotImplementedException"/> if trying to call this method with an unsupported <see cref="T:System.Type"/>.</exception>
+        </member>
+        <member name="T:TsadriuUtilities.StrHelper">
+            <summary>
+            A class that helps on dealing with strings.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.StrHelper.GetTagValue(System.String,System.String,System.String)">
+            <summary>
+            Searches through an input text returning the value between the start tag and end tag.
+            </summary>
+            <param name="text">Text to search though.</param>
+            <param name="startTag">The start tag.</param>
+            <param name="endTag">The end tag.</param>
+            <returns>Returns string.empty if nothing is found.</returns>
+        </member>
+    </members>
+</doc>
