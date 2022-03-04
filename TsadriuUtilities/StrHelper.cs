@@ -1,4 +1,4 @@
-﻿// <copyright file Main.cs of solution TsadriuUtilities of developer Tsadriu>
+﻿// <copyright file StrHelper.cs of solution TsadriuUtilities of developer Tsadriu>
 // Copyright 2022 (C) Tsadriu. All rights reserved.
 // </copyright>
 using System;
@@ -86,7 +86,7 @@ namespace TsadriuUtilities
         /// <param name="value">The value to change.</param>
         /// <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
         /// <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
-        private static string LetterUpperCase(string value, int index = 0)
+        public static string LetterUpperCase(string value, int index = 0)
         {
             if (IsNotEmpty(value))
             {
@@ -111,7 +111,7 @@ namespace TsadriuUtilities
         /// <param name="value">The value to change.</param>
         /// <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
         /// <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
-        private static string LetterLowerCase(string value, int index = 0)
+        public static string LetterLowerCase(string value, int index = 0)
         {
             if (IsNotEmpty(value))
             {

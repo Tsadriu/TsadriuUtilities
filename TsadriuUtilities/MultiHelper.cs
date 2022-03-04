@@ -1,4 +1,4 @@
-﻿// <copyright file Main.cs of solution TsadriuUtilities of developer Tsadriu>
+﻿// <copyright file MultiHelper.cs of solution TsadriuUtilities of developer Tsadriu>
 // Copyright 2022 (C) Tsadriu. All rights reserved.
 // </copyright>
 using System;
@@ -10,6 +10,15 @@ namespace TsadriuUtilities
     /// </summary>
     public static class MultiHelper
     {
+        private static readonly Type dateType = typeof(DateTime);
+        private static readonly Type longType = typeof(long);
+        private static readonly Type intType = typeof(int);
+        private static readonly Type shortType = typeof(short);
+        private static readonly Type byteType = typeof(byte);
+        private static readonly Type floatType = typeof(float);
+        private static readonly Type doubleType = typeof(double);
+        private static readonly Type decimalType = typeof(decimal);
+
         /// <summary>
         /// Clamps a value based on its' parameters. Returns <paramref name="maxValue"/> if <paramref name="currentValue"/> is higher than it and returns <paramref name="minValue"/> if it is lower than it.
         /// Supported types:
@@ -25,14 +34,6 @@ namespace TsadriuUtilities
         public static T ClampValue<T>(T currentValue, T minValue, T maxValue)
         {
             var currentType = typeof(T);
-            var dateType = typeof(DateTime);
-            var longType = typeof(long);
-            var intType = typeof(int);
-            var shortType = typeof(short);
-            var byteType = typeof(byte);
-            var floatType = typeof(float);
-            var doubleType = typeof(double);
-            var decimalType = typeof(decimal);
 
             if (currentType == dateType)
             {
@@ -107,6 +108,21 @@ namespace TsadriuUtilities
             }
 
             throw new NotImplementedException("The type of " + typeof(T) + " is not supported.");
+        }
+
+        /// <summary>
+        /// Converts an <see cref="Array"/> into a single line <see cref="string"/>. If <paramref name="separator"/> is not passed, it will separate by a space. Examples: ArrayToString(new int[] { 1, 3, 5 }) -> "1 3 5", ArrayToString(new string[] { "5", "2" }, "|") -> "5|2".
+        /// Supported types:
+        /// <see cref="DateTime"/>,
+        /// <see cref="long"/>, <see cref="int"/>, <see cref="short"/>, <see cref="byte"/>,
+        /// <see cref="float"/>, <see cref="double"/>, <see cref="decimal"/>.
+        /// </summary>
+        /// <param name="array"><see cref="Array"/> of objects.</param>
+        /// <param name="separator"><see cref="string"/> separator. If nothing is passed, it will separate by a space.</param>
+        /// <returns><see cref="Array"/> converted into a single <see cref="string"/> line.</returns>
+        public static string ArrayToString<T>(T[] array, string separator = " ")
+        {
+            return string.Join(separator, array);
         }
     }
 }

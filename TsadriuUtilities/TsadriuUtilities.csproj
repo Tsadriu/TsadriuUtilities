@@ -2,25 +2,26 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.0.8</Version>
+    <Version>1.0.11</Version>
     <Description>A small package with utilities to save a little bit of time in coding.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>Added more functionality to StrHelper:
-IsEmpty(value) - Returns true if the string is null, empty or white space.
-IsNotEmpty(value) - Returns true if the string contains any kind of character.
-LetterUpperCase(value, index) - Returns the string with the desired uppercase letter.
-LetterLowerCase(value, index) - Returns the string with the desired lowercase letter.
-</PackageReleaseNotes>
+    <PackageReleaseNotes>Added DateTimeHelper to provide assistance to parsing dates from a string to a DateTime object.
+
+MultiHelper:
+ - Has a new method 'ArrayToString' that parses an array and converts it into a single line of string.
+
+NumberHelper:
+ - Has a new method 'ExponentialToDouble'.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageTags>StringHelper, GenericHelper</PackageTags>
+    <PackageTags>StringHelper, GenericHelper, NumberHelper, DateTimeHelper</PackageTags>
     <Authors>Tsadriu</Authors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\foliveira\Documents\GitHub\TsadriuUtilities\TsadriuUtilities\TsadriuUtilities\TsadriuUtilities.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\foliveira\Documents\GitHub\TsadriuUtilities\TsadriuUtilities\TsadriuUtilities.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
