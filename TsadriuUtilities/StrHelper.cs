@@ -129,5 +129,21 @@ namespace TsadriuUtilities
 
             return value;
         }
+
+        /// <summary>
+        /// Returns a <see cref="string"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="valuesToRemove"></param>
+        /// <returns></returns>
+        public static string Remove(string value, params string[] valuesToRemove)
+        {
+            for (int i = 0; i < valuesToRemove.Length; i++)
+            {
+                value = value.Replace(valuesToRemove[i], string.Empty);
+            }
+
+            return value;
+        }
     }
 }
