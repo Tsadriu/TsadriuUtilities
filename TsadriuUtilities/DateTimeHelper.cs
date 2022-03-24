@@ -7,7 +7,7 @@ using System.Globalization;
 namespace TsadriuUtilities
 {
     /// <summary>
-    /// A class that helps on dealing with Dates.
+    /// A class that helps on dealing with <see cref="DateTime"/>.
     /// </summary>
     public static class DateTimeHelper
     {

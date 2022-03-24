@@ -6,7 +6,7 @@
     <members>
         <member name="T:TsadriuUtilities.DateTimeHelper">
             <summary>
-            A class that helps on dealing with Dates.
+            A class that helps on dealing with <see cref="T:System.DateTime"/>.
             </summary>
         </member>
         <member name="M:TsadriuUtilities.DateTimeHelper.StringToDate(System.String,System.String[],System.Globalization.CultureInfo,System.Boolean)">
@@ -33,6 +33,53 @@
         </member>
         <member name="M:TsadriuUtilities.DateTimeHelper.StringToDate(System.String,System.String,System.Boolean)">
             <inheritdoc cref="M:TsadriuUtilities.DateTimeHelper.StringToDate(System.String,System.String[],System.Boolean)"/>
+        </member>
+        <member name="T:TsadriuUtilities.ListHelper">
+            <summary>
+            A class that helps on dealing with <see cref="T:System.Collections.Generic.List`1"/>.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0}@,``0[],System.Int32)">
+            <summary>
+            Adds the <paramref name="array"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="T:System.Array"/>.
+            </summary>
+            <typeparam name="T">Generic type.</typeparam>
+            <param name="currentList">List where <paramref name="array"/> will be added into.</param>
+            <param name="array">Array of values.</param>
+            <param name="index">From which point of the <paramref name="array"/>'s index should added.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0}@,System.Collections.Generic.List{``0},System.Int32)">
+            <summary>
+            Adds the <paramref name="array"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="T:System.Array"/>.
+            </summary>
+            <typeparam name="T">Generic type.</typeparam>
+            <param name="currentList">List where <paramref name="listToAdd"/> will be added into.</param>
+            <param name="listToAdd">Array of values.</param>
+            <param name="index">From which point of the <paramref name="listToAdd"/>'s index should added.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TsadriuUtilities.ListHelper.ToList``1(``0[])">
+            <summary>
+            Transforms an <see cref="T:System.Array"/> to a <see cref="T:System.Collections.Generic.List`1"/>.
+            </summary>
+            <typeparam name="T">Generic type.</typeparam>
+            <param name="array"><see cref="T:System.Array"/> that you want to be converted to a <see cref="T:System.Collections.Generic.List`1"/>.</param>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> containing the <paramref name="array"/>'s values.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ListHelper.OrderByAscending``1(System.Collections.Generic.List{``0}@)">
+            <summary>
+            Orders the <see cref="T:System.Collections.Generic.List`1"/> in ascending order.
+            </summary>
+            <typeparam name="T">Generic type.</typeparam>
+            <param name="list"><see cref="T:System.Collections.Generic.List`1"/> to be ordered.</param>
+        </member>
+        <member name="M:TsadriuUtilities.ListHelper.OrderByDescending``1(System.Collections.Generic.List{``0}@)">
+            <summary>
+            Orders the <see cref="T:System.Collections.Generic.List`1"/> in descending order.
+            </summary>
+            <typeparam name="T">Generic type.</typeparam>
+            <param name="list"><see cref="T:System.Collections.Generic.List`1"/> to be ordered.</param>
         </member>
         <member name="T:TsadriuUtilities.MultiHelper">
             <summary>
@@ -86,7 +133,7 @@
         </member>
         <member name="T:TsadriuUtilities.StrHelper">
             <summary>
-            A class that helps on dealing with strings.
+            A class that helps on dealing with <see cref="T:System.String"/>.
             </summary>
         </member>
         <member name="M:TsadriuUtilities.StrHelper.GetTagValue(System.String,System.String,System.String)">
@@ -127,6 +174,14 @@
             <param name="value">The value to change.</param>
             <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
             <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StrHelper.Remove(System.String,System.String[])">
+            <summary>
+            Returns a <see cref="T:System.String"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.
+            </summary>
+            <param name="value"></param>
+            <param name="valuesToRemove"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

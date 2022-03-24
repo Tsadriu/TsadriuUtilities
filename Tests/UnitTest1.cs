@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using TsadriuUtilities;
 
 namespace Tests
@@ -38,6 +39,15 @@ namespace Tests
             var result = MultiHelper.ArrayToString(dateTimeArray, "&");
 
             Assert.IsFalse(result.Contains(dateTimeArray.GetType().ToString()));
+
+            var listaString = new List<string>() { "Fabio", "Proto" };
+            var arrayString = new string[] { "Massimo", "Tito", "Giada", "Zina", "Jonah" };
+
+            ListHelper.AddRange(ref listaString, arrayString, 2);
+
+            var test = ListHelper.ToList(arrayString);
+
+            ListHelper.OrderByDescending(ref test);
         }
     }
 }

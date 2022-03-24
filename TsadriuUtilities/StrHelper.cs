@@ -6,7 +6,7 @@ using System;
 namespace TsadriuUtilities
 {
     /// <summary>
-    /// A class that helps on dealing with strings.
+    /// A class that helps on dealing with <see cref="string"/>.
     /// </summary>
     public static class StrHelper
     {
