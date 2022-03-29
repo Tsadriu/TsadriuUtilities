@@ -12,23 +12,23 @@ namespace TsadriuUtilities
     public static class ListHelper
     {
         /// <summary>
-        /// Adds the <paramref name="array"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="Array"/>.
+        /// Adds the <paramref name="array"/> into <paramref name="currentList"/>. If <paramref name="startIndex"/> is specified, it will add only from <paramref name="startIndex"/> (included) until the end of the <see cref="Array"/>.
         /// </summary>
         /// <typeparam name="T">Generic type.</typeparam>
         /// <param name="currentList">List where <paramref name="array"/> will be added into.</param>
         /// <param name="array">Array of values.</param>
-        /// <param name="index">From which point of the <paramref name="array"/>'s index should added.</param>
+        /// <param name="startIndex">From which point of the <paramref name="array"/>'s index should added.</param>
         /// <returns></returns>
-        public static void AddRange<T>(ref List<T> currentList, T[] array, int index = 0)
+        public static void AddRange<T>(ref List<T> currentList, T[] array, int startIndex = 0, int endIndex = 0)
         {
             var list = new List<T>();
             list.AddRange(array);
-            list = list.GetRange(index, list.Count - index);
+            list = list.GetRange(startIndex, list.Count - startIndex);
             currentList.AddRange(list);
         }
 
         /// <summary>
-        /// Adds the <paramref name="array"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="Array"/>.
+        /// Adds the <paramref name="listToAdd"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="Array"/>.
         /// </summary>
         /// <typeparam name="T">Generic type.</typeparam>
         /// <param name="currentList">List where <paramref name="listToAdd"/> will be added into.</param>
