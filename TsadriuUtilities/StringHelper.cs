@@ -1,4 +1,4 @@
-﻿// <copyright file StrHelper.cs of solution TsadriuUtilities of developer Tsadriu>
+﻿// <copyright file StringHelper.cs of solution TsadriuUtilities of developer Tsadriu>
 // Copyright 2022 (C) Tsadriu. All rights reserved.
 // </copyright>
 using System;
@@ -8,8 +8,7 @@ namespace TsadriuUtilities
     /// <summary>
     /// A class that helps on dealing with <see cref="string"/>.
     /// </summary>
-    [Obsolete("StrHelper class is deprecated, please use class StringHelper instead.")]
-    public static class StrHelper
+    public static class StringHelper
     {
         /// <summary>
         /// Searches through the <paramref name="text"/>, returning the content between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
@@ -21,7 +20,44 @@ namespace TsadriuUtilities
         /// <returns>Returns string.Empty if nothing is found.</returns>
         public static string GetTagValue(string text, string startTag, string endTag = null, bool tagsIncluded = false)
         {
-            return StringHelper.GetTagValue(text, startTag, endTag, tagsIncluded);
+            if (IsEmpty(text))
+            {
+                return string.Empty;
+            }
+
+            var textLength = text.Length;
+            var result = string.Empty;
+
+            // Find the index of the first tag.
+            var startTagIndex = text.IndexOf(startTag, StringComparison.OrdinalIgnoreCase);
+
+            // If startTag is bigger than -1 it means we found it.
+            if (startTagIndex > -1)
+            {
+                startTagIndex += startTag.Length;
+                startTagIndex += tagsIncluded ? -startTag.Length : 0;
+
+                if (string.IsNullOrEmpty(endTag))
+                {
+                    result = text.Substring(startTagIndex, textLength - startTagIndex);
+                }
+                else
+                {
+                    var endTagIndex = text.IndexOf(endTag, startTagIndex, StringComparison.OrdinalIgnoreCase);
+                    endTagIndex += tagsIncluded ? endTag.Length : 0;
+
+                    if (endTagIndex > -1)
+                    {
+                        result = text.Substring(startTagIndex, endTagIndex - startTagIndex);
+                    }
+                    else
+                    {
+                        result = text.Substring(startTagIndex, textLength - startTagIndex);
+                    }
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -31,7 +67,7 @@ namespace TsadriuUtilities
         /// <returns>Returns true if the <paramref name="value"/> is empty. Returns false if not.</returns>
         public static bool IsEmpty(string value)
         {
-            return StringHelper.IsEmpty(value);
+            return string.IsNullOrWhiteSpace(value);
         }
 
         /// <summary>
@@ -41,7 +77,7 @@ namespace TsadriuUtilities
         /// <returns>Returns true if the <paramref name="value"/> is not empty. Returns false if not.</returns>
         public static bool IsNotEmpty(string value)
         {
-            return StringHelper.IsNotEmpty(value);
+            return !IsEmpty(value);
         }
 
         /// <summary>
@@ -52,7 +88,21 @@ namespace TsadriuUtilities
         /// <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
         public static string LetterUpperCase(string value, int index = 0)
         {
-            return StringHelper.LetterUpperCase(value, index);
+            if (IsNotEmpty(value))
+            {
+                if (index < value.Length)
+                {
+                    char[] charArray = value.ToCharArray();
+
+                    char charToModify = char.ToUpper(charArray[index]);
+
+                    charArray[index] = charToModify;
+
+                    return string.Concat(charArray);
+                }
+            }
+
+            return value;
         }
 
         /// <summary>
@@ -63,7 +113,21 @@ namespace TsadriuUtilities
         /// <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
         public static string LetterLowerCase(string value, int index = 0)
         {
-            return StringHelper.LetterLowerCase(value, index);
+            if (IsNotEmpty(value))
+            {
+                if (index < value.Length)
+                {
+                    char[] charArray = value.ToCharArray();
+
+                    char charToModify = char.ToLower(charArray[index]);
+
+                    charArray[index] = charToModify;
+
+                    return string.Concat(charArray);
+                }
+            }
+
+            return value;
         }
 
         /// <summary>
@@ -74,7 +138,12 @@ namespace TsadriuUtilities
         /// <returns></returns>
         public static string Remove(string value, params string[] valuesToRemove)
         {
-            return StringHelper.Remove(value, valuesToRemove);
+            for (int i = 0; i < valuesToRemove.Length; i++)
+            {
+                value = value.Replace(valuesToRemove[i], string.Empty);
+            }
+
+            return value;
         }
     }
 }

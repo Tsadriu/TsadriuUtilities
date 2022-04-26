@@ -12,18 +12,20 @@ namespace TsadriuUtilities
     public static class ListHelper
     {
         /// <summary>
-        /// Adds the <paramref name="array"/> into <paramref name="currentList"/>. If <paramref name="startIndex"/> is specified, it will add only from <paramref name="startIndex"/> (included) until the end of the <see cref="Array"/>.
+        /// Adds the <paramref name="array"/> into <paramref name="currentList"/>.
+        /// If <paramref name="startIndex"/> is specified, it will add only from <paramref name="startIndex"/> (included) until the end of the <see cref="Array"/> or until it reaches <paramref name="endIndex"/> (included) if it is specified.
         /// </summary>
         /// <typeparam name="T">Generic type.</typeparam>
         /// <param name="currentList">List where <paramref name="array"/> will be added into.</param>
         /// <param name="array">Array of values.</param>
         /// <param name="startIndex">From which point of the <paramref name="array"/>'s index should added.</param>
+        /// <param name="endIndex">From which point of the <paramref name="array"/>'s index should stop.</param>
         /// <returns></returns>
         public static void AddRange<T>(ref List<T> currentList, T[] array, int startIndex = 0, int endIndex = 0)
         {
             var list = new List<T>();
             list.AddRange(array);
-            list = list.GetRange(startIndex, list.Count - startIndex);
+            list = list.GetRange(startIndex, list.Count - (endIndex - 1));
             currentList.AddRange(list);
         }
 

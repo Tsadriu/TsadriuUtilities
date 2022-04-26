@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using TsadriuUtilities;
+using TsadriuUtilities.Objects;
 
 namespace Tests
 {
@@ -28,7 +29,7 @@ namespace Tests
             Assert.IsNotNull(test4);
             Assert.IsFalse(test4 == DateTime.MinValue);
 
-            
+
         }
 
         [TestMethod]
@@ -43,11 +44,34 @@ namespace Tests
             var listaString = new List<string>() { "Fabio", "Proto" };
             var arrayString = new string[] { "Massimo", "Tito", "Giada", "Zina", "Jonah" };
 
-            ListHelper.AddRange(ref listaString, arrayString, 2);
+            ListHelper.AddRange(ref listaString, arrayString, 1, 3);
 
             var test = ListHelper.ToList(arrayString);
 
             ListHelper.OrderByDescending(ref test);
+        }
+
+        [TestMethod]
+        public void StrHelperTest()
+        {
+            var text = "This fox is <b>very</b> sneaky!\nI hope nothing <b>happens</b> to my food...";
+
+            Assert.IsTrue(StringHelper.GetTagValue(text, "very", "\n", true) == "very</b> sneaky!\n");
+
+            var table = new Table("Name", "Retains the info of the students names.");
+            
+            table.AddData("Name", "Fabio", "Alessandro", "Jonah");
+
+            table.AddColumn("Last name", "Retains the info of the students last name.");
+            table.AddData("Last Name", "Oliveira de Sousa", "Proto", "Stenblik");
+
+            table.AddColumn("Age");
+            table.AddData("Age", 22, 22, 18, 14, 8, 2, 3);
+
+
+            table.RemoveData("Age", 18);
+
+            table.TableToCsv();
         }
     }
 }

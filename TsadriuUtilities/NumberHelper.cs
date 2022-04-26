@@ -17,7 +17,7 @@ namespace TsadriuUtilities
         /// <returns>Returns the parsed <paramref name="value"/> as a <see cref="decimal"/>. If the conversion fails, returns <see cref="decimal.Zero"/>.</returns>
         public static decimal? ExponentialToDecimal(string value)
         {
-            if (StrHelper.IsNotEmpty(value))
+            if (StringHelper.IsNotEmpty(value))
             {
                 if (double.TryParse(value, out double valueAsDouble))
                 {
@@ -35,7 +35,7 @@ namespace TsadriuUtilities
         /// <returns>Returns the parsed <paramref name="value"/> as a <see cref="double"/>. If the conversion fails, returns 0.0d.</returns>
         public static double? ExponentialToDouble(string value)
         {
-            if (StrHelper.IsNotEmpty(value))
+            if (StringHelper.IsNotEmpty(value))
             {
                 if (double.TryParse(value, out double valueAsDouble))
                 {

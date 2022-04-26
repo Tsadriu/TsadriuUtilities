@@ -34,24 +34,47 @@
         <member name="M:TsadriuUtilities.DateTimeHelper.StringToDate(System.String,System.String,System.Boolean)">
             <inheritdoc cref="M:TsadriuUtilities.DateTimeHelper.StringToDate(System.String,System.String[],System.Boolean)"/>
         </member>
+        <member name="T:TsadriuUtilities.DirectoryHelper">
+            <summary>
+            A class that helps on dealing with <see cref="T:System.IO.Directory"/>.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.DirectoryHelper.Exist(System.String,System.Boolean)">
+            <summary>
+            Checks if a <paramref name="path"/> exists. If <paramref name="createFolder"/> is true, it will create <paramref name="path"/> if the <paramref name="path"/> doesn't exist.
+            </summary>
+            <param name="path">Path.</param>
+            <param name="createFolder">Create the folder in case the <paramref name="path"/> doesn't exist.</param>
+            <returns>True if the path exists. Otherwise false.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.DirectoryHelper.NotExist(System.String,System.Boolean)">
+            <summary>
+            Checks if a <paramref name="path"/> does not exist. If <paramref name="createFolder"/> is true, it will create <paramref name="path"/> if the <paramref name="path"/> doesn't exist.
+            </summary>
+            <param name="path">Path.</param>
+            <param name="createFolder">Create the folder in case the <paramref name="path"/> doesn't exist.</param>
+            <returns>True if the path does not exist. Otherwise false.</returns>
+        </member>
         <member name="T:TsadriuUtilities.ListHelper">
             <summary>
             A class that helps on dealing with <see cref="T:System.Collections.Generic.List`1"/>.
             </summary>
         </member>
-        <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0}@,``0[],System.Int32)">
+        <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0}@,``0[],System.Int32,System.Int32)">
             <summary>
-            Adds the <paramref name="array"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="T:System.Array"/>.
+            Adds the <paramref name="array"/> into <paramref name="currentList"/>.
+            If <paramref name="startIndex"/> is specified, it will add only from <paramref name="startIndex"/> (included) until the end of the <see cref="T:System.Array"/> or until it reaches <paramref name="endIndex"/> (included) if it is specified.
             </summary>
             <typeparam name="T">Generic type.</typeparam>
             <param name="currentList">List where <paramref name="array"/> will be added into.</param>
             <param name="array">Array of values.</param>
-            <param name="index">From which point of the <paramref name="array"/>'s index should added.</param>
+            <param name="startIndex">From which point of the <paramref name="array"/>'s index should added.</param>
+            <param name="endIndex">From which point of the <paramref name="array"/>'s index should stop.</param>
             <returns></returns>
         </member>
         <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0}@,System.Collections.Generic.List{``0},System.Int32)">
             <summary>
-            Adds the <paramref name="array"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="T:System.Array"/>.
+            Adds the <paramref name="listToAdd"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="T:System.Array"/>.
             </summary>
             <typeparam name="T">Generic type.</typeparam>
             <param name="currentList">List where <paramref name="listToAdd"/> will be added into.</param>
@@ -131,23 +154,145 @@
             <param name="value">Number as a <see cref="T:System.String"/> (46e-9).</param>
             <returns>Returns the parsed <paramref name="value"/> as a <see cref="T:System.Double"/>. If the conversion fails, returns 0.0d.</returns>
         </member>
+        <member name="T:TsadriuUtilities.Objects.Table">
+            <summary>
+            A class that helps store data on the go.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.Table.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new instace of <see cref="T:TsadriuUtilities.Objects.Table"/>.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <param name="columnDescription">Description of the column.</param>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.Table.AddColumn(System.String,System.String)">
+            <summary>
+            Adds a new <see cref="T:TsadriuUtilities.Objects.TableColumn"/> in the <see cref="T:TsadriuUtilities.Objects.Table"/>.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <param name="columnDescription">Description of the column.</param>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.Table.AddColumn(TsadriuUtilities.Objects.TableColumn)">
+            <summary>
+            Adds a new <see cref="T:TsadriuUtilities.Objects.TableColumn"/> in the <see cref="T:TsadriuUtilities.Objects.Table"/>.
+            </summary>
+            <param name="tableColumn">Instance of <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.Table.AddData(System.String,System.Object[])">
+            <summary>
+            Adds <paramref name="values"/> into the <see cref="T:TsadriuUtilities.Objects.TableColumn"/> as <see cref="T:System.Object"/>.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <param name="values">Values to store in the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.Table.AddData(TsadriuUtilities.Objects.TableColumn,System.Object[])">
+            <summary>
+            Adds <paramref name="values"/> into the <see cref="T:TsadriuUtilities.Objects.TableColumn"/> as <see cref="T:System.Object"/>.
+            </summary>
+            <param name="tableColumn"><see cref="T:TsadriuUtilities.Objects.TableColumn"/> instance.</param>
+            <param name="values">Values to store in the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.Table.ExistsData(System.String,System.Object)">
+            <summary>
+            Checks through the <see cref="T:TsadriuUtilities.Objects.TableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <param name="value">Value to be checked.</param>
+            <returns>True if the <paramref name="value"/> is found, otherwise false.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.Table.ExistsData(TsadriuUtilities.Objects.TableColumn,System.Object)">
+            <summary>
+            Checks through the <see cref="T:TsadriuUtilities.Objects.TableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
+            </summary>
+            <param name="tableColumn">Instance of <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+            <param name="value">Value to be checked.</param>
+            <returns>True if the <paramref name="value"/> is found, otherwise false.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.Table.RemoveData(System.String,System.Object[])">
+            <summary>
+            Removes all instances of <paramref name="valuesToRemove"/>.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <param name="valuesToRemove">Values to remove from the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.Table.RemoveData(TsadriuUtilities.Objects.TableColumn,System.Object[])">
+            <summary>
+            Removes all instances of <paramref name="valuesToRemove"/>.
+            </summary>
+            <param name="tableColumn"><see cref="T:TsadriuUtilities.Objects.TableColumn"/> instance.</param>
+            <param name="valuesToRemove">Values to remove from the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.Table.TableToCsv">
+            <summary>
+            Transform the <see cref="T:TsadriuUtilities.Objects.Table"/> into a parseable .csv file.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.Table.StartUp">
+            <summary>
+            Starts up the List of <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.TableColumn.#ctor(System.String,System.String)">
+            <summary>
+            Creates a new instace of <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <param name="columnDescription">Description of the column.</param>
+        </member>
+        <member name="P:TsadriuUtilities.Objects.TableColumn.ColumnName">
+            <summary>
+            The name of the column.
+            </summary>
+        </member>
+        <member name="P:TsadriuUtilities.Objects.TableColumn.ColumnDescription">
+            <summary>
+            The description of the column.
+            </summary>
+        </member>
+        <member name="P:TsadriuUtilities.Objects.TableColumn.ColumnData">
+            <summary>
+            The data stored in the column.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.TableColumn.AddData(System.Object[])">
+            <summary>
+            Adds <paramref name="values"/> into the <see cref="T:TsadriuUtilities.Objects.TableColumn"/> as <see cref="T:System.Object"/>.
+            </summary>
+            <param name="values">Values to store in the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.TableColumn.ExistsData(System.Object)">
+            <summary>
+            Checks through the <see cref="T:TsadriuUtilities.Objects.TableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
+            </summary>
+            <param name="value">Value to be checked.</param>
+            <returns>True if the <paramref name="value"/> is found, otherwise false.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.TableColumn.RemoveData(System.Object[])">
+            <summary>
+            Removes all instances of <paramref name="values"/>.
+            </summary>
+            <param name="values">Values to remove from the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+        </member>
         <member name="T:TsadriuUtilities.StrHelper">
             <summary>
             A class that helps on dealing with <see cref="T:System.String"/>.
             </summary>
         </member>
-        <member name="M:TsadriuUtilities.StrHelper.GetTagValue(System.String,System.String,System.String)">
+        <member name="M:TsadriuUtilities.StrHelper.GetTagValue(System.String,System.String,System.String,System.Boolean)">
             <summary>
-            Searches through an input text returning the value between the start tag and end tag.
+            Searches through the <paramref name="text"/>, returning the content between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
             </summary>
             <param name="text">Text to search though.</param>
             <param name="startTag">The start tag.</param>
             <param name="endTag">The end tag.</param>
-            <returns>Returns string.empty if nothing is found.</returns>
+            <param name="tagsIncluded">If enabled, it will return a string with the <paramref name="startTag"/> and <paramref name="endTag"/> included.</param>
+            <returns>Returns string.Empty if nothing is found.</returns>
         </member>
         <member name="M:TsadriuUtilities.StrHelper.IsEmpty(System.String)">
             <summary>
-            Checks if the <paramref name="value"/> is null, <see cref="F:System.String.Empty"/> or a white space ("").
+            Checks if the <paramref name="value"/> is null, <see cref="F:System.String.Empty"/> or a white space ("", \n, \r, ...).
             </summary>
             <param name="value">The value to check.</param>
             <returns>Returns true if the <paramref name="value"/> is empty. Returns false if not.</returns>
@@ -176,6 +321,59 @@
             <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
         </member>
         <member name="M:TsadriuUtilities.StrHelper.Remove(System.String,System.String[])">
+            <summary>
+            Returns a <see cref="T:System.String"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.
+            </summary>
+            <param name="value"></param>
+            <param name="valuesToRemove"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TsadriuUtilities.StringHelper">
+            <summary>
+            A class that helps on dealing with <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.GetTagValue(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Searches through the <paramref name="text"/>, returning the content between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
+            </summary>
+            <param name="text">Text to search though.</param>
+            <param name="startTag">The start tag.</param>
+            <param name="endTag">The end tag.</param>
+            <param name="tagsIncluded">If enabled, it will return a string with the <paramref name="startTag"/> and <paramref name="endTag"/> included.</param>
+            <returns>Returns string.Empty if nothing is found.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.IsEmpty(System.String)">
+            <summary>
+            Checks if the <paramref name="value"/> is null, <see cref="F:System.String.Empty"/> or a white space ("", \n, \r, ...).
+            </summary>
+            <param name="value">The value to check.</param>
+            <returns>Returns true if the <paramref name="value"/> is empty. Returns false if not.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.IsNotEmpty(System.String)">
+            <summary>
+            Checks if <paramref name="value"/> contains any kind of character.
+            </summary>
+            <param name="value">The value to check.</param>
+            <returns>Returns true if the <paramref name="value"/> is not empty. Returns false if not.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.LetterUpperCase(System.String,System.Int32)">
+            <summary>
+            Changes a lower-case letter to be upper-case. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.
+            </summary>
+            <param name="value">The value to change.</param>
+            <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
+            <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.LetterLowerCase(System.String,System.Int32)">
+            <summary>
+            Changes a upper-case letter to be lower-case. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.
+            </summary>
+            <param name="value">The value to change.</param>
+            <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
+            <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.Remove(System.String,System.String[])">
             <summary>
             Returns a <see cref="T:System.String"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.
             </summary>
