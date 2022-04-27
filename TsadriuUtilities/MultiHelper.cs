@@ -125,5 +125,28 @@ namespace TsadriuUtilities
         {
             return string.Join(separator, array);
         }
+
+        /// <summary>
+        /// Converts an <see cref="List{T}"/> into a single line <see cref="string"/>. If <paramref name="separator"/> is not passed, it will separate by a space. Examples: ListToString(new int[] { 1, 3, 5 }) -> "1 3 5", ListToString(new string[] { "5", "2" }, "|") -> "5|2".
+        /// Supported types:
+        /// <see cref="DateTime"/>,
+        /// <see cref="long"/>, <see cref="int"/>, <see cref="short"/>, <see cref="byte"/>,
+        /// <see cref="float"/>, <see cref="double"/>, <see cref="decimal"/>.
+        /// </summary>
+        /// <param name="list"><see cref="List{T}"/> of objects.</param>
+        /// <param name="separator"><see cref="string"/> separator. If nothing is passed, it will separate by a space.</param>
+        /// <param name="startIndex">From which point of the <paramref name="list"/>'s index should added.</param>
+        /// <param name="count">How many elements in the <paramref name="list"/> should be taken considering the <paramref name="startIndex"/>'s point.</param>
+        /// <returns><see cref="List{T}"/> converted into a single <see cref="string"/> line.</returns>
+        public static string ListToString<T>(List<T> list, string separator = " ", int startIndex = 0, int count = -1)
+        {
+            if (count == -1)
+            {
+                count = list.Count;
+            }
+
+            var values = list.GetRange(startIndex, count);
+            return string.Join(separator, values);
+        }
     }
 }

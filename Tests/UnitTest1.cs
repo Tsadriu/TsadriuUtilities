@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using TsadriuUtilities;
 using TsadriuUtilities.Objects;
 
@@ -68,10 +69,15 @@ namespace Tests
             table.AddColumn("Age");
             table.AddData("Age", 22, 22, 18, 14, 8, 2, 3);
 
-
+            table.AddColumn("sdsd");
             table.RemoveData("Age", 18);
 
-            table.TableToCsv();
+            var contentList = table.TableToCsv(";");
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TEST CSV");
+
+            DirectoryHelper.Exist(path, true);
+
+            File.AppendAllLines(Path.Combine(path, "file_test.csv"), contentList);
         }
     }
 }

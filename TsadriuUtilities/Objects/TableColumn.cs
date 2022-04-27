@@ -22,8 +22,8 @@ namespace TsadriuUtilities.Objects
             ColumnName = columnName;
             ColumnDescription = columnDescription;
             ColumnData = new List<object>();
-   
-        
+        }
+
         /// <summary>
         /// The name of the column.
         /// </summary>
@@ -45,7 +45,7 @@ namespace TsadriuUtilities.Objects
         /// <param name="values">Values to store in the <see cref="TableColumn"/>.</param>
         public void AddData(params object[] values)
         {
-            foreach(var value in values)
+            foreach (var value in values)
             {
                 ColumnData.Add(value);
             }

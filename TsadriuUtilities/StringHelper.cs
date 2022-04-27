@@ -2,6 +2,7 @@
 // Copyright 2022 (C) Tsadriu. All rights reserved.
 // </copyright>
 using System;
+using System.Linq;
 
 namespace TsadriuUtilities
 {
@@ -133,9 +134,9 @@ namespace TsadriuUtilities
         /// <summary>
         /// Returns a <see cref="string"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="valuesToRemove"></param>
-        /// <returns></returns>
+        /// <param name="value">The value to change.</param>
+        /// <param name="valuesToRemove">The values to remove from <paramref name="value"/>.</param>
+        /// <returns>Returns a <see cref="string"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.</returns>
         public static string Remove(string value, params string[] valuesToRemove)
         {
             for (int i = 0; i < valuesToRemove.Length; i++)
@@ -144,6 +145,17 @@ namespace TsadriuUtilities
             }
 
             return value;
+        }
+
+        /// <summary>
+        /// Returns the count of <paramref name="valueToCount"/> present in <paramref name="value"/>.
+        /// </summary>
+        /// <param name="value">The value to be checked.</param>
+        /// <param name="valueToCount">The value to be counted in <paramref name="value"/>.</param>
+        /// <returns>Returns the count of <paramref name="valueToCount"/> present in <paramref name="value"/>.</returns>
+        public static int CharCount(string value, string valueToCount)
+        {
+            return value.Split(valueToCount).Length - 1;
         }
     }
 }

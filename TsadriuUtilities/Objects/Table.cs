@@ -140,23 +140,69 @@ namespace TsadriuUtilities.Objects
         }
 
         /// <summary>
-        /// Transform the <see cref="Table"/> into a parseable .csv file.
+        /// Transform the <see cref="Table"/> into a parseable .csv file. <see cref="TableColumn.ColumnData"/> values that go over the count of <see cref="Column"/> count will be trimmed.
         /// </summary>
         /// <param name="separator">Separator of the csv. Default: ;</param>
         /// <returns>List of <see cref="Table"/> that has been parsed to a List of <see cref="string"/> as a csv.</returns>
         public List<string> TableToCsv(string separator = ";")
         {
-            throw new NotImplementedException("Not yet implemented.");
-            string header = "";
+            var content = new List<string>();
+            string header = GetHeaders(Column, separator);
+            int columns = StringHelper.CharCount(header, separator) + 1;
+            content.Add(header);
 
-            foreach (var column in Column)
+            for (int i = 0; i < Column.Count; i++)
             {
+                string currentRow = MultiHelper.ListToString(Column[i].ColumnData, separator, 0, MultiHelper.ClampValue(columns, 0, Column[i].ColumnData.Count));
+                currentRow = currentRow.PadRight(currentRow.Length + (columns - Column[i].ColumnData.Count), CharHelper.StringToChar(separator));
+                content.Add(currentRow);
             }
 
-            return new List<string>();
+            return content;
+        }
+
+        private string GetHeaders(List<TableColumn> columns, string separator)
+        {
+            string header = string.Empty;
+
+            for (int i = 0; i < columns.Count; i++)
+            {
+                header += Column[i].ColumnName;
+
+                if (i + 1 < Column.Count)
+                {
+                    header += separator;
+                }
+            }
+
+            return header;
         }
 
         private List<TableColumn> Column { get; set; }
+
+        /// <summary>
+        /// Checks through the List of <see cref="Column"/> and returns the <see cref="TableColumn.ColumnData"/> with the highest Count.
+        /// </summary>
+        /// <returns>Returns the <see cref="TableColumn.ColumnData"/> with the highest Count.</returns>
+        private int GetHighestColumnDataCount()
+        {
+            if (Column.Count == 0)
+            {
+                return 0;
+            }
+
+            int highestCount = Column[0].ColumnData.Count;
+
+            for (int i = 0; i < Column.Count; i++)
+            {
+                if (highestCount < Column[i].ColumnData.Count)
+                {
+                    highestCount = Column[i].ColumnData.Count;
+                }
+            }
+
+            return highestCount;
+        }
 
         /// <summary>
         /// Starts up the List of <see cref="TableColumn"/>.

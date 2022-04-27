@@ -4,6 +4,19 @@
         <name>TsadriuUtilities</name>
     </assembly>
     <members>
+        <member name="T:TsadriuUtilities.CharHelper">
+            <summary>
+            A class that helps on dealing with <see cref="T:System.Char"/>.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.CharHelper.StringToChar(System.String,System.Int32)">
+            <summary>
+            Converts a <see cref="T:System.String"/> into a <see cref="T:System.Char"/>. If the length of <paramref name="value"/> is higher than 1, it will return the first character of <paramref name="value"/> or, if <paramref name="index"/> is passed, the character of the desired index.
+            </summary>
+            <param name="value">The <see cref="T:System.String"/> to get the value from.</param>
+            <param name="index">The <paramref name="index"/> of the letter to be return. If <paramref name="index"/> is not passed, it will return the first letter of <paramref name="value"/>.</param>
+            <returns>Return the first character of <paramref name="value"/> or, if <paramref name="index"/> is passed, the character of the desired index.</returns>
+        </member>
         <member name="T:TsadriuUtilities.DateTimeHelper">
             <summary>
             A class that helps on dealing with <see cref="T:System.DateTime"/>.
@@ -135,6 +148,20 @@
             <param name="separator"><see cref="T:System.String"/> separator. If nothing is passed, it will separate by a space.</param>
             <returns><see cref="T:System.Array"/> converted into a single <see cref="T:System.String"/> line.</returns>
         </member>
+        <member name="M:TsadriuUtilities.MultiHelper.ListToString``1(System.Collections.Generic.List{``0},System.String,System.Int32,System.Int32)">
+            <summary>
+            Converts an <see cref="T:System.Collections.Generic.List`1"/> into a single line <see cref="T:System.String"/>. If <paramref name="separator"/> is not passed, it will separate by a space. Examples: ListToString(new int[] { 1, 3, 5 }) -> "1 3 5", ListToString(new string[] { "5", "2" }, "|") -> "5|2".
+            Supported types:
+            <see cref="T:System.DateTime"/>,
+            <see cref="T:System.Int64"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/>,
+            <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Decimal"/>.
+            </summary>
+            <param name="list"><see cref="T:System.Collections.Generic.List`1"/> of objects.</param>
+            <param name="separator"><see cref="T:System.String"/> separator. If nothing is passed, it will separate by a space.</param>
+            <param name="startIndex">From which point of the <paramref name="list"/>'s index should added.</param>
+            <param name="count">How many elements in the <paramref name="list"/> should be taken considering the <paramref name="startIndex"/>'s point.</param>
+            <returns><see cref="T:System.Collections.Generic.List`1"/> converted into a single <see cref="T:System.String"/> line.</returns>
+        </member>
         <member name="T:TsadriuUtilities.NumberHelper">
             <summary>
             A class that helps on dealing with numbers.
@@ -223,15 +250,27 @@
             <param name="tableColumn"><see cref="T:TsadriuUtilities.Objects.TableColumn"/> instance.</param>
             <param name="valuesToRemove">Values to remove from the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
         </member>
-        <member name="M:TsadriuUtilities.Objects.Table.TableToCsv">
+        <member name="M:TsadriuUtilities.Objects.Table.TableToCsv(System.String)">
             <summary>
             Transform the <see cref="T:TsadriuUtilities.Objects.Table"/> into a parseable .csv file.
             </summary>
-            <returns></returns>
+            <param name="separator">Separator of the csv. Default: ;</param>
+            <returns>List of <see cref="T:TsadriuUtilities.Objects.Table"/> that has been parsed to a List of <see cref="T:System.String"/> as a csv.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.Objects.Table.GetHighestColumnDataCount">
+            <summary>
+            Checks through the List of <see cref="P:TsadriuUtilities.Objects.Table.Column"/> and returns the <see cref="P:TsadriuUtilities.Objects.TableColumn.ColumnData"/> with the highest Count.
+            </summary>
+            <returns>Returns the <see cref="P:TsadriuUtilities.Objects.TableColumn.ColumnData"/> with the highest Count.</returns>
         </member>
         <member name="M:TsadriuUtilities.Objects.Table.StartUp">
             <summary>
             Starts up the List of <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.
+            </summary>
+        </member>
+        <member name="T:TsadriuUtilities.Objects.TableColumn">
+            <summary>
+            A class that helps store data on the go.
             </summary>
         </member>
         <member name="M:TsadriuUtilities.Objects.TableColumn.#ctor(System.String,System.String)">
@@ -377,9 +416,17 @@
             <summary>
             Returns a <see cref="T:System.String"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.
             </summary>
-            <param name="value"></param>
-            <param name="valuesToRemove"></param>
-            <returns></returns>
+            <param name="value">The value to change.</param>
+            <param name="valuesToRemove">The values to remove from <paramref name="value"/>.</param>
+            <returns>Returns a <see cref="T:System.String"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.CharCount(System.String,System.String)">
+            <summary>
+            Returns the count of <paramref name="valueToCount"/> present in <paramref name="value"/>.
+            </summary>
+            <param name="value">The value to be checked.</param>
+            <param name="valueToCount">The value to be counted in <paramref name="value"/>.</param>
+            <returns>Returns the count of <paramref name="valueToCount"/> present in <paramref name="value"/>.</returns>
         </member>
     </members>
 </doc>
