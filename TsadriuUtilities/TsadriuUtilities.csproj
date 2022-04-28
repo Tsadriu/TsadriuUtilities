@@ -8,7 +8,28 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>removed \n from header of csv</PackageReleaseNotes>
+    <PackageReleaseNotes>StrHelper has been renamed to StringHelper, therefore, it's now deprecated.
+StringHelper:
+ - Added method Remove.
+ - Added method CharCount.
+
+ListHelper:
+ - Added method AddRange.
+ - Added method ToList (converts an array to a list).
+ - Added method OrderByAscending.
+ - Added method OrderByDescending.
+ - Added method ListToString.
+
+DirectoryHelper:
+ - Added method Exist.
+ - Added method NotExist.
+
+CharHelper:
+ - Added method StringToChar.
+
+Table:
+ - Can be instantiated as an object and functions exactly like a table.
+ - Has the option to export the data into a .csv file with custom separator.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
