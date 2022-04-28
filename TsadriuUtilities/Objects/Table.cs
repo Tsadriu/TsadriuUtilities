@@ -5,55 +5,58 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TsadriuUtilities.Objects
+namespace TsadriuUtilities
 {
     /// <summary>
     /// A class that helps store data on the go.
     /// </summary>
-    public class Table
+    public class TTable
+
     {
         /// <summary>
-        /// Creates a new instace of <see cref="Table"/>.
+        /// Creates a new instace of <see cref="TTable"/> (Tsadriu Table).
         /// </summary>
-        /// <param name="columnName">Name of the column.</param>
-        /// <param name="columnDescription">Description of the column.</param>
-        public Table(string columnName, string columnDescription = null)
+        public TTable()
         {
             StartUp();
-            Column.Add(new TableColumn(columnName, columnDescription));
         }
 
         /// <summary>
-        /// Adds a new <see cref="TableColumn"/> in the <see cref="Table"/>.
+        /// Adds a new <see cref="TTableColumn"/> in the <see cref="TTable"/>.
         /// </summary>
         /// <param name="columnName">Name of the column.</param>
-        /// <param name="columnDescription">Description of the column.</param>
-        public void AddColumn(string columnName, string columnDescription = null)
+        public void AddColumn(params string[] columnName)
         {
-            AddColumn(new TableColumn(columnName, columnDescription));
+            foreach (var column in columnName)
+            {
+                AddColumn(new TTableColumn(column));
+            }            
         }
 
         /// <summary>
-        /// Adds a new <see cref="TableColumn"/> in the <see cref="Table"/>.
+        /// Adds a new <see cref="TTableColumn"/> in the <see cref="TTable"/>.
         /// </summary>
-        /// <param name="tableColumn">Instance of <see cref="TableColumn"/>.</param>
-        public void AddColumn(TableColumn tableColumn)
+        /// <param name="tableColumn">Instance of <see cref="TTableColumn"/>.</param>
+        public void AddColumn(params TTableColumn[] tableColumn)
         {
-            Column.Add(tableColumn);
+            foreach (var column in tableColumn)
+            {
+                ColumnList.Add(column);
+            }
         }
 
         /// <summary>
-        /// Adds <paramref name="values"/> into the <see cref="TableColumn"/> as <see cref="object"/>.
+        /// Adds <paramref name="values"/> into the <see cref="TTableColumn"/> as <see cref="object"/>.
         /// </summary>
         /// <param name="columnName">Name of the column.</param>
-        /// <param name="values">Values to store in the <see cref="TableColumn"/>.</param>
+        /// <param name="values">Values to store in the <see cref="TTableColumn"/>.</param>
         public void AddData(string columnName, params object[] values)
         {
-            var exists = Column.Any(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase));
+            var exists = ColumnList.Any(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase));
 
             if (exists)
             {
-                Column.Where(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase)).First().AddData(values);
+                ColumnList.Where(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase)).First().AddData(values);
             }
             else
             {
@@ -62,11 +65,11 @@ namespace TsadriuUtilities.Objects
         }
 
         /// <summary>
-        /// Adds <paramref name="values"/> into the <see cref="TableColumn"/> as <see cref="object"/>.
+        /// Adds <paramref name="values"/> into the <see cref="TTableColumn"/> as <see cref="object"/>.
         /// </summary>
-        /// <param name="tableColumn"><see cref="TableColumn"/> instance.</param>
-        /// <param name="values">Values to store in the <see cref="TableColumn"/>.</param>
-        public void AddData(TableColumn tableColumn, params object[] values)
+        /// <param name="tableColumn"><see cref="TTableColumn"/> instance.</param>
+        /// <param name="values">Values to store in the <see cref="TTableColumn"/>.</param>
+        public void AddData(TTableColumn tableColumn, params object[] values)
         {
             if (tableColumn != null)
             {
@@ -75,18 +78,18 @@ namespace TsadriuUtilities.Objects
         }
 
         /// <summary>
-        /// Checks through the <see cref="TableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
+        /// Checks through the <see cref="TTableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
         /// </summary>
         /// <param name="columnName">Name of the column.</param>
         /// <param name="value">Value to be checked.</param>
         /// <returns>True if the <paramref name="value"/> is found, otherwise false.</returns>
         public bool ExistsData(string columnName, object value)
         {
-            var exists = Column.Any(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase));
+            var exists = ColumnList.Any(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase));
 
             if (exists)
             {
-                return Column.Where(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase)).First().ExistsData(value);
+                return ColumnList.Where(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase)).First().ExistsData(value);
             }
             else
             {
@@ -97,28 +100,48 @@ namespace TsadriuUtilities.Objects
         }
 
         /// <summary>
-        /// Checks through the <see cref="TableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
+        /// Checks through the <see cref="TTableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
         /// </summary>
-        /// <param name="tableColumn">Instance of <see cref="TableColumn"/>.</param>
+        /// <param name="tableColumn">Instance of <see cref="TTableColumn"/>.</param>
         /// <param name="value">Value to be checked.</param>
         /// <returns>True if the <paramref name="value"/> is found, otherwise false.</returns>
-        public bool ExistsData(TableColumn tableColumn, object value)
+        public bool ExistsData(TTableColumn tableColumn, object value)
         {
-            return tableColumn.ExistsData(tableColumn);
+            return tableColumn.ExistsData(value);
+        }
+
+        /// <summary>
+        /// If the <paramref name="columnName"/> exists, returns all the data present in the <see cref="TTableColumn"/>.
+        /// </summary>
+        /// <param name="columnName">Name of the column.</param>
+        /// <returns>If the <see cref="TTableColumn"/> exists, returns a List of <see cref="object"/> containing the data. Otherwise returns an empty list. </returns>
+        public List<object> GetData(string columnName)
+        {
+            var data = new List<object>();
+
+            foreach (var column in ColumnList)
+            {
+                if (column.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase))
+                {
+                    data.AddRange(column.ColumnData);
+                }
+            }
+
+            return data;
         }
 
         /// <summary>
         /// Removes all instances of <paramref name="valuesToRemove"/>.
         /// </summary>
         /// <param name="columnName">Name of the column.</param>
-        /// <param name="valuesToRemove">Values to remove from the <see cref="TableColumn"/>.</param>
+        /// <param name="valuesToRemove">Values to remove from the <see cref="TTableColumn"/>.</param>
         public void RemoveData(string columnName, params object[] valuesToRemove)
         {
-            var exists = Column.Any(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase));
+            var exists = ColumnList.Any(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase));
 
             if (exists)
             {
-                Column.Where(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase)).First().RemoveData(valuesToRemove);
+                ColumnList.Where(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase)).First().RemoveData(valuesToRemove);
             }
             else
             {
@@ -129,9 +152,9 @@ namespace TsadriuUtilities.Objects
         /// <summary>
         /// Removes all instances of <paramref name="valuesToRemove"/>.
         /// </summary>
-        /// <param name="tableColumn"><see cref="TableColumn"/> instance.</param>
-        /// <param name="valuesToRemove">Values to remove from the <see cref="TableColumn"/>.</param>
-        public void RemoveData(TableColumn tableColumn, params object[] valuesToRemove)
+        /// <param name="tableColumn"><see cref="TTableColumn"/> instance.</param>
+        /// <param name="valuesToRemove">Values to remove from the <see cref="TTableColumn"/>.</param>
+        public void RemoveData(TTableColumn tableColumn, params object[] valuesToRemove)
         {
             if (tableColumn != null)
             {
@@ -140,36 +163,89 @@ namespace TsadriuUtilities.Objects
         }
 
         /// <summary>
-        /// Transform the <see cref="Table"/> into a parseable .csv file. <see cref="TableColumn.ColumnData"/> values that go over the count of <see cref="Column"/> count will be trimmed.
+        /// Transform the <see cref="TTable"/> into a parseable .csv file. <see cref="TTableColumn.ColumnData"/> values that go over the count of <see cref="ColumnList"/> count will be trimmed.
         /// </summary>
-        /// <param name="separator">Separator of the csv. Default: ;</param>
-        /// <returns>List of <see cref="Table"/> that has been parsed to a List of <see cref="string"/> as a csv.</returns>
-        public List<string> TableToCsv(string separator = ";")
+        /// <param name="addHeader">If true, the generated .csv file will have a header. If false, the generated .csv file will have no header. <see cref="TTableColumn.ColumnName"/> will be used as a header.</param>
+        /// <param name="separator">Separator of the csv. Default uses ;</param>
+        /// <returns>List of <see cref="TTable"/> that has been parsed to a List of <see cref="string"/> as a csv.</returns>
+        public List<string> TableToCsv(bool addHeader = true, string separator = ";")
         {
             var content = new List<string>();
-            string header = GetHeaders(Column, separator);
-            int columns = StringHelper.CharCount(header, separator) + 1;
-            content.Add(header);
+            string header = GetHeadersAsString(ColumnList, separator);
 
-            for (int i = 0; i < Column.Count; i++)
+            if (addHeader)
             {
-                string currentRow = MultiHelper.ListToString(Column[i].ColumnData, separator, 0, MultiHelper.ClampValue(columns, 0, Column[i].ColumnData.Count));
-                currentRow = currentRow.PadRight(currentRow.Length + (columns - Column[i].ColumnData.Count), CharHelper.StringToChar(separator));
-                content.Add(currentRow);
+                content.Add(header);
+            }
+
+            var maxRow = GetHighestColumnDataCount();
+            
+            for (int currentRow = 0; currentRow < maxRow; currentRow++)
+            {
+                string rowData = string.Empty;
+
+                for (int currentColumn = 0; currentColumn < ColumnList.Count; currentColumn++)
+                {
+                    if (currentRow >= ColumnList[currentColumn].ColumnData.Count)
+                    {
+                        rowData = rowData.PadRight(rowData.Length + 1, CharHelper.StringToChar(separator));
+                    }
+                    else
+                    {
+                        if (string.IsNullOrWhiteSpace(rowData))
+                        {
+                            rowData = ColumnList[currentColumn].ColumnData[currentRow].ToString();
+                        }
+                        else
+                        {
+                            rowData = string.Join(separator, rowData, ColumnList[currentColumn].ColumnData[currentRow]);
+                        }
+                    }
+                }
+                content.Add(rowData);
             }
 
             return content;
         }
 
-        private string GetHeaders(List<TableColumn> columns, string separator)
+        /// <summary>
+        /// Checks through the List of <see cref="ColumnList"/> and returns the <see cref="TTableColumn.ColumnData"/> with the highest Count.
+        /// </summary>
+        /// <returns>Returns the <see cref="TTableColumn.ColumnData"/> with the highest Count.</returns>
+        private int GetHighestColumnDataCount()
+        {
+            if (ColumnList.Count == 0)
+            {
+                return 0;
+            }
+            int highestCount = ColumnList[0].ColumnData.Count;
+
+            for (int i = 0; i < ColumnList.Count; i++)
+            {
+                if (highestCount < ColumnList[i].ColumnData.Count)
+                {
+                    highestCount = ColumnList[i].ColumnData.Count;
+                }
+            }
+
+            return highestCount;
+        }
+
+        /// <summary>
+        /// Returns the headers of the <see cref="TTable"/> as a <see cref="string"/>.
+        /// </summary>
+        /// <param name="columns">The list of <see cref="TTableColumn"/> (usually found in object <see cref="ColumnList"/>).</param>
+        /// <param name="separator">The desired separator. Default uses ;</param>
+        /// <returns></returns>
+        public string GetHeadersAsString(List<TTableColumn> columns, string separator = ";")
         {
             string header = string.Empty;
 
             for (int i = 0; i < columns.Count; i++)
             {
-                header += Column[i].ColumnName;
+                header += ColumnList[i].ColumnName;
 
-                if (i + 1 < Column.Count)
+                if (i + 1 < ColumnList.Count)
                 {
                     header += separator;
                 }
@@ -178,38 +254,14 @@ namespace TsadriuUtilities.Objects
             return header;
         }
 
-        private List<TableColumn> Column { get; set; }
+        private List<TTableColumn> ColumnList { get; set; }
 
         /// <summary>
-        /// Checks through the List of <see cref="Column"/> and returns the <see cref="TableColumn.ColumnData"/> with the highest Count.
-        /// </summary>
-        /// <returns>Returns the <see cref="TableColumn.ColumnData"/> with the highest Count.</returns>
-        private int GetHighestColumnDataCount()
-        {
-            if (Column.Count == 0)
-            {
-                return 0;
-            }
-
-            int highestCount = Column[0].ColumnData.Count;
-
-            for (int i = 0; i < Column.Count; i++)
-            {
-                if (highestCount < Column[i].ColumnData.Count)
-                {
-                    highestCount = Column[i].ColumnData.Count;
-                }
-            }
-
-            return highestCount;
-        }
-
-        /// <summary>
-        /// Starts up the List of <see cref="TableColumn"/>.
+        /// Starts up the List of <see cref="TTableColumn"/>.
         /// </summary>
         private void StartUp()
         {
-            Column = new List<TableColumn>();
+            ColumnList = new List<TTableColumn>();
         }
     }
 }

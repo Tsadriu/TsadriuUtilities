@@ -2,22 +2,18 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.0.11</Version>
+    <Version>1.0.12</Version>
     <Description>A small package with utilities to save a little bit of time in coding.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>Added DateTimeHelper to provide assistance to parsing dates from a string to a DateTime object.
-
-MultiHelper:
- - Has a new method 'ArrayToString' that parses an array and converts it into a single line of string.
-
-NumberHelper:
- - Has a new method 'ExponentialToDouble'.</PackageReleaseNotes>
+    <PackageReleaseNotes>removed \n from header of csv</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageTags>StringHelper, GenericHelper, NumberHelper, DateTimeHelper</PackageTags>
+    <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
+    <AssemblyVersion>1.0.12.1</AssemblyVersion>
+    <FileVersion>1.0.12.1</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

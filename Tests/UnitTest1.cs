@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using TsadriuUtilities;
-using TsadriuUtilities.Objects;
 
 namespace Tests
 {
@@ -59,20 +58,20 @@ namespace Tests
 
             Assert.IsTrue(StringHelper.GetTagValue(text, "very", "\n", true) == "very</b> sneaky!\n");
 
-            var table = new Table("Name", "Retains the info of the students names.");
-            
-            table.AddData("Name", "Fabio", "Alessandro", "Jonah");
+            var table = new TTable();
+            table.AddColumn("Data", "Ore", "Minuti", "Ore Svolte", "Ore Effettive Ticket", "Attivita", "Branch", "Commit", "Orario di registrazione");
+            table.AddData("Data", DateTime.Today.ToString("yyyy-MM-dd"));
+            table.AddData("Ore", 2);
+            table.AddData("Minuti", 47);
+            table.AddData("Ore Svolte", 2.677);
+            table.AddData("Ore Effettive Ticket", 2.75);
+            table.AddData("Ore Effettive Ticket", 5.0);
+            table.AddData("Attivita", "Questo è un test");
+            table.AddData("Branch", "Ticket_999TEST");
+            table.AddData("Commit", "Non esistente");
+            table.AddData("Orario di registrazione", DateTime.Now);
 
-            table.AddColumn("Last name", "Retains the info of the students last name.");
-            table.AddData("Last Name", "Oliveira de Sousa", "Proto", "Stenblik");
-
-            table.AddColumn("Age");
-            table.AddData("Age", 22, 22, 18, 14, 8, 2, 3);
-
-            table.AddColumn("sdsd");
-            table.RemoveData("Age", 18);
-
-            var contentList = table.TableToCsv(";");
+            var contentList = table.TableToCsv(true, ";");
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TEST CSV");
 
             DirectoryHelper.Exist(path, true);

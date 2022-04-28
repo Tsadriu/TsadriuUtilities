@@ -4,23 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TsadriuUtilities.Objects
+namespace TsadriuUtilities
 {
     /// <summary>
     /// A class that helps store data on the go.
     /// </summary>
-    public class TableColumn
-
+    public class TTableColumn
     {
         /// <summary>
-        /// Creates a new instace of <see cref="TableColumn"/>.
+        /// Creates a new instace of <see cref="TTableColumn"/> (Tsadriu Table Column).
         /// </summary>
         /// <param name="columnName">Name of the column.</param>
-        /// <param name="columnDescription">Description of the column.</param>
-        public TableColumn(string columnName, string columnDescription = null)
+        public TTableColumn(string columnName)
         {
             ColumnName = columnName;
-            ColumnDescription = columnDescription;
             ColumnData = new List<object>();
         }
 
@@ -30,19 +27,14 @@ namespace TsadriuUtilities.Objects
         public string ColumnName { get; set; }
 
         /// <summary>
-        /// The description of the column.
-        /// </summary>
-        public string ColumnDescription { get; set; }
-
-        /// <summary>
         /// The data stored in the column.
         /// </summary>
         public List<object> ColumnData { get; set; }
 
         /// <summary>
-        /// Adds <paramref name="values"/> into the <see cref="TableColumn"/> as <see cref="object"/>.
+        /// Adds <paramref name="values"/> into the <see cref="TTableColumn"/> as <see cref="object"/>.
         /// </summary>
-        /// <param name="values">Values to store in the <see cref="TableColumn"/>.</param>
+        /// <param name="values">Values to store in the <see cref="TTableColumn"/>.</param>
         public void AddData(params object[] values)
         {
             foreach (var value in values)
@@ -52,7 +44,7 @@ namespace TsadriuUtilities.Objects
         }
 
         /// <summary>
-        /// Checks through the <see cref="TableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
+        /// Checks through the <see cref="TTableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
         /// </summary>
         /// <param name="value">Value to be checked.</param>
         /// <returns>True if the <paramref name="value"/> is found, otherwise false.</returns>
@@ -72,7 +64,7 @@ namespace TsadriuUtilities.Objects
         /// <summary>
         /// Removes all instances of <paramref name="values"/>.
         /// </summary>
-        /// <param name="values">Values to remove from the <see cref="TableColumn"/>.</param>
+        /// <param name="values">Values to remove from the <see cref="TTableColumn"/>.</param>
         public void RemoveData(params object[] values)
         {
             for (int columnData = 0; columnData < ColumnData.Count; columnData++)

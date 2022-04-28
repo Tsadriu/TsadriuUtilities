@@ -181,138 +181,145 @@
             <param name="value">Number as a <see cref="T:System.String"/> (46e-9).</param>
             <returns>Returns the parsed <paramref name="value"/> as a <see cref="T:System.Double"/>. If the conversion fails, returns 0.0d.</returns>
         </member>
-        <member name="T:TsadriuUtilities.Objects.Table">
+        <member name="T:TsadriuUtilities.TTable">
             <summary>
             A class that helps store data on the go.
             </summary>
         </member>
-        <member name="M:TsadriuUtilities.Objects.Table.#ctor(System.String,System.String)">
+        <member name="M:TsadriuUtilities.TTable.#ctor">
             <summary>
-            Creates a new instace of <see cref="T:TsadriuUtilities.Objects.Table"/>.
+            Creates a new instace of <see cref="T:TsadriuUtilities.TTable"/>.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.TTable.AddColumn(System.String[])">
+            <summary>
+            Adds a new <see cref="T:TsadriuUtilities.TTableColumn"/> in the <see cref="T:TsadriuUtilities.TTable"/>.
             </summary>
             <param name="columnName">Name of the column.</param>
-            <param name="columnDescription">Description of the column.</param>
         </member>
-        <member name="M:TsadriuUtilities.Objects.Table.AddColumn(System.String,System.String)">
+        <member name="M:TsadriuUtilities.TTable.AddColumn(TsadriuUtilities.TTableColumn[])">
             <summary>
-            Adds a new <see cref="T:TsadriuUtilities.Objects.TableColumn"/> in the <see cref="T:TsadriuUtilities.Objects.Table"/>.
+            Adds a new <see cref="T:TsadriuUtilities.TTableColumn"/> in the <see cref="T:TsadriuUtilities.TTable"/>.
+            </summary>
+            <param name="tableColumn">Instance of <see cref="T:TsadriuUtilities.TTableColumn"/>.</param>
+        </member>
+        <member name="M:TsadriuUtilities.TTable.AddData(System.String,System.Object[])">
+            <summary>
+            Adds <paramref name="values"/> into the <see cref="T:TsadriuUtilities.TTableColumn"/> as <see cref="T:System.Object"/>.
             </summary>
             <param name="columnName">Name of the column.</param>
-            <param name="columnDescription">Description of the column.</param>
+            <param name="values">Values to store in the <see cref="T:TsadriuUtilities.TTableColumn"/>.</param>
         </member>
-        <member name="M:TsadriuUtilities.Objects.Table.AddColumn(TsadriuUtilities.Objects.TableColumn)">
+        <member name="M:TsadriuUtilities.TTable.AddData(TsadriuUtilities.TTableColumn,System.Object[])">
             <summary>
-            Adds a new <see cref="T:TsadriuUtilities.Objects.TableColumn"/> in the <see cref="T:TsadriuUtilities.Objects.Table"/>.
+            Adds <paramref name="values"/> into the <see cref="T:TsadriuUtilities.TTableColumn"/> as <see cref="T:System.Object"/>.
             </summary>
-            <param name="tableColumn">Instance of <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+            <param name="tableColumn"><see cref="T:TsadriuUtilities.TTableColumn"/> instance.</param>
+            <param name="values">Values to store in the <see cref="T:TsadriuUtilities.TTableColumn"/>.</param>
         </member>
-        <member name="M:TsadriuUtilities.Objects.Table.AddData(System.String,System.Object[])">
+        <member name="M:TsadriuUtilities.TTable.ExistsData(System.String,System.Object)">
             <summary>
-            Adds <paramref name="values"/> into the <see cref="T:TsadriuUtilities.Objects.TableColumn"/> as <see cref="T:System.Object"/>.
-            </summary>
-            <param name="columnName">Name of the column.</param>
-            <param name="values">Values to store in the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
-        </member>
-        <member name="M:TsadriuUtilities.Objects.Table.AddData(TsadriuUtilities.Objects.TableColumn,System.Object[])">
-            <summary>
-            Adds <paramref name="values"/> into the <see cref="T:TsadriuUtilities.Objects.TableColumn"/> as <see cref="T:System.Object"/>.
-            </summary>
-            <param name="tableColumn"><see cref="T:TsadriuUtilities.Objects.TableColumn"/> instance.</param>
-            <param name="values">Values to store in the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
-        </member>
-        <member name="M:TsadriuUtilities.Objects.Table.ExistsData(System.String,System.Object)">
-            <summary>
-            Checks through the <see cref="T:TsadriuUtilities.Objects.TableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
+            Checks through the <see cref="T:TsadriuUtilities.TTableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
             </summary>
             <param name="columnName">Name of the column.</param>
             <param name="value">Value to be checked.</param>
             <returns>True if the <paramref name="value"/> is found, otherwise false.</returns>
         </member>
-        <member name="M:TsadriuUtilities.Objects.Table.ExistsData(TsadriuUtilities.Objects.TableColumn,System.Object)">
+        <member name="M:TsadriuUtilities.TTable.ExistsData(TsadriuUtilities.TTableColumn,System.Object)">
             <summary>
-            Checks through the <see cref="T:TsadriuUtilities.Objects.TableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
+            Checks through the <see cref="T:TsadriuUtilities.TTableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
             </summary>
-            <param name="tableColumn">Instance of <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+            <param name="tableColumn">Instance of <see cref="T:TsadriuUtilities.TTableColumn"/>.</param>
             <param name="value">Value to be checked.</param>
             <returns>True if the <paramref name="value"/> is found, otherwise false.</returns>
         </member>
-        <member name="M:TsadriuUtilities.Objects.Table.RemoveData(System.String,System.Object[])">
+        <member name="M:TsadriuUtilities.TTable.GetData(System.String)">
+            <summary>
+            If the <paramref name="columnName"/> exists, returns all the data present in the <see cref="T:TsadriuUtilities.TTableColumn"/>.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>If the <see cref="T:TsadriuUtilities.TTableColumn"/> exists, returns a List of <see cref="T:System.Object"/> containing the data. Otherwise returns an empty list. </returns>
+        </member>
+        <member name="M:TsadriuUtilities.TTable.RemoveData(System.String,System.Object[])">
             <summary>
             Removes all instances of <paramref name="valuesToRemove"/>.
             </summary>
             <param name="columnName">Name of the column.</param>
-            <param name="valuesToRemove">Values to remove from the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+            <param name="valuesToRemove">Values to remove from the <see cref="T:TsadriuUtilities.TTableColumn"/>.</param>
         </member>
-        <member name="M:TsadriuUtilities.Objects.Table.RemoveData(TsadriuUtilities.Objects.TableColumn,System.Object[])">
+        <member name="M:TsadriuUtilities.TTable.RemoveData(TsadriuUtilities.TTableColumn,System.Object[])">
             <summary>
             Removes all instances of <paramref name="valuesToRemove"/>.
             </summary>
-            <param name="tableColumn"><see cref="T:TsadriuUtilities.Objects.TableColumn"/> instance.</param>
-            <param name="valuesToRemove">Values to remove from the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+            <param name="tableColumn"><see cref="T:TsadriuUtilities.TTableColumn"/> instance.</param>
+            <param name="valuesToRemove">Values to remove from the <see cref="T:TsadriuUtilities.TTableColumn"/>.</param>
         </member>
-        <member name="M:TsadriuUtilities.Objects.Table.TableToCsv(System.String)">
+        <member name="M:TsadriuUtilities.TTable.TableToCsv(System.Boolean,System.String)">
             <summary>
-            Transform the <see cref="T:TsadriuUtilities.Objects.Table"/> into a parseable .csv file.
+            Transform the <see cref="T:TsadriuUtilities.TTable"/> into a parseable .csv file. <see cref="P:TsadriuUtilities.TTableColumn.ColumnData"/> values that go over the count of <see cref="P:TsadriuUtilities.TTable.ColumnList"/> count will be trimmed.
             </summary>
-            <param name="separator">Separator of the csv. Default: ;</param>
-            <returns>List of <see cref="T:TsadriuUtilities.Objects.Table"/> that has been parsed to a List of <see cref="T:System.String"/> as a csv.</returns>
+            <param name="addHeader">If true, the generated .csv file will have a header. If false, the generated .csv file will have no header. <see cref="P:TsadriuUtilities.TTableColumn.ColumnName"/> will be used as a header.</param>
+            <param name="separator">Separator of the csv. Default uses ;</param>
+            <returns>List of <see cref="T:TsadriuUtilities.TTable"/> that has been parsed to a List of <see cref="T:System.String"/> as a csv.</returns>
         </member>
-        <member name="M:TsadriuUtilities.Objects.Table.GetHighestColumnDataCount">
+        <member name="M:TsadriuUtilities.TTable.GetHighestColumnDataCount">
             <summary>
-            Checks through the List of <see cref="P:TsadriuUtilities.Objects.Table.Column"/> and returns the <see cref="P:TsadriuUtilities.Objects.TableColumn.ColumnData"/> with the highest Count.
+            Checks through the List of <see cref="P:TsadriuUtilities.TTable.ColumnList"/> and returns the <see cref="P:TsadriuUtilities.TTableColumn.ColumnData"/> with the highest Count.
             </summary>
-            <returns>Returns the <see cref="P:TsadriuUtilities.Objects.TableColumn.ColumnData"/> with the highest Count.</returns>
+            <returns>Returns the <see cref="P:TsadriuUtilities.TTableColumn.ColumnData"/> with the highest Count.</returns>
         </member>
-        <member name="M:TsadriuUtilities.Objects.Table.StartUp">
+        <member name="M:TsadriuUtilities.TTable.GetHeadersAsString(System.Collections.Generic.List{TsadriuUtilities.TTableColumn},System.String)">
             <summary>
-            Starts up the List of <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.
+            Returns the headers of the <see cref="T:TsadriuUtilities.TTable"/> as a <see cref="T:System.String"/>.
+            </summary>
+            <param name="columns">The list of <see cref="T:TsadriuUtilities.TTableColumn"/> (usually found in object <see cref="P:TsadriuUtilities.TTable.ColumnList"/>).</param>
+            <param name="separator">The desired separator. Default uses ;</param>
+            <returns></returns>
+        </member>
+        <member name="M:TsadriuUtilities.TTable.StartUp">
+            <summary>
+            Starts up the List of <see cref="T:TsadriuUtilities.TTableColumn"/>.
             </summary>
         </member>
-        <member name="T:TsadriuUtilities.Objects.TableColumn">
+        <member name="T:TsadriuUtilities.TTableColumn">
             <summary>
             A class that helps store data on the go.
             </summary>
         </member>
-        <member name="M:TsadriuUtilities.Objects.TableColumn.#ctor(System.String,System.String)">
+        <member name="M:TsadriuUtilities.TTableColumn.#ctor(System.String)">
             <summary>
-            Creates a new instace of <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.
+            Creates a new instace of <see cref="T:TsadriuUtilities.TTableColumn"/>.
             </summary>
             <param name="columnName">Name of the column.</param>
-            <param name="columnDescription">Description of the column.</param>
         </member>
-        <member name="P:TsadriuUtilities.Objects.TableColumn.ColumnName">
+        <member name="P:TsadriuUtilities.TTableColumn.ColumnName">
             <summary>
             The name of the column.
             </summary>
         </member>
-        <member name="P:TsadriuUtilities.Objects.TableColumn.ColumnDescription">
-            <summary>
-            The description of the column.
-            </summary>
-        </member>
-        <member name="P:TsadriuUtilities.Objects.TableColumn.ColumnData">
+        <member name="P:TsadriuUtilities.TTableColumn.ColumnData">
             <summary>
             The data stored in the column.
             </summary>
         </member>
-        <member name="M:TsadriuUtilities.Objects.TableColumn.AddData(System.Object[])">
+        <member name="M:TsadriuUtilities.TTableColumn.AddData(System.Object[])">
             <summary>
-            Adds <paramref name="values"/> into the <see cref="T:TsadriuUtilities.Objects.TableColumn"/> as <see cref="T:System.Object"/>.
+            Adds <paramref name="values"/> into the <see cref="T:TsadriuUtilities.TTableColumn"/> as <see cref="T:System.Object"/>.
             </summary>
-            <param name="values">Values to store in the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+            <param name="values">Values to store in the <see cref="T:TsadriuUtilities.TTableColumn"/>.</param>
         </member>
-        <member name="M:TsadriuUtilities.Objects.TableColumn.ExistsData(System.Object)">
+        <member name="M:TsadriuUtilities.TTableColumn.ExistsData(System.Object)">
             <summary>
-            Checks through the <see cref="T:TsadriuUtilities.Objects.TableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
+            Checks through the <see cref="T:TsadriuUtilities.TTableColumn"/> for <paramref name="value"/>. Returns true if <paramref name="value"/> is found, otherwise false.
             </summary>
             <param name="value">Value to be checked.</param>
             <returns>True if the <paramref name="value"/> is found, otherwise false.</returns>
         </member>
-        <member name="M:TsadriuUtilities.Objects.TableColumn.RemoveData(System.Object[])">
+        <member name="M:TsadriuUtilities.TTableColumn.RemoveData(System.Object[])">
             <summary>
             Removes all instances of <paramref name="values"/>.
             </summary>
-            <param name="values">Values to remove from the <see cref="T:TsadriuUtilities.Objects.TableColumn"/>.</param>
+            <param name="values">Values to remove from the <see cref="T:TsadriuUtilities.TTableColumn"/>.</param>
         </member>
         <member name="T:TsadriuUtilities.StrHelper">
             <summary>
