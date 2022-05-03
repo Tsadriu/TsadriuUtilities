@@ -389,6 +389,16 @@
             <param name="tagsIncluded">If enabled, it will return a string with the <paramref name="startTag"/> and <paramref name="endTag"/> included.</param>
             <returns>Returns string.Empty if nothing is found.</returns>
         </member>
+        <member name="M:TsadriuUtilities.StringHelper.GetTagValues(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Searches through the <paramref name="text"/>, returning the content between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
+            </summary>
+            <param name="text">Text to search though.</param>
+            <param name="startTag">The start tag.</param>
+            <param name="endTag">The end tag.</param>
+            <param name="tagsIncluded">If enabled, it will return a string with the <paramref name="startTag"/> and <paramref name="endTag"/> included.</param>
+            <returns>Returns an empty List of <see cref="T:System.String"/> if nothing is found or parameters <paramref name="text"/>, <paramref name="startTag"/> or <paramref name="endTag"/> are empty.</returns>
+        </member>
         <member name="M:TsadriuUtilities.StringHelper.IsEmpty(System.String)">
             <summary>
             Checks if the <paramref name="value"/> is null, <see cref="F:System.String.Empty"/> or a white space ("", \n, \r, ...).
