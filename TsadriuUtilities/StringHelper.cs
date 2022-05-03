@@ -2,6 +2,7 @@
 // Copyright 2022 (C) Tsadriu. All rights reserved.
 // </copyright>
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TsadriuUtilities
@@ -59,6 +60,39 @@ namespace TsadriuUtilities
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Searches through the <paramref name="text"/>, returning the content between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
+        /// </summary>
+        /// <param name="text">Text to search though.</param>
+        /// <param name="startTag">The start tag.</param>
+        /// <param name="endTag">The end tag.</param>
+        /// <param name="tagsIncluded">If enabled, it will return a string with the <paramref name="startTag"/> and <paramref name="endTag"/> included.</param>
+        /// <returns>Returns an empty List of <see cref="string"/> if nothing is found or parameters <paramref name="text"/>, <paramref name="startTag"/> or <paramref name="endTag"/> are empty.</returns>
+        public static List<string> GetTagValues(string text, string startTag, string endTag, bool tagsIncluded = false)
+        {
+            if (IsEmpty(text) || IsEmpty(startTag) || IsEmpty(endTag))
+            {
+                if (IsEmpty(startTag) || IsEmpty(endTag))
+                {
+                    Console.WriteLine("Parameters startTag and endTag cannot be empty. Either use GetTagValue or provide the necessary information to use this method.");
+                }
+
+                return new List<string>();
+            }
+
+            var list = new List<string>();
+            var modifiedText = text;
+
+            while(modifiedText.Contains(startTag))
+            {
+                var res = GetTagValue(modifiedText, startTag, endTag, tagsIncluded);
+                modifiedText = GetTagValue(modifiedText, res, string.Empty, false);
+                list.Add(res);
+            }
+
+            return list;
         }
 
         /// <summary>
