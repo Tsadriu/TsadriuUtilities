@@ -8,8 +8,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>StringHelper:
- - Implemented new method GetTagValues. This method will return in a list all instances where startTag and endTag are found.</PackageReleaseNotes>
+    <PackageReleaseNotes>FileHelper:
+ - Added method to retrieve a file's extention.
+
+ListHelper:
+ - Renamed method from 'ToList' to 'ArrayToList'. (Method 'ToList' is still available to use, but I recommend using 'ArrayToList').
+
+StringHelper:
+ - Implemented methods AreEmpty and AreNotEmpty.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
