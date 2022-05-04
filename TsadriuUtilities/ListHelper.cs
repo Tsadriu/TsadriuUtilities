@@ -51,7 +51,19 @@ namespace TsadriuUtilities
         /// <typeparam name="T">Generic type.</typeparam>
         /// <param name="array"><see cref="Array"/> that you want to be converted to a <see cref="List{T}"/>.</param>
         /// <returns>A <see cref="List{T}"/> containing the <paramref name="array"/>'s values.</returns>
+        [Obsolete("ToList is deprecated, please use method ArrayToList instead.")]
         public static List<T> ToList<T>(T[] array)
+        {
+            return ArrayToList(array);
+        }
+
+        /// <summary>
+        /// Transforms an <see cref="Array"/> to a <see cref="List{T}"/>.
+        /// </summary>
+        /// <typeparam name="T">Generic type.</typeparam>
+        /// <param name="array"><see cref="Array"/> that you want to be converted to a <see cref="List{T}"/>.</param>
+        /// <returns>A <see cref="List{T}"/> containing the <paramref name="array"/>'s values.</returns>
+        public static List<T> ArrayToList<T>(T[] array)
         {
             var newList = new List<T>();
             newList.AddRange(array);

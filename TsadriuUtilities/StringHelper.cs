@@ -99,7 +99,7 @@ namespace TsadriuUtilities
         /// Checks if the <paramref name="value"/> is null, <see cref="string.Empty"/> or a white space ("", \n, \r, ...).
         /// </summary>
         /// <param name="value">The value to check.</param>
-        /// <returns>Returns true if the <paramref name="value"/> is empty. Returns false if not.</returns>
+        /// <returns>Returns true if the <paramref name="value"/> is empty. Returns false if it's not empty.</returns>
         public static bool IsEmpty(string value)
         {
             return string.IsNullOrWhiteSpace(value);
@@ -109,10 +109,50 @@ namespace TsadriuUtilities
         /// Checks if <paramref name="value"/> contains any kind of character.
         /// </summary>
         /// <param name="value">The value to check.</param>
-        /// <returns>Returns true if the <paramref name="value"/> is not empty. Returns false if not.</returns>
+        /// <returns>Returns true if the <paramref name="value"/> is not empty. Returns false if it contains any kind of character.</returns>
         public static bool IsNotEmpty(string value)
         {
             return !IsEmpty(value);
+        }
+
+        /// <summary>
+        /// Checks if all instances of <paramref name="values"/> are null, <see cref="string.Empty"/> or a white space ("", \n, \r, ...).
+        /// </summary>
+        /// <param name="values">The values to check.</param>
+        /// <returns>Returns true if all instances of <paramref name="values"/> are empty. Returns false if even one of them is not empty.</returns>
+        public static bool AreEmpty(params string[] values)
+        {
+            int emptyValuesCount = 0;
+
+            foreach (var value in values)
+            {
+                if (IsEmpty(value))
+                {
+                    emptyValuesCount++;
+                }
+            }
+
+            return emptyValuesCount == values.Length;
+        }
+
+        /// <summary>
+        /// Checks if all instances of <paramref name="values"/> are not empty.
+        /// </summary>
+        /// <param name="values">The values to check.</param>
+        /// <returns>Returns true if all instances of <paramref name="values"/> are not empty. Returns false if even one of them is empty.</returns>
+        public static bool AreNotEmpty(params string[] values)
+        {
+            int notEmptyValuesCount = 0;
+
+            foreach (var value in values)
+            {
+                if (IsNotEmpty(value))
+                {
+                    notEmptyValuesCount++;
+                }
+            }
+
+            return notEmptyValuesCount == values.Length;
         }
 
         /// <summary>

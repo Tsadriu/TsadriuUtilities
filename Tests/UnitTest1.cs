@@ -28,8 +28,6 @@ namespace Tests
 
             Assert.IsNotNull(test4);
             Assert.IsFalse(test4 == DateTime.MinValue);
-
-
         }
 
         [TestMethod]
@@ -40,19 +38,34 @@ namespace Tests
             var result = MultiHelper.ArrayToString(dateTimeArray, "&");
 
             Assert.IsFalse(result.Contains(dateTimeArray.GetType().ToString()));
+        }
 
+        [TestMethod]
+        public void ListHelperTest()
+        {
             var listaString = new List<string>() { "Fabio", "Proto" };
             var arrayString = new string[] { "Massimo", "Tito", "Giada", "Zina", "Jonah" };
 
             ListHelper.AddRange(ref listaString, arrayString, 1, 3);
 
-            var test = ListHelper.ToList(arrayString);
+            Assert.IsTrue(
+                listaString[0] == "Fabio" &&
+                listaString[1] == "Proto" &&
+                listaString[2] == "Tito" &&
+                listaString[3] == "Giada" &&
+                listaString[4] == "Zina");
+
+            var test = ListHelper.ArrayToList(arrayString);
+
+            Assert.IsTrue(test.GetType().Name == listaString.GetType().Name);
 
             ListHelper.OrderByDescending(ref test);
+
+            Assert.IsTrue(test[0] == "Jonah");
         }
 
         [TestMethod]
-        public void StrHelperTest()
+        public void StringHelperTest()
         {
             var text = "This fox is <b>very</b> sneaky!\nI hope nothing <b>happens</b> to my food...";
 
@@ -78,6 +91,21 @@ namespace Tests
 
             File.AppendAllLines(Path.Combine(path, "file_test.csv"), contentList);
             var t = StringHelper.GetTagValues("<?xml version=\"1.0\" encoding=\"UTF-8\"?><gesmes:Envelope xmlns:gesmes=\"http://www.gesmes.org/xml/2002-08-01\" xmlns=\"http://www.ecb.int/vocabulary/2002-08-01/eurofxref\"><gesmes:subject>Reference rates</gesmes:subject><gesmes:Sender><gesmes:name>European Central Bank</gesmes:name></gesmes:Sender><Cube><Cube time='2022-04-29'><Cube currency='USD' rate='1.0540'/><Cube currency='JPY' rate='137.01'/><Cube currency='BGN' rate='1.9558'/><Cube currency='CZK' rate='24.605'/><Cube currency='DKK' rate='7.4415'/><Cube currency='GBP' rate='0.83908'/><Cube currency='HUF' rate='378.71'/><Cube currency='PLN' rate='4.6780'/><Cube currency='RON' rate='4.9479'/><Cube currency='SEK' rate='10.2958'/><Cube currency='CHF' rate='1.0229'/><Cube currency='ISK' rate='137.80'/><Cube currency='NOK' rate='9.7525'/><Cube currency='HRK' rate='7.5667'/><Cube currency='TRY' rate='15.6385'/><Cube currency='AUD' rate='1.4699'/><Cube currency='BRL' rate='5.1608'/><Cube currency='CAD' rate='1.3426'/><Cube currency='CNY' rate='6.9441'/><Cube currency='HKD' rate='8.2703'/><Cube currency='IDR' rate='15301.52'/><Cube currency='ILS' rate='3.4993'/><Cube currency='INR' rate='80.6380'/><Cube currency='KRW' rate='1326.71'/><Cube currency='MXN' rate='21.4181'/><Cube currency='MYR' rate='4.5886'/><Cube currency='NZD' rate='1.6119'/><Cube currency='PHP' rate='55.200'/><Cube currency='SGD' rate='1.4545'/><Cube currency='THB' rate='36.026'/><Cube currency='ZAR' rate='16.6473'/></Cube></Cube></gesmes:Envelope>", "<Cube ", "/>", true);
+
+
+            var valuesOne = new List<string>() { "Fabio", "Noah", "Jonah", string.Empty, "Giada" };
+            Assert.IsFalse(StringHelper.AreEmpty(valuesOne.ToArray()));
+            Assert.IsFalse(StringHelper.AreNotEmpty(valuesOne.ToArray()));
+
+            var valuesTwo = new List<string>() { "", "\r", "\n", string.Empty, " " };
+            Assert.IsTrue(StringHelper.AreEmpty(valuesTwo.ToArray()));
+        }
+
+        [TestMethod]
+        public void FileHelperTest()
+        {
+            Assert.IsTrue(FileHelper.GetFileExtention("testFileName.txt.zip") == "zip");
+            Assert.IsTrue(FileHelper.GetFileExtention("testFileName.txt") == "txt");
         }
     }
 }
