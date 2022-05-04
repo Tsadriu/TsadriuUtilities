@@ -10,12 +10,17 @@
     <PackageIconUrl />
     <PackageReleaseNotes>FileHelper:
  - Added method to retrieve a file's extention.
+ - Implemented method Exist.
+ - Implemented method NotExist.
 
 ListHelper:
  - Renamed method from 'ToList' to 'ArrayToList'. (Method 'ToList' is still available to use, but I recommend using 'ArrayToList').
 
 StringHelper:
- - Implemented methods AreEmpty and AreNotEmpty.</PackageReleaseNotes>
+ - Implemented methods AreEmpty and AreNotEmpty.
+
+TTable:
+ - Implemented method to parse a .csv file into a TTable object.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>

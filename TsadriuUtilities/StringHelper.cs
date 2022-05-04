@@ -3,7 +3,6 @@
 // </copyright>
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace TsadriuUtilities
 {
@@ -72,24 +71,25 @@ namespace TsadriuUtilities
         /// <returns>Returns an empty List of <see cref="string"/> if nothing is found or parameters <paramref name="text"/>, <paramref name="startTag"/> or <paramref name="endTag"/> are empty.</returns>
         public static List<string> GetTagValues(string text, string startTag, string endTag, bool tagsIncluded = false)
         {
-            if (IsEmpty(text) || IsEmpty(startTag) || IsEmpty(endTag))
+            var list = new List<string>();
+
+            if (AreEmpty(text, startTag, endTag))
             {
-                if (IsEmpty(startTag) || IsEmpty(endTag))
+                if (AreEmpty(startTag, endTag))
                 {
                     Console.WriteLine("Parameters startTag and endTag cannot be empty. Either use GetTagValue or provide the necessary information to use this method.");
                 }
 
-                return new List<string>();
+                return list;
             }
 
-            var list = new List<string>();
             var modifiedText = text;
 
-            while(modifiedText.Contains(startTag))
+            while (modifiedText.Contains(startTag))
             {
-                var res = GetTagValue(modifiedText, startTag, endTag, tagsIncluded);
-                modifiedText = GetTagValue(modifiedText, res, string.Empty, false);
-                list.Add(res);
+                var result = GetTagValue(modifiedText, startTag, endTag, tagsIncluded);
+                modifiedText = GetTagValue(modifiedText, result, string.Empty, false);
+                list.Add(result);
             }
 
             return list;
@@ -119,40 +119,28 @@ namespace TsadriuUtilities
         /// Checks if all instances of <paramref name="values"/> are null, <see cref="string.Empty"/> or a white space ("", \n, \r, ...).
         /// </summary>
         /// <param name="values">The values to check.</param>
-        /// <returns>Returns true if all instances of <paramref name="values"/> are empty. Returns false if even one of them is not empty.</returns>
+        /// <returns>Returns true if even one of the instances of <paramref name="values"/> is empty. Returns false if all of them are not empty.</returns>
         public static bool AreEmpty(params string[] values)
         {
-            int emptyValuesCount = 0;
-
             foreach (var value in values)
             {
                 if (IsEmpty(value))
                 {
-                    emptyValuesCount++;
+                    return true;
                 }
             }
 
-            return emptyValuesCount == values.Length;
+            return false;
         }
 
         /// <summary>
         /// Checks if all instances of <paramref name="values"/> are not empty.
         /// </summary>
         /// <param name="values">The values to check.</param>
-        /// <returns>Returns true if all instances of <paramref name="values"/> are not empty. Returns false if even one of them is empty.</returns>
+        /// <returns>Returns true if even one of the instances of <paramref name="values"/> is not empty. Returns false if all of them are empty.</returns>
         public static bool AreNotEmpty(params string[] values)
         {
-            int notEmptyValuesCount = 0;
-
-            foreach (var value in values)
-            {
-                if (IsNotEmpty(value))
-                {
-                    notEmptyValuesCount++;
-                }
-            }
-
-            return notEmptyValuesCount == values.Length;
+            return !AreEmpty(values);
         }
 
         /// <summary>

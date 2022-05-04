@@ -19,12 +19,24 @@ namespace TsadriuUtilities
         /// <returns>True if the path exists. Otherwise false.</returns>
         public static bool Exist(string path, bool createFolder = false)
         {
+            // In case a path with a filename is passed.
+            path = Path.GetDirectoryName(path);
+
+            var pathExists = Directory.Exists(path);
+
+            if (pathExists)
+            {
+                return true;
+            }
+
             if (createFolder)
             {
                 Directory.CreateDirectory(path);
+                return true;
             }
 
-            return Directory.Exists(path);
+            Console.WriteLine($"Path '{path}' does not exist.");
+            return false;
         }
 
         /// <summary>

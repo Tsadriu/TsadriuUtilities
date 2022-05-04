@@ -1,8 +1,9 @@
-﻿// <copyright file Table.cs of solution TsadriuUtilities of developer Tsadriu>
+﻿// <copyright file TTable.cs of solution TsadriuUtilities of developer Tsadriu>
 // Copyright 2022 (C) Tsadriu. All rights reserved.
 // </copyright>
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace TsadriuUtilities
@@ -11,10 +12,9 @@ namespace TsadriuUtilities
     /// A class that helps store data on the go.
     /// </summary>
     public class TTable
-
     {
         /// <summary>
-        /// Creates a new instace of <see cref="TTable"/> (Tsadriu Table).
+        /// Creates a new instace of <see cref="TTable"/>.
         /// </summary>
         public TTable()
         {
@@ -30,7 +30,7 @@ namespace TsadriuUtilities
             foreach (var column in columnName)
             {
                 AddColumn(new TTableColumn(column));
-            }            
+            }
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Transform the <see cref="TTable"/> into a parseable .csv file. <see cref="TTableColumn.ColumnData"/> values that go over the count of <see cref="ColumnList"/> count will be trimmed.
+        /// Transform the <see cref="TTable"/> into a parseable .csv file.
         /// </summary>
         /// <param name="addHeader">If true, the generated .csv file will have a header. If false, the generated .csv file will have no header. <see cref="TTableColumn.ColumnName"/> will be used as a header.</param>
         /// <param name="separator">Separator of the csv. Default uses ;</param>
@@ -179,7 +179,7 @@ namespace TsadriuUtilities
             }
 
             var maxRow = GetHighestColumnDataCount();
-            
+
             for (int currentRow = 0; currentRow < maxRow; currentRow++)
             {
                 string rowData = string.Empty;
@@ -206,6 +206,42 @@ namespace TsadriuUtilities
             }
 
             return content;
+        }
+
+        /// <summary>
+        /// Transforms a .csv file into a <see cref="TTable"/>.
+        /// </summary>
+        /// <param name="fullFileName">File name of the file, including its' path.</param>
+        /// <param name="separator">Separator of the csv. Default uses ;</param>
+        /// <returns>Instance of <see cref="TTable"/> with the data of <paramref name="fullFileName"/>.</returns>
+        public void CsvToTable(string fullFileName, string separator = ";")
+        {
+            if (DirectoryHelper.NotExist(fullFileName))
+            {
+                return;
+            }
+
+            if (FileHelper.NotExist(fullFileName))
+            {
+                return;
+            }
+
+            var fileRows = ListHelper.ArrayToList(File.ReadAllLines(fullFileName));
+
+            if (fileRows.Count == 0)
+            {
+                return;
+            }
+
+            AddColumn(fileRows[0].Split(separator));
+            
+            for (int dataIndex = 1; dataIndex < fileRows.Count; dataIndex++)
+            {
+                for (int columnIndex = 0; columnIndex < ColumnList.Count; columnIndex++)
+                {
+                    AddData(ColumnList[columnIndex].ColumnName, fileRows[dataIndex].Split(separator)[columnIndex]);
+                }
+            }
         }
 
         /// <summary>
@@ -236,8 +272,8 @@ namespace TsadriuUtilities
         /// </summary>
         /// <param name="columns">The list of <see cref="TTableColumn"/> (usually found in object <see cref="ColumnList"/>).</param>
         /// <param name="separator">The desired separator. Default uses ;</param>
-        /// <returns></returns>
-        public string GetHeadersAsString(List<TTableColumn> columns, string separator = ";")
+        /// <returns>Headers of the columns in a <see cref="string"/>.</returns>
+        private string GetHeadersAsString(List<TTableColumn> columns, string separator = ";")
         {
             string header = string.Empty;
 

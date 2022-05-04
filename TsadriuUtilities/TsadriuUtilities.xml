@@ -80,6 +80,22 @@
             <param name="fileName">The name of the file.</param>
             <returns>Returns the extention of <paramref name="fileName"/>.</returns>
         </member>
+        <member name="M:TsadriuUtilities.FileHelper.Exist(System.String,System.Boolean)">
+            <summary>
+            Checks if a <paramref name="fullFileName"/> exists. If <paramref name="createFile"/> is true, it will create <paramref name="fullFileName"/> if the <paramref name="fullFileName"/> doesn't exist (Keep in mind that the path of <paramref name="fullFileName"/> must exist for <paramref name="createFile"/> to work).
+            </summary>
+            <param name="fullFileName">File name with the path included.</param>
+            <param name="createFile">Create the file in case the <paramref name="fullFileName"/> doesn't exist. The path must exist beforehand for this to work.</param>
+            <returns>True if the file exists. Otherwise false.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.FileHelper.NotExist(System.String,System.Boolean)">
+            <summary>
+            Checks if a <paramref name="fullFileName"/> does not exist. If <paramref name="createFile"/> is true, it will create <paramref name="fullFileName"/> if the <paramref name="fullFileName"/> doesn't exist (Keep in mind that the path of <paramref name="fullFileName"/> must exist for <paramref name="createFile"/> to work).
+            </summary>
+            <param name="fullFileName">File name with the path included.</param>
+            <param name="createFile">Create the file in case the <paramref name="fullFileName"/> doesn't exist. The path must exist beforehand for this to work.</param>
+            <returns>True if the file exists. Otherwise false.</returns>
+        </member>
         <member name="T:TsadriuUtilities.ListHelper">
             <summary>
             A class that helps on dealing with <see cref="T:System.Collections.Generic.List`1"/>.
@@ -99,7 +115,7 @@
         </member>
         <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0}@,System.Collections.Generic.List{``0},System.Int32)">
             <summary>
-            Adds the <paramref name="listToAdd"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="T:System.Array"/>.
+            Adds the <paramref name="listToAdd"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="T:System.Collections.Generic.List`1"/>.
             </summary>
             <typeparam name="T">Generic type.</typeparam>
             <param name="currentList">List where <paramref name="listToAdd"/> will be added into.</param>
@@ -276,11 +292,19 @@
         </member>
         <member name="M:TsadriuUtilities.TTable.TableToCsv(System.Boolean,System.String)">
             <summary>
-            Transform the <see cref="T:TsadriuUtilities.TTable"/> into a parseable .csv file. <see cref="P:TsadriuUtilities.TTableColumn.ColumnData"/> values that go over the count of <see cref="P:TsadriuUtilities.TTable.ColumnList"/> count will be trimmed.
+            Transform the <see cref="T:TsadriuUtilities.TTable"/> into a parseable .csv file.
             </summary>
             <param name="addHeader">If true, the generated .csv file will have a header. If false, the generated .csv file will have no header. <see cref="P:TsadriuUtilities.TTableColumn.ColumnName"/> will be used as a header.</param>
             <param name="separator">Separator of the csv. Default uses ;</param>
             <returns>List of <see cref="T:TsadriuUtilities.TTable"/> that has been parsed to a List of <see cref="T:System.String"/> as a csv.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.TTable.CsvToTable(System.String,System.String)">
+            <summary>
+            Transforms a .csv file into a <see cref="T:TsadriuUtilities.TTable"/>.
+            </summary>
+            <param name="fullFileName">File name of the file, including its' path.</param>
+            <param name="separator">Separator of the csv. Default uses ;</param>
+            <returns>Instance of <see cref="T:TsadriuUtilities.TTable"/> with the data of <paramref name="fullFileName"/>.</returns>
         </member>
         <member name="M:TsadriuUtilities.TTable.GetHighestColumnDataCount">
             <summary>
@@ -294,7 +318,7 @@
             </summary>
             <param name="columns">The list of <see cref="T:TsadriuUtilities.TTableColumn"/> (usually found in object <see cref="P:TsadriuUtilities.TTable.ColumnList"/>).</param>
             <param name="separator">The desired separator. Default uses ;</param>
-            <returns></returns>
+            <returns>Headers of the columns in a <see cref="T:System.String"/>.</returns>
         </member>
         <member name="M:TsadriuUtilities.TTable.StartUp">
             <summary>
@@ -438,14 +462,14 @@
             Checks if all instances of <paramref name="values"/> are null, <see cref="F:System.String.Empty"/> or a white space ("", \n, \r, ...).
             </summary>
             <param name="values">The values to check.</param>
-            <returns>Returns true if all instances of <paramref name="values"/> are empty. Returns false if even one of them is not empty.</returns>
+            <returns>Returns true if even one of the instances of <paramref name="values"/> is empty. Returns false if all of them are not empty.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.AreNotEmpty(System.String[])">
             <summary>
             Checks if all instances of <paramref name="values"/> are not empty.
             </summary>
             <param name="values">The values to check.</param>
-            <returns>Returns true if all instances of <paramref name="values"/> are not empty. Returns false if even one of them is empty.</returns>
+            <returns>Returns true if even one of the instances of <paramref name="values"/> is not empty. Returns false if all of them are empty.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.LetterUpperCase(System.String,System.Int32)">
             <summary>

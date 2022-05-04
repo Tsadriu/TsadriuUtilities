@@ -1,8 +1,7 @@
-﻿using System;
+﻿// <copyright file TTableColumn.cs of solution TsadriuUtilities of developer Tsadriu>
+// Copyright 2022 (C) Tsadriu. All rights reserved.
+// </copyright>
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TsadriuUtilities
 {
@@ -12,7 +11,7 @@ namespace TsadriuUtilities
     public class TTableColumn
     {
         /// <summary>
-        /// Creates a new instace of <see cref="TTableColumn"/> (Tsadriu Table Column).
+        /// Creates a new instace of <see cref="TTableColumn"/>.
         /// </summary>
         /// <param name="columnName">Name of the column.</param>
         public TTableColumn(string columnName)

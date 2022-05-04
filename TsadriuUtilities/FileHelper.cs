@@ -2,6 +2,9 @@
 // Copyright 2022 (C) Tsadriu. All rights reserved.
 // </copyright>
 
+using System;
+using System.IO;
+
 namespace TsadriuUtilities
 {
     /// <summary>
@@ -17,6 +20,49 @@ namespace TsadriuUtilities
         public static string GetFileExtention(string fileName)
         {
             return fileName.Split(".")[StringHelper.CharCount(fileName, ".")];
+        }
+
+        /// <summary>
+        /// Checks if a <paramref name="fullFileName"/> exists. If <paramref name="createFile"/> is true, it will create <paramref name="fullFileName"/> if the <paramref name="fullFileName"/> doesn't exist (Keep in mind that the path of <paramref name="fullFileName"/> must exist for <paramref name="createFile"/> to work).
+        /// </summary>
+        /// <param name="fullFileName">File name with the path included.</param>
+        /// <param name="createFile">Create the file in case the <paramref name="fullFileName"/> doesn't exist. The path must exist beforehand for this to work.</param>
+        /// <returns>True if the file exists. Otherwise false.</returns>
+        public static bool Exist(string fullFileName, bool createFile = false)
+        {
+            if (DirectoryHelper.NotExist(fullFileName))
+            {
+                return false;
+            }
+
+            var fileName = Path.GetFileName(fullFileName);
+
+            bool fileExists = File.Exists(fullFileName);
+
+            if (fileExists)
+            {
+                return true;
+            }
+
+            if (createFile)
+            {
+                File.Create(fullFileName).Close();
+                return true;
+            }
+
+            Console.WriteLine($"File '{fileName}' does not exist.");
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if a <paramref name="fullFileName"/> does not exist. If <paramref name="createFile"/> is true, it will create <paramref name="fullFileName"/> if the <paramref name="fullFileName"/> doesn't exist (Keep in mind that the path of <paramref name="fullFileName"/> must exist for <paramref name="createFile"/> to work).
+        /// </summary>
+        /// <param name="fullFileName">File name with the path included.</param>
+        /// <param name="createFile">Create the file in case the <paramref name="fullFileName"/> doesn't exist. The path must exist beforehand for this to work.</param>
+        /// <returns>True if the file exists. Otherwise false.</returns>
+        public static bool NotExist(string fullFileName, bool createFile = false)
+        {
+            return !Exist(fullFileName, createFile);
         }
     }
 }

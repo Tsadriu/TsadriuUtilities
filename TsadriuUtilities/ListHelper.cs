@@ -30,7 +30,7 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Adds the <paramref name="listToAdd"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="Array"/>.
+        /// Adds the <paramref name="listToAdd"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="List{T}"/>.
         /// </summary>
         /// <typeparam name="T">Generic type.</typeparam>
         /// <param name="currentList">List where <paramref name="listToAdd"/> will be added into.</param>
