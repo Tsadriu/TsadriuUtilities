@@ -224,7 +224,7 @@
         </member>
         <member name="M:TsadriuUtilities.TTable.#ctor">
             <summary>
-            Creates a new instace of <see cref="T:TsadriuUtilities.TTable"/> (Tsadriu Table).
+            Creates a new instace of <see cref="T:TsadriuUtilities.TTable"/>.
             </summary>
         </member>
         <member name="M:TsadriuUtilities.TTable.AddColumn(System.String[])">
@@ -332,7 +332,7 @@
         </member>
         <member name="M:TsadriuUtilities.TTableColumn.#ctor(System.String)">
             <summary>
-            Creates a new instace of <see cref="T:TsadriuUtilities.TTableColumn"/> (Tsadriu Table Column).
+            Creates a new instace of <see cref="T:TsadriuUtilities.TTableColumn"/>.
             </summary>
             <param name="columnName">Name of the column.</param>
         </member>
