@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.0.13</Version>
-    <Description>A small package with utilities to save a little bit of time in coding.</Description>
+    <Version>1.0.14</Version>
+    <Description>A small package of utilities to help dealing with strings, chars, lists and more to hopefully save a little bit of time in coding.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
@@ -24,8 +24,8 @@ TTable:
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
-    <AssemblyVersion>1.0.13.1</AssemblyVersion>
-    <FileVersion>1.0.13.1</FileVersion>
+    <AssemblyVersion>1.0.14.1</AssemblyVersion>
+    <FileVersion>1.0.14.1</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
