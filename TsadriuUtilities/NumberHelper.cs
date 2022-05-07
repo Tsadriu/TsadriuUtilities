@@ -45,5 +45,71 @@ namespace TsadriuUtilities
 
             return 0.0d;
         }
+
+        /// <summary>
+        /// Returns the highest number present in the <paramref name="sequence"/>.
+        /// Supported types:
+        /// <see cref="long"/>, <see cref="int"/>, <see cref="short"/>, <see cref="byte"/>,
+        /// <see cref="float"/>, <see cref="double"/>, <see cref="decimal"/>.
+        /// </summary>
+        /// <typeparam name="T">Type.</typeparam>
+        /// <param name="sequence">Sequence of numbers.</param>
+        /// <returns>The highest number present in <paramref name="sequence"/>. If it's not found (or sequence is null or empty), returns 0.</returns>
+        public static T Max<T>(params T[] sequence)
+        {
+            if (sequence.Length == 0)
+            {
+                return (T)Convert.ChangeType(0, typeof(T));
+            }
+
+            var max = (decimal)Convert.ChangeType(sequence[0], typeof(decimal));
+
+            for (int i = 0; i < sequence.Length; i++)
+            {
+                var currentValue = (decimal)Convert.ChangeType(sequence[i], typeof(decimal));
+
+                if (currentValue <= max)
+                {
+                    continue;
+                }
+
+                max = currentValue;
+            }
+
+            return (T)Convert.ChangeType(max, typeof(T));
+        }
+
+        /// <summary>
+        /// Returns the lowest number present in the <paramref name="sequence"/>.
+        /// Supported types:
+        /// <see cref="long"/>, <see cref="int"/>, <see cref="short"/>, <see cref="byte"/>,
+        /// <see cref="float"/>, <see cref="double"/>, <see cref="decimal"/>.
+        /// </summary>
+        /// <typeparam name="T">Type.</typeparam>
+        /// <param name="sequence">Sequence of numbers.</param>
+        /// <returns>The lowest number present in <paramref name="sequence"/>. If it's not found (or sequence is null or empty), returns 0.</returns>
+        public static T Min<T>(params T[] sequence)
+        {
+            if (sequence.Length == 0)
+            {
+                return (T)Convert.ChangeType(0, typeof(T));
+            }
+
+            var min = (decimal)Convert.ChangeType(sequence[0], typeof(decimal));
+
+            for (int i = 0; i < sequence.Length; i++)
+            {
+                var currentValue = (decimal)Convert.ChangeType(sequence[i], typeof(decimal));
+
+                if (currentValue >= min)
+                {
+                    continue;
+                }
+
+                min = currentValue;
+            }
+
+            return (T)Convert.ChangeType(min, typeof(T));
+        }
     }
 }

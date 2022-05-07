@@ -111,5 +111,17 @@ namespace Tests
             Assert.IsTrue(FileHelper.GetFileExtention("testFileName.txt.zip") == "zip");
             Assert.IsTrue(FileHelper.GetFileExtention("testFileName.txt") == "txt");
         }
+
+        [TestMethod]
+        public void NumberHelperTest()
+        {
+            int[] test = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+
+            var max = NumberHelper.Max(test);
+            var min = NumberHelper.Min(test);
+
+            Assert.IsTrue(max == 7);
+            Assert.IsTrue(min == 1);
+        }
     }
 }
