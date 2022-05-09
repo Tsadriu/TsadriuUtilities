@@ -217,6 +217,40 @@
             <param name="value">Number as a <see cref="T:System.String"/> (46e-9).</param>
             <returns>Returns the parsed <paramref name="value"/> as a <see cref="T:System.Double"/>. If the conversion fails, returns 0.0d.</returns>
         </member>
+        <member name="M:TsadriuUtilities.NumberHelper.Max``1(``0[])">
+            <summary>
+            Returns the highest number present in the <paramref name="sequence"/>.
+            Supported types:
+            <see cref="T:System.Int64"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/>,
+            <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Decimal"/>.
+            </summary>
+            <typeparam name="T">Type.</typeparam>
+            <param name="sequence">Sequence of numbers.</param>
+            <returns>The highest number present in <paramref name="sequence"/>. If it's not found (or sequence is null or empty), returns 0.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.NumberHelper.Min``1(``0[])">
+            <summary>
+            Returns the lowest number present in the <paramref name="sequence"/>.
+            Supported types:
+            <see cref="T:System.Int64"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/>,
+            <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Decimal"/>.
+            </summary>
+            <typeparam name="T">Type.</typeparam>
+            <param name="sequence">Sequence of numbers.</param>
+            <returns>The lowest number present in <paramref name="sequence"/>. If it's not found (or sequence is null or empty), returns 0.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.NumberHelper.Between``1(``0,``0,``0,System.Boolean)">
+            <summary>
+            Check if <paramref name="value"/> is between <paramref name="min"/> and <paramref name="max"/>. Setting <paramref name="included"/> to true will also include <paramref name="min"/> and <paramref name="max"/> in the verification.
+            </summary>
+            <typeparam name="T">Supported types: <see cref="T:System.Int64"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/>,
+            <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Decimal"/>.</typeparam>
+            <param name="value">The value to be checked on.</param>
+            <param name="min">Minimum value.</param>
+            <param name="max">Maximum value.</param>
+            <param name="included">Set to true to include <paramref name="min"/> and <paramref name="max"/> in the verification.</param>
+            <returns>True if <paramref name="value"/> is between <paramref name="min"/> and <paramref name="max"/>. Otherwise returns false.</returns>
+        </member>
         <member name="T:TsadriuUtilities.TTable">
             <summary>
             A class that helps store data on the go.

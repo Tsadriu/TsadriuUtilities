@@ -122,6 +122,11 @@ namespace Tests
 
             Assert.IsTrue(max == 7);
             Assert.IsTrue(min == 1);
+
+            var isBetween = NumberHelper.Between(max, 2, 8);
+            Assert.IsTrue(isBetween == true);
+
+            Assert.IsTrue(NumberHelper.Between(18, 20, 5) == false);
         }
     }
 }

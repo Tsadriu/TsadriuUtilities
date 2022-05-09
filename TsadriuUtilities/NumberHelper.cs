@@ -111,5 +111,31 @@ namespace TsadriuUtilities
 
             return (T)Convert.ChangeType(min, typeof(T));
         }
+
+        /// <summary>
+        /// Check if <paramref name="value"/> is between <paramref name="min"/> and <paramref name="max"/>. Setting <paramref name="included"/> to true will also include <paramref name="min"/> and <paramref name="max"/> in the verification.
+        /// </summary>
+        /// <typeparam name="T">Supported types: <see cref="long"/>, <see cref="int"/>, <see cref="short"/>, <see cref="byte"/>,
+        /// <see cref="float"/>, <see cref="double"/>, <see cref="decimal"/>.</typeparam>
+        /// <param name="value">The value to be checked on.</param>
+        /// <param name="min">Minimum value.</param>
+        /// <param name="max">Maximum value.</param>
+        /// <param name="included">Set to true to include <paramref name="min"/> and <paramref name="max"/> in the verification.</param>
+        /// <returns>True if <paramref name="value"/> is between <paramref name="min"/> and <paramref name="max"/>. Otherwise returns false.</returns>
+        public static bool Between<T>(T value, T min, T max, bool included = true)
+        {
+            var currentValue = (decimal)Convert.ChangeType(value, typeof(decimal));
+            var currentMin = (decimal)Convert.ChangeType(min, typeof(decimal));
+            var currentMax = (decimal)Convert.ChangeType(max, typeof(decimal));
+
+            if (included)
+            {
+                return currentValue >= currentMin && currentValue <= currentMax;
+            }
+            else
+            {
+                return currentValue > currentMin && currentValue < currentMax;
+            }
+        }
     }
 }
