@@ -101,7 +101,7 @@
             A class that helps on dealing with <see cref="T:System.Collections.Generic.List`1"/>.
             </summary>
         </member>
-        <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0}@,``0[],System.Int32,System.Int32)">
+        <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0},``0[],System.Int32,System.Int32)">
             <summary>
             Adds the <paramref name="array"/> into <paramref name="currentList"/>.
             If <paramref name="startIndex"/> is specified, it will add only from <paramref name="startIndex"/> (included) until the end of the <see cref="T:System.Array"/> or until it reaches <paramref name="endIndex"/> (included) if it is specified.
@@ -113,7 +113,7 @@
             <param name="endIndex">From which point of the <paramref name="array"/>'s index should stop.</param>
             <returns></returns>
         </member>
-        <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0}@,System.Collections.Generic.List{``0},System.Int32)">
+        <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0},System.Int32)">
             <summary>
             Adds the <paramref name="listToAdd"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="T:System.Collections.Generic.List`1"/>.
             </summary>
@@ -139,14 +139,14 @@
             <param name="array"><see cref="T:System.Array"/> that you want to be converted to a <see cref="T:System.Collections.Generic.List`1"/>.</param>
             <returns>A <see cref="T:System.Collections.Generic.List`1"/> containing the <paramref name="array"/>'s values.</returns>
         </member>
-        <member name="M:TsadriuUtilities.ListHelper.OrderByAscending``1(System.Collections.Generic.List{``0}@)">
+        <member name="M:TsadriuUtilities.ListHelper.OrderByAscending``1(System.Collections.Generic.List{``0})">
             <summary>
             Orders the <see cref="T:System.Collections.Generic.List`1"/> in ascending order.
             </summary>
             <typeparam name="T">Generic type.</typeparam>
             <param name="list"><see cref="T:System.Collections.Generic.List`1"/> to be ordered.</param>
         </member>
-        <member name="M:TsadriuUtilities.ListHelper.OrderByDescending``1(System.Collections.Generic.List{``0}@)">
+        <member name="M:TsadriuUtilities.ListHelper.OrderByDescending``1(System.Collections.Generic.List{``0})">
             <summary>
             Orders the <see cref="T:System.Collections.Generic.List`1"/> in descending order.
             </summary>

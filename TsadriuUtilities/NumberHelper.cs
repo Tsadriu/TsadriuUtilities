@@ -15,7 +15,7 @@ namespace TsadriuUtilities
         /// </summary>
         /// <param name="value">Number as a <see cref="string"/> (46e-9).</param>
         /// <returns>Returns the parsed <paramref name="value"/> as a <see cref="decimal"/>. If the conversion fails, returns <see cref="decimal.Zero"/>.</returns>
-        public static decimal? ExponentialToDecimal(string value)
+        public static decimal ExponentialToDecimal(string value)
         {
             if (StringHelper.IsNotEmpty(value))
             {
@@ -33,7 +33,7 @@ namespace TsadriuUtilities
         /// </summary>
         /// <param name="value">Number as a <see cref="string"/> (46e-9).</param>
         /// <returns>Returns the parsed <paramref name="value"/> as a <see cref="double"/>. If the conversion fails, returns 0.0d.</returns>
-        public static double? ExponentialToDouble(string value)
+        public static double ExponentialToDouble(string value)
         {
             if (StringHelper.IsNotEmpty(value))
             {

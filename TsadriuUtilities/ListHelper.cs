@@ -21,7 +21,7 @@ namespace TsadriuUtilities
         /// <param name="startIndex">From which point of the <paramref name="array"/>'s index should added.</param>
         /// <param name="endIndex">From which point of the <paramref name="array"/>'s index should stop.</param>
         /// <returns></returns>
-        public static void AddRange<T>(ref List<T> currentList, T[] array, int startIndex = 0, int endIndex = 0)
+        public static void AddRange<T>(this List<T> currentList, T[] array, int startIndex = 0, int endIndex = 0)
         {
             var list = new List<T>();
             list.AddRange(array);
@@ -37,7 +37,7 @@ namespace TsadriuUtilities
         /// <param name="listToAdd">Array of values.</param>
         /// <param name="index">From which point of the <paramref name="listToAdd"/>'s index should added.</param>
         /// <returns></returns>
-        public static void AddRange<T>(ref List<T> currentList, List<T> listToAdd, int index = 0)
+        public static void AddRange<T>(this List<T> currentList, List<T> listToAdd, int index = 0)
         {
             var list = new List<T>();
             list.AddRange(listToAdd);
@@ -75,7 +75,7 @@ namespace TsadriuUtilities
         /// </summary>
         /// <typeparam name="T">Generic type.</typeparam>
         /// <param name="list"><see cref="List{T}"/> to be ordered.</param>
-        public static void OrderByAscending<T>(ref List<T> list)
+        public static void OrderByAscending<T>(this List<T> list)
         {
             list.Sort();
         }
@@ -85,7 +85,7 @@ namespace TsadriuUtilities
         /// </summary>
         /// <typeparam name="T">Generic type.</typeparam>
         /// <param name="list"><see cref="List{T}"/> to be ordered.</param>
-        public static void OrderByDescending<T>(ref List<T> list)
+        public static void OrderByDescending<T>(this List<T> list)
         {
             list.Reverse();
         }

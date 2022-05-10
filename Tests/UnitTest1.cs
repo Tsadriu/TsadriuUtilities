@@ -46,7 +46,7 @@ namespace Tests
             var listaString = new List<string>() { "Fabio", "Proto" };
             var arrayString = new string[] { "Massimo", "Tito", "Giada", "Zina", "Jonah" };
 
-            ListHelper.AddRange(ref listaString, arrayString, 1, 3);
+            listaString.AddRange(arrayString, 1, 3);
 
             Assert.IsTrue(
                 listaString[0] == "Fabio" &&
@@ -58,8 +58,8 @@ namespace Tests
             var test = ListHelper.ArrayToList(arrayString);
 
             Assert.IsTrue(test.GetType().Name == listaString.GetType().Name);
-
-            ListHelper.OrderByDescending(ref test);
+            test.OrderByDescending();
+            ListHelper.OrderByDescending(test);
 
             Assert.IsTrue(test[0] == "Jonah");
         }
@@ -85,7 +85,7 @@ namespace Tests
             table.AddData("Orario di registrazione", DateTime.Now);
 
             var contentList = table.TableToCsv(true, ";");
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TEST CSV");
+            /*var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TEST CSV");
 
             DirectoryHelper.Exist(path, true);
 
@@ -102,7 +102,13 @@ namespace Tests
             Assert.IsFalse(StringHelper.AreNotEmpty(valuesOne.ToArray()));
 
             var valuesTwo = new List<string>() { "", "Fabio", "\n", string.Empty, " " };
-            Assert.IsTrue(StringHelper.AreEmpty(valuesTwo.ToArray()));
+            Assert.IsTrue(StringHelper.AreEmpty(valuesTwo.ToArray()));*/
+            // C:\Users\foliveira\Documents\GitHub\TsadriuUtilities\Tests\Files\
+            // C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\bin\\Debug\\net5.0
+            var fileToTest = Path.Combine(StringHelper.GetTagValue(Directory.GetCurrentDirectory(), string.Empty, "Tests", true), "Files", "TestTTableXmlFile.xml");
+            var fileContent = File.ReadAllText(fileToTest);
+
+            var vals = StringHelper.GetTagValues(fileContent, "<Corrispettivi>", "</Corrispettivi>", true);
         }
 
         [TestMethod]
