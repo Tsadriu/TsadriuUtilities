@@ -32,7 +32,7 @@ namespace TsadriuUtilities
         /// <param name="maxValue">Maximum value that the <paramref name="currentValue"/> cannot succeed.</param>
         /// <returns>Returns the clamped result of the operation.</returns>
         /// <exception cref="NotImplementedException">Throws <see cref="NotImplementedException"/> if trying to call this method with an unsupported <see cref="Type"/>.</exception>
-        public static T ClampValue<T>(T currentValue, T minValue, T maxValue)
+        public static T ClampValue<T>(this T currentValue, T minValue, T maxValue)
         {
             var currentType = typeof(T);
 
@@ -121,9 +121,10 @@ namespace TsadriuUtilities
         /// <param name="array"><see cref="Array"/> of objects.</param>
         /// <param name="separator"><see cref="string"/> separator. If nothing is passed, it will separate by a space.</param>
         /// <returns><see cref="Array"/> converted into a single <see cref="string"/> line.</returns>
+        [Obsolete("Method will be removed in 1.0.16. Please use method ArrayHelper.ToString(separator) instead.", true)]
         public static string ArrayToString<T>(T[] array, string separator = " ")
         {
-            return string.Join(separator, array);
+            return array.ToString(separator);
         }
 
         /// <summary>
@@ -138,15 +139,10 @@ namespace TsadriuUtilities
         /// <param name="startIndex">From which point of the <paramref name="list"/>'s index should added.</param>
         /// <param name="count">How many elements in the <paramref name="list"/> should be taken considering the <paramref name="startIndex"/>'s point.</param>
         /// <returns><see cref="List{T}"/> converted into a single <see cref="string"/> line.</returns>
+        [Obsolete("Method will be removed in 1.0.16. Please use method ListHelper.ToString(separator, startIndex, count) instead.", true)]
         public static string ListToString<T>(List<T> list, string separator = " ", int startIndex = 0, int count = -1)
         {
-            if (count == -1)
-            {
-                count = list.Count;
-            }
-
-            var values = list.GetRange(startIndex, count);
-            return string.Join(separator, values);
+            return list.ToString(separator, startIndex, count);
         }
     }
 }

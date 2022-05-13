@@ -12,10 +12,13 @@ namespace Tests
         [TestMethod]
         public void DateTimeHelperTest()
         {
-            DateTime test1 = (DateTime)DateTimeHelper.StringToDate("25/03/2020", new string[] { "dd-MM-yyyy", "dd/MM/yyyy" }, System.Globalization.CultureInfo.InvariantCulture);
-            DateTime test2 = (DateTime)DateTimeHelper.StringToDate("25/03/2020", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime test3 = (DateTime)DateTimeHelper.StringToDate("25/03/2020", new string[] { "dd-MM-yyyy", "dd/MM/yyyy" });
-            DateTime test4 = (DateTime)DateTimeHelper.StringToDate("25/03/2020", "dd/MM/yyyy");
+            DateTime test1 = "25/03/2020".ToDateTime(new string[] { "dd-MM-yyyy", "dd/MM/yyyy" }, System.Globalization.CultureInfo.InvariantCulture);
+            DateTime test2 = "25/03/2020".ToDateTime("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime test3 = "25/03/2020".ToDateTime(new string[] { "dd-MM-yyyy", "dd/MM/yyyy" });
+            DateTime test4 = "25/03/2020".ToDateTime("dd/MM/yyyy");
+            string dateString = "25/03/2000";
+            DateTime test5 = dateString.ToDateTime("dd/MM/yyyy");
+            DateTime dt = DateTime.Today.GetLastDayOfMonth();
 
             Assert.IsNotNull(test1);
             Assert.IsFalse(test1 == DateTime.MinValue);
@@ -35,7 +38,7 @@ namespace Tests
         {
             DateTime[] dateTimeArray = new DateTime[] { DateTime.Today, DateTime.Now, new DateTime(2020, 03, 20) };
 
-            var result = MultiHelper.ArrayToString(dateTimeArray, "&");
+            var result = dateTimeArray.ToString("&");
 
             Assert.IsFalse(result.Contains(dateTimeArray.GetType().ToString()));
         }
@@ -55,7 +58,7 @@ namespace Tests
                 listaString[3] == "Giada" &&
                 listaString[4] == "Zina");
 
-            var test = ListHelper.ArrayToList(arrayString);
+            var test = arrayString.ToList();
 
             Assert.IsTrue(test.GetType().Name == listaString.GetType().Name);
             test.OrderByDescending();
@@ -69,6 +72,7 @@ namespace Tests
         {
             var text = "This fox is <b>very</b> sneaky!\nI hope nothing <b>happens</b> to my food...";
 
+            var stringToChar = CharHelper.StringToChar("Fabio", 2);
             Assert.IsTrue(StringHelper.GetTagValue(text, "very", "\n", true) == "very</b> sneaky!\n");
 
             var table = new TTable();
@@ -133,6 +137,8 @@ namespace Tests
             Assert.IsTrue(isBetween == true);
 
             Assert.IsTrue(NumberHelper.Between(18, 20, 5) == false);
+            string exNumber = "49e-9";
+            decimal parsedExNumber = exNumber.ToDecimal();
         }
     }
 }

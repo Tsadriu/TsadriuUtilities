@@ -19,7 +19,7 @@ namespace TsadriuUtilities
         /// <param name="endTag">The end tag.</param>
         /// <param name="tagsIncluded">If enabled, it will return a string with the <paramref name="startTag"/> and <paramref name="endTag"/> included.</param>
         /// <returns>Returns string.Empty if nothing is found.</returns>
-        public static string GetTagValue(string text, string startTag, string endTag = null, bool tagsIncluded = false)
+        public static string GetTagValue(this string text, string startTag, string endTag = null, bool tagsIncluded = false)
         {
             if (IsEmpty(text))
             {
@@ -69,7 +69,7 @@ namespace TsadriuUtilities
         /// <param name="endTag">The end tag.</param>
         /// <param name="tagsIncluded">If enabled, it will return a string with the <paramref name="startTag"/> and <paramref name="endTag"/> included.</param>
         /// <returns>Returns an empty List of <see cref="string"/> if nothing is found or parameters <paramref name="text"/>, <paramref name="startTag"/> or <paramref name="endTag"/> are empty.</returns>
-        public static List<string> GetTagValues(string text, string startTag, string endTag, bool tagsIncluded = false)
+        public static List<string> GetTagValues(this string text, string startTag, string endTag, bool tagsIncluded = false)
         {
             var list = new List<string>();
 
@@ -100,7 +100,7 @@ namespace TsadriuUtilities
         /// </summary>
         /// <param name="value">The value to check.</param>
         /// <returns>Returns true if the <paramref name="value"/> is empty. Returns false if it's not empty.</returns>
-        public static bool IsEmpty(string value)
+        public static bool IsEmpty(this string value)
         {
             return string.IsNullOrWhiteSpace(value);
         }
@@ -110,7 +110,7 @@ namespace TsadriuUtilities
         /// </summary>
         /// <param name="value">The value to check.</param>
         /// <returns>Returns true if the <paramref name="value"/> is not empty. Returns false if it contains any kind of character.</returns>
-        public static bool IsNotEmpty(string value)
+        public static bool IsNotEmpty(this string value)
         {
             return !IsEmpty(value);
         }
@@ -149,7 +149,7 @@ namespace TsadriuUtilities
         /// <param name="value">The value to change.</param>
         /// <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
         /// <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
-        public static string LetterUpperCase(string value, int index = 0)
+        public static string LetterUpperCase(this string value, int index = 0)
         {
             if (IsNotEmpty(value))
             {
@@ -174,7 +174,7 @@ namespace TsadriuUtilities
         /// <param name="value">The value to change.</param>
         /// <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
         /// <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
-        public static string LetterLowerCase(string value, int index = 0)
+        public static string LetterLowerCase(this string value, int index = 0)
         {
             if (IsNotEmpty(value))
             {
@@ -199,7 +199,7 @@ namespace TsadriuUtilities
         /// <param name="value">The value to change.</param>
         /// <param name="valuesToRemove">The values to remove from <paramref name="value"/>.</param>
         /// <returns>Returns a <see cref="string"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.</returns>
-        public static string Remove(string value, params string[] valuesToRemove)
+        public static string Remove(this string value, params string[] valuesToRemove)
         {
             for (int i = 0; i < valuesToRemove.Length; i++)
             {
@@ -215,7 +215,7 @@ namespace TsadriuUtilities
         /// <param name="value">The value to be checked.</param>
         /// <param name="valueToCount">The value to be counted in <paramref name="value"/>.</param>
         /// <returns>Returns the count of <paramref name="valueToCount"/> present in <paramref name="value"/>.</returns>
-        public static int CharCount(string value, string valueToCount)
+        public static int CharCount(this string value, string valueToCount)
         {
             return value.Split(valueToCount).Length - 1;
         }

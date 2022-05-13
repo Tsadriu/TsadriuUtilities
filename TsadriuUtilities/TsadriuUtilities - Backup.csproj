@@ -23,8 +23,8 @@ DateTime:
  
 ListHelper:
  - Method 'AddRange' has been changed to an extention and no longer requires the 'ref' keyword. (Method 'AddRange' with the 'ref' keyword is deprecated and will generate and error if it is being used).
- - Method OrderByAscending can be used as an extention and is accessible using the . (member access operator) on a List{T}.
- - Method OrderByDescending can be used as an extention and is accessible using the . (member access operator) on a List{T}.
+ - Method OrderByAscending can be used as an extention and is accessible using the . (member access operator) on a List<T>.
+ - Method OrderByDescending can be used as an extention and is accessible using the . (member access operator) on a List<T>.
  - Implemented method ToString as an extention.
  
 MultiHelper:
@@ -46,8 +46,7 @@ StringHelper:
  - Method LetterUpperCase can be used as an extention and is accessible using the . (member access operator) on a string.
  - Method LetterLowerCase can be used as an extention and is accessible using the . (member access operator) on a string.
  - Method Remove can be used as an extention and is accessible using the . (member access operator) on a string.
- - Method CharCount can be used as an extention and is accessible using the . (member access operator) on a string.
- </PackageReleaseNotes>
+ - Method CharCount can be used as an extention and is accessible using the . (member access operator) on a string.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>

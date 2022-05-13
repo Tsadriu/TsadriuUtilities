@@ -226,7 +226,7 @@ namespace TsadriuUtilities
                 return;
             }
 
-            var fileRows = ListHelper.ArrayToList(File.ReadAllLines(fullFileName));
+            var fileRows = ListHelper.ToList(File.ReadAllLines(fullFileName));
 
             if (fileRows.Count == 0)
             {
