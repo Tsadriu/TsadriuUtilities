@@ -25,6 +25,7 @@
         <TProvinciaDestinatario>MI</TProvinciaDestinatario>
         <TNazioneDestinatario>IT</TNazioneDestinatario>
         <TContrattoDispacciamento>DP2265</TContrattoDispacciamento>
+		<TUnTagVuoto/>
     </TestataFlusso>
     <Fatture>
         <FNumeroFattura>522001678514</FNumeroFattura>

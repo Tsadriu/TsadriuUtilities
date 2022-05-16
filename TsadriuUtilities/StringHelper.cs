@@ -36,7 +36,11 @@ namespace TsadriuUtilities
             if (startTagIndex > -1)
             {
                 startTagIndex += startTag.Length;
-                startTagIndex += tagsIncluded ? -startTag.Length : 0;
+
+                if (startTagIndex > -1)
+                {
+                    startTagIndex += tagsIncluded ? -startTag.Length : 0;
+                }
 
                 if (string.IsNullOrEmpty(endTag))
                 {
@@ -45,7 +49,11 @@ namespace TsadriuUtilities
                 else
                 {
                     var endTagIndex = text.IndexOf(endTag, startTagIndex, StringComparison.OrdinalIgnoreCase);
-                    endTagIndex += tagsIncluded ? endTag.Length : 0;
+
+                    if (endTagIndex > -1)
+                    {
+                        endTagIndex += tagsIncluded ? endTag.Length : 0;
+                    }
 
                     if (endTagIndex > -1)
                     {

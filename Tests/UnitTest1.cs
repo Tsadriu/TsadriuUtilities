@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using TsadriuUtilities;
+using TsadriuUtilities.Objects;
 
 namespace Tests
 {
@@ -139,6 +140,14 @@ namespace Tests
             Assert.IsTrue(NumberHelper.Between(18, 20, 5) == false);
             string exNumber = "49e-9";
             decimal parsedExNumber = exNumber.ToDecimal();
+        }
+
+        [TestMethod]
+        public void TXmlTest()
+        {
+            var fileToTest = Path.Combine(StringHelper.GetTagValue(Directory.GetCurrentDirectory(), string.Empty, "Tests", true), "Files", "TestTTableXmlFile.xml");
+            var fileContent = File.ReadAllText(fileToTest);
+            TXml.ReadXml(fileContent);
         }
     }
 }
