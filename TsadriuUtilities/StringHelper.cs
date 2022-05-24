@@ -227,5 +227,34 @@ namespace TsadriuUtilities
         {
             return value.Split(valueToCount).Length - 1;
         }
+
+        /// <summary>
+        /// Returns a string where all instances of <paramref name="tags"/> are removed.
+        /// </summary>
+        /// <param name="value">The value where <paramref name="tags"/> will be removed.</param>
+        /// <param name="tags">The tags to remove from <paramref name="value"/>.</param>
+        /// Returns a <see cref="string"/> where all instances of <paramref name="tags"/> are removed.
+        public static string RemoveTags(this string value, string[] tags)
+        {
+            foreach (var tag in tags)
+            {
+                tag.Remove("<", ">", "/");
+                var tagsToRemove = new string[] { $"<{tag}>", $"</{tag}>", $"<{tag}/>" };
+                value = value.Remove(tagsToRemove);
+            }
+
+            return value;
+        }
+
+        /// <summary>
+        /// Returns a string where all instances of <paramref name="tag"/> are removed.
+        /// </summary>
+        /// <param name="value">The value where <paramref name="tag"/> will be removed.</param>
+        /// <param name="tag">The tag to remove from <paramref name="value"/>.</param>
+        /// Returns a <see cref="string"/> where all instances of <paramref name="tag"/> are removed.
+        public static string RemoveTags(this string value, string tag)
+        {
+            return value.RemoveTags(new string[] { tag });
+        }
     }
 }

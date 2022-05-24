@@ -89,7 +89,10 @@ namespace Tests
             table.AddData("Commit", "Non esistente");
             table.AddData("Orario di registrazione", DateTime.Now);
 
-            var contentList = table.TableToCsv(true, ";");
+            // var contentList = table.TableToCsv(true, ";");
+
+            var xmlText = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><gesmes:Envelope xmlns:gesmes=\"http://www.gesmes.org/xml/2002-08-01\" xmlns=\"http://www.ecb.int/vocabulary/2002-08-01/eurofxref\"><gesmes:subject>Reference rates</gesmes:subject><gesmes:Sender><gesmes:name>European Central Bank</gesmes:name></gesmes:Sender><Cube><Cube time='2022-04-29'><Cube currency='USD' rate='1.0540'/><Cube currency='JPY' rate='137.01'/><Cube currency='BGN' rate='1.9558'/><Cube currency='CZK' rate='24.605'/><Cube currency='DKK' rate='7.4415'/><Cube currency='GBP' rate='0.83908'/><Cube currency='HUF' rate='378.71'/><Cube currency='PLN' rate='4.6780'/><Cube currency='RON' rate='4.9479'/><Cube currency='SEK' rate='10.2958'/><Cube currency='CHF' rate='1.0229'/><Cube currency='ISK' rate='137.80'/><Cube currency='NOK' rate='9.7525'/><Cube currency='HRK' rate='7.5667'/><Cube currency='TRY' rate='15.6385'/><Cube currency='AUD' rate='1.4699'/><Cube currency='BRL' rate='5.1608'/><Cube currency='CAD' rate='1.3426'/><Cube currency='CNY' rate='6.9441'/><Cube currency='HKD' rate='8.2703'/><Cube currency='IDR' rate='15301.52'/><Cube currency='ILS' rate='3.4993'/><Cube currency='INR' rate='80.6380'/><Cube currency='KRW' rate='1326.71'/><Cube currency='MXN' rate='21.4181'/><Cube currency='MYR' rate='4.5886'/><Cube currency='NZD' rate='1.6119'/><Cube currency='PHP' rate='55.200'/><Cube currency='SGD' rate='1.4545'/><Cube currency='THB' rate='36.026'/><Cube currency='ZAR' rate='16.6473'/></Cube></Cube></gesmes:Envelope>";
+            xmlText = xmlText.RemoveTags("Cube");
             /*var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TEST CSV");
 
             DirectoryHelper.Exist(path, true);
@@ -148,6 +151,14 @@ namespace Tests
             var fileToTest = Path.Combine(StringHelper.GetTagValue(Directory.GetCurrentDirectory(), string.Empty, "Tests", true), "Files", "TestTTableXmlFile.xml");
             var fileContent = File.ReadAllText(fileToTest);
             TXml.ReadXml(fileContent);
+        }
+
+        [TestMethod]
+        public void ArrayHelperTest()
+        {
+            int[] test1 = new int[5].GenerateRandom();
+            short[] test2 = new short[5].GenerateRandom(0, 200);
+            byte[] test3 = new byte[5].GenerateRandom(0, 200000);
         }
     }
 }

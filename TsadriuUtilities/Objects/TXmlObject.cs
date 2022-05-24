@@ -15,10 +15,10 @@ namespace TsadriuUtilities.Objects
     /// </summary>
     public class TXmlObject
     {
-        public string TagName { get; set; }
+        public string TagName { get => throw new NotImplementedException("Method is still in development and is not ready"); set => throw new NotImplementedException("Method is still in development and is not ready"); }
 
-        public List<TXmlObject> TagChildren { get; set; }
+        public List<TXmlObject> TagChildren { get => throw new NotImplementedException("Method is still in development and is not ready"); set => throw new NotImplementedException("Method is still in development and is not ready"); }
 
-        public object TagValue { get; set; }
+        public object TagValue { get => throw new NotImplementedException("Method is still in development and is not ready"); set => throw new NotImplementedException("Method is still in development and is not ready"); }
     }
 }

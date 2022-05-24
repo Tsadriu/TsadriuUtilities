@@ -15,10 +15,11 @@ namespace TsadriuUtilities.Objects
     /// </summary>
     public class TXml
     {
-        public List<TXmlObject> XmlTags { get; set; }
+        public List<TXmlObject> XmlTags { get => throw new NotImplementedException("Method is still in development and is not ready"); set => throw new NotImplementedException("Method is still in development and is not ready"); }
 
         public static void ReadXml(string content)
         {
+            throw new NotImplementedException("Method is still in development and is not ready");
             var test = content.GetTagValues("<", ">", true); //content.Split("\n"); 
             var tags = new List<TXmlTag>();
             string[] xmlTags = new string[] { "</", "/>", "<", ">" };
@@ -42,6 +43,7 @@ namespace TsadriuUtilities.Objects
 
         public static TXmlTag GetChildren(string startTag, string text, TXmlTag child = null)
         {
+            throw new NotImplementedException("Method is still in development and is not ready");
             var rawData = text.GetTagValue($"<{startTag}>", $"</{startTag}>");
 
             string[] xmlTags = new string[] { "</", "/>", "<", ">" };

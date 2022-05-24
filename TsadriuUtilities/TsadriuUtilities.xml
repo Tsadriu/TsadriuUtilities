@@ -21,6 +21,25 @@
             <param name="separator"><see cref="T:System.String"/> separator. If nothing is passed, it will separate by a space.</param>
             <returns><see cref="T:System.Array"/> converted into a single <see cref="T:System.String"/> line.</returns>
         </member>
+        <member name="M:TsadriuUtilities.ArrayHelper.GenerateRandom``1(``0[],System.Int32,System.Int32)">
+            <summary>
+            Fills up the array with random numbers between <paramref name="min"/> (default: 0, inclusive) and <paramref name="max"/> (default: 100, inclusive).
+            Supported types: <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/> and <see cref="T:System.Double"/>.
+            </summary>
+            <param name="array">Current array.</param>
+            <param name="min">The minimum number that can be generated.</param>
+            <param name="max">The maximum number that can be generated.</param>
+            <returns>An array which all indexes have been assigned a random number.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ArrayHelper.GenerateRandom(System.Double[],System.Int32,System.Int32)">
+            <summary>
+            Fills up the array with random numbers between <paramref name="min"/> (default: 0, inclusive) and <paramref name="max"/> (default: 100, inclusive).
+            </summary>
+            <param name="array">Current array of <see cref="T:System.Int32"/>.</param>
+            <param name="min">The minimum number that can be generated.</param>
+            <param name="max">The maximum number that can be generated.</param>
+            <returns>An array which all indexes have been assigned a random number.</returns>
+        </member>
         <member name="T:TsadriuUtilities.CharHelper">
             <summary>
             A class that helps on dealing with <see cref="T:System.Char"/>.
@@ -649,6 +668,22 @@
             <param name="value">The value to be checked.</param>
             <param name="valueToCount">The value to be counted in <paramref name="value"/>.</param>
             <returns>Returns the count of <paramref name="valueToCount"/> present in <paramref name="value"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.RemoveTags(System.String,System.String[])">
+            <summary>
+            Returns a string where all instances of <paramref name="tags"/> are removed.
+            </summary>
+            <param name="value">The value where <paramref name="tags"/> will be removed.</param>
+            <param name="tags">The tags to remove from <paramref name="value"/>.</param>
+            Returns a <see cref="T:System.String"/> where all instances of <paramref name="tags"/> are removed.
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.RemoveTags(System.String,System.String)">
+            <summary>
+            Returns a string where all instances of <paramref name="tag"/> are removed.
+            </summary>
+            <param name="value">The value where <paramref name="tag"/> will be removed.</param>
+            <param name="tag">The tag to remove from <paramref name="value"/>.</param>
+            Returns a <see cref="T:System.String"/> where all instances of <paramref name="tag"/> are removed.
         </member>
     </members>
 </doc>
