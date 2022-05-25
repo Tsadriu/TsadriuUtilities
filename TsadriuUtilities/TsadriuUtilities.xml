@@ -36,14 +36,6 @@
             A class that helps on dealing with <see cref="T:System.Char"/>.
             </summary>
         </member>
-        <member name="M:TsadriuUtilities.CharHelper.StringToChar(System.String,System.Int32)">
-            <summary>
-            Converts a <see cref="T:System.String"/> into a <see cref="T:System.Char"/>. If the length of <paramref name="value"/> is higher than 1, it will return the first character of <paramref name="value"/> or, if <paramref name="index"/> is passed, the character of the desired index.
-            </summary>
-            <param name="value">The <see cref="T:System.String"/> to get the value from.</param>
-            <param name="index">The <paramref name="index"/> of the letter to be return. If <paramref name="index"/> is not passed, it will return the first letter of <paramref name="value"/>.</param>
-            <returns>Return the first character of <paramref name="value"/> or, if <paramref name="index"/> is passed, the character of the desired index.</returns>
-        </member>
         <member name="M:TsadriuUtilities.CharHelper.ToChar(System.String,System.Int32)">
             <summary>
             Converts a <see cref="T:System.String"/> into a <see cref="T:System.Char"/>. If the length of <paramref name="value"/> is higher than 1, it will return the first character of <paramref name="value"/> or, if <paramref name="index"/> is passed, the character of the desired index.
@@ -56,19 +48,6 @@
             <summary>
             A class that helps on dealing with <see cref="T:System.DateTime"/>.
             </summary>
-        </member>
-        <member name="M:TsadriuUtilities.DateTimeHelper.StringToDate(System.String,System.String[],System.Globalization.CultureInfo,System.Boolean)">
-            <summary>
-            Tries to convert a date from a <see cref="T:System.String"/> to a type of <see cref="T:System.DateTime"/>. If the conversion fails and <paramref name="canReturnNull"/> is true, returns null, otherwise returns <see cref="F:System.DateTime.MinValue"/>.
-            </summary>
-            <param name="dateAsString">The date as a <see cref="T:System.String"/>. Examples: "23/03/2012", "11-02-2001", "06.12.2019".</param>
-            <param name="dateFormats">The date format. Examples: "dd/MM/yyyy", "MM/dd/yyyy".</param>
-            <param name="dateCulture">The <see cref="T:System.Globalization.CultureInfo"/> of the date (Is it an american date? Is it an italian date?). Default: <see cref="P:System.Globalization.CultureInfo.InvariantCulture"/>.</param>
-            <param name="canReturnNull">True to return a null if the conversion fails. Otherwise false to return a <see cref="F:System.DateTime.MinValue"/>.</param>
-            <returns>If the parsing was successful, returns <see cref="T:System.DateTime"/>. If the parsing fails and <paramref name="canReturnNull"/> is true, returns null, otherwise returns <see cref="F:System.DateTime.MinValue"/>.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.DateTimeHelper.StringToDate(System.String,System.String,System.Globalization.CultureInfo,System.Boolean)">
-            <inheritdoc cref="M:TsadriuUtilities.DateTimeHelper.StringToDate(System.String,System.String[],System.Globalization.CultureInfo,System.Boolean)"/>
         </member>
         <member name="M:TsadriuUtilities.DateTimeHelper.ToDateTime(System.String,System.String,System.Globalization.CultureInfo)">
             <summary>
@@ -173,17 +152,6 @@
             A class that helps on dealing with <see cref="T:System.Collections.Generic.List`1"/>.
             </summary>
         </member>
-        <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0}@,``0[],System.Int32,System.Int32)">
-            <summary>
-            Adds the <paramref name="array"/> into <paramref name="currentList"/>.
-            If <paramref name="startIndex"/> is specified, it will add only from <paramref name="startIndex"/> (included) until the end of the <see cref="T:System.Array"/> or until it reaches <paramref name="endIndex"/> (included) if it is specified.
-            </summary>
-            <typeparam name="T">Generic type.</typeparam>
-            <param name="currentList">List where <paramref name="array"/> will be added into.</param>
-            <param name="array">Array of values.</param>
-            <param name="startIndex">From which point of the <paramref name="array"/>'s index should added.</param>
-            <param name="endIndex">From which point of the <paramref name="array"/>'s index should stop.</param>
-        </member>
         <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0},``0[],System.Int32,System.Int32)">
             <summary>
             Adds the <paramref name="array"/> into <paramref name="currentList"/>.
@@ -194,15 +162,6 @@
             <param name="array">Array of values.</param>
             <param name="startIndex">From which point of the <paramref name="array"/>'s index should added.</param>
             <param name="endIndex">From which point of the <paramref name="array"/>'s index should stop.</param>
-        </member>
-        <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0}@,System.Collections.Generic.List{``0},System.Int32)">
-            <summary>
-            Adds the <paramref name="listToAdd"/> into <paramref name="currentList"/>. If <paramref name="index"/> is specified, it will add only from <paramref name="index"/> (included) until the end of the <see cref="T:System.Collections.Generic.List`1"/>.
-            </summary>
-            <typeparam name="T">Generic type.</typeparam>
-            <param name="currentList">List where <paramref name="listToAdd"/> will be added into.</param>
-            <param name="listToAdd">Array of values.</param>
-            <param name="index">From which point of the <paramref name="listToAdd"/>'s index should added.</param>
         </member>
         <member name="M:TsadriuUtilities.ListHelper.AddRange``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0},System.Int32)">
             <summary>
@@ -221,31 +180,9 @@
             <param name="array"><see cref="T:System.Array"/> that you want to be converted to a <see cref="T:System.Collections.Generic.List`1"/>.</param>
             <returns>A <see cref="T:System.Collections.Generic.List`1"/> containing the <paramref name="array"/>'s values.</returns>
         </member>
-        <member name="M:TsadriuUtilities.ListHelper.ArrayToList``1(``0[])">
-            <summary>
-            Transforms an <see cref="T:System.Array"/> to a <see cref="T:System.Collections.Generic.List`1"/>.
-            </summary>
-            <typeparam name="T">Generic type.</typeparam>
-            <param name="array"><see cref="T:System.Array"/> that you want to be converted to a <see cref="T:System.Collections.Generic.List`1"/>.</param>
-            <returns>A <see cref="T:System.Collections.Generic.List`1"/> containing the <paramref name="array"/>'s values.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.ListHelper.OrderByAscending``1(System.Collections.Generic.List{``0}@)">
-            <summary>
-            Orders the <see cref="T:System.Collections.Generic.List`1"/> in ascending order.
-            </summary>
-            <typeparam name="T">Generic type.</typeparam>
-            <param name="list"><see cref="T:System.Collections.Generic.List`1"/> to be ordered.</param>
-        </member>
         <member name="M:TsadriuUtilities.ListHelper.OrderByAscending``1(System.Collections.Generic.List{``0})">
             <summary>
             Orders the <see cref="T:System.Collections.Generic.List`1"/> in ascending order.
-            </summary>
-            <typeparam name="T">Generic type.</typeparam>
-            <param name="list"><see cref="T:System.Collections.Generic.List`1"/> to be ordered.</param>
-        </member>
-        <member name="M:TsadriuUtilities.ListHelper.OrderByDescending``1(System.Collections.Generic.List{``0}@)">
-            <summary>
-            Orders the <see cref="T:System.Collections.Generic.List`1"/> in descending order.
             </summary>
             <typeparam name="T">Generic type.</typeparam>
             <param name="list"><see cref="T:System.Collections.Generic.List`1"/> to be ordered.</param>
@@ -290,50 +227,10 @@
             <returns>Returns the clamped result of the operation.</returns>
             <exception cref="T:System.NotImplementedException">Throws <see cref="T:System.NotImplementedException"/> if trying to call this method with an unsupported <see cref="T:System.Type"/>.</exception>
         </member>
-        <member name="M:TsadriuUtilities.MultiHelper.ArrayToString``1(``0[],System.String)">
-            <summary>
-            Converts an <see cref="T:System.Array"/> into a single line <see cref="T:System.String"/>. If <paramref name="separator"/> is not passed, it will separate by a space. Examples: ArrayToString(new int[] { 1, 3, 5 }) -> "1 3 5", ArrayToString(new string[] { "5", "2" }, "|") -> "5|2".
-            Supported types:
-            <see cref="T:System.DateTime"/>,
-            <see cref="T:System.Int64"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/>,
-            <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Decimal"/>.
-            </summary>
-            <param name="array"><see cref="T:System.Array"/> of objects.</param>
-            <param name="separator"><see cref="T:System.String"/> separator. If nothing is passed, it will separate by a space.</param>
-            <returns><see cref="T:System.Array"/> converted into a single <see cref="T:System.String"/> line.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.MultiHelper.ListToString``1(System.Collections.Generic.List{``0},System.String,System.Int32,System.Int32)">
-            <summary>
-            Converts an <see cref="T:System.Collections.Generic.List`1"/> into a single line <see cref="T:System.String"/>. If <paramref name="separator"/> is not passed, it will separate by a space. Examples: ListToString(new int[] { 1, 3, 5 }) -> "1 3 5", ListToString(new string[] { "5", "2" }, "|") -> "5|2".
-            Supported types:
-            <see cref="T:System.DateTime"/>,
-            <see cref="T:System.Int64"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/>,
-            <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Decimal"/>.
-            </summary>
-            <param name="list"><see cref="T:System.Collections.Generic.List`1"/> of objects.</param>
-            <param name="separator"><see cref="T:System.String"/> separator. If nothing is passed, it will separate by a space.</param>
-            <param name="startIndex">From which point of the <paramref name="list"/>'s index should added.</param>
-            <param name="count">How many elements in the <paramref name="list"/> should be taken considering the <paramref name="startIndex"/>'s point.</param>
-            <returns><see cref="T:System.Collections.Generic.List`1"/> converted into a single <see cref="T:System.String"/> line.</returns>
-        </member>
         <member name="T:TsadriuUtilities.NumberHelper">
             <summary>
             A class that helps on dealing with numbers.
             </summary>
-        </member>
-        <member name="M:TsadriuUtilities.NumberHelper.ExponentialToDecimal(System.String)">
-            <summary>
-            Converts an exponential number to a <see cref="T:System.Decimal"/>. Example: 46e-9 returns 0.000000046.
-            </summary>
-            <param name="value">Number as a <see cref="T:System.String"/> (46e-9).</param>
-            <returns>Returns the parsed <paramref name="value"/> as a <see cref="T:System.Decimal"/>. If the conversion fails, returns <see cref="F:System.Decimal.Zero"/>.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.NumberHelper.ExponentialToDouble(System.String)">
-            <summary>
-            Converts an exponential number to a <see cref="T:System.Double"/>. Example: 46e-9 returns 0.000000046.
-            </summary>
-            <param name="value">Number as a <see cref="T:System.String"/> (46e-9).</param>
-            <returns>Returns the parsed <paramref name="value"/> as a <see cref="T:System.Double"/>. If the conversion fails, returns 0.0d.</returns>
         </member>
         <member name="M:TsadriuUtilities.NumberHelper.ToDecimal(System.String)">
             <summary>
@@ -545,59 +442,6 @@
             <summary>
             A class that helps on storing xml data.
             </summary>
-        </member>
-        <member name="T:TsadriuUtilities.StrHelper">
-            <summary>
-            A class that helps on dealing with <see cref="T:System.String"/>.
-            </summary>
-        </member>
-        <member name="M:TsadriuUtilities.StrHelper.GetTagValue(System.String,System.String,System.String,System.Boolean)">
-            <summary>
-            Searches through the <paramref name="text"/>, returning the content between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
-            </summary>
-            <param name="text">Text to search though.</param>
-            <param name="startTag">The start tag.</param>
-            <param name="endTag">The end tag.</param>
-            <param name="tagsIncluded">If enabled, it will return a string with the <paramref name="startTag"/> and <paramref name="endTag"/> included.</param>
-            <returns>Returns string.Empty if nothing is found.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StrHelper.IsEmpty(System.String)">
-            <summary>
-            Checks if the <paramref name="value"/> is null, <see cref="F:System.String.Empty"/> or a white space ("", \n, \r, ...).
-            </summary>
-            <param name="value">The value to check.</param>
-            <returns>Returns true if the <paramref name="value"/> is empty. Returns false if not.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StrHelper.IsNotEmpty(System.String)">
-            <summary>
-            Checks if <paramref name="value"/> contains any kind of character.
-            </summary>
-            <param name="value">The value to check.</param>
-            <returns>Returns true if the <paramref name="value"/> is not empty. Returns false if not.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StrHelper.LetterUpperCase(System.String,System.Int32)">
-            <summary>
-            Changes a lower-case letter to be upper-case. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.
-            </summary>
-            <param name="value">The value to change.</param>
-            <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
-            <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StrHelper.LetterLowerCase(System.String,System.Int32)">
-            <summary>
-            Changes a upper-case letter to be lower-case. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.
-            </summary>
-            <param name="value">The value to change.</param>
-            <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
-            <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StrHelper.Remove(System.String,System.String[])">
-            <summary>
-            Returns a <see cref="T:System.String"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.
-            </summary>
-            <param name="value"></param>
-            <param name="valuesToRemove"></param>
-            <returns></returns>
         </member>
         <member name="T:TsadriuUtilities.StringHelper">
             <summary>

@@ -2,51 +2,38 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.0.151</Version>
+    <Version>1.1.0</Version>
     <Description>A small package of utilities to help dealing with strings, chars, lists and more to hopefully save a little bit of time in coding.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>ArrayHelper:
- - Implemented method ToString()
-
+    <PackageReleaseNotes>
 CharHelper:
- - Renamed method from 'StringToChar' to 'ToChar'. (Method 'StringToChar' is deprecated and will generate and error if it is being used).
- - Method ToChar can be used as an extention and is accessible using the . (member access operator) on a string variable.
-
-DateTime:
- - Renamed method from 'StringToDate' to 'ToDateTime'. (Method 'StringToChar' is deprecated and will generate and error if it is being used).
- - Method now also mentions that if the Culture is not passed, it will use the invariant culture.
- - Method ToDateTime can be used as an extention and is accessible using the . (member access operator) on a DateTime variable.
- - Implemented method GetLastDayOfMonth as an extention and is accessible using the . (member access operator) on a DateTime variable.
+ - Removed method 'StringToChar'.
  
 ListHelper:
- - Method 'AddRange' has been changed to an extention and no longer requires the 'ref' keyword. (Method 'AddRange' with the 'ref' keyword is deprecated and will generate and error if it is being used).
- - Method OrderByAscending can be used as an extention and is accessible using the . (member access operator) on a List{T}.
- - Method OrderByDescending can be used as an extention and is accessible using the . (member access operator) on a List{T}.
- - Implemented method ToString as an extention.
- 
+ - Removed method 'AddRange(ref)'. 
+
 MultiHelper:
- - Method ClampValue can be used as an extention and is accessible using the . (member access operator) on a Generic Type T.
- - Method ArrayToString has been moved to ArrayHelper.ToString. (Method 'MultiHelper.ArrayToString is deprecated and will generate and error if it is being used).
- - Method ListToString has been moved to ListHelper.ToString. (Method 'MultiHelper.ListToString is deprecated and will generate and error if it is being used).
+ - Removed method 'ArrayToString'.
+ - Removed method 'ListToString'.
  
 NumberHelper:
- - Renamed method from 'ExponentialToDecimal' to 'ToDecimal'. (Method 'ExponentialToDecimal' is deprecated and will generate and error if it is being used).
- - Method ToDecimal can be used as an extention and is accessible using the . (member access operator) on a string variable.
- - Renamed method from 'ExponentialToDouble' to 'ToDouble'. (Method 'ExponentialToDouble' is deprecated and will generate and error if it is being used).
- - Method ToDouble can be used as an extention and is accessible using the . (member access operator) on a string variable.
+ - Removed method 'ExponentialToDecimal'.
+ - Removed method 'ExponentialToDouble'.
+
+ArrayHelper:
+ - Implemented method to fill up an array (int, short, byte) with random numbers.
  
 StringHelper:
- - Method GetTagValue can be used as an extention and is accessible using the . (member access operator) on a string.
- - Method GetTagValues can be used as an extention and is accessible using the . (member access operator) on a string.
- - Method IsEmpty can be used as an extention and is accessible using the . (member access operator) on a string.
- - Method IsNotEmpty can be used as an extention and is accessible using the . (member access operator) on a string.
- - Method LetterUpperCase can be used as an extention and is accessible using the . (member access operator) on a string.
- - Method LetterLowerCase can be used as an extention and is accessible using the . (member access operator) on a string.
- - Method Remove can be used as an extention and is accessible using the . (member access operator) on a string.
- - Method CharCount can be used as an extention and is accessible using the . (member access operator) on a string.
+ - Implemented method to remove tags from a string. Passing 'b' will remove all tags of 'b'.
+ 
+DateTimeHelper:
+ - Remove method 'StringToDate'.
+ - Implemented method SetDay().
+ - Implemented method SetMonth().
+ - Implemented method SetYear().
  </PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
