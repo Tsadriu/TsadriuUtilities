@@ -11,44 +11,6 @@ namespace TsadriuUtilities
     public static class NumberHelper
     {
         /// <summary>
-        /// Converts an exponential number to a <see cref="decimal"/>. Example: 46e-9 returns 0.000000046.
-        /// </summary>
-        /// <param name="value">Number as a <see cref="string"/> (46e-9).</param>
-        /// <returns>Returns the parsed <paramref name="value"/> as a <see cref="decimal"/>. If the conversion fails, returns <see cref="decimal.Zero"/>.</returns>
-        [Obsolete("Method will be removed in 1.0.16. Please use method ToDecimal instead.", true)]
-        public static decimal ExponentialToDecimal(string value)
-        {
-            if (StringHelper.IsNotEmpty(value))
-            {
-                if (double.TryParse(value, out double valueAsDouble))
-                {
-                    return Convert.ToDecimal(valueAsDouble);
-                }
-            }
-
-            return decimal.Zero;
-        }
-
-        /// <summary>
-        /// Converts an exponential number to a <see cref="double"/>. Example: 46e-9 returns 0.000000046.
-        /// </summary>
-        /// <param name="value">Number as a <see cref="string"/> (46e-9).</param>
-        /// <returns>Returns the parsed <paramref name="value"/> as a <see cref="double"/>. If the conversion fails, returns 0.0d.</returns>
-        [Obsolete("Method will be removed in 1.0.16. Please use method ToDouble instead.", true)]
-        public static double ExponentialToDouble(string value)
-        {
-            if (StringHelper.IsNotEmpty(value))
-            {
-                if (double.TryParse(value, out double valueAsDouble))
-                {
-                    return valueAsDouble;
-                }
-            }
-            
-            return 0.0d;
-        }
-
-        /// <summary>
         /// Converts a <see cref="string"/> into a <see cref="decimal"/>.
         /// </summary>
         /// <param name="value">Number as a <see cref="string"/> ('46e-9', '5.6', etc...).</param>

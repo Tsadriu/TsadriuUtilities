@@ -13,6 +13,7 @@ namespace Tests
         [TestMethod]
         public void DateTimeHelperTest()
         {
+            
             DateTime test1 = "25/03/2020".ToDateTime(new string[] { "dd-MM-yyyy", "dd/MM/yyyy" }, System.Globalization.CultureInfo.InvariantCulture);
             DateTime test2 = "25/03/2020".ToDateTime("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             DateTime test3 = "25/03/2020".ToDateTime(new string[] { "dd-MM-yyyy", "dd/MM/yyyy" });
@@ -32,6 +33,12 @@ namespace Tests
 
             Assert.IsNotNull(test4);
             Assert.IsFalse(test4 == DateTime.MinValue);
+
+            DateTime test6 = new DateTime(2024, 1, 1);
+            test6 = test6.SetDay(40);
+
+            test6 = test6.SetMonth(2);
+            test6 = test6.SetYear(2023);
         }
 
         [TestMethod]
@@ -39,9 +46,9 @@ namespace Tests
         {
             DateTime[] dateTimeArray = new DateTime[] { DateTime.Today, DateTime.Now, new DateTime(2020, 03, 20) };
 
-            var result = dateTimeArray.ToString("&");
+            ////var result = dateTimeArray.ToString("&");
 
-            Assert.IsFalse(result.Contains(dateTimeArray.GetType().ToString()));
+            //Assert.IsFalse(result.Contains(dateTimeArray.GetType().ToString()));
         }
 
         [TestMethod]
@@ -127,6 +134,14 @@ namespace Tests
         }
 
         [TestMethod]
+        public void TTableTest()
+        {
+            TTable table = new TTable();
+            string path = Path.Combine(StringHelper.GetTagValue(Directory.GetCurrentDirectory(), string.Empty, "Tests", true), "Files", "20220330_Serbia_SpotSettlement.csv");
+            table.CsvToTable(path);
+        }
+
+            [TestMethod]
         public void NumberHelperTest()
         {
             int[] test = new int[] { 1, 2, 3, 4, 5, 6, 7 };

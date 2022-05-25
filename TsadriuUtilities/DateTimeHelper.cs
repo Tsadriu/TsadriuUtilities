@@ -12,27 +12,6 @@ namespace TsadriuUtilities
     public static class DateTimeHelper
     {
         /// <summary>
-        /// Tries to convert a date from a <see cref="string"/> to a type of <see cref="DateTime"/>. If the conversion fails and <paramref name="canReturnNull"/> is true, returns null, otherwise returns <see cref="DateTime.MinValue"/>.
-        /// </summary>
-        /// <param name="dateAsString">The date as a <see cref="string"/>. Examples: "23/03/2012", "11-02-2001", "06.12.2019".</param>
-        /// <param name="dateFormats">The date format. Examples: "dd/MM/yyyy", "MM/dd/yyyy".</param>
-        /// <param name="dateCulture">The <see cref="CultureInfo"/> of the date (Is it an american date? Is it an italian date?). Default: <see cref="CultureInfo.InvariantCulture"/>.</param>
-        /// <param name="canReturnNull">True to return a null if the conversion fails. Otherwise false to return a <see cref="DateTime.MinValue"/>.</param>
-        /// <returns>If the parsing was successful, returns <see cref="DateTime"/>. If the parsing fails and <paramref name="canReturnNull"/> is true, returns null, otherwise returns <see cref="DateTime.MinValue"/>.</returns>
-        [Obsolete("Method will be removed in 1.0.16. Please use method ToDateTime instead.", true)]
-        public static DateTime? StringToDate(this string dateAsString, string[] dateFormats, CultureInfo dateCulture = null, bool canReturnNull = false)
-        {
-            return canReturnNull ? null : ToDateTime(dateAsString, dateFormats, dateCulture);
-        }
-
-        /// <inheritdoc cref="StringToDate(string, string[], CultureInfo, bool)"/>
-        [Obsolete("Method will be removed in 1.0.16. Please use method ToDateTime instead.", true)]
-        public static DateTime? StringToDate(this string dateAsString, string dateFormat, CultureInfo dateCulture = null, bool canReturnNull = false)
-        {
-            return StringToDate(dateAsString, new string[] { dateFormat }, dateCulture, canReturnNull);
-        }
-
-        /// <summary>
         /// Tries to convert a date from a <see cref="string"/> to a type of <see cref="DateTime"/>.
         /// </summary>
         /// <param name="dateAsString">The date as a <see cref="string"/>. Examples: "23/03/2012", "11-02-2001", "06.12.2019".</param>
@@ -86,10 +65,46 @@ namespace TsadriuUtilities
         /// Parses the date to return with the last day of the month.
         /// </summary>
         /// <param name="date">Date to be checked on.</param>
-        /// <returns>Returns the date with the last day of the month.</returns>
+        /// <returns>Date with the last day of the month.</returns>
         public static DateTime GetLastDayOfMonth(this DateTime date)
         {
             return new DateTime(date.Year, date.Month, 1).AddMonths(1).AddDays(-1);
+        }
+
+        /// <summary>
+        /// Sets the <paramref name="day"/> in the <paramref name="date"/>.
+        /// </summary>
+        /// <param name="date">Current date.</param>
+        /// <param name="day">Day to set. In case <paramref name="day"/> is higher than the month's max days, it will be clamped.</param>
+        /// <returns>Date with the specified <paramref name="day"/>.</returns>
+        public static DateTime SetDay(this DateTime date, int day)
+        {
+            int clampedDay = day.ClampValue(DateTime.MinValue.Day, DateTime.DaysInMonth(date.Year, date.Month));
+            return new DateTime(date.Year, date.Month, clampedDay);
+        }
+
+        /// <summary>
+        /// Sets the <paramref name="month"/> in the <paramref name="date"/>.
+        /// </summary>
+        /// <param name="date">Current date.</param>
+        /// <param name="month">Month to set. In case <paramref name="month"/> is higher than the year's max months, it will be clamped.</param>
+        /// <returns>Date with the specified <paramref name="month"/>.</returns>
+        public static DateTime SetMonth(this DateTime date, int month)
+        {
+            int clampedMonth = month.ClampValue(DateTime.MinValue.Month, DateTime.MaxValue.Month);
+            return new DateTime(date.Year, clampedMonth, 1).SetDay(date.Day);
+        }
+
+        /// <summary>
+        /// Sets the <paramref name="year"/> in the <paramref name="date"/>.
+        /// </summary>
+        /// <param name="date">Current date.</param>
+        /// <param name="year">Year to set.</param>
+        /// <returns>Date with the specified <paramref name="year"/>.</returns>
+        public static DateTime SetYear(this DateTime date, int year)
+        {
+            int clampedYear = year.ClampValue(DateTime.MinValue.Year, DateTime.MaxValue.Year);
+            return new DateTime(clampedYear, 1, 1).SetMonth(date.Month).SetDay(date.Day);
         }
     }
 }

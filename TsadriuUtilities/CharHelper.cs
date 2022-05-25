@@ -17,18 +17,6 @@ namespace TsadriuUtilities
         /// <param name="value">The <see cref="string"/> to get the value from.</param>
         /// <param name="index">The <paramref name="index"/> of the letter to be return. If <paramref name="index"/> is not passed, it will return the first letter of <paramref name="value"/>.</param>
         /// <returns>Return the first character of <paramref name="value"/> or, if <paramref name="index"/> is passed, the character of the desired index.</returns>
-        [Obsolete("Method will be removed in 1.0.16. Please use method ToChar instead.")]
-        public static char StringToChar(string value, int index = 0)
-        {
-            return value.ToChar(index);
-        }
-
-        /// <summary>
-        /// Converts a <see cref="string"/> into a <see cref="char"/>. If the length of <paramref name="value"/> is higher than 1, it will return the first character of <paramref name="value"/> or, if <paramref name="index"/> is passed, the character of the desired index.
-        /// </summary>
-        /// <param name="value">The <see cref="string"/> to get the value from.</param>
-        /// <param name="index">The <paramref name="index"/> of the letter to be return. If <paramref name="index"/> is not passed, it will return the first letter of <paramref name="value"/>.</param>
-        /// <returns>Return the first character of <paramref name="value"/> or, if <paramref name="index"/> is passed, the character of the desired index.</returns>
         public static char ToChar(this string value, int index = 0)
         {
             return value[index];

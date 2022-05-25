@@ -188,7 +188,7 @@ namespace TsadriuUtilities
                 {
                     if (currentRow >= ColumnList[currentColumn].ColumnData.Count)
                     {
-                        rowData = rowData.PadRight(rowData.Length + 1, CharHelper.StringToChar(separator));
+                        rowData = rowData.PadRight(rowData.Length + 1, CharHelper.ToChar(separator));
                     }
                     else
                     {

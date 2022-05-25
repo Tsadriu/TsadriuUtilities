@@ -24,18 +24,9 @@
         <member name="M:TsadriuUtilities.ArrayHelper.GenerateRandom``1(``0[],System.Int32,System.Int32)">
             <summary>
             Fills up the array with random numbers between <paramref name="min"/> (default: 0, inclusive) and <paramref name="max"/> (default: 100, inclusive).
-            Supported types: <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/> and <see cref="T:System.Double"/>.
+            Supported types: <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/> and <see cref="T:System.Byte"/>.
             </summary>
             <param name="array">Current array.</param>
-            <param name="min">The minimum number that can be generated.</param>
-            <param name="max">The maximum number that can be generated.</param>
-            <returns>An array which all indexes have been assigned a random number.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.ArrayHelper.GenerateRandom(System.Double[],System.Int32,System.Int32)">
-            <summary>
-            Fills up the array with random numbers between <paramref name="min"/> (default: 0, inclusive) and <paramref name="max"/> (default: 100, inclusive).
-            </summary>
-            <param name="array">Current array of <see cref="T:System.Int32"/>.</param>
             <param name="min">The minimum number that can be generated.</param>
             <param name="max">The maximum number that can be generated.</param>
             <returns>An array which all indexes have been assigned a random number.</returns>
@@ -102,7 +93,31 @@
             Parses the date to return with the last day of the month.
             </summary>
             <param name="date">Date to be checked on.</param>
-            <returns>Returns the date with the last day of the month.</returns>
+            <returns>Date with the last day of the month.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.DateTimeHelper.SetDay(System.DateTime,System.Int32)">
+            <summary>
+            Sets the <paramref name="day"/> in the <paramref name="date"/>.
+            </summary>
+            <param name="date">Current date.</param>
+            <param name="day">Day to set. In case <paramref name="day"/> is higher than the month's max days, it will be clamped.</param>
+            <returns>Date with the specified <paramref name="day"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.DateTimeHelper.SetMonth(System.DateTime,System.Int32)">
+            <summary>
+            Sets the <paramref name="month"/> in the <paramref name="date"/>.
+            </summary>
+            <param name="date">Current date.</param>
+            <param name="month">Month to set. In case <paramref name="month"/> is higher than the year's max months, it will be clamped.</param>
+            <returns>Date with the specified <paramref name="month"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.DateTimeHelper.SetYear(System.DateTime,System.Int32)">
+            <summary>
+            Sets the <paramref name="year"/> in the <paramref name="date"/>.
+            </summary>
+            <param name="date">Current date.</param>
+            <param name="year">Year to set.</param>
+            <returns>Date with the specified <paramref name="year"/>.</returns>
         </member>
         <member name="T:TsadriuUtilities.DirectoryHelper">
             <summary>

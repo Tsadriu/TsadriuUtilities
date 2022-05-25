@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.0.15</Version>
+    <Version>1.0.151</Version>
     <Description>A small package of utilities to help dealing with strings, chars, lists and more to hopefully save a little bit of time in coding.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
