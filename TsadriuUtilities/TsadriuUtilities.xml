@@ -210,7 +210,7 @@
         </member>
         <member name="M:TsadriuUtilities.ListHelper.HasAny``1(System.Collections.Generic.List{``0})">
             <summary>
-            Iterates through a list checking that it has at least 1 non null element.
+            Iterates through <paramref name="list"/> checking that it has at least 1 non null element.
             </summary>
             <typeparam name="T">Generic type.</typeparam>
             <param name="list"><see cref="T:System.Collections.Generic.List`1"/> of objects.</param>
@@ -458,7 +458,7 @@
         </member>
         <member name="M:TsadriuUtilities.StringHelper.GetTagValue(System.String,System.String,System.String,System.Boolean)">
             <summary>
-            Searches through the <paramref name="text"/>, returning the content between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
+            Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
             </summary>
             <param name="text">Text to search though.</param>
             <param name="startTag">The start tag.</param>
@@ -468,7 +468,7 @@
         </member>
         <member name="M:TsadriuUtilities.StringHelper.GetTagValues(System.String,System.String,System.String,System.Boolean)">
             <summary>
-            Searches through the <paramref name="text"/>, returning the content between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
+            Searches through the <paramref name="text"/>, returning all instances found between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
             </summary>
             <param name="text">Text to search though.</param>
             <param name="startTag">The start tag.</param>
