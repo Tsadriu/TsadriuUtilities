@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TsadriuUtilities;
 using TsadriuUtilities.Objects;
 
@@ -72,6 +73,10 @@ namespace Tests
             test.OrderByDescending();
 
             Assert.IsTrue(test[0] == "Jonah");
+            var newListTest = new List<TTableColumn>();
+            newListTest.Add(null);
+
+            var isAny = newListTest.HasAny();
         }
 
         [TestMethod]

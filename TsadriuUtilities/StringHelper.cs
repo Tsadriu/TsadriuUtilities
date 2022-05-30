@@ -96,6 +96,10 @@ namespace TsadriuUtilities
             while (modifiedText.Contains(startTag))
             {
                 var result = GetTagValue(modifiedText, startTag, endTag, tagsIncluded);
+                if (IsEmpty(result))
+                {
+                    break;
+                }
                 modifiedText = GetTagValue(modifiedText, result, string.Empty, false);
                 list.Add(result);
             }

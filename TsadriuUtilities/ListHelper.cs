@@ -98,5 +98,28 @@ namespace TsadriuUtilities
             var values = list.GetRange(startIndex, count);
             return string.Join(separator, values);
         }
+
+        /// <summary>
+        /// Iterates through <paramref name="list"/> checking that it has at least 1 non null element.
+        /// </summary>
+        /// <typeparam name="T">Generic type.</typeparam>
+        /// <param name="list"><see cref="List{T}"/> of objects.</param>
+        /// <returns>Returns true if <paramref name="list"/> has at least 1 non null element. Otherwise returns false.</returns>
+        public static bool HasAny<T>(this List<T> list)
+        {
+            if (list != null)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (list[i] == null)
+                    {
+                        continue;
+                    }
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
