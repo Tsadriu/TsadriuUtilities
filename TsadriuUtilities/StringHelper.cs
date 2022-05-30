@@ -12,7 +12,7 @@ namespace TsadriuUtilities
     public static class StringHelper
     {
         /// <summary>
-        /// Searches through the <paramref name="text"/>, returning the content between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
+        /// Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
         /// </summary>
         /// <param name="text">Text to search though.</param>
         /// <param name="startTag">The start tag.</param>
@@ -70,7 +70,7 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Searches through the <paramref name="text"/>, returning the content between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
+        /// Searches through the <paramref name="text"/>, returning all instances found between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
         /// </summary>
         /// <param name="text">Text to search though.</param>
         /// <param name="startTag">The start tag.</param>
