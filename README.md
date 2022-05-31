@@ -8,9 +8,9 @@ TsadriuUtilities is a library that helps on dealing with
 
 ## > Features <
 ### ArrayHelper:
-- **ToString<T>(T[], string)**:
+- **ToString<T>(T[], string separator)**:
     - Converts an Array into a single line of string. If the separator is not passed, it will separate by a space. Examples: ArrayToString(new int[] { 1, 3, 5 }) -> "1 3 5", ArrayToString(new string[] { "5", "2" }, "|") -> "5|2".
-- **GenerateRandom<T>(T[] array, int min = 0, int max = 100)**:
+- **GenerateRandom<T>(T[] array, int min, int max)**:
     - Fills up the array with random numbers between min (default: 0, inclusive) and max (default: 100, inclusive).
 
 ### CharHelper:
@@ -56,7 +56,7 @@ TsadriuUtilities is a library that helps on dealing with
 - **OrderByDescending<T>(List<T> list)**:
     - Orders a list in descending order. 
 - **ToString<T>(List<T> list, string separator, int startIndex, int count)**
-    - /// Converts an list into a single line of string. If separator is not passed, it will separate by a space. Examples: ListToString(new int[] { 1, 3, 5 }) -> "1 3 5", ListToString(new string[] { "5", "2" }, "|") -> "5|2".
+    - Converts an list into a single line of string. If separator is not passed, it will separate by a space. Examples: ListToString(new int[] { 1, 3, 5 }) -> "1 3 5", ListToString(new string[] { "5", "2" }, "|") -> "5|2".
 - **HasAny<T>(List<T> list)**
     - Iterates through the list, checking that it has at least 1 non null element.
 
@@ -99,7 +99,7 @@ TsadriuUtilities is a library that helps on dealing with
     - Returns the count of valueToCount present in the value.
 - **RemoveTags(string value, tag)**
 - **RemoveTags(string value, string[] tags)**
-    - Returns a string where all instances of tags are removed (tag b will remove <b>, </b> and <b/>.
+    - Returns a string where all instances of tags are removed (Example: Passing 'b' will remove all 'b' xml tags).
 
 ### TTable:
 - **AddColumn(params string[] columnName)**:
