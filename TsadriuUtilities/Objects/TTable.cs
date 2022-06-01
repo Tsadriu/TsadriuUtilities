@@ -212,7 +212,7 @@ namespace TsadriuUtilities
         /// Transforms a .csv file into a <see cref="TTable"/>.
         /// </summary>
         /// <param name="fullFileName">File name of the file, including its' path.</param>
-        /// <param name="separator">Separator of the csv. Default uses ;</param>
+        /// <param name="separator">Separator of the csv.</param>
         /// <returns>Instance of <see cref="TTable"/> with the data of <paramref name="fullFileName"/>.</returns>
         public void CsvToTable(string fullFileName, string separator = ";")
         {
@@ -242,6 +242,24 @@ namespace TsadriuUtilities
                     AddData(ColumnList[columnIndex].ColumnName, fileRows[dataIndex].Split(separator)[columnIndex]);
                 }
             }
+        }
+
+        public void MoveColumnPosition(TTableColumn tableColumn, int position)
+        {
+            int columnIndex = -1;
+
+            for (int i = 0; i < ColumnList.Count; i++)
+            {
+                if (ColumnList[i].ColumnName.Equals(tableColumn.ColumnName))
+                {
+                    columnIndex = i;
+                    break;
+                }
+            }
+
+            var oldColumn = ColumnList[position];
+            ColumnList[position] = ColumnList[columnIndex];
+            ColumnList[columnIndex] = oldColumn;
         }
 
         /// <summary>
