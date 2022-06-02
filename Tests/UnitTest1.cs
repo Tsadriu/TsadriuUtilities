@@ -85,8 +85,18 @@ namespace Tests
             var text = "This fox is <b>very</b> sneaky!\nI hope nothing <b>happens</b> to my food...";
 
             var stringToChar = CharHelper.ToChar("Fabio", 2);
-            Assert.IsTrue(StringHelper.GetTagValue(text, "very", "\n", true) == "very</b> sneaky!\n");
-
+            Assert.IsTrue(StringHelper.GetBetween(text, "very", "\n", true) == "very</b> sneaky!\n");
+            var t = text.GetBetween("<b", ">", true);
+            t = text.GetBetween("fox", "</b> to");
+            t = text.GetBetween("<b>", "</b>", true);
+            t = text.GetBetween("<b>", "</b>", false);
+            t = text.GetBetween("<b", ">", true);
+            t = text.GetBetween("<b", ">", false);
+            t = text.GetBetween("<b");
+            t = text.GetBetween(string.Empty, "<b>", true);
+            t = text.GetBetween(string.Empty, "<b>", false);
+            t = text.GetBetween("<b", ">", true);
+            t = text.GetBetween("<b", ">", true);
             var table = new TTable();
             table.AddColumn("Data", "Ore", "Minuti", "Ore Svolte", "Ore Effettive Ticket", "Attivita", "Branch", "Commit", "Orario di registrazione");
             table.AddData("Data", DateTime.Today.ToString("yyyy-MM-dd"));
@@ -103,6 +113,7 @@ namespace Tests
             // var contentList = table.TableToCsv(true, ";");
 
             var xmlText = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><gesmes:Envelope xmlns:gesmes=\"http://www.gesmes.org/xml/2002-08-01\" xmlns=\"http://www.ecb.int/vocabulary/2002-08-01/eurofxref\"><gesmes:subject>Reference rates</gesmes:subject><gesmes:Sender><gesmes:name>European Central Bank</gesmes:name></gesmes:Sender><Cube><Cube time='2022-04-29'><Cube currency='USD' rate='1.0540'/><Cube currency='JPY' rate='137.01'/><Cube currency='BGN' rate='1.9558'/><Cube currency='CZK' rate='24.605'/><Cube currency='DKK' rate='7.4415'/><Cube currency='GBP' rate='0.83908'/><Cube currency='HUF' rate='378.71'/><Cube currency='PLN' rate='4.6780'/><Cube currency='RON' rate='4.9479'/><Cube currency='SEK' rate='10.2958'/><Cube currency='CHF' rate='1.0229'/><Cube currency='ISK' rate='137.80'/><Cube currency='NOK' rate='9.7525'/><Cube currency='HRK' rate='7.5667'/><Cube currency='TRY' rate='15.6385'/><Cube currency='AUD' rate='1.4699'/><Cube currency='BRL' rate='5.1608'/><Cube currency='CAD' rate='1.3426'/><Cube currency='CNY' rate='6.9441'/><Cube currency='HKD' rate='8.2703'/><Cube currency='IDR' rate='15301.52'/><Cube currency='ILS' rate='3.4993'/><Cube currency='INR' rate='80.6380'/><Cube currency='KRW' rate='1326.71'/><Cube currency='MXN' rate='21.4181'/><Cube currency='MYR' rate='4.5886'/><Cube currency='NZD' rate='1.6119'/><Cube currency='PHP' rate='55.200'/><Cube currency='SGD' rate='1.4545'/><Cube currency='THB' rate='36.026'/><Cube currency='ZAR' rate='16.6473'/></Cube></Cube></gesmes:Envelope>";
+            var xmtest = xmlText.GetMultipleBetween("<Cube ", "/>", true);
             xmlText = xmlText.RemoveTags("Cube");
             /*var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TEST CSV");
 
@@ -124,10 +135,10 @@ namespace Tests
             Assert.IsTrue(StringHelper.AreEmpty(valuesTwo.ToArray()));*/
             // C:\Users\foliveira\Documents\GitHub\TsadriuUtilities\Tests\Files\
             // C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\bin\\Debug\\net5.0
-            var fileToTest = Path.Combine(StringHelper.GetTagValue(Directory.GetCurrentDirectory(), string.Empty, "Tests", true), "Files", "TestTTableXmlFile.xml");
+            var fileToTest = Path.Combine(StringHelper.GetBetween(Directory.GetCurrentDirectory(), string.Empty, "Tests", true), "Files", "TestTTableXmlFile.xml");
             var fileContent = File.ReadAllText(fileToTest);
 
-            var vals = StringHelper.GetTagValues(fileContent, "<Corrispettivi>", "</Corrispettivi>", true);
+            var vals = StringHelper.GetMultipleBetween(fileContent, "<Corrispettivi>", "</Corrispettivi>", true);
         }
 
         [TestMethod]
@@ -141,8 +152,21 @@ namespace Tests
         public void TTableTest()
         {
             TTable table = new TTable();
-            string path = Path.Combine(StringHelper.GetTagValue(Directory.GetCurrentDirectory(), string.Empty, "Tests", true), "Files", "20220330_Serbia_SpotSettlement.csv");
+            string path = Path.Combine(StringHelper.GetBetween(Directory.GetCurrentDirectory(), string.Empty, "Tests", true), "Files", "20220330_Serbia_SpotSettlement.csv");
             table.CsvToTable(path);
+
+            string longFilePath = Path.Combine(StringHelper.GetBetween(Directory.GetCurrentDirectory(), string.Empty, "Tests", true), "Files", "22DVI03607_details.csv");
+
+            var table2 = new TTable();
+            table2.CsvToTable(longFilePath);
+            table2.MoveColumnIndex("Tipologia impianto", 0);
+            var col = table2.GetColumn("Tipologia impianto");
+            var col2 = col;
+            col2.AddData("test", 283, 38);
+            col2.ColumnName = "New table";
+            table2.MoveColumnIndex(col, 0);
+            
+            table2.RemoveColumn(col2);
         }
 
             [TestMethod]
@@ -167,9 +191,9 @@ namespace Tests
         [TestMethod]
         public void TXmlTest()
         {
-            /*var fileToTest = Path.Combine(StringHelper.GetTagValue(Directory.GetCurrentDirectory(), string.Empty, "Tests", true), "Files", "TestTTableXmlFile.xml");
+            var fileToTest = Path.Combine(StringHelper.GetBetween(Directory.GetCurrentDirectory(), string.Empty, "Tests", true), "Files", "TestTTableXmlFile.xml");
             var fileContent = File.ReadAllText(fileToTest);
-            TXml.ReadXml(fileContent);*/
+            TXml.ReadXml(fileContent);
         }
 
         [TestMethod]

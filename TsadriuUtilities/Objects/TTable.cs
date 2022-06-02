@@ -39,9 +39,136 @@ namespace TsadriuUtilities
         /// <param name="tableColumn">Instance of <see cref="TTableColumn"/>.</param>
         public void AddColumn(params TTableColumn[] tableColumn)
         {
+            if (tableColumn == null)
+            {
+                return;
+            }
+
             foreach (var column in tableColumn)
             {
-                ColumnList.Add(column);
+                if (column == null)
+                {
+                    continue;
+                }
+
+                if (!ColumnList.Any(x => x.ColumnName == column.ColumnName))
+                {
+                    ColumnList.Add(column);
+                }
+                else
+                {
+                    Console.WriteLine($"Column '{column.ColumnName}' is already present. Skipping.");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns an instance of <see cref="TTableColumn"/> if it is present in <see cref="ColumnList"/>. If it is not present, returns a null.
+        /// </summary>
+        /// <param name="columnName">Name of the <see cref="TTableColumn"/>.</param>
+        /// <returns>The <see cref="TTableColumn"/> if it is present. Otherwise retuns a null.</returns>
+        public TTableColumn GetColumn(string columnName)
+        {
+            var exists = ColumnList.Any(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase));
+
+            if (exists)
+            {
+                return ColumnList.Where(x => x.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase)).First();
+            }
+
+            Console.WriteLine($"Column '{columnName}' is not present in the table. Please ensure that you wrote the correct name of the column.");
+            return null;
+        }
+
+        /// <summary>
+        /// Returns all <see cref="TTableColumn"/> if it is present in <see cref="ColumnList"/>, or, if <paramref name="index"/> is passed, returns the <see cref="TTableColumn"/> of the desired index.
+        /// </summary>
+        /// <param name="index">Index of the column.</param>
+        /// <returns>All <see cref="TTableColumn"/> if it is present in <see cref="ColumnList"/>, or, if <paramref name="index"/> is passed, returns the <see cref="TTableColumn"/> of the desired index.</returns>
+        public List<TTableColumn> GetColumns(int index = -1)
+        {
+            if (index > -1)
+            {
+                return new List<TTableColumn>() { ColumnList[index] };
+            }
+
+            return ColumnList;
+        }
+
+        /// <summary>
+        /// Moves a <paramref name="tableColumn"/>'s index to <paramref name="newIndex"/>.
+        /// </summary>
+        /// <param name="tableColumn">The column that will be moved.</param>
+        /// <param name="newIndex">The new index that ranges between 0 and <see cref="ColumnList"/> length's - 1.</param>
+        public void MoveColumnIndex(TTableColumn tableColumn, int newIndex)
+        {
+            if (tableColumn == null)
+            {
+                return;
+            }
+
+            int columnIndex = -1;
+
+            for (int i = 0; i < ColumnList.Count; i++)
+            {
+                if (ColumnList[i].ColumnName.Equals(tableColumn.ColumnName))
+                {
+                    columnIndex = i;
+                    break;
+                }
+            }
+
+            var oldColumn = ColumnList[newIndex];
+            ColumnList[newIndex] = ColumnList[columnIndex];
+            ColumnList[columnIndex] = oldColumn;
+        }
+
+        /// <summary>
+        /// Moves a <see cref="TTableColumn"/>'s index to <paramref name="newIndex"/>.
+        /// </summary>
+        /// <param name="columnName">The column that will be moved.</param>
+        /// <param name="newIndex">The new index that ranges between 0 and <see cref="ColumnList"/> length's - 1.</param>
+        public void MoveColumnIndex(string columnName, int newIndex)
+        {
+            MoveColumnIndex(GetColumn(columnName), newIndex);
+        }
+
+        /// <summary>
+        /// Removes a <see cref="TTableColumn"/> from <see cref="ColumnList"/> (Method will use <see cref="TTableColumn.ColumnName"/> to determine which <see cref="TTableColumn"/> to remove from <see cref="ColumnList"/>).
+        /// </summary>
+        /// <param name="tableColumn">Column to remove.</param>
+        public void RemoveColumn(params TTableColumn[] tableColumn)
+        {
+            if (tableColumn == null)
+            {
+                return;
+            }
+
+            foreach (var column in tableColumn)
+            {
+                if (column == null)
+                {
+                    continue;
+                }
+
+                int index = ColumnList.FindIndex(x => x.ColumnName == column.ColumnName);
+
+                if (index > -1)
+                {
+                    ColumnList.RemoveAt(index);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Removes a <see cref="TTableColumn"/> from <see cref="ColumnList"/> (Method will use <see cref="TTableColumn.ColumnName"/> to determine which <see cref="TTableColumn"/> to remove from <see cref="ColumnList"/>).
+        /// </summary>
+        /// <param name="columnName">Name of the column.</param>
+        public void RemoveColumn(params string[] columnName)
+        {
+            foreach (var column in columnName)
+            {
+                RemoveColumn(GetColumn(column));
             }
         }
 
@@ -234,7 +361,7 @@ namespace TsadriuUtilities
             }
 
             AddColumn(fileRows[0].Split(separator));
-            
+
             for (int dataIndex = 1; dataIndex < fileRows.Count; dataIndex++)
             {
                 for (int columnIndex = 0; columnIndex < ColumnList.Count; columnIndex++)
@@ -242,24 +369,6 @@ namespace TsadriuUtilities
                     AddData(ColumnList[columnIndex].ColumnName, fileRows[dataIndex].Split(separator)[columnIndex]);
                 }
             }
-        }
-
-        public void MoveColumnPosition(TTableColumn tableColumn, int position)
-        {
-            int columnIndex = -1;
-
-            for (int i = 0; i < ColumnList.Count; i++)
-            {
-                if (ColumnList[i].ColumnName.Equals(tableColumn.ColumnName))
-                {
-                    columnIndex = i;
-                    break;
-                }
-            }
-
-            var oldColumn = ColumnList[position];
-            ColumnList[position] = ColumnList[columnIndex];
-            ColumnList[columnIndex] = oldColumn;
         }
 
         /// <summary>

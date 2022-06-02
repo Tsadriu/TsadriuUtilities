@@ -113,7 +113,7 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Check if <paramref name="value"/> is between <paramref name="min"/> and <paramref name="max"/>. Setting <paramref name="included"/> to true will also include <paramref name="min"/> and <paramref name="max"/> in the verification.
+        /// Checks if <paramref name="value"/> is between <paramref name="min"/> and <paramref name="max"/>. Setting <paramref name="included"/> to true will also include <paramref name="min"/> and <paramref name="max"/> in the verification.
         /// </summary>
         /// <typeparam name="T">Supported types: <see cref="long"/>, <see cref="int"/>, <see cref="short"/>, <see cref="byte"/>,
         /// <see cref="float"/>, <see cref="double"/>, <see cref="decimal"/>.</typeparam>

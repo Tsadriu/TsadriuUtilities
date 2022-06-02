@@ -38,11 +38,11 @@
         </member>
         <member name="M:TsadriuUtilities.CharHelper.ToChar(System.String,System.Int32)">
             <summary>
-            Converts a <see cref="T:System.String"/> into a <see cref="T:System.Char"/>. If the length of <paramref name="value"/> is higher than 1, it will return the first character of <paramref name="value"/> or, if <paramref name="index"/> is passed, the character of the desired index.
+            Converts the <paramref name="value"/> into a <see cref="T:System.Char"/>. If the length of <paramref name="value"/> is higher than 1, it will return the first character of <paramref name="value"/> or, if <paramref name="index"/> is passed, the character of the desired index.
             </summary>
             <param name="value">The <see cref="T:System.String"/> to get the value from.</param>
             <param name="index">The <paramref name="index"/> of the letter to be return. If <paramref name="index"/> is not passed, it will return the first letter of <paramref name="value"/>.</param>
-            <returns>Return the first character of <paramref name="value"/> or, if <paramref name="index"/> is passed, the character of the desired index.</returns>
+            <returns>The first character of <paramref name="value"/> or, if <paramref name="index"/> is passed, the character of the desired index.</returns>
         </member>
         <member name="T:TsadriuUtilities.DateTimeHelper">
             <summary>
@@ -278,7 +278,7 @@
         </member>
         <member name="M:TsadriuUtilities.NumberHelper.Between``1(``0,``0,``0,System.Boolean)">
             <summary>
-            Check if <paramref name="value"/> is between <paramref name="min"/> and <paramref name="max"/>. Setting <paramref name="included"/> to true will also include <paramref name="min"/> and <paramref name="max"/> in the verification.
+            Checks if <paramref name="value"/> is between <paramref name="min"/> and <paramref name="max"/>. Setting <paramref name="included"/> to true will also include <paramref name="min"/> and <paramref name="max"/> in the verification.
             </summary>
             <typeparam name="T">Supported types: <see cref="T:System.Int64"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/>,
             <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Decimal"/>.</typeparam>
@@ -309,6 +309,46 @@
             Adds a new <see cref="T:TsadriuUtilities.TTableColumn"/> in the <see cref="T:TsadriuUtilities.TTable"/>.
             </summary>
             <param name="tableColumn">Instance of <see cref="T:TsadriuUtilities.TTableColumn"/>.</param>
+        </member>
+        <member name="M:TsadriuUtilities.TTable.GetColumn(System.String)">
+            <summary>
+            Returns an instance of <see cref="T:TsadriuUtilities.TTableColumn"/> if it is present in <see cref="P:TsadriuUtilities.TTable.ColumnList"/>. If it is not present, returns a null.
+            </summary>
+            <param name="columnName">Name of the <see cref="T:TsadriuUtilities.TTableColumn"/>.</param>
+            <returns>The <see cref="T:TsadriuUtilities.TTableColumn"/> if it is present. Otherwise retuns a null.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.TTable.GetColumns(System.Int32)">
+            <summary>
+            Returns all <see cref="T:TsadriuUtilities.TTableColumn"/> if it is present in <see cref="P:TsadriuUtilities.TTable.ColumnList"/>, or, if <paramref name="index"/> is passed, returns the <see cref="T:TsadriuUtilities.TTableColumn"/> of the desired index.
+            </summary>
+            <param name="index">Index of the column.</param>
+            <returns>All <see cref="T:TsadriuUtilities.TTableColumn"/> if it is present in <see cref="P:TsadriuUtilities.TTable.ColumnList"/>, or, if <paramref name="index"/> is passed, returns the <see cref="T:TsadriuUtilities.TTableColumn"/> of the desired index.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.TTable.MoveColumnIndex(TsadriuUtilities.TTableColumn,System.Int32)">
+            <summary>
+            Moves a <paramref name="tableColumn"/>'s index to <paramref name="newIndex"/>.
+            </summary>
+            <param name="tableColumn">The column that will be moved.</param>
+            <param name="newIndex">The new index that ranges between 0 and <see cref="P:TsadriuUtilities.TTable.ColumnList"/> length's - 1.</param>
+        </member>
+        <member name="M:TsadriuUtilities.TTable.MoveColumnIndex(System.String,System.Int32)">
+            <summary>
+            Moves a <see cref="T:TsadriuUtilities.TTableColumn"/>'s index to <paramref name="newIndex"/>.
+            </summary>
+            <param name="columnName">The column that will be moved.</param>
+            <param name="newIndex">The new index that ranges between 0 and <see cref="P:TsadriuUtilities.TTable.ColumnList"/> length's - 1.</param>
+        </member>
+        <member name="M:TsadriuUtilities.TTable.RemoveColumn(TsadriuUtilities.TTableColumn[])">
+            <summary>
+            Removes a <see cref="T:TsadriuUtilities.TTableColumn"/> from <see cref="P:TsadriuUtilities.TTable.ColumnList"/> (Method will use <see cref="P:TsadriuUtilities.TTableColumn.ColumnName"/> to determine which <see cref="T:TsadriuUtilities.TTableColumn"/> to remove from <see cref="P:TsadriuUtilities.TTable.ColumnList"/>).
+            </summary>
+            <param name="tableColumn">Column to remove.</param>
+        </member>
+        <member name="M:TsadriuUtilities.TTable.RemoveColumn(System.String[])">
+            <summary>
+            Removes a <see cref="T:TsadriuUtilities.TTableColumn"/> from <see cref="P:TsadriuUtilities.TTable.ColumnList"/> (Method will use <see cref="P:TsadriuUtilities.TTableColumn.ColumnName"/> to determine which <see cref="T:TsadriuUtilities.TTableColumn"/> to remove from <see cref="P:TsadriuUtilities.TTable.ColumnList"/>).
+            </summary>
+            <param name="columnName">Name of the column.</param>
         </member>
         <member name="M:TsadriuUtilities.TTable.AddData(System.String,System.Object[])">
             <summary>
@@ -374,7 +414,7 @@
             Transforms a .csv file into a <see cref="T:TsadriuUtilities.TTable"/>.
             </summary>
             <param name="fullFileName">File name of the file, including its' path.</param>
-            <param name="separator">Separator of the csv. Default uses ;</param>
+            <param name="separator">Separator of the csv.</param>
             <returns>Instance of <see cref="T:TsadriuUtilities.TTable"/> with the data of <paramref name="fullFileName"/>.</returns>
         </member>
         <member name="M:TsadriuUtilities.TTable.GetHighestColumnDataCount">
@@ -458,51 +498,71 @@
         </member>
         <member name="M:TsadriuUtilities.StringHelper.GetTagValue(System.String,System.String,System.String,System.Boolean)">
             <summary>
-            Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
+            Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
             </summary>
             <param name="text">Text to search though.</param>
-            <param name="startTag">The start tag.</param>
-            <param name="endTag">The end tag.</param>
-            <param name="tagsIncluded">If enabled, it will return a string with the <paramref name="startTag"/> and <paramref name="endTag"/> included.</param>
+            <param name="start">The start tag.</param>
+            <param name="end">The end tag.</param>
+            <param name="startEndIncluded">If enabled, it will return a string with the <paramref name="start"/> and <paramref name="end"/> included.</param>
             <returns>Returns string.Empty if nothing is found.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.GetBetween(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="T:System.String"/>.
+            </summary>
+            <param name="text">Text to search though.</param>
+            <param name="start">The start tag.</param>
+            <param name="end">The end tag.</param>
+            <param name="startEndIncluded">If enabled, it will return a <see cref="T:System.String"/> with the <paramref name="start"/> and <paramref name="end"/> included in it.</param>
+            <returns>Returns <see cref="F:System.String.Empty"/> if nothing is found.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.GetMultipleBetween(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Searches through the <paramref name="text"/>, returning multiple instances found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning List of <see cref="T:System.String"/>.
+            </summary>
+            <param name="text">Text to search though.</param>
+            <param name="start">From where the text begins.</param>
+            <param name="end">Until where the text stops.</param>
+            <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
+            <returns>Multiple instances found between <paramref name="start"/> and <paramref name="end"/>. If nothing is found, or parameters <paramref name="text"/>, <paramref name="start"/> or <paramref name="end"/> are empty, returns an empty List of <see cref="T:System.String"/> .</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.GetTagValues(System.String,System.String,System.String,System.Boolean)">
             <summary>
-            Searches through the <paramref name="text"/>, returning all instances found between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
+            Searches through the <paramref name="text"/>, returning the instances found between the <paramref name="start"/> and <paramref name="end"/> in a List of <see cref="T:System.String"/>. Use <paramref name="startEndIncluded"/> if you want to include them.
             </summary>
             <param name="text">Text to search though.</param>
-            <param name="startTag">The start tag.</param>
-            <param name="endTag">The end tag.</param>
-            <param name="tagsIncluded">If enabled, it will return a string with the <paramref name="startTag"/> and <paramref name="endTag"/> included.</param>
-            <returns>Returns an empty List of <see cref="T:System.String"/> if nothing is found or parameters <paramref name="text"/>, <paramref name="startTag"/> or <paramref name="endTag"/> are empty.</returns>
+            <param name="start">From where the text begins.</param>
+            <param name="end">Until where the text stops.</param>
+            <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
+            <returns>Returns an empty List of <see cref="T:System.String"/> if nothing is found or parameters <paramref name="text"/>, <paramref name="start"/> or <paramref name="end"/> are empty.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.IsEmpty(System.String)">
             <summary>
             Checks if the <paramref name="value"/> is null, <see cref="F:System.String.Empty"/> or a white space ("", \n, \r, ...).
             </summary>
             <param name="value">The value to check.</param>
-            <returns>Returns true if the <paramref name="value"/> is empty. Returns false if it's not empty.</returns>
+            <returns>True if the <paramref name="value"/> is empty.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.IsNotEmpty(System.String)">
             <summary>
             Checks if <paramref name="value"/> contains any kind of character.
             </summary>
             <param name="value">The value to check.</param>
-            <returns>Returns true if the <paramref name="value"/> is not empty. Returns false if it contains any kind of character.</returns>
+            <returns>True if the <paramref name="value"/> is not empty.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.AreEmpty(System.String[])">
             <summary>
-            Checks if all instances of <paramref name="values"/> are null, <see cref="F:System.String.Empty"/> or a white space ("", \n, \r, ...).
+            Checks if all instances of <paramref name="values"/> are null, <see cref="F:System.String.Empty"/> or a white space ("", \n, \r, ...), returning true if all of them are empty.
             </summary>
             <param name="values">The values to check.</param>
-            <returns>Returns true if even one of the instances of <paramref name="values"/> is empty. Returns false if all of them are not empty.</returns>
+            <returns>Returns true if all instances of <paramref name="values"/> are empty. Returns false if even one of them is not empty.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.AreNotEmpty(System.String[])">
             <summary>
-            Checks if all instances of <paramref name="values"/> are not empty.
+            Checks if all instances of <paramref name="values"/> are not empty, returning true if all of them are not empty.
             </summary>
             <param name="values">The values to check.</param>
-            <returns>Returns true if even one of the instances of <paramref name="values"/> is not empty. Returns false if all of them are empty.</returns>
+            <returns>Returns true if all instances of <paramref name="values"/> are not empty. Returns false if even one of them is empty.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.LetterUpperCase(System.String,System.Int32)">
             <summary>

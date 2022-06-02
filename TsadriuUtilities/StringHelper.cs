@@ -12,78 +12,91 @@ namespace TsadriuUtilities
     public static class StringHelper
     {
         /// <summary>
-        /// Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
+        /// Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
         /// </summary>
         /// <param name="text">Text to search though.</param>
-        /// <param name="startTag">The start tag.</param>
-        /// <param name="endTag">The end tag.</param>
-        /// <param name="tagsIncluded">If enabled, it will return a string with the <paramref name="startTag"/> and <paramref name="endTag"/> included.</param>
+        /// <param name="start">The start tag.</param>
+        /// <param name="end">The end tag.</param>
+        /// <param name="startEndIncluded">If enabled, it will return a string with the <paramref name="start"/> and <paramref name="end"/> included.</param>
         /// <returns>Returns string.Empty if nothing is found.</returns>
-        public static string GetTagValue(this string text, string startTag, string endTag = null, bool tagsIncluded = false)
+        [Obsolete("Use method GetBetween.", true)]
+        public static string GetTagValue(this string text, string start = null, string end = null, bool startEndIncluded = false)
         {
-            if (IsEmpty(text))
+            return GetBetween(text, start, end, startEndIncluded);
+        }
+
+        /// <summary>
+        /// Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="string"/>.
+        /// </summary>
+        /// <param name="text">Text to search though.</param>
+        /// <param name="start">The start tag.</param>
+        /// <param name="end">The end tag.</param>
+        /// <param name="startEndIncluded">If enabled, it will return a <see cref="string"/> with the <paramref name="start"/> and <paramref name="end"/> included in it.</param>
+        /// <returns>Returns <see cref="string.Empty"/> if nothing is found.</returns>
+        public static string GetBetween(this string text, string start = null, string end = null, bool startEndIncluded = false)
+        {
+            if (text.IsEmpty())
             {
                 return string.Empty;
             }
 
-            var textLength = text.Length;
-            var result = string.Empty;
+            var startIndex = -1;
 
-            // Find the index of the first tag.
-            var startTagIndex = text.IndexOf(startTag, StringComparison.OrdinalIgnoreCase);
-
-            // If startTag is bigger than -1 it means we found it.
-            if (startTagIndex > -1)
+            if (start.IsNotEmpty())
             {
-                startTagIndex += startTag.Length;
-
-                if (startTagIndex > -1)
-                {
-                    startTagIndex += tagsIncluded ? -startTag.Length : 0;
-                }
-
-                if (string.IsNullOrEmpty(endTag))
-                {
-                    result = text.Substring(startTagIndex, textLength - startTagIndex);
-                }
-                else
-                {
-                    var endTagIndex = text.IndexOf(endTag, startTagIndex, StringComparison.OrdinalIgnoreCase);
-
-                    if (endTagIndex > -1)
-                    {
-                        endTagIndex += tagsIncluded ? endTag.Length : 0;
-                    }
-
-                    if (endTagIndex > -1)
-                    {
-                        result = text.Substring(startTagIndex, endTagIndex - startTagIndex);
-                    }
-                    else
-                    {
-                        result = text.Substring(startTagIndex, textLength - startTagIndex);
-                    }
-                }
+                startIndex = text.IndexOf(start, StringComparison.OrdinalIgnoreCase);
             }
 
-            return result;
+            if (startIndex > -1)
+            {
+                startIndex += startEndIncluded ? 0 : start.Length;
+            }
+
+            var endIndex = -1;
+
+            if (end.IsNotEmpty())
+            {
+                endIndex = text.IndexOf(end, StringComparison.OrdinalIgnoreCase);
+            }
+
+            if (endIndex > -1)
+            {
+                endIndex += startEndIncluded ? end.Length : 0;
+            }
+
+            if (endIndex > -1 && startIndex > -1)
+            {
+                return text.Substring(startIndex, endIndex - startIndex);
+            }
+
+            if (startIndex > -1)
+            {
+                return text.Substring(startIndex, text.Length - startIndex);
+            }
+
+            if (endIndex > -1)
+            {
+                return text.Substring(0, endIndex);
+            }
+
+            return text;
         }
 
         /// <summary>
-        /// Searches through the <paramref name="text"/>, returning all instances found between the <paramref name="startTag"/> and <paramref name="endTag"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
+        /// Searches through the <paramref name="text"/>, returning multiple instances found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning List of <see cref="string"/>.
         /// </summary>
         /// <param name="text">Text to search though.</param>
-        /// <param name="startTag">The start tag.</param>
-        /// <param name="endTag">The end tag.</param>
-        /// <param name="tagsIncluded">If enabled, it will return a string with the <paramref name="startTag"/> and <paramref name="endTag"/> included.</param>
-        /// <returns>Returns an empty List of <see cref="string"/> if nothing is found or parameters <paramref name="text"/>, <paramref name="startTag"/> or <paramref name="endTag"/> are empty.</returns>
-        public static List<string> GetTagValues(this string text, string startTag, string endTag, bool tagsIncluded = false)
+        /// <param name="start">From where the text begins.</param>
+        /// <param name="end">Until where the text stops.</param>
+        /// <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
+        /// <returns>Multiple instances found between <paramref name="start"/> and <paramref name="end"/>. If nothing is found, or parameters <paramref name="text"/>, <paramref name="start"/> or <paramref name="end"/> are empty, returns an empty List of <see cref="string"/> .</returns>
+        public static List<string> GetMultipleBetween(this string text, string start, string end, bool startEndIncluded = false)
         {
             var list = new List<string>();
 
-            if (AreEmpty(text, startTag, endTag))
+            if (AreEmpty(text, start, end))
             {
-                if (AreEmpty(startTag, endTag))
+                if (AreEmpty(start, end))
                 {
                     Console.WriteLine("Parameters startTag and endTag cannot be empty. Either use GetTagValue or provide the necessary information to use this method.");
                 }
@@ -93,14 +106,14 @@ namespace TsadriuUtilities
 
             var modifiedText = text;
 
-            while (modifiedText.Contains(startTag))
+            while (modifiedText.Contains(start, StringComparison.OrdinalIgnoreCase))
             {
-                var result = GetTagValue(modifiedText, startTag, endTag, tagsIncluded);
+                var result = GetBetween(modifiedText, start, end, startEndIncluded);
                 if (IsEmpty(result))
                 {
                     break;
                 }
-                modifiedText = GetTagValue(modifiedText, result, string.Empty, false);
+                modifiedText = GetBetween(modifiedText, result, string.Empty, false);
                 list.Add(result);
             }
 
@@ -108,10 +121,24 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
+        /// Searches through the <paramref name="text"/>, returning the instances found between the <paramref name="start"/> and <paramref name="end"/> in a List of <see cref="string"/>. Use <paramref name="startEndIncluded"/> if you want to include them.
+        /// </summary>
+        /// <param name="text">Text to search though.</param>
+        /// <param name="start">From where the text begins.</param>
+        /// <param name="end">Until where the text stops.</param>
+        /// <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
+        /// <returns>Returns an empty List of <see cref="string"/> if nothing is found or parameters <paramref name="text"/>, <paramref name="start"/> or <paramref name="end"/> are empty.</returns>
+        [Obsolete("Use method GetMultipleBetween.", true)]
+        public static List<string> GetTagValues(this string text, string start, string end, bool startEndIncluded = false)
+        {
+            return GetMultipleBetween(text, start, end, startEndIncluded);
+        }
+
+        /// <summary>
         /// Checks if the <paramref name="value"/> is null, <see cref="string.Empty"/> or a white space ("", \n, \r, ...).
         /// </summary>
         /// <param name="value">The value to check.</param>
-        /// <returns>Returns true if the <paramref name="value"/> is empty. Returns false if it's not empty.</returns>
+        /// <returns>True if the <paramref name="value"/> is empty.</returns>
         public static bool IsEmpty(this string value)
         {
             return string.IsNullOrWhiteSpace(value);
@@ -121,35 +148,35 @@ namespace TsadriuUtilities
         /// Checks if <paramref name="value"/> contains any kind of character.
         /// </summary>
         /// <param name="value">The value to check.</param>
-        /// <returns>Returns true if the <paramref name="value"/> is not empty. Returns false if it contains any kind of character.</returns>
+        /// <returns>True if the <paramref name="value"/> is not empty.</returns>
         public static bool IsNotEmpty(this string value)
         {
             return !IsEmpty(value);
         }
 
         /// <summary>
-        /// Checks if all instances of <paramref name="values"/> are null, <see cref="string.Empty"/> or a white space ("", \n, \r, ...).
+        /// Checks if all instances of <paramref name="values"/> are null, <see cref="string.Empty"/> or a white space ("", \n, \r, ...), returning true if all of them are empty.
         /// </summary>
         /// <param name="values">The values to check.</param>
-        /// <returns>Returns true if even one of the instances of <paramref name="values"/> is empty. Returns false if all of them are not empty.</returns>
+        /// <returns>Returns true if all instances of <paramref name="values"/> are empty. Returns false if even one of them is not empty.</returns>
         public static bool AreEmpty(params string[] values)
         {
             foreach (var value in values)
             {
-                if (IsEmpty(value))
+                if (IsNotEmpty(value))
                 {
-                    return true;
+                    return false;
                 }
             }
 
-            return false;
+            return true;
         }
 
         /// <summary>
-        /// Checks if all instances of <paramref name="values"/> are not empty.
+        /// Checks if all instances of <paramref name="values"/> are not empty, returning true if all of them are not empty.
         /// </summary>
         /// <param name="values">The values to check.</param>
-        /// <returns>Returns true if even one of the instances of <paramref name="values"/> is not empty. Returns false if all of them are empty.</returns>
+        /// <returns>Returns true if all instances of <paramref name="values"/> are not empty. Returns false if even one of them is empty.</returns>
         public static bool AreNotEmpty(params string[] values)
         {
             return !AreEmpty(values);
