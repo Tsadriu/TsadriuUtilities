@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace TsadriuUtilities
 {
@@ -81,10 +82,10 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Returns all <see cref="TTableColumn"/> if it is present in <see cref="ColumnList"/>, or, if <paramref name="index"/> is passed, returns the <see cref="TTableColumn"/> of the desired index.
+        /// Returns all <see cref="TTableColumn"/>  present in <see cref="ColumnList"/>, or, if <paramref name="index"/> is passed, returns the <see cref="TTableColumn"/> of the desired index.
         /// </summary>
         /// <param name="index">Index of the column.</param>
-        /// <returns>All <see cref="TTableColumn"/> if it is present in <see cref="ColumnList"/>, or, if <paramref name="index"/> is passed, returns the <see cref="TTableColumn"/> of the desired index.</returns>
+        /// <returns>All <see cref="TTableColumn"/> present in <see cref="ColumnList"/>, or, if <paramref name="index"/> is passed, returns the <see cref="TTableColumn"/> of the desired index.</returns>
         public List<TTableColumn> GetColumns(int index = -1)
         {
             if (index > -1)
@@ -315,7 +316,7 @@ namespace TsadriuUtilities
                 {
                     if (currentRow >= ColumnList[currentColumn].ColumnData.Count)
                     {
-                        rowData = rowData.PadRight(rowData.Length + 1, CharHelper.ToChar(separator));
+                        rowData = rowData.PadRight(rowData.Length + 1, separator.ToChar());
                     }
                     else
                     {
@@ -353,7 +354,7 @@ namespace TsadriuUtilities
                 return;
             }
 
-            var fileRows = ListHelper.ToList(File.ReadAllLines(fullFileName));
+            var fileRows = File.ReadAllLines(fullFileName).ToList();
 
             if (fileRows.Count == 0)
             {
@@ -402,19 +403,19 @@ namespace TsadriuUtilities
         /// <returns>Headers of the columns in a <see cref="string"/>.</returns>
         private string GetHeadersAsString(List<TTableColumn> columns, string separator = ";")
         {
-            string header = string.Empty;
+            var stringBuilder = new StringBuilder();
 
             for (int i = 0; i < columns.Count; i++)
             {
-                header += ColumnList[i].ColumnName;
+                stringBuilder.Append(columns[i].ColumnName);
 
                 if (i + 1 < ColumnList.Count)
                 {
-                    header += separator;
+                    stringBuilder.Append(separator);
                 }
             }
 
-            return header;
+            return stringBuilder.ToString();
         }
 
         private List<TTableColumn> ColumnList { get; set; }

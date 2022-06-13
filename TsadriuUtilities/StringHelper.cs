@@ -135,6 +135,46 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
+        /// Checks a <see cref="string"/> if it has all instances of <paramref name="values"/>.
+        /// </summary>
+        /// <param name="text">Current <see cref="string"/>.</param>
+        /// <param name="stringComparison">The type of <see cref="StringComparison"/>.</param>
+        /// <param name="values">The <paramref name="values"/> to search in the <paramref name="text"/>.</param>
+        /// <returns>True if all <paramref name="values"/> are present in the <paramref name="text"/>. Otherwise returns false.</returns>
+        public static bool AndContains(this string text, StringComparison stringComparison, params string[] values)
+        {
+            foreach (var value in values)
+            {
+                if(!text.Contains(value, stringComparison))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Checks a <see cref="string"/> if it has at least one instance of <paramref name="values"/>.
+        /// </summary>
+        /// <param name="text">Current <see cref="string"/>.</param>
+        /// <param name="stringComparison">The type of <see cref="StringComparison"/>.</param>
+        /// <param name="values">The <paramref name="values"/> to search in the <paramref name="text"/>.</param>
+        /// <returns>True if at least one instance <paramref name="values"/> is present in the <paramref name="text"/>. Otherwise returns false.</returns>
+        public static bool OrContains(this string text, StringComparison stringComparison, params string[] values)
+        {
+            foreach (var value in values)
+            {
+                if (text.Contains(value, stringComparison))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Checks if the <paramref name="value"/> is null, <see cref="string.Empty"/> or a white space ("", \n, \r, ...).
         /// </summary>
         /// <param name="value">The value to check.</param>

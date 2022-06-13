@@ -186,6 +186,8 @@ namespace Tests
             Assert.IsTrue(NumberHelper.Between(18, 20, 5) == false);
             string exNumber = "49e-9";
             decimal parsedExNumber = exNumber.ToDecimal();
+            exNumber = "1,4E-05";
+            parsedExNumber = exNumber.ToDecimal();
         }
 
         [TestMethod]

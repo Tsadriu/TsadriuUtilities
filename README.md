@@ -21,7 +21,7 @@ TsadriuUtilities is a library that helps on dealing with
 ### DateTimeHelper:
 - **ToDateTime(string dateAsString, string dateFormat, CultureInfo cultureInfo)**:
 - **ToDateTime(string dateAsString, string[] dateFormats, CultureInfo cultureInfo)**:
-    - Tries to convert a date from a string to a type of DateTime.
+    - Tries to convert a `date` from a string to a type of `DateTime`.
 - **GetLastDayOfMonth(DateTime date)**:
     - Parses the `date` to return with the last day of the month.
 - **SetDay(DateTime date, int day)**:
@@ -82,6 +82,10 @@ TsadriuUtilities is a library that helps on dealing with
     - Searches through the `text`, returning the first instance found between `start` and `end`. Use `startEndIncluded` if you want to include `start` and `end` in the returning string.
 - **GetMultipleBetween(string text, string startTag, string endTag, bool tagsIncluded)**:
     - Searches through the `text`, returning multiple instances found between `start` and `end`. Use `startEndIncluded` if you want to include `start` and `end` in the returning List of string.
+- **AndContains(string text, StringComparison stringComparison, string[] values)**:
+    - Checks a `string` if it has all instances of `values`. If that's the case, then it returns `true`, otherwise it returns `false`.
+- **OrContains(string text, StringComparison stringComparison, string[] values)**:
+    - Checks a `string` if it has at least one instance of `values`. If that's the case, then it returns `true`, otherwise it returns `false`.
 - **IsEmpty(string value)**:
     - Checks if the `value` is `null`, `string.Empty` or a white space ("", " ", "\n", "\r", ...)
 - **IsNotEmpty(string value)**:
@@ -89,7 +93,7 @@ TsadriuUtilities is a library that helps on dealing with
 - **AreEmpty(string[] values)**:
     - Checks if all instances of `values` are null, string.Empty or a white space ("", " ", "\n", "\r", ...), returning `true` if **all** of them **are** empty.
 - **AreNotEmpty(string[] values)**:
-    - Checks if all instances of `values` contain any kind of character,, returning `true` if **all** of them **are not** empty.
+    - Checks if all instances of `values` contain any kind of character, returning `true` if **all** of them **are not** empty.
 - **LetterUpperCase(string value, int index)**:
     - Changes a letter from `value` to be upper-case. If `index` is not passed, it will change the first letter of `value`.
 - **LetterLowerCase(string value, int index)**:

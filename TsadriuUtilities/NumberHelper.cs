@@ -2,6 +2,7 @@
 // Copyright 2022 (C) Tsadriu. All rights reserved.
 // </copyright>
 using System;
+using System.Globalization;
 
 namespace TsadriuUtilities
 {
@@ -13,15 +14,22 @@ namespace TsadriuUtilities
         /// <summary>
         /// Converts a <see cref="string"/> into a <see cref="decimal"/>.
         /// </summary>
-        /// <param name="value">Number as a <see cref="string"/> ('46e-9', '5.6', etc...).</param>
+        /// <param name="value">Number as a <see cref="string"/> ('46e-9', '5.6', '1,4E-05', etc...).</param>
+        /// <param name="culture">Current culture of <paramref name="value"/>.</param>
         /// <returns>Returns the parsed <paramref name="value"/> as a <see cref="decimal"/>. If the conversion fails, returns <see cref="decimal.Zero"/>.</returns>
-        public static decimal ToDecimal(this string value)
+        public static decimal ToDecimal(this string value, CultureInfo culture = null)
         {
+            if (culture == null)
+            {
+                culture = CultureInfo.InvariantCulture;
+                value = value.Replace(",", ".");
+            }
+
             if (StringHelper.IsNotEmpty(value))
             {
-                if (double.TryParse(value, out double valueAsDecimal))
+                if (decimal.TryParse(value, NumberStyles.Float, culture, out decimal valueAsDecimal))
                 {
-                    return Convert.ToDecimal(valueAsDecimal);
+                    return valueAsDecimal;
                 }
             }
 
@@ -31,15 +39,22 @@ namespace TsadriuUtilities
         /// <summary>
         /// Converts a <see cref="string"/> into a <see cref="double"/>.
         /// </summary>
-        /// <param name="value">Number as a <see cref="string"/> ('46e-9', '5.6', etc...).</param>
+        /// <param name="value">Number as a <see cref="string"/> ('46e-9', '5.6', '1,4E-05', etc...).</param>
+        /// <param name="culture">Current culture of <paramref name="value"/>.</param>
         /// <returns>Returns the parsed <paramref name="value"/> as a <see cref="double"/>. If the conversion fails, returns 0.0d.</returns>
-        public static double ToDouble(this string value)
+        public static double ToDouble(this string value, CultureInfo culture)
         {
+            if (culture == null)
+            {
+                culture = CultureInfo.InvariantCulture;
+                value = value.Replace(",", ".");
+            }
+
             if (StringHelper.IsNotEmpty(value))
             {
-                if (double.TryParse(value, out double valueAsDouble))
+                if (double.TryParse(value, NumberStyles.Float, culture, out double valuesAsDouble))
                 {
-                    return valueAsDouble;
+                    return valuesAsDouble;
                 }
             }
 

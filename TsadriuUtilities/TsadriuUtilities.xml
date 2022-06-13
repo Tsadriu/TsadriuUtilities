@@ -240,18 +240,20 @@
             A class that helps on dealing with numbers.
             </summary>
         </member>
-        <member name="M:TsadriuUtilities.NumberHelper.ToDecimal(System.String)">
+        <member name="M:TsadriuUtilities.NumberHelper.ToDecimal(System.String,System.Globalization.CultureInfo)">
             <summary>
             Converts a <see cref="T:System.String"/> into a <see cref="T:System.Decimal"/>.
             </summary>
-            <param name="value">Number as a <see cref="T:System.String"/> ('46e-9', '5.6', etc...).</param>
+            <param name="value">Number as a <see cref="T:System.String"/> ('46e-9', '5.6', '1,4E-05', etc...).</param>
+            <param name="culture">Current culture of <paramref name="value"/>.</param>
             <returns>Returns the parsed <paramref name="value"/> as a <see cref="T:System.Decimal"/>. If the conversion fails, returns <see cref="F:System.Decimal.Zero"/>.</returns>
         </member>
-        <member name="M:TsadriuUtilities.NumberHelper.ToDouble(System.String)">
+        <member name="M:TsadriuUtilities.NumberHelper.ToDouble(System.String,System.Globalization.CultureInfo)">
             <summary>
             Converts a <see cref="T:System.String"/> into a <see cref="T:System.Double"/>.
             </summary>
-            <param name="value">Number as a <see cref="T:System.String"/> ('46e-9', '5.6', etc...).</param>
+            <param name="value">Number as a <see cref="T:System.String"/> ('46e-9', '5.6', '1,4E-05', etc...).</param>
+            <param name="culture">Current culture of <paramref name="value"/>.</param>
             <returns>Returns the parsed <paramref name="value"/> as a <see cref="T:System.Double"/>. If the conversion fails, returns 0.0d.</returns>
         </member>
         <member name="M:TsadriuUtilities.NumberHelper.Max``1(``0[])">
@@ -319,10 +321,10 @@
         </member>
         <member name="M:TsadriuUtilities.TTable.GetColumns(System.Int32)">
             <summary>
-            Returns all <see cref="T:TsadriuUtilities.TTableColumn"/> if it is present in <see cref="P:TsadriuUtilities.TTable.ColumnList"/>, or, if <paramref name="index"/> is passed, returns the <see cref="T:TsadriuUtilities.TTableColumn"/> of the desired index.
+            Returns all <see cref="T:TsadriuUtilities.TTableColumn"/>  present in <see cref="P:TsadriuUtilities.TTable.ColumnList"/>, or, if <paramref name="index"/> is passed, returns the <see cref="T:TsadriuUtilities.TTableColumn"/> of the desired index.
             </summary>
             <param name="index">Index of the column.</param>
-            <returns>All <see cref="T:TsadriuUtilities.TTableColumn"/> if it is present in <see cref="P:TsadriuUtilities.TTable.ColumnList"/>, or, if <paramref name="index"/> is passed, returns the <see cref="T:TsadriuUtilities.TTableColumn"/> of the desired index.</returns>
+            <returns>All <see cref="T:TsadriuUtilities.TTableColumn"/> present in <see cref="P:TsadriuUtilities.TTable.ColumnList"/>, or, if <paramref name="index"/> is passed, returns the <see cref="T:TsadriuUtilities.TTableColumn"/> of the desired index.</returns>
         </member>
         <member name="M:TsadriuUtilities.TTable.MoveColumnIndex(TsadriuUtilities.TTableColumn,System.Int32)">
             <summary>
@@ -535,6 +537,24 @@
             <param name="end">Until where the text stops.</param>
             <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
             <returns>Returns an empty List of <see cref="T:System.String"/> if nothing is found or parameters <paramref name="text"/>, <paramref name="start"/> or <paramref name="end"/> are empty.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.AndContains(System.String,System.StringComparison,System.String[])">
+            <summary>
+            Checks a <see cref="T:System.String"/> if it has all instances of <paramref name="values"/>.
+            </summary>
+            <param name="text">Current <see cref="T:System.String"/>.</param>
+            <param name="stringComparison">The type of <see cref="T:System.StringComparison"/>.</param>
+            <param name="values">The <paramref name="values"/> to search in the <paramref name="text"/>.</param>
+            <returns>True if all <paramref name="values"/> are present in the <paramref name="text"/>. Otherwise returns false.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.OrContains(System.String,System.StringComparison,System.String[])">
+            <summary>
+            Checks a <see cref="T:System.String"/> if it has at least one instance of <paramref name="values"/>.
+            </summary>
+            <param name="text">Current <see cref="T:System.String"/>.</param>
+            <param name="stringComparison">The type of <see cref="T:System.StringComparison"/>.</param>
+            <param name="values">The <paramref name="values"/> to search in the <paramref name="text"/>.</param>
+            <returns>True if at least one instance <paramref name="values"/> is present in the <paramref name="text"/>. Otherwise returns false.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.IsEmpty(System.String)">
             <summary>
