@@ -35,7 +35,9 @@ namespace TsadriuUtilities
         /// <returns>Returns <see cref="string.Empty"/> if nothing is found.</returns>
         public static string GetBetween(this string text, string start = null, string end = null, bool startEndIncluded = false)
         {
-            if (text.IsEmpty())
+            var copyOfText = text;
+
+            if (copyOfText.IsEmpty())
             {
                 return string.Empty;
             }
@@ -50,13 +52,14 @@ namespace TsadriuUtilities
             if (startIndex > -1)
             {
                 startIndex += startEndIncluded ? 0 : start.Length;
+                copyOfText = text.Substring(startIndex);
             }
 
             var endIndex = -1;
 
             if (end != null && end.Length > 0)
             {
-                endIndex = text.IndexOf(end, StringComparison.OrdinalIgnoreCase);
+                endIndex = copyOfText.IndexOf(end, StringComparison.OrdinalIgnoreCase);
             }
 
             if (endIndex > -1)
@@ -66,12 +69,12 @@ namespace TsadriuUtilities
 
             if (endIndex > -1 && startIndex > -1)
             {
-                return text.Substring(startIndex, Math.Abs(endIndex - startIndex));
+                return text.Substring(startIndex, endIndex);
             }
 
             if (startIndex > -1)
             {
-                return text.Substring(startIndex, Math.Abs(text.Length - startIndex));
+                return text.Substring(startIndex, text.Length - startIndex);
             }
 
             if (endIndex > -1)

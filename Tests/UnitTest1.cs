@@ -96,7 +96,7 @@ namespace Tests
             t = text.GetBetween(string.Empty, "<b>", true);
             t = text.GetBetween(string.Empty, "<b>", false);
             t = text.GetBetween("<b", ">", true);
-            t = text.GetBetween("<b", ">", true);
+            t = text.GetBetween("<b", ">", false);
             var table = new TTable();
             table.AddColumn("Data", "Ore", "Minuti", "Ore Svolte", "Ore Effettive Ticket", "Attivita", "Branch", "Commit", "Orario di registrazione");
             table.AddData("Data", DateTime.Today.ToString("yyyy-MM-dd"));
@@ -118,6 +118,8 @@ namespace Tests
 
             var lorenzoErrore = File.ReadAllText("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\Files\\h.html");
             var ssss = lorenzoErrore.GetMultipleBetween("Button", ",[]]]],");
+            ssss = lorenzoErrore.GetMultipleBetween("Listheader", "}");
+            ssss = new List<string>();
             /*var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TEST CSV");
 
             DirectoryHelper.Exist(path, true);

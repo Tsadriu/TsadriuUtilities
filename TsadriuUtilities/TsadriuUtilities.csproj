@@ -2,23 +2,20 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.3.1</Version>
+    <Version>1.3.2</Version>
     <Description>A small package of utilities to help dealing with strings, chars, lists and more to hopefully save a little bit of time in coding.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
     <PackageReleaseNotes>StringHelper:
- - Crashing bug on method GetBetween has been fixed.
- - Crashing bug on method GetMultipleBetween has been fixed.
-
-NumberHelper:
- - Implemented method ToInt.</PackageReleaseNotes>
+ - Bug on method GetBetween that made it not work as intended has been fixed.
+ - Bug on method GetMultipleBetween that made it not work as intended has been fixed.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
-    <AssemblyVersion>1.3.1</AssemblyVersion>
-    <FileVersion>1.3.1</FileVersion>
+    <AssemblyVersion>1.3.2</AssemblyVersion>
+    <FileVersion>1.3.2</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>TsadriuUtilities</PackageId>
   </PropertyGroup>
