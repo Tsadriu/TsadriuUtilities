@@ -62,6 +62,21 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
+        /// Converts a <see cref="string"/> into a <see cref="int"/>.
+        /// </summary>
+        /// <param name="value">Number as a <see cref="string"/>.</param>
+        /// <returns>The partsed <paramref name="value"/> as a <see cref="int"/>. If the conversion fails, returns 0.</returns>
+        public static int ToInt(this string value)
+        {
+            if (int.TryParse(value, out int result))
+            {
+                return result;
+            }
+
+            return 0;
+        }
+
+        /// <summary>
         /// Returns the highest number present in the <paramref name="sequence"/>.
         /// Supported types:
         /// <see cref="long"/>, <see cref="int"/>, <see cref="short"/>, <see cref="byte"/>,

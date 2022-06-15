@@ -70,6 +70,8 @@ TsadriuUtilities is a library that helps on dealing with
     - Converts `value` into a decimal. If the conversion fails, returns a `0.0M`.
 - **ToDouble(string value)**:
     - Converts `value` into a double. If the conversion fails, returns a `0.0d`.
+- **ToInt(string value)**:
+    - Converts `value` into a int. If the conversion fails, returns a `0`.
 - **Max\<T\>(T[] sequence)**:
     - Returns the highest number present in the `sequence`.
 - **Min\<T\>(T[] sequence)**:

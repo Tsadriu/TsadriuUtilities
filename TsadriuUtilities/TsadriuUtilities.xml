@@ -256,6 +256,13 @@
             <param name="culture">Current culture of <paramref name="value"/>.</param>
             <returns>Returns the parsed <paramref name="value"/> as a <see cref="T:System.Double"/>. If the conversion fails, returns 0.0d.</returns>
         </member>
+        <member name="M:TsadriuUtilities.NumberHelper.ToInt(System.String)">
+            <summary>
+            Converts a <see cref="T:System.String"/> into a <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="value">Number as a <see cref="T:System.String"/>.</param>
+            <returns>The partsed <paramref name="value"/> as a <see cref="T:System.Int32"/>. If the conversion fails, returns 0.</returns>
+        </member>
         <member name="M:TsadriuUtilities.NumberHelper.Max``1(``0[])">
             <summary>
             Returns the highest number present in the <paramref name="sequence"/>.

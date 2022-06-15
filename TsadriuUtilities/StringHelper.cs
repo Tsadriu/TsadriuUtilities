@@ -42,7 +42,7 @@ namespace TsadriuUtilities
 
             var startIndex = -1;
 
-            if (start.IsNotEmpty())
+            if (start != null && start.Length > 0)
             {
                 startIndex = text.IndexOf(start, StringComparison.OrdinalIgnoreCase);
             }
@@ -54,7 +54,7 @@ namespace TsadriuUtilities
 
             var endIndex = -1;
 
-            if (end.IsNotEmpty())
+            if (end != null && end.Length > 0)
             {
                 endIndex = text.IndexOf(end, StringComparison.OrdinalIgnoreCase);
             }
@@ -66,12 +66,12 @@ namespace TsadriuUtilities
 
             if (endIndex > -1 && startIndex > -1)
             {
-                return text.Substring(startIndex, endIndex - startIndex);
+                return text.Substring(startIndex, Math.Abs(endIndex - startIndex));
             }
 
             if (startIndex > -1)
             {
-                return text.Substring(startIndex, text.Length - startIndex);
+                return text.Substring(startIndex, Math.Abs(text.Length - startIndex));
             }
 
             if (endIndex > -1)
