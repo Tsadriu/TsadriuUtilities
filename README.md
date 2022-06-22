@@ -30,6 +30,16 @@ TsadriuUtilities is a library that helps on dealing with
     - Sets the `month` in the `date`. In case the `month` is higher than the year's maximum months, it will be clamped.
 - **SetYear(DateTime date, int year)**:
     - Sets the `year` in the `date`.
+- **RemoveDays(DateTime date, int days)**:
+    - Removes a specified number of `days` from `date`.
+- **RemoveMonths(DateTime date, int months)**:
+    - Removes a specified number of `months` from `date`.
+- **RemoveYears(DateTime date, int years)**:
+    - Removes a specified number of `years` from `date`.
+
+### DictionaryHelper:
+- **ToDictionary\<TKey, TValue\>(List\<string\> list, string separator, bool invertKeyWithValue)**:
+    - Iterates through each element of the `list` and splits it by `separator`, assigning `TKey` to everything that is before the `separator` and `TValue` to everything that is after the `separator`.
 
 ### DirectoryHelper:
 - **Exist(string path, bool createFolder)**:
@@ -60,6 +70,12 @@ TsadriuUtilities is a library that helps on dealing with
     - Converts an `list` into a single line of string. If `separator` is not passed, it will separate by a space. Examples: ListToString(new int[] { 1, 3, 5 }) -> "1 3 5", ListToString(new string[] { "5", "2" }, "|") -> "5|2".
 - **HasAny\<T\>(List\<T\> list)**
     - Iterates through the `list`, checking that it has **at least 1** non null element.
+- **GetValueLike(List\<string\> list, string value, StringComparison stringComparison)**
+    - Iterates through the `list`, returning the first value found that contains `value`.
+- **RemoveFromElements(List\<string\> list, string value, StringComparison stringComparison)**
+    - Returns a list where all occasions of `valuesToRemove` have been removed from the elements of the `list`.
+- **ReplaceFromElements(List\<string\> list, string value, StringComparison stringComparison)**
+    - Returns a list where all occasions of `oldValue` have been replaced by `newValue` from the elements of the `list`.
 
 ### MultiHelper:
 - **ClampValue\<T\>(T currentValue, T minValue, T maxValue)**:

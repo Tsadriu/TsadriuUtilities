@@ -121,5 +121,58 @@ namespace TsadriuUtilities
 
             return false;
         }
+
+        /// <summary>
+        /// Iterates through the <paramref name="list"/>, returning the first value found that contains <paramref name="value"/>.
+        /// </summary>
+        /// <param name="list">Current list.</param>
+        /// <param name="value">The value to search for.</param>
+        /// <param name="stringComparison">String comparison. If nothing is passed, <see cref="StringComparison.OrdinalIgnoreCase"/> will be used.</param>
+        /// <returns>The first value found in the list that contains <paramref name="value"/>. If <paramref name="value"/> is not present in the list, returns <see cref="string.Empty"/>.</returns>
+        public static string GetValueLike(this List<string> list, string value, StringComparison stringComparison = StringComparison.OrdinalIgnoreCase)
+        {
+            foreach (var element in list)
+            {
+                if (element.Contains(value, stringComparison))
+                {
+                    return element;
+                }
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Returns a list where all occasions of <paramref name="valuesToRemove"/> have been removed from the elements of the <paramref name="list"/>.
+        /// </summary>
+        /// <param name="list">Current list.</param>
+        /// <param name="valuesToRemove">The values to remove from the elements of the <paramref name="list"/>.</param>
+        /// <returns>A list where all occasions of <paramref name="valuesToRemove"/> have been removed from the elements of the <paramref name="list"/>.</returns>
+        public static List<string> RemoveFromElements(this List<string> list, params string[] valuesToRemove)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i] = list[i].Remove(valuesToRemove);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Returns a list where all occasions of <paramref name="oldValue"/> have been replaced by <paramref name="newValue"/> from the elements of the <paramref name="list"/>.
+        /// </summary>
+        /// <param name="list">Current list.</param>
+        /// <param name="oldValue">Old value to be replaced.</param>
+        /// <param name="newValue">New value that replaces the <paramref name="oldValue"/>.</param>
+        /// <returns>A list where all occasions of <paramref name="oldValue"/> have been replaced by <paramref name="newValue"/> from the elements of the <paramref name="list"/>.</returns>
+        public static List<string> ReplaceFromElements(this List<string> list, string oldValue, string newValue)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i] = list[i].Replace(oldValue, newValue);
+            }
+
+            return list;
+        }
     }
 }

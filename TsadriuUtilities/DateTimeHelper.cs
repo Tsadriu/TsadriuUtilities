@@ -106,5 +106,38 @@ namespace TsadriuUtilities
             int clampedYear = year.ClampValue(DateTime.MinValue.Year, DateTime.MaxValue.Year);
             return new DateTime(clampedYear, 1, 1).SetMonth(date.Month).SetDay(date.Day);
         }
+
+        /// <summary>
+        /// Removes a specified number of days from <paramref name="date"/>.
+        /// </summary>
+        /// <param name="date">Current date.</param>
+        /// <param name="days">Number of days to remove.</param>
+        /// <returns>Date with the specified number of days removed.</returns>
+        public static DateTime RemoveDays(this DateTime date, int days)
+        {
+            return date.AddDays(-Math.Abs(days));
+        }
+
+        /// <summary>
+        /// Removes a specified number of months from <paramref name="date"/>.
+        /// </summary>
+        /// <param name="date">Current date.</param>
+        /// <param name="months">Number of months to remove.</param>
+        /// <returns>Date with the specified number of months removed.</returns>
+        public static DateTime RemoveMonths(this DateTime date, int months)
+        {
+            return date.AddMonths(-Math.Abs(months));
+        }
+
+        /// <summary>
+        /// Removes a specified number of years from <paramref name="date"/>.
+        /// </summary>
+        /// <param name="date">Current date.</param>
+        /// <param name="years">Number of years to remove.</param>
+        /// <returns>Date with the specified number of years removed.</returns>
+        public static DateTime RemoveYears(this DateTime date, int years)
+        {
+            return date.AddYears(-Math.Abs(years));
+        }
     }
 }

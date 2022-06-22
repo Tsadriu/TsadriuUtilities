@@ -222,7 +222,15 @@ namespace TsadriuUtilities
         /// <returns>Returns true if all instances of <paramref name="values"/> are not empty. Returns false if even one of them is empty.</returns>
         public static bool AreNotEmpty(params string[] values)
         {
-            return !AreEmpty(values);
+            foreach (var value in values)
+            {
+                if (IsEmpty(value))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -280,7 +288,7 @@ namespace TsadriuUtilities
         /// </summary>
         /// <param name="value">The value to change.</param>
         /// <param name="valuesToRemove">The values to remove from <paramref name="value"/>.</param>
-        /// <returns>Returns a <see cref="string"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.</returns>
+        /// <returns>A <see cref="string"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.</returns>
         public static string Remove(this string value, params string[] valuesToRemove)
         {
             for (int i = 0; i < valuesToRemove.Length; i++)

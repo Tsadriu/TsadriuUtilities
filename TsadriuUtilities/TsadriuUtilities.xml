@@ -98,6 +98,46 @@
             <param name="year">Year to set.</param>
             <returns>Date with the specified <paramref name="year"/>.</returns>
         </member>
+        <member name="M:TsadriuUtilities.DateTimeHelper.RemoveDays(System.DateTime,System.Int32)">
+            <summary>
+            Removes a specified number of days from <paramref name="date"/>.
+            </summary>
+            <param name="date">Current date.</param>
+            <param name="days">Number of days to remove.</param>
+            <returns>Date with the specified number of days removed.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.DateTimeHelper.RemoveMonths(System.DateTime,System.Int32)">
+            <summary>
+            Removes a specified number of months from <paramref name="date"/>.
+            </summary>
+            <param name="date">Current date.</param>
+            <param name="months">Number of months to remove.</param>
+            <returns>Date with the specified number of months removed.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.DateTimeHelper.RemoveYears(System.DateTime,System.Int32)">
+            <summary>
+            Removes a specified number of years from <paramref name="date"/>.
+            </summary>
+            <param name="date">Current date.</param>
+            <param name="years">Number of years to remove.</param>
+            <returns>Date with the specified number of years removed.</returns>
+        </member>
+        <member name="T:TsadriuUtilities.DictionaryHelper">
+            <summary>
+            A class that helps on dealing with <see cref="T:System.Collections.Generic.Dictionary`2"/>.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.DictionaryHelper.ToDictionary``2(System.Collections.Generic.List{System.String},System.String,System.Boolean)">
+            <summary>
+            Iterates through each element in the <paramref name="list"/> and splits it by <paramref name="separator"/>, assigning <typeparamref name="TKey"/> to everything that is before the <paramref name="separator"/> and <typeparamref name="TValue"/> to everything that is after the <paramref name="separator"/>.
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="list">Current list of <see cref="T:System.String"/>.</param>
+            <param name="separator">Separator used to determine what is picked as a <typeparamref name="TKey"/> and as a <typeparamref name="TValue"/>.</param>
+            <param name="invertKeyWithValue">Set to true to invert the <typeparamref name="TKey"/> with the <typeparamref name="TValue"/>.</param>
+            <returns>A dictionary filled with valid data based on the elements of <paramref name="list"/>.</returns>
+        </member>
         <member name="T:TsadriuUtilities.DirectoryHelper">
             <summary>
             A class that helps on dealing with <see cref="T:System.IO.Directory"/>.
@@ -215,6 +255,32 @@
             <typeparam name="T">Generic type.</typeparam>
             <param name="list"><see cref="T:System.Collections.Generic.List`1"/> of objects.</param>
             <returns>Returns true if <paramref name="list"/> has at least 1 non null element. Otherwise returns false.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ListHelper.GetValueLike(System.Collections.Generic.List{System.String},System.String,System.StringComparison)">
+            <summary>
+            Iterates through the <paramref name="list"/>, returning the first value found that contains <paramref name="value"/>.
+            </summary>
+            <param name="list">Current list.</param>
+            <param name="value">The value to search for.</param>
+            <param name="stringComparison">String comparison. If nothing is passed, <see cref="F:System.StringComparison.OrdinalIgnoreCase"/> will be used.</param>
+            <returns>The first value found in the list that contains <paramref name="value"/>. If <paramref name="value"/> is not present in the list, returns <see cref="F:System.String.Empty"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ListHelper.RemoveFromElements(System.Collections.Generic.List{System.String},System.String[])">
+            <summary>
+            Returns a list where all occasions of <paramref name="valuesToRemove"/> have been removed from the elements of the <paramref name="list"/>.
+            </summary>
+            <param name="list">Current list.</param>
+            <param name="valuesToRemove">The values to remove from the elements of the <paramref name="list"/>.</param>
+            <returns>A list where all occasions of <paramref name="valuesToRemove"/> have been removed from the elements of the <paramref name="list"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ListHelper.ReplaceFromElements(System.Collections.Generic.List{System.String},System.String,System.String)">
+            <summary>
+            Returns a list where all occasions of <paramref name="oldValue"/> have been replaced by <paramref name="newValue"/> from the elements of the <paramref name="list"/>.
+            </summary>
+            <param name="list">Current list.</param>
+            <param name="oldValue">Old value to be replaced.</param>
+            <param name="newValue">New value that replaces the <paramref name="oldValue"/>.</param>
+            <returns>A list where all occasions of <paramref name="oldValue"/> have been replaced by <paramref name="newValue"/> from the elements of the <paramref name="list"/>.</returns>
         </member>
         <member name="T:TsadriuUtilities.MultiHelper">
             <summary>
@@ -613,7 +679,7 @@
             </summary>
             <param name="value">The value to change.</param>
             <param name="valuesToRemove">The values to remove from <paramref name="value"/>.</param>
-            <returns>Returns a <see cref="T:System.String"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.</returns>
+            <returns>A <see cref="T:System.String"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.CharCount(System.String,System.String)">
             <summary>
