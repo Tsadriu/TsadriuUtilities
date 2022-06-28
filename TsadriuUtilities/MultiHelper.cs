@@ -3,6 +3,8 @@
 // </copyright>
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace TsadriuUtilities
 {
@@ -109,6 +111,37 @@ namespace TsadriuUtilities
             }
 
             throw new NotImplementedException("The type of " + typeof(T) + " is not supported.");
+        }
+
+        /// <summary>
+        /// Checks if all <paramref name="objects"/> are not null. If all of <paramref name="objects"/> are not null, returns true. Otherwise returns false.
+        /// </summary>
+        /// <typeparam name="T">The base item type.</typeparam>
+        /// <param name="objects">Objects to check if they're not null.</param>
+        /// <returns>True if all <paramref name="objects"/>are not null. If even one of <paramref name="objects"/> is null, returns false.</returns>
+        public static bool AreNotNull<T>(params T[] objects)
+        {
+            foreach (var currentObject in objects)
+            {
+                if (currentObject == null)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Generates a <see cref="Guid"/> based on <paramref name="value"/>.
+        /// </summary>
+        /// <param name="value">Value to generate a <see cref="Guid"/>.</param>
+        /// <returns>Instance of <see cref="Guid"/>.</returns>
+        public static Guid GenerateGuid(this string value)
+        {
+            var md5 = MD5.Create();
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(value));
+            return new Guid(hash);
         }
     }
 }

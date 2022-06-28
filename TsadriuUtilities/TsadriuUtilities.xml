@@ -31,6 +31,22 @@
             <param name="max">The maximum number that can be generated.</param>
             <returns>An array which all indexes have been assigned a random number.</returns>
         </member>
+        <member name="T:TsadriuUtilities.BoolHelper">
+            <summary>
+            A class that helps on dealing with <see cref="T:System.Boolean"/>.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.BoolHelper.ToBool(System.String,TsadriuUtilities.Enums.BoolHelper.SearchType,System.String[],System.String[])">
+            <summary>
+            Tries to parse the <paramref name="value"/> into a <see cref="T:System.Boolean"/>.
+            </summary>
+            <param name="value">The <see cref="T:System.String"/> to be parsed as a <see cref="T:System.Boolean"/>.</param>
+            <param name="searchType">The type of search mode to use on <paramref name="trueValues"/>, <paramref name="falseValues"/> and <paramref name="value"/>.</param>
+            <param name="trueValues">The values that will make the <paramref name="value"/> return true.</param>
+            <param name="falseValues">The values that will make the <paramref name="value"/> return false.</param>
+            <returns>If the conversion was successfull, it will return <paramref name="value"/> as true or false depending on where it was found (<paramref name="trueValues"/>, <paramref name="falseValues"/>). If <paramref name="value"/> is not found in any of those, it'll launch an <see cref="T:System.ArgumentOutOfRangeException"/>.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown the <paramref name="value"/> is not found in <paramref name="trueValues"/> and <paramref name="falseValues"/>.</exception>
+        </member>
         <member name="T:TsadriuUtilities.CharHelper">
             <summary>
             A class that helps on dealing with <see cref="T:System.Char"/>.
@@ -129,7 +145,7 @@
         </member>
         <member name="M:TsadriuUtilities.DictionaryHelper.ToDictionary``2(System.Collections.Generic.List{System.String},System.String,System.Boolean)">
             <summary>
-            Iterates through each element in the <paramref name="list"/> and splits it by <paramref name="separator"/>, assigning <typeparamref name="TKey"/> to everything that is before the <paramref name="separator"/> and <typeparamref name="TValue"/> to everything that is after the <paramref name="separator"/>.
+            Iterates through each element of the <paramref name="list"/> and splits it by <paramref name="separator"/>, assigning <typeparamref name="TKey"/> to everything that is before the <paramref name="separator"/> and <typeparamref name="TValue"/> to everything that is after the <paramref name="separator"/>.
             </summary>
             <typeparam name="TKey">Key type.</typeparam>
             <typeparam name="TValue">Value type.</typeparam>
@@ -158,6 +174,21 @@
             <param name="path">Path.</param>
             <param name="createFolder">Create the folder in case the <paramref name="path"/> doesn't exist.</param>
             <returns>True if the path does not exist. Otherwise false.</returns>
+        </member>
+        <member name="T:TsadriuUtilities.Enums.BoolHelper.SearchType">
+            <summary>
+            Enum to use when you're trying to search for a <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="F:TsadriuUtilities.Enums.BoolHelper.SearchType.Contains">
+            <summary>
+            Will search if the <see cref="T:System.String"/> you're searching for is inside of the text.
+            </summary>
+        </member>
+        <member name="F:TsadriuUtilities.Enums.BoolHelper.SearchType.Equals">
+            <summary>
+            Will search if the <see cref="T:System.String"/> you're searching for is equal to the text.
+            </summary>
         </member>
         <member name="T:TsadriuUtilities.FileHelper">
             <summary>
@@ -301,6 +332,21 @@
             <returns>Returns the clamped result of the operation.</returns>
             <exception cref="T:System.NotImplementedException">Throws <see cref="T:System.NotImplementedException"/> if trying to call this method with an unsupported <see cref="T:System.Type"/>.</exception>
         </member>
+        <member name="M:TsadriuUtilities.MultiHelper.AreNotNull``1(``0[])">
+            <summary>
+            Checks if all <paramref name="objects"/> are not null. If all of <paramref name="objects"/> are not null, returns true. Otherwise returns false.
+            </summary>
+            <typeparam name="T">The base item type.</typeparam>
+            <param name="objects">Objects to check if they're not null.</param>
+            <returns>True if all <paramref name="objects"/>are not null. If even one of <paramref name="objects"/> is null, returns false.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.MultiHelper.GenerateGuid(System.String)">
+            <summary>
+            Generates a <see cref="T:System.Guid"/> based on <paramref name="value"/>.
+            </summary>
+            <param name="value">Value to generate a <see cref="T:System.Guid"/>.</param>
+            <returns>Instance of <see cref="T:System.Guid"/>.</returns>
+        </member>
         <member name="T:TsadriuUtilities.NumberHelper">
             <summary>
             A class that helps on dealing with numbers.
@@ -384,6 +430,13 @@
             Adds a new <see cref="T:TsadriuUtilities.TTableColumn"/> in the <see cref="T:TsadriuUtilities.TTable"/>.
             </summary>
             <param name="tableColumn">Instance of <see cref="T:TsadriuUtilities.TTableColumn"/>.</param>
+        </member>
+        <member name="M:TsadriuUtilities.TTable.RenameColumn(System.String,System.String)">
+            <summary>
+            Renames a column (if it exists).
+            </summary>
+            <param name="currentColumnName">Current name of the column.</param>
+            <param name="newColumnName">New name of the column.</param>
         </member>
         <member name="M:TsadriuUtilities.TTable.GetColumn(System.String)">
             <summary>
@@ -696,14 +749,6 @@
             <param name="value">The value where <paramref name="tags"/> will be removed.</param>
             <param name="tags">The tags to remove from <paramref name="value"/>.</param>
             Returns a <see cref="T:System.String"/> where all instances of <paramref name="tags"/> are removed.
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.RemoveTags(System.String,System.String)">
-            <summary>
-            Returns a string where all instances of <paramref name="tag"/> are removed.
-            </summary>
-            <param name="value">The value where <paramref name="tag"/> will be removed.</param>
-            <param name="tag">The tag to remove from <paramref name="value"/>.</param>
-            Returns a <see cref="T:System.String"/> where all instances of <paramref name="tag"/> are removed.
         </member>
     </members>
 </doc>

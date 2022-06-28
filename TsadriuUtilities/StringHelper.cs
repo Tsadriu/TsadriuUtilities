@@ -3,6 +3,7 @@
 // </copyright>
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace TsadriuUtilities
 {
@@ -52,14 +53,14 @@ namespace TsadriuUtilities
             if (startIndex > -1)
             {
                 startIndex += startEndIncluded ? 0 : start.Length;
-                copyOfText = text.Substring(startIndex);
+                copyOfText = text.Substring(startIndex + (startEndIncluded ? start.Length : 0));
             }
 
             var endIndex = -1;
 
             if (end != null && end.Length > 0)
             {
-                endIndex = copyOfText.IndexOf(end, StringComparison.OrdinalIgnoreCase);
+                endIndex = (text.Length - copyOfText.Length) + copyOfText.IndexOf(end, StringComparison.OrdinalIgnoreCase);
             }
 
             if (endIndex > -1)
@@ -69,7 +70,7 @@ namespace TsadriuUtilities
 
             if (endIndex > -1 && startIndex > -1)
             {
-                return text.Substring(startIndex, endIndex);
+                return text.Substring(startIndex, endIndex - startIndex);
             }
 
             if (startIndex > -1)
@@ -316,7 +317,7 @@ namespace TsadriuUtilities
         /// <param name="value">The value where <paramref name="tags"/> will be removed.</param>
         /// <param name="tags">The tags to remove from <paramref name="value"/>.</param>
         /// Returns a <see cref="string"/> where all instances of <paramref name="tags"/> are removed.
-        public static string RemoveTags(this string value, string[] tags)
+        public static string RemoveTags(this string value, params string[] tags)
         {
             foreach (var tag in tags)
             {
@@ -326,17 +327,6 @@ namespace TsadriuUtilities
             }
 
             return value;
-        }
-
-        /// <summary>
-        /// Returns a string where all instances of <paramref name="tag"/> are removed.
-        /// </summary>
-        /// <param name="value">The value where <paramref name="tag"/> will be removed.</param>
-        /// <param name="tag">The tag to remove from <paramref name="value"/>.</param>
-        /// Returns a <see cref="string"/> where all instances of <paramref name="tag"/> are removed.
-        public static string RemoveTags(this string value, string tag)
-        {
-            return value.RemoveTags(new string[] { tag });
         }
     }
 }

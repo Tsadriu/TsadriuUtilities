@@ -2,33 +2,31 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.4.0</Version>
+    <Version>1.5.0</Version>
     <Description>A small package of utilities to help dealing with strings, chars, lists and more to hopefully save a little bit of time in coding.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>DateTimeHelper:
- - Implemented method RemoveDays.
- - Implemented method RemoveMonths.
- - Implemented method RemoveYears.
+    <PackageReleaseNotes>BoolHelper:
+ - Implemented method ToBool().
 
-DictionaryHelper:
- - New helper implemented.
- - Implemented method ToDictionary.
+MultiHelper:
+ - Implemented method AreNotNull().
 
-ListHelper:
- - Implemented method GetValueLike.
- - Implemented method RemoveFromElements.
- - Implemented method ReplaceFromElements.
+TTable:
+ - Implemented method RenameColumn().
+
+TTableColumn:
+ - Implemented fix that was adding lists instead of data on method AddData().
 
 StringHelper:
- - Bug on method AreNotEmpty that made it not work as intended has been fixed.</PackageReleaseNotes>
+ - Improved method GetBetween() and GetMultipleBetween().</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
-    <AssemblyVersion>1.4.0</AssemblyVersion>
-    <FileVersion>1.4.0</FileVersion>
+    <AssemblyVersion>1.5.0</AssemblyVersion>
+    <FileVersion>1.5.0</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>TsadriuUtilities</PackageId>
   </PropertyGroup>

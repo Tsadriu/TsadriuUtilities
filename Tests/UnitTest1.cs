@@ -82,7 +82,10 @@ namespace Tests
         [TestMethod]
         public void StringHelperTest()
         {
-            var text = "This fox is <b>very</b> sneaky!\nI hope nothing <b>happens</b> to my food...";
+            var x = File.ReadAllText("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\Files\\xmlTable.xml");
+            var con = x.GetBetween(@" xsi:type=""", "\"", true);
+            var text = "This fox is <b>very</b> sneaky!\nI hope nothing <b_>happens</b> to my food...";
+            var x2 = File.ReadAllText("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\Files\\xmlTest3.xml");
 
             var stringToChar = CharHelper.ToChar("Fabio", 2);
             Assert.IsTrue(StringHelper.GetBetween(text, "very", "\n", true) == "very</b> sneaky!\n");

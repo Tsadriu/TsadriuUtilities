@@ -64,6 +64,27 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
+        /// Renames a column (if it exists).
+        /// </summary>
+        /// <param name="currentColumnName">Current name of the column.</param>
+        /// <param name="newColumnName">New name of the column.</param>
+        public void RenameColumn(string currentColumnName, string newColumnName)
+        {
+            int index = -1;
+
+            for (int i = 0; i < ColumnList.Count; i++)
+            {
+                if (ColumnList[i].ColumnName.Equals(currentColumnName, StringComparison.OrdinalIgnoreCase))
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            ColumnList[index].ColumnName = newColumnName;
+        }
+
+        /// <summary>
         /// Returns an instance of <see cref="TTableColumn"/> if it is present in <see cref="ColumnList"/>. If it is not present, returns a null.
         /// </summary>
         /// <param name="columnName">Name of the <see cref="TTableColumn"/>.</param>

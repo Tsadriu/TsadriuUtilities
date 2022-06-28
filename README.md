@@ -14,6 +14,10 @@ TsadriuUtilities is a library that helps on dealing with
 - **GenerateRandom\<T\>(T[] array, int min, int max)**:
     - Fills up the `array` with random numbers between `min` (default: 0, inclusive) and `max` (default: 100, inclusive).
 
+### BooolHelper:
+- **ToBool(string value, SearchType searchType, string[] trueValue, string[] falseValue)**:
+	- Tries to parse the `value` into a `bool`. If the conversion was successfull, it will return `value` as `true` or `false` depending on where it was found (`trueValues`, `falseValues`). If `value` is not found in any of those, it'll launch an `ArgumentOutOfRangeException`.
+
 ### CharHelper:
 - **ToChar(string value, int index)**:
     - Converts the `value` into a char. If the length of value is higher than 1, it will return the first character of value or, if `index` is passed, the character of the desired `index`. 
@@ -72,14 +76,15 @@ TsadriuUtilities is a library that helps on dealing with
     - Iterates through the `list`, checking that it has **at least 1** non null element.
 - **GetValueLike(List\<string\> list, string value, StringComparison stringComparison)**
     - Iterates through the `list`, returning the first value found that contains `value`.
-- **RemoveFromElements(List\<string\> list, string value, StringComparison stringComparison)**
+- **RemoveFromElements(List\<string\> list, params string[] valuesToRemove)**
     - Returns a list where all occasions of `valuesToRemove` have been removed from the elements of the `list`.
-- **ReplaceFromElements(List\<string\> list, string value, StringComparison stringComparison)**
+- **ReplaceFromElements(List\<string\> list, string oldValue, string newValue)**
     - Returns a list where all occasions of `oldValue` have been replaced by `newValue` from the elements of the `list`.
 
 ### MultiHelper:
 - **ClampValue\<T\>(T currentValue, T minValue, T maxValue)**:
     - Clamps `currentValue` based on its' parameters. Returns `maxValue` if `currentValue` is higher than it and returns `minValue` if it is lower than it.
+- **AreNotNull<T>(params T[] objects)**: Checks if all `objects` are **not** null. If all of `objects` are not null, returns `true`. Otherwise returns `false`.
 
 ### NumberHelper:
 - **ToDecimal(string value)**:

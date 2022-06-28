@@ -36,10 +36,7 @@ namespace TsadriuUtilities
         /// <param name="values">Values to store in the <see cref="TTableColumn"/>.</param>
         public void AddData(params object[] values)
         {
-            foreach (var value in values)
-            {
-                ColumnData.Add(value);
-            }
+            ColumnData.AddRange(values);
         }
 
         /// <summary>
