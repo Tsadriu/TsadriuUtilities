@@ -5,7 +5,7 @@
 
 TsadriuUtilities is a library that helps on dealing with
  - [Arrays](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/), [Chars](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char), [Date and Time](https://docs.microsoft.com/en-us/dotnet/api/system.datetime.date?view=net-6.0), [Directories](https://docs.microsoft.com/en-us/dotnet/api/system.io.directory?view=net-6.0), [Files](https://docs.microsoft.com/en-us/dotnet/api/system.io.file?view=net-6.0), [Lists](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1?view=net-6.0), [Numbers](https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/tutorials/numbers-in-csharp-local), [Strings](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=net-6.0) and 
-[Generic types](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics), to hopefully make coding easier while also saving a bit of time. 
+[Generic types](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics) and more to hopefully make coding easier while also saving a bit of time. 
 
 ## > Features <
 ### ArrayHelper:
@@ -84,7 +84,8 @@ TsadriuUtilities is a library that helps on dealing with
 ### MultiHelper:
 - **ClampValue\<T\>(T currentValue, T minValue, T maxValue)**:
     - Clamps `currentValue` based on its' parameters. Returns `maxValue` if `currentValue` is higher than it and returns `minValue` if it is lower than it.
-- **AreNotNull<T>(params T[] objects)**: Checks if all `objects` are **not** null. If all of `objects` are not null, returns `true`. Otherwise returns `false`.
+- **AreNotNull<T>(params T[] objects)**:
+	- Checks if all `objects` are **not** null. If all of `objects` are not null, returns `true`. Otherwise returns `false`.
 
 ### NumberHelper:
 - **ToDecimal(string value)**:
@@ -133,6 +134,8 @@ TsadriuUtilities is a library that helps on dealing with
 - **AddColumn(params string[] columnName)**:
 - **AddColumn(params TTable[] columnName)**:
     - Adds a new `TTableColumn` in the `TTable`.
+- **RenameColumn(string currentColumnName, string newColumnname)**:
+	- Renames a column (if it exists).
 - **GetColumn(params TTable[] columnName)**:
 	- Returns an instance of `TTableColumn` if it is present in `TTable.ColumnList`. If it is not present, returns a null.  
 - **GetColumns(int index)**:
