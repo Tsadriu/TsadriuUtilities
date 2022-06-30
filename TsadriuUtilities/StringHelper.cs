@@ -60,7 +60,18 @@ namespace TsadriuUtilities
 
             if (end != null && end.Length > 0)
             {
-                endIndex = (text.Length - copyOfText.Length) + copyOfText.IndexOf(end, StringComparison.OrdinalIgnoreCase);
+                endIndex = (text.Length - copyOfText.Length);
+
+                var currentEndIndex = copyOfText.IndexOf(end, StringComparison.OrdinalIgnoreCase);
+
+                if (currentEndIndex > -1)
+                {
+                    endIndex += copyOfText.IndexOf(end, StringComparison.OrdinalIgnoreCase);
+                }
+                else if (currentEndIndex == -1)
+                {
+                    endIndex = -1;
+                }
             }
 
             if (endIndex > -1)
@@ -83,7 +94,7 @@ namespace TsadriuUtilities
                 return text.Substring(0, endIndex);
             }
 
-            return text;
+            return string.Empty;
         }
 
         /// <summary>

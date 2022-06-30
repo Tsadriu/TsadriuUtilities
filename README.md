@@ -126,7 +126,6 @@ TsadriuUtilities is a library that helps on dealing with
     - Returns a string where all instances of `valuesToRemove` have been removed from the `value`.
 - **CharCount(string value, string valueToCount)**
     - Returns the count of `valueToCount` present in the `value`.
-- **RemoveTags(string value, string tag)**
 - **RemoveTags(string value, string[] tags)**
     - Returns a string where all instances of `tags` are removed from `value` (Example: Passing 'b' will remove all '\<b\>', '\</b\>' and \<b/\> xml tags).
 
