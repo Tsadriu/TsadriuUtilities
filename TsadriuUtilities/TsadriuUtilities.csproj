@@ -2,21 +2,36 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.5.2</Version>
+    <Version>1.6.0</Version>
     <Description>A small package of utilities to help dealing with strings, chars, lists and more to hopefully save a little bit of time in coding.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>StringHelper:
- - Fixed bug on method GetBetween that would allow it to go out of bounds.</PackageReleaseNotes>
+    <PackageReleaseNotes>ArrayHelper:
+- Implemented method GetBetween().
+- Implemented method KeepBetween().
+- Implemented method Exclude().
+ 
+DictionaryHelper:
+- Implemented method FlipKeyWithValue().
+
+ListHelper:
+- Implemented method GetBetween().
+- Implemented method KeepBetween().
+- Implemented method Exclude().
+
+StringHelper:
+- Removed method GetTagValue().
+- Removed method GetTagValues().</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
-    <AssemblyVersion>1.5.2</AssemblyVersion>
-    <FileVersion>1.5.2</FileVersion>
+    <AssemblyVersion>1.6.0</AssemblyVersion>
+    <FileVersion>1.6.0</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>TsadriuUtilities</PackageId>
+    <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

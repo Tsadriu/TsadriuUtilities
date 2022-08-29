@@ -69,6 +69,13 @@ namespace Tests
 
             var test = arrayString.ToList();
 
+            var getValueLike = arrayString.GetBetween("J", "h", true);
+
+            var f = File.ReadAllText("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\Files\\siiTest.txt");
+            var rawTable = f.GetBetween("<table class=\"gs_table gs_table_pratiche\">", "</thead>");
+            var rawLinks = rawTable.Split("<th>").ToList();
+            var links = rawLinks.KeepBetween("<a href=\"");
+            var excludeLink = links.Exclude("Data");
             Assert.IsTrue(test.GetType().Name == listaString.GetType().Name);
             test.OrderByDescending();
 
@@ -192,6 +199,15 @@ namespace Tests
             var test3 = DictionaryHelper.ToDictionary<int, string>(test.ReplaceFromElements("\">", " "), " ");
 
             var listtest = new List<string>() { pdfText.GetBetween("Importo IVA Totale").Remove("\n") }.ToDictionary<string, string>(" ", true);
+
+            var currentDictionary = new Dictionary<int, string>();
+            currentDictionary.Add(13, "G - TISG");
+            currentDictionary.Add(6, "E - II Settlement");
+            currentDictionary.Add(2, "P - Un valore a caso");
+            currentDictionary.Add(3, "Boh");
+            currentDictionary.Add(5, "Qualcosa");
+
+            var newDictionary = currentDictionary.FlipKeyWithValue();
         }
     }
 }

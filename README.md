@@ -13,8 +13,14 @@ TsadriuUtilities is a library that helps on dealing with
     - Converts an `Array` into a single line of string. If the `separator` is not passed, it will separate by a space. Examples: ArrayToString(new int[] { 1, 3, 5 }) -> "1 3 5", ArrayToString(new string[] { "5", "2" }, "|") -> "5|2".
 - **GenerateRandom\<T\>(T[] array, int min, int max)**:
     - Fills up the `array` with random numbers between `min` (default: 0, inclusive) and `max` (default: 100, inclusive).
+- **GetBetween(string[] stringArray, string start, string end, bool startEndIncluded)**:
+    - Iterates through the `stringArray`, returning the first index where both `start` and `end` are found. If none of the indexes match `start` and `end`, a `string.Empty` is returned. Use `startEndIncluded` if you want to include `start` and `end` in the returning string.
+- **KeepBetween(string[] stringArray, string start, string end, bool startEndIncluded, bool excludeEmptyIndexes)**:
+    - Iterates through the `stringArray`, keeping the content between `start` and `end`. If `startEndIncluded` is enabled, the indexes will keep the `start` and `end`. If `excludeEmptyIndexes` is enabled, empty indexes will be removed from the array.
+- **Exclude(string[] stringArray, string[] excludeStrings)**:
+    - Iterates through the `stringArray`, excluding the indexes that contain `excludeStrings`.
 
-### BooolHelper:
+### BoolHelper:
 - **ToBool(string value, SearchType searchType, string[] trueValue, string[] falseValue)**:
 	- Tries to parse the `value` into a `bool`. If the conversion was successfull, it will return `value` as `true` or `false` depending on where it was found (`trueValues`, `falseValues`). If `value` is not found in any of those, it'll launch an `ArgumentOutOfRangeException`.
 
@@ -44,6 +50,8 @@ TsadriuUtilities is a library that helps on dealing with
 ### DictionaryHelper:
 - **ToDictionary\<TKey, TValue\>(List\<string\> list, string separator, bool invertKeyWithValue)**:
     - Iterates through each element of the `list` and splits it by `separator`, assigning `TKey` to everything that is before the `separator` and `TValue` to everything that is after the `separator`.
+- **FlipKeyWithValue\<TKey, TValue\>(Dictionary\<TKey, TValue\> dictionary)**:
+    - Returns the `dictionary` where the `TValue` is the key and `TKey` is the value.
 
 ### DirectoryHelper:
 - **Exist(string path, bool createFolder)**:
@@ -80,6 +88,12 @@ TsadriuUtilities is a library that helps on dealing with
     - Returns a list where all occasions of `valuesToRemove` have been removed from the elements of the `list`.
 - **ReplaceFromElements(List\<string\> list, string oldValue, string newValue)**
     - Returns a list where all occasions of `oldValue` have been replaced by `newValue` from the elements of the `list`.
+- **GetBetween(List<string> stringList, string start, string end, bool startEndIncluded)**:
+    - Iterates through the `stringList`, returning the first index where both `start` and `end` are found. If none of the indexes match `start` and `end`, a `string.Empty` is returned. Use `startEndIncluded` if you want to include `start` and `end` in the returning string.
+- **KeepBetween(List<string> stringList, string start, string end, bool startEndIncluded, bool excludeEmptyIndexes)**:
+    - Iterates through the `stringList`, keeping the content between `start` and `end`. If `startEndIncluded` is enabled, the indexes will keep the `start` and `end`. If `excludeEmptyIndexes` is enabled, empty indexes will be removed from the list.
+- **Exclude(List<string> stringList, string[] excludeStrings)**:
+    - Iterates through the `stringList`, excluding the indexes that contain `excludeStrings`.
 
 ### MultiHelper:
 - **ClampValue\<T\>(T currentValue, T minValue, T maxValue)**:

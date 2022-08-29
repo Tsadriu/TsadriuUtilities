@@ -67,5 +67,43 @@ namespace TsadriuUtilities
 
             return array;
         }
+
+        /// <summary>
+        /// Iterates through <paramref name="stringArray"/>, checking if any of the indexes contain <paramref name="start"/> and <paramref name="end"/>.
+        /// </summary>
+        /// <param name="stringArray">Array of <see cref="string"/> to search through.</param>
+        /// <param name="start">The start tag.</param>
+        /// <param name="end">The end tag.</param>
+        /// <param name="startEndIncluded">If enabled, it will return a <see cref="string"/> with the <paramref name="start"/> and <paramref name="end"/> included in it.</param>
+        /// <returns>The first index where both <paramref name="start"/> and <paramref name="end"/> are found. If none of the indexes match <paramref name="start"/> and <paramref name="end"/>, it will return a <see cref="string.Empty"/>.</returns>
+        public static string GetBetween(this string[] stringArray, string start, string end, bool startEndIncluded = false)
+        {
+            return ListHelper.GetBetween(stringArray.ToList(), start, end, startEndIncluded);
+        }
+
+        /// <summary>
+        /// Iterates through <paramref name="stringArray"/>, keeping the content between <paramref name="start"/> and <paramref name="end"/>.
+        /// </summary>
+        /// <param name="stringArray">The array to iterate through.</param>
+        /// <param name="start">The start tag.</param>
+        /// <param name="end">The end tag.</param>
+        /// <param name="startEndIncluded">If enabled, the indexes will keep the <paramref name="start"/> and <paramref name="end"/>.</param>
+        /// <param name="excludeEmptyIndexes">If enabled, empty indexes will be removed from the array.</param>
+        /// <returns>New array with the indexes' content changed based on <paramref name="start"/> and/or <paramref name="end"/>.</returns>
+        public static string[] KeepBetween(this string[] stringArray, string start = null, string end = null, bool startEndIncluded = false, bool excludeEmptyIndexes = true)
+        {
+            return ListHelper.KeepBetween(stringArray.ToList(), start, end, startEndIncluded, excludeEmptyIndexes).ToArray();
+        }
+
+        /// <summary>
+        /// Iterates through <paramref name="stringArray"/>, excluding the indexes that contain <paramref name="excludeStrings"/>.
+        /// </summary>
+        /// <param name="stringArray">The array to iterate through.</param>
+        /// <param name="excludeStrings"><see cref="string"/> to exclude from the <paramref name="stringArray"/>. If <paramref name="excludeStrings"/> is found in any of the indexes of <paramref name="stringArray"/>, it will be removed.</param>
+        /// <returns>New array where the indexes that had <paramref name="excludeStrings"/> were removed from the <paramref name="stringArray"/>.</returns>
+        public static string[] Exclude(this string[] stringArray, params string[] excludeStrings)
+        {
+            return ListHelper.Exclude(stringArray.ToList(), excludeStrings).ToArray();
+        }
     }
 }

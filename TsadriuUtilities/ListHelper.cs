@@ -174,5 +174,84 @@ namespace TsadriuUtilities
 
             return list;
         }
+
+        /// <summary>
+        /// Iterates through <paramref name="stringList"/>, checking if any of the indexes contain <paramref name="start"/> and <paramref name="end"/>.
+        /// </summary>
+        /// <param name="stringList">List of <see cref="string"/> to search through.</param>
+        /// <param name="start">The start tag.</param>
+        /// <param name="end">The end tag.</param>
+        /// <param name="startEndIncluded">If enabled, the indexes will keep the <paramref name="start"/> and <paramref name="end"/>.</param>
+        /// <returns>The first index where both <paramref name="start"/> and <paramref name="end"/> are found. If none of the indexes match <paramref name="start"/> and <paramref name="end"/>, it will return a <see cref="string.Empty"/>.</returns>
+        public static string GetBetween(this List<string> stringList, string start, string end, bool startEndIncluded = false)
+        {
+            for (int i = 0; i < stringList.Count; i++)
+            {
+                if (stringList[i].Contains(start, StringComparison.OrdinalIgnoreCase) && stringList[i].Contains(end, StringComparison.OrdinalIgnoreCase))
+                {
+                    return StringHelper.GetBetween(stringList[i], start, end, startEndIncluded);
+                }
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Iterates through <paramref name="stringList"/>, keeping the content between <paramref name="start"/> and <paramref name="end"/>.
+        /// </summary>
+        /// <param name="stringList">The list to iterate through.</param>
+        /// <param name="start">The start tag.</param>
+        /// <param name="end">The end tag.</param>
+        /// <param name="startEndIncluded">If enabled, the indexes will keep the <paramref name="start"/> and <paramref name="end"/>.</param>
+        /// <param name="excludeEmptyIndexes">If enabled, empty indexes will be removed from the list.</param>
+        /// <returns>New list with the indexes' content changed based on <paramref name="start"/> and/or <paramref name="end"/>.</returns>
+        public static List<string> KeepBetween(this List<string> stringList, string start = null, string end = null, bool startEndIncluded = false, bool excludeEmptyIndexes = true)
+        {
+            List<string> newList = new List<string>();
+
+            for (int i = 0; i < stringList.Count; i++)
+            {
+                var result = stringList[i].GetBetween(start, end, startEndIncluded);
+
+                if (!excludeEmptyIndexes)
+                {
+                    newList.Add(result);
+                    continue;
+                }
+
+                if (result.IsNotEmpty())
+                {
+                    newList.Add(result);
+                }
+            }
+
+            return newList;
+        }
+
+        /// <summary>
+        /// Iterates through <paramref name="stringList"/>, excluding the indexes that contain <paramref name="excludeStrings"/>.
+        /// </summary>
+        /// <param name="stringList">The list to iterate through.</param>
+        /// <param name="excludeStrings"><see cref="string"/> to exclude from the <paramref name="stringList"/>. If <paramref name="excludeStrings"/> is found in any of the indexes of <paramref name="stringList"/>, it will be removed.</param>
+        /// <returns>New list where the indexes that had <paramref name="excludeStrings"/> were removed from the <paramref name="stringList"/>.</returns>
+        public static List<string> Exclude(this List<string> stringList, params string[] excludeStrings)
+        {
+            List<string> newList = new List<string>();
+
+            for (int i = 0; i < stringList.Count; i++)
+            {
+                for (int j = 0; j < excludeStrings.Length; j++)
+                {
+                    if (stringList[i].Contains(excludeStrings[j], StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    newList.Add(stringList[i]);
+                }
+            }
+
+            return newList;
+        }
     }
 }

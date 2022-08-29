@@ -13,23 +13,9 @@ namespace TsadriuUtilities
     public static class StringHelper
     {
         /// <summary>
-        /// Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="tagsIncluded"/> if you want to include them.
-        /// </summary>
-        /// <param name="text">Text to search though.</param>
-        /// <param name="start">The start tag.</param>
-        /// <param name="end">The end tag.</param>
-        /// <param name="startEndIncluded">If enabled, it will return a string with the <paramref name="start"/> and <paramref name="end"/> included.</param>
-        /// <returns>Returns string.Empty if nothing is found.</returns>
-        [Obsolete("Use method GetBetween.", true)]
-        public static string GetTagValue(this string text, string start = null, string end = null, bool startEndIncluded = false)
-        {
-            return GetBetween(text, start, end, startEndIncluded);
-        }
-
-        /// <summary>
         /// Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="string"/>.
         /// </summary>
-        /// <param name="text">Text to search though.</param>
+        /// <param name="text">Text to search through.</param>
         /// <param name="start">The start tag.</param>
         /// <param name="end">The end tag.</param>
         /// <param name="startEndIncluded">If enabled, it will return a <see cref="string"/> with the <paramref name="start"/> and <paramref name="end"/> included in it.</param>
@@ -100,7 +86,7 @@ namespace TsadriuUtilities
         /// <summary>
         /// Searches through the <paramref name="text"/>, returning multiple instances found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning List of <see cref="string"/>.
         /// </summary>
-        /// <param name="text">Text to search though.</param>
+        /// <param name="text">Text to search through.</param>
         /// <param name="start">From where the text begins.</param>
         /// <param name="end">Until where the text stops.</param>
         /// <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
@@ -133,20 +119,6 @@ namespace TsadriuUtilities
             }
 
             return list;
-        }
-
-        /// <summary>
-        /// Searches through the <paramref name="text"/>, returning the instances found between the <paramref name="start"/> and <paramref name="end"/> in a List of <see cref="string"/>. Use <paramref name="startEndIncluded"/> if you want to include them.
-        /// </summary>
-        /// <param name="text">Text to search though.</param>
-        /// <param name="start">From where the text begins.</param>
-        /// <param name="end">Until where the text stops.</param>
-        /// <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
-        /// <returns>Returns an empty List of <see cref="string"/> if nothing is found or parameters <paramref name="text"/>, <paramref name="start"/> or <paramref name="end"/> are empty.</returns>
-        [Obsolete("Use method GetMultipleBetween.", true)]
-        public static List<string> GetTagValues(this string text, string start, string end, bool startEndIncluded = false)
-        {
-            return GetMultipleBetween(text, start, end, startEndIncluded);
         }
 
         /// <summary>

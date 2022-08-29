@@ -47,5 +47,27 @@ namespace TsadriuUtilities
 
             return dict;
         }
+
+        /// <summary>
+        /// Returns the <paramref name="dictionary"/> where the <typeparamref name="TValue"/> is the key and <typeparamref name="TKey"/> is the value.
+        /// </summary>
+        /// <typeparam name="TKey">Key type.</typeparam>
+        /// <typeparam name="TValue">Value type.</typeparam>
+        /// <param name="dictionary">Current dictionary</param>
+        /// <returns>A new <see cref="Dictionary{TKey, TValue}"/> with the values swapped.</returns>
+        public static Dictionary<TValue, TKey>FlipKeyWithValue<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
+        {
+            var keys = new List<TKey>(dictionary.Keys);
+            var values = new List<TValue>(dictionary.Values);
+
+            var newDictionary = new Dictionary<TValue, TKey>();
+            
+            for (int i = 0; i < keys.Count; i++)
+            {
+                newDictionary.Add(values[i], keys[i]);
+            }
+
+            return newDictionary;
+        }
     }
 }
