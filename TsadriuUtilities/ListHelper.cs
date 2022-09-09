@@ -123,12 +123,12 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Iterates through the <paramref name="list"/>, returning the first value found that contains <paramref name="value"/>.
+        /// Iterates through the <paramref name="list"/>, returning the first item found that contains <paramref name="value"/>.
         /// </summary>
         /// <param name="list">Current list.</param>
         /// <param name="value">The value to search for.</param>
         /// <param name="stringComparison">String comparison. If nothing is passed, <see cref="StringComparison.OrdinalIgnoreCase"/> will be used.</param>
-        /// <returns>The first value found in the list that contains <paramref name="value"/>. If <paramref name="value"/> is not present in the list, returns <see cref="string.Empty"/>.</returns>
+        /// <returns>The first item found in the list that contains <paramref name="value"/>. If <paramref name="value"/> is not present in the list, returns <see cref="string.Empty"/>.</returns>
         public static string GetValueLike(this List<string> list, string value, StringComparison stringComparison = StringComparison.OrdinalIgnoreCase)
         {
             foreach (var element in list)
@@ -140,6 +140,73 @@ namespace TsadriuUtilities
             }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Iterates through the <paramref name="list"/>, returning the first item found that contains all <paramref name="values"/>.
+        /// </summary>
+        /// <param name="list">The list to iterate through.</param>
+        /// <param name="stringComparison">String comparison. If nothing is passed, <see cref="StringComparison.OrdinalIgnoreCase"/> will be used.</param>
+        /// <param name="values">The values to search in the <paramref name="list"/>.</param>
+        /// <returns>The first item found in the <paramref name="list"/> that contains all <paramref name="values"/>. If any of the elements of the <paramref name="list"/>
+        /// does not have all <paramref name="values"/>, returns <see cref="string.Empty"/>.</returns>
+        public static string GetValueContaining(this List<string> list, StringComparison stringComparison, params string[] values)
+        {
+            int countOfValues = 0;
+
+            foreach (var element in list)
+            {
+                foreach (var value in values)
+                {
+                    if (element.Contains(value, stringComparison))
+                    {
+                        countOfValues++;
+                        continue;
+                    }
+                }
+
+                if (countOfValues == values.Length)
+                {
+                    return element;
+                }
+
+                countOfValues = 0;
+                continue;
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Iterates through the <paramref name="list"/>, adding <paramref name="startItemTag"/> before the item and <paramref name="endItemTag"/> after the item.
+        /// Example: <paramref name="startItemTag"/> is 'www.' and <paramref name="list"/> is 'google.com'. Method will return the elements as 'www.google.com'.
+        /// </summary>
+        /// <param name="list">The list of <see cref="string"/> to iterate through.</param>
+        /// <param name="startItemTag">What to add <b>before</b> the item.</param>
+        /// <param name="endItemTag">What to add <b>after</b> the item.</param>
+        /// <returns>If both <paramref name="startItemTag"/> and <paramref name="endItemTag"/> are empty, it will return the same <paramref name="list"/>. If even one
+        /// of <paramref name="startItemTag"/> or <paramref name="endItemTag"/> has a value, it will be added to the items of the <paramref name="list"/>.</returns>
+        public static List<string> AddToElements(this List<string> list, string startItemTag, string endItemTag = null)
+        {
+            if (StringHelper.AreEmpty(startItemTag, endItemTag))
+            {
+                return list;
+            }
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (startItemTag.IsNotEmpty())
+                {
+                    list[i] = startItemTag + list[i]; 
+                }
+
+                if (endItemTag.IsNotEmpty())
+                {
+                    list[i] = list[i] + endItemTag;
+                }
+            }
+
+            return list;
         }
 
         /// <summary>

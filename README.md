@@ -67,6 +67,12 @@ TsadriuUtilities is a library that helps on dealing with
 - **NotExist(string fullFileName, bool createFile)**:
     - Checks if `fullFileName` does not exist. If `createFile` is true, it will create the `fullFileName` if it doesn't exist (Keep in mind that the path of the `fullFileName` must exist for `createFile` to work).
 
+### HtmlHelper:
+- **EncodeHtml(string decodedHtml)**:
+	- Converts a `decodedHtml` into a HTML-encoded string.
+- **DecodeHtml(string encodedHtml)**:
+	- Converts a `encodedHtml` into a decoded string.
+
 ### ListHelper:
 - **AddRange\<T\>(List\<T\> list, T[] array, int startIndex, int endIndex)**:
     - Adds the `array` into the `list`. If `statIndex` is specified, it will add the contents of the `array` only from `startIndex` (included) until the end of the array or until it reaches `endIndex` (included) if it is specified.
@@ -83,7 +89,11 @@ TsadriuUtilities is a library that helps on dealing with
 - **HasAny\<T\>(List\<T\> list)**
     - Iterates through the `list`, checking that it has **at least 1** non null element.
 - **GetValueLike(List\<string\> list, string value, StringComparison stringComparison)**
-    - Iterates through the `list`, returning the first value found that contains `value`.
+    - Iterates through the `list`, returning the first item found that contains `value`.
+- **GetValueContaining(List\<string\> list, StringComparison stringComparison, string[] values)**
+    - Iterates through the `list`, returning the first item found that contains all the `values`.
+- **AddToElements(List\<string\> list, string startItemTag, string endItemTag)**
+    - Iterates through the `list`, adding `startItemTag` before the item and `endItemTag` after the item. Example: `startItemTag` is 'www.' and the items inside the `list` are 'google.com'. This method will return the elements as 'www.google.com'.
 - **RemoveFromElements(List\<string\> list, params string[] valuesToRemove)**
     - Returns a list where all occasions of `valuesToRemove` have been removed from the elements of the `list`.
 - **ReplaceFromElements(List\<string\> list, string oldValue, string newValue)**
@@ -114,12 +124,16 @@ TsadriuUtilities is a library that helps on dealing with
     - Returns the lowest number present in the `sequence`.
 - **Between\<T\>(T value, T min, T max, bool included)**:
     - Checks if the `value` is between `min` and `max`. Setting `included` to true will also include `min` and `max` in the verification.
+- **IsNullOrZero\<T\>(T value)**:
+    - Checks if `value` is a null or 0.
 
 ### StringHelper:
 - **GetBetween(string text, string start, string end, bool startEndIncluded)**:
     - Searches through the `text`, returning the first instance found between `start` and `end`. Use `startEndIncluded` if you want to include `start` and `end` in the returning string.
 - **GetMultipleBetween(string text, string startTag, string endTag, bool tagsIncluded)**:
     - Searches through the `text`, returning multiple instances found between `start` and `end`. Use `startEndIncluded` if you want to include `start` and `end` in the returning List of string.
+- **GetBetweenReverse(string text, string start, string end, bool startEndIncluded)**:
+    - This method is unstable and unfinished. Using it will throw an `NotImplementedException`. Searches through the `text`, using the `start` as the **end tag** and then searches the `text` **backwards** until the `end` tag is found.
 - **AndContains(string text, StringComparison stringComparison, string[] values)**:
     - Checks a `string` if it has all instances of `values`. If that's the case, then it returns `true`, otherwise it returns `false`.
 - **OrContains(string text, StringComparison stringComparison, string[] values)**:
@@ -142,6 +156,10 @@ TsadriuUtilities is a library that helps on dealing with
     - Returns the count of `valueToCount` present in the `value`.
 - **RemoveTags(string value, string[] tags)**
     - Returns a string where all instances of `tags` are removed from `value` (Example: Passing 'b' will remove all '\<b\>', '\</b\>' and \<b/\> xml tags).
+- **Reverse(string value)**
+    - Reverses a string.
+- **Split(string value, string separator, bool keepSplitValue)**
+    - Splits the `value` based on the `separator`. Use `keepSplitValue` to keep the `separator` on the values.
 
 ### TTable:
 - **AddColumn(params string[] columnName)**:

@@ -167,5 +167,83 @@ namespace TsadriuUtilities
                 return currentValue > currentMin && currentValue < currentMax;
             }
         }
+
+        /// <summary>
+        /// Checks if <paramref name="value"/> is null or is a zero.
+        /// </summary>
+        /// <typeparam name="T">Supported types: <see cref="long"/>, <see cref="int"/>, <see cref="short"/>, <see cref="byte"/>,
+        /// <see cref="float"/>, <see cref="double"/>, <see cref="decimal"/>.</typeparam>
+        /// <param name="value">Numeric value to be checked.</param>
+        /// <returns>True if <paramref name="value"/> is null or zero, otherwise it returns false.</returns>
+        public static bool IsNullOrZero<T>(this T value)
+        {
+            if (value == null)
+            {
+                return true;
+            }
+
+            if (typeof(T) == typeof(byte) || typeof(T) == typeof(byte?))
+            {
+                byte? valueOfT = (byte?)Convert.ChangeType(value, typeof(byte?));
+
+                return valueOfT == 0;
+            }
+
+            if (typeof(T) == typeof(short) || typeof(T) == typeof(short?))
+            {
+                short? valueOfT = (short?)Convert.ChangeType(value, typeof(short?));
+
+                return valueOfT == 0;
+            }
+
+            if (typeof(T) == typeof(int) || typeof(T) == typeof(int?))
+            {
+                int? valueOfT = (int?)Convert.ChangeType(value, typeof(int?));
+
+                return valueOfT == 0;
+            }
+
+            if (typeof(T) == typeof(long) || typeof(T) == typeof(long?))
+            {
+                long? valueOfT = (long?)Convert.ChangeType(value, typeof(long?));
+
+                return valueOfT == 0;
+            }
+
+            if (typeof(T) == typeof(float) || typeof(T) == typeof(float?))
+            {
+                float? valueOfT = (float?)Convert.ChangeType(value, typeof(float?));
+
+                return valueOfT == 0;
+            }
+
+            if (typeof(T) == typeof(double) || typeof(T) == typeof(double?))
+            {
+                double? valueOfT = (double?)Convert.ChangeType(value, typeof(double?));
+
+                return valueOfT == 0;
+            }
+
+            if (typeof(T) == typeof(decimal) || typeof(T) == typeof(decimal?))
+            {
+                decimal valueOfT = (decimal)Convert.ChangeType(value, typeof(decimal));
+
+                return valueOfT == 0;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if <paramref name="value"/> is <b>not</b> null or zero.
+        /// </summary>
+        /// <typeparam name="T">Supported types: <see cref="long"/>, <see cref="int"/>, <see cref="short"/>, <see cref="byte"/>,
+        /// <see cref="float"/>, <see cref="double"/>, <see cref="decimal"/>.</typeparam>
+        /// <param name="value">Numeric value to be checked.</param>
+        /// <returns>True if <paramref name="value"/> is <b>not</b> null or zero, otherwise it returns false.</returns>
+        public static bool IsNotNullOrZero<T>(this T value)
+        {
+            return !value.IsNullOrZero();
+        }
     }
 }

@@ -3,6 +3,7 @@
 // </copyright>
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace TsadriuUtilities
@@ -122,6 +123,48 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
+        /// <b>This method is unstable and unfinished. Using it will throw an <see cref="NotImplementedException"/>.</b>
+        /// Searches through the <paramref name="text"/>, using the <paramref name="start"/> as the end tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="end"/> tag is found.
+        /// </summary>
+        /// <param name="text">Text to search through.</param>
+        /// <param name="start">From where the text ends.</param>
+        /// <param name="end">From where the text starts.</param>
+        /// <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
+        /// <returns>The first instance found between <paramref name="start"/> and <paramref name="end"/>. If both <paramref name="start"/> and <paramref name="end"/> are not found, returns a <see cref="string.Empty"/>.</returns>
+        public static string GetBetweenReverse(this string text, string start = null, string end = null, bool startEndIncluded = false)
+        {
+            throw new NotImplementedException("This method has not been implemented yet.");
+            var copyOfText = text;
+            if (copyOfText.IsEmpty())
+            {
+                return string.Empty;
+            }
+
+            bool hasStart = copyOfText.Contains(start, StringComparison.OrdinalIgnoreCase);
+
+            if (hasStart)
+            {
+                var amountOfSplit = text.Split(start).Length - 1;
+                copyOfText = (startEndIncluded ? start : string.Empty) + text.Split(start)[amountOfSplit];
+            }
+
+            bool hasEnd = copyOfText.Contains(end, StringComparison.OrdinalIgnoreCase);
+
+            if (hasEnd)
+            {
+                var newText = (startEndIncluded ? end : string.Empty) + text.Split(end).ToList().GetValueContaining(StringComparison.OrdinalIgnoreCase, "Prestazione", "align")/*.GetValueLike(start).GetBetween(string.Empty, start)*/;
+                copyOfText = newText + copyOfText;
+            }
+
+            if (hasStart && hasEnd)
+            {
+                return copyOfText;
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
         /// Checks a <see cref="string"/> if it has all instances of <paramref name="values"/>.
         /// </summary>
         /// <param name="text">Current <see cref="string"/>.</param>
@@ -182,10 +225,10 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Checks if all instances of <paramref name="values"/> are null, <see cref="string.Empty"/> or a white space ("", \n, \r, ...), returning true if all of them are empty.
+        /// Iterates through <paramref name="values"/> and checks them if they are null, <see cref="string.Empty"/> or white space ("", \n, \r, ...).
         /// </summary>
         /// <param name="values">The values to check.</param>
-        /// <returns>Returns true if all instances of <paramref name="values"/> are empty. Returns false if even one of them is not empty.</returns>
+        /// <returns>Returns true if all instances of <paramref name="values"/> are null, <see cref="string.Empty"/> or white space ("", \n, \r, ...). Returns false if even one of them is <b>not</b> empty.</returns>
         public static bool AreEmpty(params string[] values)
         {
             foreach (var value in values)
@@ -268,7 +311,7 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Returns a <see cref="string"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.
+        /// Iterates through <paramref name="valuesToRemove"/> and removes them from <paramref name="value"/> (if they are present).
         /// </summary>
         /// <param name="value">The value to change.</param>
         /// <param name="valuesToRemove">The values to remove from <paramref name="value"/>.</param>
@@ -284,7 +327,7 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Returns the count of <paramref name="valueToCount"/> present in <paramref name="value"/>.
+        /// Counts the number of <paramref name="valueToCount"/> present in <paramref name="value"/>.
         /// </summary>
         /// <param name="value">The value to be checked.</param>
         /// <param name="valueToCount">The value to be counted in <paramref name="value"/>.</param>
@@ -295,7 +338,8 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Returns a string where all instances of <paramref name="tags"/> are removed.
+        /// Iterates through <paramref name="tags"/> and will remove them from the <paramref name="value"/>. <paramref name="tags"/> will only be removed
+        /// if they correspond to <![CDATA[<]]><paramref name="tags"/><![CDATA[>]]>, <![CDATA[</]]><paramref name="tags"/><![CDATA[>]]> or <![CDATA[<]]><paramref name="tags"/><![CDATA[/>]]>.
         /// </summary>
         /// <param name="value">The value where <paramref name="tags"/> will be removed.</param>
         /// <param name="tags">The tags to remove from <paramref name="value"/>.</param>
@@ -310,6 +354,48 @@ namespace TsadriuUtilities
             }
 
             return value;
+        }
+
+        /// <summary>
+        /// Reverses a string.
+        /// </summary>
+        /// <param name="value"><see cref="string"/> to be reversed.</param>
+        /// <returns>Reversed <see cref="string"/>. If <paramref name="value"/> is null or <see cref="string.Empty"/>, it will return <see cref="string.Empty"/>.</returns>
+        public static string Reverse(this string value)
+        {
+            if (value.IsEmpty())
+            {
+                return string.Empty;
+            }
+
+            char[] charArray = value.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
+        }
+
+        /// <summary>
+        /// Splits the <paramref name="value"/> based on the <paramref name="separator"/>.
+        /// </summary>
+        /// <param name="value">The value to be splitted.</param>
+        /// <param name="separator">The separator.</param>
+        /// <param name="keepSeparator">Setting it to true, the <paramref name="separator"/> will be included in the result of the split.</param>
+        /// <returns>A list of <see cref="string"/> that contains <paramref name="value"/> splitted by the <paramref name="separator"/>.</returns>
+        public static List<string> Split(this string value, string separator, bool keepSeparator = false)
+        {
+            var splittedValue = value.Split(separator).ToList();
+
+            if (keepSeparator)
+            {
+                var stringBuilder = new StringBuilder();
+
+                for (int i = 1; i < splittedValue.Count; i++)
+                {
+                    splittedValue[i] = stringBuilder.Append(separator + splittedValue[i]).ToString();
+                    stringBuilder.Clear();
+                }
+            }
+
+            return splittedValue;
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TsadriuUtilities;
-using TsadriuUtilities.Objects;
 
 namespace Tests
 {
@@ -122,6 +121,14 @@ namespace Tests
             var fileContent = File.ReadAllText(fileToTest);
 
             var vals = StringHelper.GetMultipleBetween(fileContent, "<Corrispettivi>", "</Corrispettivi>", true);
+
+            var novaFile = File.ReadAllText("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\Files\\novaaeg.html");
+            var splitTest = novaFile.Split("href", true);
+            var valueContaining = splitTest.GetValueContaining(StringComparison.OrdinalIgnoreCase, "Index", "Pratiche<");
+            var test = novaFile.GetBetweenReverse("Prestazione", "align", true);
+            var test2 = novaFile.GetBetween("Flussi di Misura", "href", true);
+            var novaAegTableFile = File.ReadAllText("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\Files\\novaAegTable.html");
+            var testNovaTable = novaAegTableFile.GetMultipleBetween("color:Black;\">", "<");
         }
 
         [TestMethod]
@@ -152,7 +159,7 @@ namespace Tests
             table2.RemoveColumn(col2);
         }
 
-            [TestMethod]
+        [TestMethod]
         public void NumberHelperTest()
         {
             int[] test = new int[] { 1, 2, 3, 4, 5, 6, 7 };
@@ -171,6 +178,19 @@ namespace Tests
             decimal parsedExNumber = exNumber.ToDecimal();
             exNumber = "1,4E-05";
             parsedExNumber = exNumber.ToDecimal();
+
+            decimal? numberTest = null;
+            decimal? numberTest2 = 0;
+            decimal? numberTest3 = 2.7M;
+            string pippo = "1";
+            bool s = pippo.IsNullOrZero();
+            Assert.IsTrue(numberTest.IsNullOrZero());
+            Assert.IsTrue(numberTest2.IsNullOrZero());
+            Assert.IsTrue(numberTest3.IsNullOrZero() == false);
+
+            Assert.IsTrue(numberTest.IsNotNullOrZero() == false);
+            Assert.IsTrue(numberTest2.IsNotNullOrZero() == false);
+            Assert.IsTrue(numberTest3.IsNotNullOrZero());
         }
 
         [TestMethod]
@@ -208,6 +228,15 @@ namespace Tests
             currentDictionary.Add(5, "Qualcosa");
 
             var newDictionary = currentDictionary.FlipKeyWithValue();
+        }
+
+        [TestMethod]
+        public void HtmlHelperTest()
+        {
+            var file = File.ReadAllText("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\Files\\novaaeg.html");
+
+            //var rawLinks = file.GetLinks(true);
+            // var link = file.GetLinkLike("Flussi Dati Tecnici");
         }
     }
 }
