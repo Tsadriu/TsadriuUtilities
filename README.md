@@ -72,6 +72,8 @@ TsadriuUtilities is a library that helps on dealing with
 	- Converts a `decodedHtml` into a HTML-encoded string.
 - **DecodeHtml(string encodedHtml)**:
 	- Converts a `encodedHtml` into a decoded string.
+- **GetHrefLink(string html)**:
+	- Checks the `html` and tries to return link that is in between the **href=""**.
 
 ### ListHelper:
 - **AddRange\<T\>(List\<T\> list, T[] array, int startIndex, int endIndex)**:
