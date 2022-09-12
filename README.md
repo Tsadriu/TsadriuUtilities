@@ -13,8 +13,20 @@ TsadriuUtilities is a library that helps on dealing with
     - Converts an `Array` into a single line of string. If the `separator` is not passed, it will separate by a space. Examples: ArrayToString(new int[] { 1, 3, 5 }) -> "1 3 5", ArrayToString(new string[] { "5", "2" }, "|") -> "5|2".
 - **GenerateRandom\<T\>(T[] array, int min, int max)**:
     - Fills up the `array` with random numbers between `min` (default: 0, inclusive) and `max` (default: 100, inclusive).
+- **GetValueLike(string[] stringArray, string value, StringComparison stringComparison)**
+    - Iterates through the `stringArray`, returning the first item found that contains `value`.
+- **GetValueContaining(string[] stringArray, StringComparison stringComparison, string[] values)**
+    - Iterates through the `stringArray`, returning the first item found that contains all the `values`.
+- **AddToElements(string[] stringArray, string startItemTag, string endItemTag)**
+    - Iterates through the `stringArray`, adding `startItemTag` before the item and `endItemTag` after the item. Example: `startItemTag` is 'www.' and the items inside the `stringArray` are 'google.com'. This method will return the elements as 'www.google.com'.
+- **RemoveFromElements(string[] stringArray, params string[] valuesToRemove)**
+	- Returns an array where all occasions of `valuesToRemove` have been removed from the elements of the `stringArray`.
+- **ReplaceFromElements(string[] stringArray, string oldValue, string newValue)**
+    - Returns an array where all occasions of `oldValue` have been replaced by `newValue` from the elements of the `stringArray`.
 - **GetBetween(string[] stringArray, string start, string end, bool startEndIncluded)**:
-    - Iterates through the `stringArray`, returning the first index where both `start` and `end` are found. If none of the indexes match `start` and `end`, a `string.Empty` is returned. Use `startEndIncluded` if you want to include `start` and `end` in the returning string.
+    - Iterates through the `stringArray`, returning the first instance where both `start` and `end` are found. If none of the indexes match `start` and `end`, a `string.Empty` is returned. Use `startEndIncluded` if you want to include `start` and `end` in the returning string.
+- **GetMultipleBetween(string[] stringArray, string start, string end, bool startEndIncluded)**:
+    - Searches through the `stringArray`, returning multiple instances found between `start` and `end`. Use `startEndIncluded` if you want to include `start` and `end` in the returning array.
 - **KeepBetween(string[] stringArray, string start, string end, bool startEndIncluded, bool excludeEmptyIndexes)**:
     - Iterates through the `stringArray`, keeping the content between `start` and `end`. If `startEndIncluded` is enabled, the indexes will keep the `start` and `end`. If `excludeEmptyIndexes` is enabled, empty indexes will be removed from the array.
 - **Exclude(string[] stringArray, string[] excludeStrings)**:
@@ -74,6 +86,8 @@ TsadriuUtilities is a library that helps on dealing with
 	- Converts a `encodedHtml` into a decoded string.
 - **GetHrefLink(string html)**:
 	- Checks the `html` and tries to return link that is in between the **href=""**.
+- **GetMultipleHrefLinks(string html)**:
+	- Checks the `html` and tries to return multiple links that are in between the **href=""**.
 
 ### ListHelper:
 - **AddRange\<T\>(List\<T\> list, T[] array, int startIndex, int endIndex)**:
@@ -101,7 +115,9 @@ TsadriuUtilities is a library that helps on dealing with
 - **ReplaceFromElements(List\<string\> list, string oldValue, string newValue)**
     - Returns a list where all occasions of `oldValue` have been replaced by `newValue` from the elements of the `list`.
 - **GetBetween(List<string> stringList, string start, string end, bool startEndIncluded)**:
-    - Iterates through the `stringList`, returning the first index where both `start` and `end` are found. If none of the indexes match `start` and `end`, a `string.Empty` is returned. Use `startEndIncluded` if you want to include `start` and `end` in the returning string.
+    - Iterates through the `stringList`, returning the first instance where both `start` and `end` are found. If none of the indexes match `start` and `end`, a `string.Empty` is returned. Use `startEndIncluded` if you want to include `start` and `end` in the returning string.
+- **GetMultipleBetween(List<string> stringList, string start, string end, bool startEndIncluded)**:
+    - Searches through the `stringList`, returning multiple instances found between `start` and `end`. Use `startEndIncluded` if you want to include `start` and `end` in the returning List<string>.
 - **KeepBetween(List<string> stringList, string start, string end, bool startEndIncluded, bool excludeEmptyIndexes)**:
     - Iterates through the `stringList`, keeping the content between `start` and `end`. If `startEndIncluded` is enabled, the indexes will keep the `start` and `end`. If `excludeEmptyIndexes` is enabled, empty indexes will be removed from the list.
 - **Exclude(List<string> stringList, string[] excludeStrings)**:

@@ -69,16 +69,91 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Iterates through <paramref name="stringArray"/>, checking if any of the indexes contain <paramref name="start"/> and <paramref name="end"/>.
+        /// Iterates through the <paramref name="stringArray"/>, returning the first index found that contains <paramref name="value"/>.
         /// </summary>
-        /// <param name="stringArray">Array of <see cref="string"/> to search through.</param>
+        /// <param name="stringArray">Current array.</param>
+        /// <param name="value">The value to search for.</param>
+        /// <param name="stringComparison">String comparison. If nothing is passed, <see cref="StringComparison.OrdinalIgnoreCase"/> will be used.</param>
+        /// <returns>The first index found in the array that contains <paramref name="value"/>. If <paramref name="value"/> is not present in the array, returns <see cref="string.Empty"/>.</returns>
+        public static string GetValueLike(this string[] stringArray, string value, StringComparison stringComparison = StringComparison.OrdinalIgnoreCase)
+        {
+            return stringArray.ToList().GetValueLike(value, stringComparison);
+        }
+
+        /// <summary>
+        /// Iterates through the <paramref name="stringArray"/>, returning the first index found that contains all <paramref name="values"/>.
+        /// </summary>
+        /// <param name="stringArray">The array to iterate through.</param>
+        /// <param name="stringComparison">String comparison. If nothing is passed, <see cref="StringComparison.OrdinalIgnoreCase"/> will be used.</param>
+        /// <param name="values">The values to search in the <paramref name="stringArray"/>.</param>
+        /// <returns>The first index found in the <paramref name="stringArray"/> that contains all <paramref name="values"/>. If any of the items of the <paramref name="stringArray"/>
+        /// does not have all <paramref name="values"/>, returns <see cref="string.Empty"/>.</returns>
+        public static string GetValueContaining(this string[] stringArray, StringComparison stringComparison, params string[] values)
+        {
+            return stringArray.ToList().GetValueContaining(stringComparison, values);
+        }
+
+        /// <summary>
+        /// Iterates through the <paramref name="stringArray"/>, adding <paramref name="startItemTag"/> before the item and <paramref name="endItemTag"/> after the item.
+        /// Example: <paramref name="startItemTag"/> is 'www.' and <paramref name="stringArray"/> is 'google.com'. Method will return the elements as 'www.google.com'.
+        /// </summary>
+        /// <param name="stringArray">The array of <see cref="string"/> to iterate through.</param>
+        /// <param name="startItemTag">What to add <b>before</b> the item.</param>
+        /// <param name="endItemTag">What to add <b>after</b> the item.</param>
+        /// <returns>If both <paramref name="startItemTag"/> and <paramref name="endItemTag"/> are empty, it will return the same <paramref name="stringArray"/>. If even one
+        /// of <paramref name="startItemTag"/> or <paramref name="endItemTag"/> has a value, it will be added to the items of the <paramref name="stringArray"/>.</returns>
+        public static string[] AddToElements(this string[] stringArray, string startItemTag, string endItemTag = null)
+        {
+            return stringArray.ToList().AddToElements(startItemTag, endItemTag).ToArray();
+        }
+
+        /// <summary>
+        /// Returns an array where all occasions of <paramref name="valuesToRemove"/> have been removed from the elements of the <paramref name="stringArray"/>.
+        /// </summary>
+        /// <param name="stringArray">Current array.</param>
+        /// <param name="valuesToRemove">The values to remove from the indexes of the <paramref name="stringArray"/>.</param>
+        /// <returns>An array where all occasions of <paramref name="valuesToRemove"/> have been removed from the elements of the <paramref name="stringArray"/>.</returns>
+        public static string[] RemoveFromElements(this string[] stringArray, params string[] valuesToRemove)
+        {
+            return stringArray.ToList().RemoveFromElements(valuesToRemove).ToArray();
+        }
+
+        /// <summary>
+        /// Returns an array where all occasions of <paramref name="oldValue"/> have been replaced by <paramref name="newValue"/> from the elements of the <paramref name="stringArray"/>.
+        /// </summary>
+        /// <param name="stringArray">Current array.</param>
+        /// <param name="oldValue">Old value to be replaced.</param>
+        /// <param name="newValue">New value that replaces the <paramref name="oldValue"/>.</param>
+        /// <returns>An array where all occasions of <paramref name="oldValue"/> have been replaced by <paramref name="newValue"/> from the elements of the <paramref name="stringArray"/>.</returns>
+        public static string[] ReplaceFromElements(this string[] stringArray, string oldValue, string newValue)
+        {
+            return stringArray.ToList().ReplaceFromElements(oldValue, newValue).ToArray();
+        }
+
+        /// <summary>
+        /// Searches through the <paramref name="stringArray"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="string"/>.
+        /// </summary>
+        /// <param name="stringArray">List of <see cref="string"/> to search through.</param>
         /// <param name="start">The start tag.</param>
         /// <param name="end">The end tag.</param>
-        /// <param name="startEndIncluded">If enabled, it will return a <see cref="string"/> with the <paramref name="start"/> and <paramref name="end"/> included in it.</param>
-        /// <returns>The first index where both <paramref name="start"/> and <paramref name="end"/> are found. If none of the indexes match <paramref name="start"/> and <paramref name="end"/>, it will return a <see cref="string.Empty"/>.</returns>
-        public static string GetBetween(this string[] stringArray, string start, string end, bool startEndIncluded = false)
+        /// <param name="startEndIncluded">If enabled, the returning <see cref="string"/> will keep the <paramref name="start"/> and <paramref name="end"/>in it.</param>
+        /// <returns>The first index that was found with either the <paramref name="start"/> or <paramref name="end"/>. If neither are found, a <see cref="string.Empty"/> is returned instead.</returns>
+        public static string GetBetween(this string[] stringArray, string start = null, string end = null, bool startEndIncluded = false)
         {
-            return ListHelper.GetBetween(stringArray.ToList(), start, end, startEndIncluded);
+            return stringArray.ToList().GetBetween(start, end, startEndIncluded);
+        }
+
+        /// <summary>
+        /// Searches through the <paramref name="stringArray"/>, returning multiple instances found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <b><![CDATA[List<string>]]></b>.
+        /// </summary>
+        /// <param name="stringArray">List of <see cref="string"/> to search through.</param>
+        /// <param name="start">The start tag.</param>
+        /// <param name="end">The end tag.</param>
+        /// <param name="startEndIncluded">If enabled, the indexes will keep the <paramref name="start"/> and <paramref name="end"/>.</param>
+        /// <returns>Multiple indexes that were found with either the <paramref name="start"/> or <paramref name="end"/>. If neither are found, an empty <b><![CDATA[List<string>]]></b> is returned instead.</returns>
+        public static string[] GetMultipleBetween(this string[] stringArray, string start = null, string end = null, bool startEndIncluded = false)
+        {
+            return stringArray.ToList().GetMultipleBetween(start, end, startEndIncluded).ToArray();
         }
 
         /// <summary>
@@ -92,7 +167,7 @@ namespace TsadriuUtilities
         /// <returns>New array with the indexes' content changed based on <paramref name="start"/> and/or <paramref name="end"/>.</returns>
         public static string[] KeepBetween(this string[] stringArray, string start = null, string end = null, bool startEndIncluded = false, bool excludeEmptyIndexes = true)
         {
-            return ListHelper.KeepBetween(stringArray.ToList(), start, end, startEndIncluded, excludeEmptyIndexes).ToArray();
+            return stringArray.ToList().KeepBetween(start, end, startEndIncluded, excludeEmptyIndexes).ToArray();
         }
 
         /// <summary>
@@ -103,7 +178,7 @@ namespace TsadriuUtilities
         /// <returns>New array where the indexes that had <paramref name="excludeStrings"/> were removed from the <paramref name="stringArray"/>.</returns>
         public static string[] Exclude(this string[] stringArray, params string[] excludeStrings)
         {
-            return ListHelper.Exclude(stringArray.ToList(), excludeStrings).ToArray();
+            return stringArray.ToList().Exclude(excludeStrings).ToArray();
         }
     }
 }

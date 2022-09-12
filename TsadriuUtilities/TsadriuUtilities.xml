@@ -31,15 +31,72 @@
             <param name="max">The maximum number that can be generated.</param>
             <returns>An array which all indexes have been assigned a random number.</returns>
         </member>
+        <member name="M:TsadriuUtilities.ArrayHelper.GetValueLike(System.String[],System.String,System.StringComparison)">
+            <summary>
+            Iterates through the <paramref name="stringArray"/>, returning the first index found that contains <paramref name="value"/>.
+            </summary>
+            <param name="stringArray">Current array.</param>
+            <param name="value">The value to search for.</param>
+            <param name="stringComparison">String comparison. If nothing is passed, <see cref="F:System.StringComparison.OrdinalIgnoreCase"/> will be used.</param>
+            <returns>The first index found in the array that contains <paramref name="value"/>. If <paramref name="value"/> is not present in the array, returns <see cref="F:System.String.Empty"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ArrayHelper.GetValueContaining(System.String[],System.StringComparison,System.String[])">
+            <summary>
+            Iterates through the <paramref name="stringArray"/>, returning the first index found that contains all <paramref name="values"/>.
+            </summary>
+            <param name="stringArray">The array to iterate through.</param>
+            <param name="stringComparison">String comparison. If nothing is passed, <see cref="F:System.StringComparison.OrdinalIgnoreCase"/> will be used.</param>
+            <param name="values">The values to search in the <paramref name="stringArray"/>.</param>
+            <returns>The first index found in the <paramref name="stringArray"/> that contains all <paramref name="values"/>. If any of the items of the <paramref name="stringArray"/>
+            does not have all <paramref name="values"/>, returns <see cref="F:System.String.Empty"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ArrayHelper.AddToElements(System.String[],System.String,System.String)">
+            <summary>
+            Iterates through the <paramref name="stringArray"/>, adding <paramref name="startItemTag"/> before the item and <paramref name="endItemTag"/> after the item.
+            Example: <paramref name="startItemTag"/> is 'www.' and <paramref name="stringArray"/> is 'google.com'. Method will return the elements as 'www.google.com'.
+            </summary>
+            <param name="stringArray">The array of <see cref="T:System.String"/> to iterate through.</param>
+            <param name="startItemTag">What to add <b>before</b> the item.</param>
+            <param name="endItemTag">What to add <b>after</b> the item.</param>
+            <returns>If both <paramref name="startItemTag"/> and <paramref name="endItemTag"/> are empty, it will return the same <paramref name="stringArray"/>. If even one
+            of <paramref name="startItemTag"/> or <paramref name="endItemTag"/> has a value, it will be added to the items of the <paramref name="stringArray"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ArrayHelper.RemoveFromElements(System.String[],System.String[])">
+            <summary>
+            Returns an array where all occasions of <paramref name="valuesToRemove"/> have been removed from the elements of the <paramref name="stringArray"/>.
+            </summary>
+            <param name="stringArray">Current array.</param>
+            <param name="valuesToRemove">The values to remove from the indexes of the <paramref name="stringArray"/>.</param>
+            <returns>An array where all occasions of <paramref name="valuesToRemove"/> have been removed from the elements of the <paramref name="stringArray"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ArrayHelper.ReplaceFromElements(System.String[],System.String,System.String)">
+            <summary>
+            Returns an array where all occasions of <paramref name="oldValue"/> have been replaced by <paramref name="newValue"/> from the elements of the <paramref name="stringArray"/>.
+            </summary>
+            <param name="stringArray">Current array.</param>
+            <param name="oldValue">Old value to be replaced.</param>
+            <param name="newValue">New value that replaces the <paramref name="oldValue"/>.</param>
+            <returns>An array where all occasions of <paramref name="oldValue"/> have been replaced by <paramref name="newValue"/> from the elements of the <paramref name="stringArray"/>.</returns>
+        </member>
         <member name="M:TsadriuUtilities.ArrayHelper.GetBetween(System.String[],System.String,System.String,System.Boolean)">
             <summary>
-            Iterates through <paramref name="stringArray"/>, checking if any of the indexes contain <paramref name="start"/> and <paramref name="end"/>.
+            Searches through the <paramref name="stringArray"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="T:System.String"/>.
             </summary>
-            <param name="stringArray">Array of <see cref="T:System.String"/> to search through.</param>
+            <param name="stringArray">List of <see cref="T:System.String"/> to search through.</param>
             <param name="start">The start tag.</param>
             <param name="end">The end tag.</param>
-            <param name="startEndIncluded">If enabled, it will return a <see cref="T:System.String"/> with the <paramref name="start"/> and <paramref name="end"/> included in it.</param>
-            <returns>The first index where both <paramref name="start"/> and <paramref name="end"/> are found. If none of the indexes match <paramref name="start"/> and <paramref name="end"/>, it will return a <see cref="F:System.String.Empty"/>.</returns>
+            <param name="startEndIncluded">If enabled, the returning <see cref="T:System.String"/> will keep the <paramref name="start"/> and <paramref name="end"/>in it.</param>
+            <returns>The first index that was found with either the <paramref name="start"/> or <paramref name="end"/>. If neither are found, a <see cref="F:System.String.Empty"/> is returned instead.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ArrayHelper.GetMultipleBetween(System.String[],System.String,System.String,System.Boolean)">
+            <summary>
+            Searches through the <paramref name="stringArray"/>, returning multiple instances found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <b><![CDATA[List<string>]]></b>.
+            </summary>
+            <param name="stringArray">List of <see cref="T:System.String"/> to search through.</param>
+            <param name="start">The start tag.</param>
+            <param name="end">The end tag.</param>
+            <param name="startEndIncluded">If enabled, the indexes will keep the <paramref name="start"/> and <paramref name="end"/>.</param>
+            <returns>Multiple indexes that were found with either the <paramref name="start"/> or <paramref name="end"/>. If neither are found, an empty <b><![CDATA[List<string>]]></b> is returned instead.</returns>
         </member>
         <member name="M:TsadriuUtilities.ArrayHelper.KeepBetween(System.String[],System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
@@ -282,6 +339,13 @@
             <param name="html">Html string with the link inside of it.</param>
             <returns>The link in between the <b><![CDATA[href=""]]></b>. If the link is not found, returns a <see cref="F:System.String.Empty"/>.</returns>
         </member>
+        <member name="M:TsadriuUtilities.HtmlHelper.GetMultipleHrefLinks(System.String)">
+            <summary>
+            Checks the <paramref name="html"/> and tries to return multiple links that are in between the <b><![CDATA[href=""]]></b>.
+            </summary>
+            <param name="html">Html string with the links inside of it.</param>
+            <returns>The multiple links that are between the <b><![CDATA[href=""]]></b>. If no links are found, return an empty <b><![CDATA[List<string>]]></b>.</returns>
+        </member>
         <member name="T:TsadriuUtilities.ListHelper">
             <summary>
             A class that helps on dealing with <see cref="T:System.Collections.Generic.List`1"/>.
@@ -400,13 +464,23 @@
         </member>
         <member name="M:TsadriuUtilities.ListHelper.GetBetween(System.Collections.Generic.List{System.String},System.String,System.String,System.Boolean)">
             <summary>
-            Iterates through <paramref name="stringList"/>, checking if any of the indexes contain <paramref name="start"/> and <paramref name="end"/>.
+            Searches through the <paramref name="stringList"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="T:System.String"/>.
+            </summary>
+            <param name="stringList">List of <see cref="T:System.String"/> to search through.</param>
+            <param name="start">The start tag.</param>
+            <param name="end">The end tag.</param>
+            <param name="startEndIncluded">If enabled, the returning <see cref="T:System.String"/> will keep the <paramref name="start"/> and <paramref name="end"/>in it.</param>
+            <returns>The first index that was found with either the <paramref name="start"/> or <paramref name="end"/>. If neither are found, a <see cref="F:System.String.Empty"/> is returned instead.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ListHelper.GetMultipleBetween(System.Collections.Generic.List{System.String},System.String,System.String,System.Boolean)">
+            <summary>
+            Searches through the <paramref name="stringList"/>, returning multiple instances found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <b><![CDATA[List<string>]]></b>.
             </summary>
             <param name="stringList">List of <see cref="T:System.String"/> to search through.</param>
             <param name="start">The start tag.</param>
             <param name="end">The end tag.</param>
             <param name="startEndIncluded">If enabled, the indexes will keep the <paramref name="start"/> and <paramref name="end"/>.</param>
-            <returns>The first index where both <paramref name="start"/> and <paramref name="end"/> are found. If none of the indexes match <paramref name="start"/> and <paramref name="end"/>, it will return a <see cref="F:System.String.Empty"/>.</returns>
+            <returns>Multiple indexes that were found with either the <paramref name="start"/> or <paramref name="end"/>. If neither are found, an empty <b><![CDATA[List<string>]]></b> is returned instead.</returns>
         </member>
         <member name="M:TsadriuUtilities.ListHelper.KeepBetween(System.Collections.Generic.List{System.String},System.String,System.String,System.Boolean,System.Boolean)">
             <summary>

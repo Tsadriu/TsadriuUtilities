@@ -2,35 +2,31 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.7.0</Version>
+    <Version>1.8.0</Version>
     <Description>A small package of utilities to help dealing with strings, chars, lists and more to hopefully save a little bit of time in coding.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>HtmlHelper:
-- Implemented method EncodeHtml().
-- Implemented method DecodeHtml().
-- Implemented method GetHrefLink().
-
-ListHelper:
+    <PackageReleaseNotes>ArrayHelper:
+- Implemented method GetValueLike().
 - Implemented method GetValueContaining().
 - Implemented method AddToElements().
-- Implemented method Exclude().
+- Implemented method RemoveFromElements().
+- Implemented method ReplaceFromElements().
+- Implemented method GetMultipleBetween().
 
-NumberHelper:
-- Implemented method IsNullOrZero().
-- Implemented method IsNotNullorZero().
+HtmlHelper:
+- Implemented method GetMultipleHrefLinks().
 
-StringHelper:
-- Implemented method GetBetweenReverse() (Cannot be used yed!).
-- Implemented method Reverse().
-- Implemented method Split().</PackageReleaseNotes>
+ListHelper:
+- Implemented method GetMultipleBetween().
+</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
-    <AssemblyVersion>1.7.0</AssemblyVersion>
-    <FileVersion>1.7.0</FileVersion>
+    <AssemblyVersion>1.8.0</AssemblyVersion>
+    <FileVersion>1.8.0</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>TsadriuUtilities</PackageId>
     <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>

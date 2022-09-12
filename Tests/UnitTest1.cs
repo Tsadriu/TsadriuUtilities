@@ -83,6 +83,22 @@ namespace Tests
             newListTest.Add(null);
 
             var isAny = newListTest.HasAny();
+
+            var portaleTest = new string[]
+            {
+                "\" align=\"left\" style=\"font-weight:normal;\">\r\n\t\t\t\t",
+                ">1502200457</td>",
+                " title=\"07/09/2022\">07/09/2022</td>",
+                ">3804502.12</td>",
+                ">3804502.12</td>",
+                " title=\"30/09/2022\">30/09/2022</td>",
+                ">\r\n                                <input type=\"image\" name=\"templatesnet_templatedemo_body_ascx$Content$modules_ricercafatture_ascx$grdFatture$ctl02$imgFattura\" id=\"templatesnet_templatedemo_body_ascx_Content_modules_ricercafatture_ascx_grdFatture_imgFattura_0\" class=\"imd_downloadGrid\" src=\"TemplatesNET/TemplateDEMO/Images/Icons/download.png\" />\r\n                            </td>",
+                ">SI</td>",
+                ">\r\n                                <input type=\"image\" name=\"templatesnet_templatedemo_body_ascx$Content$modules_ricercafatture_ascx$grdFatture$ctl02$imgAnalitico\" id=\"templatesnet_templatedemo_body_ascx_Content_modules_ricercafatture_ascx_grdFatture_imgAnalitico_0\" class=\"imd_downloadGrid\" src=\"TemplatesNET/TemplateDEMO/Images/Icons/download.png\" />\r\n                            </td>\r\n\t\t\t",
+            };
+
+            var namesTest = portaleTest.ToList().GetMultipleBetween("name=\"");
+            var nameGetBetween = portaleTest.ToList().GetBetween("name=\"");
         }
 
         [TestMethod]

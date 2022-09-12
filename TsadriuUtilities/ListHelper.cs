@@ -197,7 +197,7 @@ namespace TsadriuUtilities
             {
                 if (startItemTag.IsNotEmpty())
                 {
-                    list[i] = startItemTag + list[i]; 
+                    list[i] = startItemTag + list[i];
                 }
 
                 if (endItemTag.IsNotEmpty())
@@ -243,24 +243,51 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Iterates through <paramref name="stringList"/>, checking if any of the indexes contain <paramref name="start"/> and <paramref name="end"/>.
+        /// Searches through the <paramref name="stringList"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="string"/>.
+        /// </summary>
+        /// <param name="stringList">List of <see cref="string"/> to search through.</param>
+        /// <param name="start">The start tag.</param>
+        /// <param name="end">The end tag.</param>
+        /// <param name="startEndIncluded">If enabled, the returning <see cref="string"/> will keep the <paramref name="start"/> and <paramref name="end"/>in it.</param>
+        /// <returns>The first index that was found with either the <paramref name="start"/> or <paramref name="end"/>. If neither are found, a <see cref="string.Empty"/> is returned instead.</returns>
+        public static string GetBetween(this List<string> stringList, string start = null, string end = null, bool startEndIncluded = false)
+        {
+            for (int i = 0; i < stringList.Count; i++)
+            {
+                var result = stringList[i].GetBetween(start, end, startEndIncluded);
+
+                if (result.IsNotEmpty())
+                {
+                    return result;
+                }
+            }
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Searches through the <paramref name="stringList"/>, returning multiple instances found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <b><![CDATA[List<string>]]></b>.
         /// </summary>
         /// <param name="stringList">List of <see cref="string"/> to search through.</param>
         /// <param name="start">The start tag.</param>
         /// <param name="end">The end tag.</param>
         /// <param name="startEndIncluded">If enabled, the indexes will keep the <paramref name="start"/> and <paramref name="end"/>.</param>
-        /// <returns>The first index where both <paramref name="start"/> and <paramref name="end"/> are found. If none of the indexes match <paramref name="start"/> and <paramref name="end"/>, it will return a <see cref="string.Empty"/>.</returns>
-        public static string GetBetween(this List<string> stringList, string start, string end, bool startEndIncluded = false)
+        /// <returns>Multiple indexes that were found with either the <paramref name="start"/> or <paramref name="end"/>. If neither are found, an empty <b><![CDATA[List<string>]]></b> is returned instead.</returns>
+        public static List<string> GetMultipleBetween(this List<string> stringList, string start = null, string end = null, bool startEndIncluded = false)
         {
+            List<string> newList = new List<string>();
+
             for (int i = 0; i < stringList.Count; i++)
             {
-                if (stringList[i].Contains(start, StringComparison.OrdinalIgnoreCase) && stringList[i].Contains(end, StringComparison.OrdinalIgnoreCase))
+                var result = stringList[i].GetBetween(start, end, startEndIncluded);
+
+                if (result.IsNotEmpty())
                 {
-                    return StringHelper.GetBetween(stringList[i], start, end, startEndIncluded);
+                    newList.Add(result);
                 }
             }
 
-            return string.Empty;
+            return newList;
         }
 
         /// <summary>
