@@ -1,11 +1,11 @@
 
 # TsadriuUtilities
-### _A small package with utilities to save a little bit of time in coding._
+### _A package with utilities that are useful while web scraping, to make it easier and save a little bit of time._
 
 
 TsadriuUtilities is a library that helps on dealing with
- - [Arrays](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/), [Chars](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char), [Date and Time](https://docs.microsoft.com/en-us/dotnet/api/system.datetime.date?view=net-6.0), [Directories](https://docs.microsoft.com/en-us/dotnet/api/system.io.directory?view=net-6.0), [Files](https://docs.microsoft.com/en-us/dotnet/api/system.io.file?view=net-6.0), [Lists](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1?view=net-6.0), [Numbers](https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/tutorials/numbers-in-csharp-local), [Strings](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=net-6.0) and 
-[Generic types](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics) and more to hopefully make coding easier while also saving a bit of time. 
+ - [Arrays](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/), [Chars](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char), [Date and Time](https://docs.microsoft.com/en-us/dotnet/api/system.datetime.date?view=net-6.0), [Directories](https://docs.microsoft.com/en-us/dotnet/api/system.io.directory?view=net-6.0), [Files](https://docs.microsoft.com/en-us/dotnet/api/system.io.file?view=net-6.0), [Lists](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1?view=net-6.0), [Numbers](https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/tutorials/numbers-in-csharp-local), [Strings](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=net-6.0), 
+[Generic types](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics) and more. I hope this package will make your coding easier and save you a bit of time. 
 
 ## > Features <
 ### ArrayHelper:

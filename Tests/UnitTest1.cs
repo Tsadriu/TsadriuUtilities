@@ -97,8 +97,8 @@ namespace Tests
                 ">\r\n                                <input type=\"image\" name=\"templatesnet_templatedemo_body_ascx$Content$modules_ricercafatture_ascx$grdFatture$ctl02$imgAnalitico\" id=\"templatesnet_templatedemo_body_ascx_Content_modules_ricercafatture_ascx_grdFatture_imgAnalitico_0\" class=\"imd_downloadGrid\" src=\"TemplatesNET/TemplateDEMO/Images/Icons/download.png\" />\r\n                            </td>\r\n\t\t\t",
             };
 
-            var namesTest = portaleTest.ToList().GetMultipleBetween("name=\"");
-            var nameGetBetween = portaleTest.ToList().GetBetween("name=\"");
+            var namesTest = portaleTest.ToList().GetMultipleBetween("name=\"", "\"");
+            var nameGetBetween = portaleTest.ToList().GetBetween("name=\"", "\"");
         }
 
         [TestMethod]

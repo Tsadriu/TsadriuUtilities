@@ -71,12 +71,12 @@ namespace TsadriuUtilities
                 return text.Substring(startIndex, endIndex - startIndex);
             }
 
-            if (startIndex > -1)
+            if (startIndex > -1 && end.IsEmpty())
             {
                 return text.Substring(startIndex, text.Length - startIndex);
             }
 
-            if (endIndex > -1)
+            if (endIndex > -1 && start.IsEmpty())
             {
                 return text.Substring(0, endIndex);
             }
