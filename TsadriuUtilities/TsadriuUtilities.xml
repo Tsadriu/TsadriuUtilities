@@ -181,7 +181,7 @@
             Sets the <paramref name="day"/> in the <paramref name="date"/>.
             </summary>
             <param name="date">Current date.</param>
-            <param name="day">Day to set. In case <paramref name="day"/> is higher than the month's max days, it will be clamped.</param>
+            <param name="day">Day to set. In case <paramref name="day"/> is higher than the month's max days, it will be clamped to the month's max day.</param>
             <returns>Date with the specified <paramref name="day"/>.</returns>
         </member>
         <member name="M:TsadriuUtilities.DateTimeHelper.SetMonth(System.DateTime,System.Int32)">
@@ -189,7 +189,7 @@
             Sets the <paramref name="month"/> in the <paramref name="date"/>.
             </summary>
             <param name="date">Current date.</param>
-            <param name="month">Month to set. In case <paramref name="month"/> is higher than the year's max months, it will be clamped.</param>
+            <param name="month">Month to set. In case <paramref name="month"/> is higher than the year's max months, it will be clamped to the year's max month.</param>
             <returns>Date with the specified <paramref name="month"/>.</returns>
         </member>
         <member name="M:TsadriuUtilities.DateTimeHelper.SetYear(System.DateTime,System.Int32)">
@@ -334,17 +334,52 @@
         </member>
         <member name="M:TsadriuUtilities.HtmlHelper.GetHrefLink(System.String)">
             <summary>
-            Checks the <paramref name="html"/> and tries to return link that is in between the <b><![CDATA[href=""]]></b>.
+            Checks the <paramref name="html"/> and tries to return the first link that is in between the <b><![CDATA[href=""]]></b>.
             </summary>
             <param name="html">Html string with the link inside of it.</param>
-            <returns>The link in between the <b><![CDATA[href=""]]></b>. If the link is not found, returns a <see cref="F:System.String.Empty"/>.</returns>
+            <returns>The first link found in between the <b><![CDATA[href=""]]></b>. If the link is not found, returns a <see cref="F:System.String.Empty"/>.</returns>
         </member>
         <member name="M:TsadriuUtilities.HtmlHelper.GetMultipleHrefLinks(System.String)">
             <summary>
             Checks the <paramref name="html"/> and tries to return multiple links that are in between the <b><![CDATA[href=""]]></b>.
             </summary>
             <param name="html">Html string with the links inside of it.</param>
-            <returns>The multiple links that are between the <b><![CDATA[href=""]]></b>. If no links are found, return an empty <b><![CDATA[List<string>]]></b>.</returns>
+            <returns>The multiple links that are between the <b><![CDATA[href=""]]></b>. If no links are found, returns an empty <b><![CDATA[List<string>]]></b>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.HtmlHelper.GetTable(System.String)">
+            <summary>
+            Checks the <paramref name="html"/> and tries to return the first table that is in between the <b><![CDATA[<table></table>]]></b>.
+            </summary>
+            <param name="html">Html string with the table inside of it.</param>
+            <returns>The first table found in between the <b><![CDATA[<table></table>]]></b>. If the table is not found, returns a <see cref="F:System.String.Empty"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.HtmlHelper.GetMultipleTables(System.String)">
+            <summary>
+            Checks the <paramref name="html"/> and tries to return multiple tables that are in between the <b><![CDATA[<table></table>]]></b>.
+            </summary>
+            <param name="html">Html string with the links inside of it.</param>
+            <returns>The multiple tables that are between the <b><![CDATA[<table></table>]]></b>. If no tables are found, returns an empty <b><![CDATA[List<string>]]></b>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.HtmlHelper.GetRowsFromTable(System.String)">
+            <summary>
+            Checks the <paramref name="htmlTable"/> and tries to return the rows that are in between the <b><![CDATA[<table></table>]]></b>.
+            </summary>
+            <param name="htmlTable">The content must contain only <b>one table</b> and nothing else.</param>
+            <returns>The multiple rows that are between the <b><![CDATA[<tr></tr>]]></b>. If no rows are found, returns an empty <b><![CDATA[List<string>]]></b>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.HtmlHelper.GetDataFromRows(System.String)">
+            <summary>
+            Checks the <paramref name="htmlTable"/> and tries to return the data that are in between the <b><![CDATA[<tr></tr>]]></b>.
+            </summary>
+            <param name="htmlTable">The content must contain only <b>one table</b> and nothing else.</param>
+            <returns>The multiple data that is between the <b><![CDATA[<tr></tr>]]></b>. If no data is found, returns an empty <b><![CDATA[List<string>]]></b>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.HtmlHelper.GetMultipleDataFromTables(System.Collections.Generic.List{System.String})">
+            <summary>
+            Checks the <paramref name="htmlTables"/> and tries to return all the data that are in multiple rows of multiple tables.
+            </summary>
+            <param name="htmlTables">The content can contain <b>multiple tables</b> and nothing else.</param>
+            <returns>Multiple data that is between the <b><![CDATA[<tr></tr>]]></b> of multiple tables. If no data is found, returns an empty <b><![CDATA[List<string>]]></b>.</returns>
         </member>
         <member name="T:TsadriuUtilities.ListHelper">
             <summary>
@@ -474,13 +509,25 @@
         </member>
         <member name="M:TsadriuUtilities.ListHelper.GetMultipleBetween(System.Collections.Generic.List{System.String},System.String,System.String,System.Boolean)">
             <summary>
-            Searches through the <paramref name="stringList"/>, returning multiple instances found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <b><![CDATA[List<string>]]></b>.
+            Searches through the <paramref name="stringList"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/> for each index.
+            If you want more instances per index, please use the method <see cref="M:TsadriuUtilities.ListHelper.GetMultipleBetweenIndexes(System.Collections.Generic.List{System.String},System.String,System.String,System.Boolean)"/>.
             </summary>
             <param name="stringList">List of <see cref="T:System.String"/> to search through.</param>
             <param name="start">The start tag.</param>
             <param name="end">The end tag.</param>
             <param name="startEndIncluded">If enabled, the indexes will keep the <paramref name="start"/> and <paramref name="end"/>.</param>
             <returns>Multiple indexes that were found with either the <paramref name="start"/> or <paramref name="end"/>. If neither are found, an empty <b><![CDATA[List<string>]]></b> is returned instead.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ListHelper.GetMultipleBetweenIndexes(System.Collections.Generic.List{System.String},System.String,System.String,System.Boolean)">
+            <summary>
+            Searches through the <paramref name="stringList"/>, returningmultiple instances found between <paramref name="start"/> and <paramref name="end"/> for each index.
+            If you want only one instance per index, please use the method <see cref="M:TsadriuUtilities.ListHelper.GetMultipleBetween(System.Collections.Generic.List{System.String},System.String,System.String,System.Boolean)"/>.
+            </summary>
+            <param name="stringList">List of <see cref="T:System.String"/> to search through.</param>
+            <param name="start">The start tag.</param>
+            <param name="end">The end tag.</param>
+            <param name="startEndIncluded">If enabled, the indexes will keep the <paramref name="start"/> and <paramref name="end"/>.</param>
+            <returns>Multiple instances by multiple indexes that were found with either the <paramref name="start"/> or <paramref name="end"/>. If neither are found, an empty <b><![CDATA[List<string>]]></b> is returned instead.</returns>
         </member>
         <member name="M:TsadriuUtilities.ListHelper.KeepBetween(System.Collections.Generic.List{System.String},System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
@@ -587,15 +634,27 @@
         </member>
         <member name="M:TsadriuUtilities.NumberHelper.Between``1(``0,``0,``0,System.Boolean)">
             <summary>
-            Checks if <paramref name="value"/> is between <paramref name="min"/> and <paramref name="max"/>. Setting <paramref name="included"/> to true will also include <paramref name="min"/> and <paramref name="max"/> in the verification.
+            Checks if <paramref name="value"/> is in the range of <paramref name="minValue"/> and <paramref name="maxValue"/>. Setting <paramref name="inclusive"/> to true will also include <paramref name="minValue"/> and <paramref name="maxValue"/> in the verification.
             </summary>
             <typeparam name="T">Supported types: <see cref="T:System.Int64"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/>,
             <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Decimal"/>.</typeparam>
             <param name="value">The value to be checked on.</param>
-            <param name="min">Minimum value.</param>
-            <param name="max">Maximum value.</param>
-            <param name="included">Set to true to include <paramref name="min"/> and <paramref name="max"/> in the verification.</param>
-            <returns>True if <paramref name="value"/> is between <paramref name="min"/> and <paramref name="max"/>. Otherwise returns false.</returns>
+            <param name="minValue">Minimum value.</param>
+            <param name="maxValue">Maximum value.</param>
+            <param name="inclusive">Set to true to include <paramref name="minValue"/> and <paramref name="maxValue"/> in the verification.</param>
+            <returns>True if <paramref name="value"/> is between <paramref name="minValue"/> and <paramref name="maxValue"/>. Otherwise returns false.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.NumberHelper.IsBetween``1(``0,``0,``0,System.Boolean)">
+            <summary>
+            Checks if <paramref name="value"/> is in the range of <paramref name="minValue"/> and <paramref name="maxValue"/>. Setting <paramref name="inclusive"/> to true will also include <paramref name="minValue"/> and <paramref name="maxValue"/> in the verification.
+            </summary>
+            <typeparam name="T">Supported types: <see cref="T:System.Int64"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/>,
+            <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Decimal"/>.</typeparam>
+            <param name="value">The value to be checked on.</param>
+            <param name="minValue">Minimum value.</param>
+            <param name="maxValue">Maximum value.</param>
+            <param name="inclusive">Set to true to include <paramref name="minValue"/> and <paramref name="maxValue"/> in the verification.</param>
+            <returns>True if <paramref name="value"/> is between <paramref name="minValue"/> and <paramref name="maxValue"/>. Otherwise returns false.</returns>
         </member>
         <member name="M:TsadriuUtilities.NumberHelper.IsNullOrZero``1(``0)">
             <summary>
@@ -832,7 +891,8 @@
         </member>
         <member name="M:TsadriuUtilities.StringHelper.GetBetween(System.String,System.String,System.String,System.Boolean)">
             <summary>
-            Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="T:System.String"/>.
+            Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>.
+            <br>Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="T:System.String"/>.</br>
             </summary>
             <param name="text">Text to search through.</param>
             <param name="start">The start tag.</param>
@@ -853,13 +913,13 @@
         <member name="M:TsadriuUtilities.StringHelper.GetBetweenReverse(System.String,System.String,System.String,System.Boolean)">
             <summary>
             <b>This method is unstable and unfinished. Using it will throw an <see cref="T:System.NotImplementedException"/>.</b>
-            Searches through the <paramref name="text"/>, using the <paramref name="start"/> as the end tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="end"/> tag is found.
+            Searches through the <paramref name="text"/>, using the <paramref name="end"/> as the end tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="start"/> tag is found.
             </summary>
             <param name="text">Text to search through.</param>
-            <param name="start">From where the text ends.</param>
-            <param name="end">From where the text starts.</param>
-            <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
-            <returns>The first instance found between <paramref name="start"/> and <paramref name="end"/>. If both <paramref name="start"/> and <paramref name="end"/> are not found, returns a <see cref="F:System.String.Empty"/>.</returns>
+            <param name="end">From where the text ends.</param>
+            <param name="start">From where the text starts.</param>
+            <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="end"/> and <paramref name="start"/> included.</param>
+            <returns>The first instance found between <paramref name="end"/> and <paramref name="start"/>. If both <paramref name="end"/> and <paramref name="start"/> are not found, returns a <see cref="F:System.String.Empty"/>.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.AndContains(System.String,System.StringComparison,System.String[])">
             <summary>
@@ -963,6 +1023,34 @@
             <param name="separator">The separator.</param>
             <param name="keepSeparator">Setting it to true, the <paramref name="separator"/> will be included in the result of the split.</param>
             <returns>A list of <see cref="T:System.String"/> that contains <paramref name="value"/> splitted by the <paramref name="separator"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.SplitByUpperCase(System.String,System.String)">
+            <summary>
+            Splits the <paramref name="value"/> by upper-case characters.
+            </summary>
+            <param name="value">The value to be splitted.</param>
+            <param name="separator">The separator to use when a character is splitted.</param>
+            <returns>The <paramref name="value"/> splitted by upper-case characters.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.SplitByLowerCase(System.String,System.String)">
+            <summary>
+            Splits the <paramref name="value"/> by lower-case characters.
+            </summary>
+            <param name="value">The value to be splitted.</param>
+            <param name="separator">The separator to use when a character is splitted.</param>
+            <returns>The <paramref name="value"/> splitted by lower-case characters.</returns>
+        </member>
+        <member name="T:TsadriuUtilities.XmlHelper">
+            <summary>
+            A class that helps on dealing with xml.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilities.XmlHelper.RemoveEmptyTags(System.String)">
+            <summary>
+            Searches through the <paramref name="xml"/>, removing empty tags that have the format of <![CDATA[<EmptyTag/>]]>.
+            </summary>
+            <param name="xml">The xml text.</param>
+            <returns>The xml where the empty tags are removed.</returns>
         </member>
     </members>
 </doc>

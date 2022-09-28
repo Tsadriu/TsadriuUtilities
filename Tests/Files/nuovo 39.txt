@@ -1,0 +1,1 @@
+<MessageAnnotationsMIBGAS xmlns="http://www.omie.es/Gas/Schemas%22%3E<MessageId v="Annotations_20220925" /><MessageVersion v="3" /><MessageDateTime v="2022-09-25T21:34:13" /><TradingDay v="2022-09-25" /><SenderId/><ReceiverId v="ENET" /></MessageAnnotationsMIBGAS>

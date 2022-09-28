@@ -2,20 +2,42 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.8.1</Version>
+    <Version>1.9.0</Version>
     <Description>TsadriuUtilities is a library that helps on dealing with: Arrays, Chars, DateTime, Directories, Files, Lists, Numbers, Strings, Generic types and more. I hope this package will make your coding easier and save you a bit of time.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>StringHelper:
-- Fixed a bug where sometimes the methods GetBetween() and GetMultipleBetween() would return an incorrect string based on the parameters start and end.
+    <PackageReleaseNotes>
+DateTimeHelper:
+- Improved comments of methods SetDay() and SetMonth().
+
+HtmlHelper:
+- Improved comment of method GetHrefLink().
+- Implemented method GetTable().
+- Implemented method GetMultipleTables().
+- Implemented method GetRowsFromTable().
+- Implemented method GetDataFromRows().
+- Implemented method GetMultipleDataFromTables().
+
+ListHelper:
+- Implemented method GetMultipleBetweenIndexes().
+
+NumberHelper:
+- Deprecated method Between(), please use the new method IsBetween().
+
+StringHelper:
+- Implemented method SplitByUpperCase().
+- Implemented method SplitByLowerCase().
+
+XmlHelper:
+- Implemented method RemoveEmptyTags().
 </PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
-    <AssemblyVersion>1.8.1</AssemblyVersion>
-    <FileVersion>1.8.1</FileVersion>
+    <AssemblyVersion>1.9.0</AssemblyVersion>
+    <FileVersion>1.9.0</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>TsadriuUtilities</PackageId>
     <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>

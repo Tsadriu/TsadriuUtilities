@@ -266,7 +266,8 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Searches through the <paramref name="stringList"/>, returning multiple instances found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <b><![CDATA[List<string>]]></b>.
+        /// Searches through the <paramref name="stringList"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/> for each index.
+        /// If you want more instances per index, please use the method <see cref="GetMultipleBetweenIndexes(List{string}, string, string, bool)"/>.
         /// </summary>
         /// <param name="stringList">List of <see cref="string"/> to search through.</param>
         /// <param name="start">The start tag.</param>
@@ -275,7 +276,7 @@ namespace TsadriuUtilities
         /// <returns>Multiple indexes that were found with either the <paramref name="start"/> or <paramref name="end"/>. If neither are found, an empty <b><![CDATA[List<string>]]></b> is returned instead.</returns>
         public static List<string> GetMultipleBetween(this List<string> stringList, string start = null, string end = null, bool startEndIncluded = false)
         {
-            List<string> newList = new List<string>();
+            var newList = new List<string>();
 
             for (int i = 0; i < stringList.Count; i++)
             {
@@ -284,6 +285,35 @@ namespace TsadriuUtilities
                 if (result.IsNotEmpty())
                 {
                     newList.Add(result);
+                }
+            }
+
+            return newList;
+        }
+
+        /// <summary>
+        /// Searches through the <paramref name="stringList"/>, returningmultiple instances found between <paramref name="start"/> and <paramref name="end"/> for each index.
+        /// If you want only one instance per index, please use the method <see cref="GetMultipleBetween(List{string}, string, string, bool)"/>.
+        /// </summary>
+        /// <param name="stringList">List of <see cref="string"/> to search through.</param>
+        /// <param name="start">The start tag.</param>
+        /// <param name="end">The end tag.</param>
+        /// <param name="startEndIncluded">If enabled, the indexes will keep the <paramref name="start"/> and <paramref name="end"/>.</param>
+        /// <returns>Multiple instances by multiple indexes that were found with either the <paramref name="start"/> or <paramref name="end"/>. If neither are found, an empty <b><![CDATA[List<string>]]></b> is returned instead.</returns>
+        public static List<string> GetMultipleBetweenIndexes(this List<string> stringList, string start = null, string end = null, bool startEndIncluded = false)
+        {
+            var newList = new List<string>();
+
+            for (int i = 0; i < stringList.Count; i++)
+            {
+                var multipleResults = stringList[i].GetMultipleBetween(start, end, startEndIncluded);
+
+                foreach (var result in multipleResults)
+                {
+                    if (result.IsNotEmpty())
+                    {
+                        newList.Add(result);
+                    }
                 }
             }
 

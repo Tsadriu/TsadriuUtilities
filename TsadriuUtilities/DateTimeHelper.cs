@@ -75,7 +75,7 @@ namespace TsadriuUtilities
         /// Sets the <paramref name="day"/> in the <paramref name="date"/>.
         /// </summary>
         /// <param name="date">Current date.</param>
-        /// <param name="day">Day to set. In case <paramref name="day"/> is higher than the month's max days, it will be clamped.</param>
+        /// <param name="day">Day to set. In case <paramref name="day"/> is higher than the month's max days, it will be clamped to the month's max day.</param>
         /// <returns>Date with the specified <paramref name="day"/>.</returns>
         public static DateTime SetDay(this DateTime date, int day)
         {
@@ -87,7 +87,7 @@ namespace TsadriuUtilities
         /// Sets the <paramref name="month"/> in the <paramref name="date"/>.
         /// </summary>
         /// <param name="date">Current date.</param>
-        /// <param name="month">Month to set. In case <paramref name="month"/> is higher than the year's max months, it will be clamped.</param>
+        /// <param name="month">Month to set. In case <paramref name="month"/> is higher than the year's max months, it will be clamped to the year's max month.</param>
         /// <returns>Date with the specified <paramref name="month"/>.</returns>
         public static DateTime SetMonth(this DateTime date, int month)
         {

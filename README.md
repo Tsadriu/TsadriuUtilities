@@ -1,4 +1,6 @@
 
+
+
 # TsadriuUtilities
 ### _A package with utilities that are useful while web scraping, to make it easier and save a little bit of time._
 
@@ -85,9 +87,19 @@ TsadriuUtilities is a library that helps on dealing with
 - **DecodeHtml(string encodedHtml)**:
 	- Converts a `encodedHtml` into a decoded string.
 - **GetHrefLink(string html)**:
-	- Checks the `html` and tries to return link that is in between the **href=""**.
+	- Checks the `html` and tries to return the first link that is in between the **href=""**.
 - **GetMultipleHrefLinks(string html)**:
 	- Checks the `html` and tries to return multiple links that are in between the **href=""**.
+- **GetTable(string html)**:
+	- Checks the `html` and tries to return the first table that is in between the **\<table\>\<\table\>**.
+- **GetMultipleTables(string html)**:
+	- Checks the `html` and tries to return multiple tables that are in between the **\<table\>\<\table\>**.
+- **GetRowsFromTable(string htmlTable)**:
+	- Checks the `htmlTable` and tries to return the rows that are in between the **\<tr\>\<\tr\>**.
+- **GetDataFromRows(string htmlTable)**:
+	- Checks the `htmlTable` and tries to return the data that are in between the **\<td\>\<\td\>**.
+- **GetMultipleDataFromTables(List\<string\> htmlTables)**:
+	- Checks the `htmlTables` and tries to return all the data that are in multiple rows of multiple tables.
 
 ### ListHelper:
 - **AddRange\<T\>(List\<T\> list, T[] array, int startIndex, int endIndex)**:
@@ -122,6 +134,8 @@ TsadriuUtilities is a library that helps on dealing with
     - Iterates through the `stringList`, keeping the content between `start` and `end`. If `startEndIncluded` is enabled, the indexes will keep the `start` and `end`. If `excludeEmptyIndexes` is enabled, empty indexes will be removed from the list.
 - **Exclude(List<string> stringList, string[] excludeStrings)**:
     - Iterates through the `stringList`, excluding the indexes that contain `excludeStrings`.
+- **GetMultipleBetweenIndexes(List<string> stringList, string start, string end, bool startEndIncluded)**:
+    - Searches through the `stringList`, returningmultiple instances found between `start` and `end` for each index. If you want only one instance per index, please use the method `GetMultipleBetween()`.
 
 ### MultiHelper:
 - **ClampValue\<T\>(T currentValue, T minValue, T maxValue)**:
@@ -140,8 +154,8 @@ TsadriuUtilities is a library that helps on dealing with
     - Returns the highest number present in the `sequence`.
 - **Min\<T\>(T[] sequence)**:
     - Returns the lowest number present in the `sequence`.
-- **Between\<T\>(T value, T min, T max, bool included)**:
-    - Checks if the `value` is between `min` and `max`. Setting `included` to true will also include `min` and `max` in the verification.
+- **IsBetween\<T\>(T value, T minValue, T maxValue, bool inclusive)**:
+    - Checks if the `value` is in the range of `minValue` and `maxValue`. Setting `inclusive` to true will also include `minValue` and `maxValue` in the verification.
 - **IsNullOrZero\<T\>(T value)**:
     - Checks if `value` is a null or 0.
 
@@ -178,6 +192,10 @@ TsadriuUtilities is a library that helps on dealing with
     - Reverses a string.
 - **Split(string value, string separator, bool keepSplitValue)**
     - Splits the `value` based on the `separator`. Use `keepSplitValue` to keep the `separator` on the values.
+- **SplitByUpperCase(string value, string separator)**
+    -  Splits the `value` by upper-case characters.
+- **SplitByLowerCase(string value, string separator)**
+    -  Splits the `value` by lower-case characters.
 
 ### TTable:
 - **AddColumn(params string[] columnName)**:
@@ -222,3 +240,7 @@ TsadriuUtilities is a library that helps on dealing with
     - Checks through the `ColumnData` for `value`. Returns `true` if `value` is found, otherwise `false`.
 - **RemoveData(params object[] values)**:
     - Removes all instances of `values`.
+	
+### TTableColumn:
+- **RemoveEmptyTags(string xml)**:
+	- Searches through the `xml`, removing empty tags that have the format of \<EmptyTag\>.

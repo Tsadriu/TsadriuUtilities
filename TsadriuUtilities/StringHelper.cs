@@ -14,7 +14,8 @@ namespace TsadriuUtilities
     public static class StringHelper
     {
         /// <summary>
-        /// Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="string"/>.
+        /// Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>.
+        /// <br>Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="string"/>.</br>
         /// </summary>
         /// <param name="text">Text to search through.</param>
         /// <param name="start">The start tag.</param>
@@ -100,7 +101,7 @@ namespace TsadriuUtilities
             {
                 if (AreEmpty(start, end))
                 {
-                    Console.WriteLine("Parameters startTag and endTag cannot be empty. Either use GetTagValue or provide the necessary information to use this method.");
+                    Console.WriteLine($"Parameters {nameof(start)} and {nameof(end)} cannot be empty. Either use method GetBetwee() or provide the necessary information to use this method.");
                 }
 
                 return list;
@@ -124,39 +125,40 @@ namespace TsadriuUtilities
 
         /// <summary>
         /// <b>This method is unstable and unfinished. Using it will throw an <see cref="NotImplementedException"/>.</b>
-        /// Searches through the <paramref name="text"/>, using the <paramref name="start"/> as the end tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="end"/> tag is found.
+        /// Searches through the <paramref name="text"/>, using the <paramref name="end"/> as the end tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="start"/> tag is found.
         /// </summary>
         /// <param name="text">Text to search through.</param>
-        /// <param name="start">From where the text ends.</param>
-        /// <param name="end">From where the text starts.</param>
-        /// <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
-        /// <returns>The first instance found between <paramref name="start"/> and <paramref name="end"/>. If both <paramref name="start"/> and <paramref name="end"/> are not found, returns a <see cref="string.Empty"/>.</returns>
-        public static string GetBetweenReverse(this string text, string start = null, string end = null, bool startEndIncluded = false)
+        /// <param name="end">From where the text ends.</param>
+        /// <param name="start">From where the text starts.</param>
+        /// <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="end"/> and <paramref name="start"/> included.</param>
+        /// <returns>The first instance found between <paramref name="end"/> and <paramref name="start"/>. If both <paramref name="end"/> and <paramref name="start"/> are not found, returns a <see cref="string.Empty"/>.</returns>
+        public static string GetBetweenReverse(this string text, string end = null, string start = null, bool startEndIncluded = false)
         {
             throw new NotImplementedException("This method has not been implemented yet.");
-            var copyOfText = text;
-            if (copyOfText.IsEmpty())
+            
+            if (text.IsEmpty())
             {
                 return string.Empty;
             }
 
-            bool hasStart = copyOfText.Contains(start, StringComparison.OrdinalIgnoreCase);
+            var copyOfText = text;
 
-            if (hasStart)
+            var endIndex = copyOfText.LastIndexOf(end);
+
+            if (endIndex > -1)
             {
-                var amountOfSplit = text.Split(start).Length - 1;
-                copyOfText = (startEndIncluded ? start : string.Empty) + text.Split(start)[amountOfSplit];
+                copyOfText = copyOfText.Substring(0, endIndex);
             }
 
-            bool hasEnd = copyOfText.Contains(end, StringComparison.OrdinalIgnoreCase);
+            var startIndex = copyOfText.LastIndexOf(start);
 
-            if (hasEnd)
+            if (startIndex > -1)
             {
-                var newText = (startEndIncluded ? end : string.Empty) + text.Split(end).ToList().GetValueContaining(StringComparison.OrdinalIgnoreCase, "Prestazione", "align")/*.GetValueLike(start).GetBetween(string.Empty, start)*/;
-                copyOfText = newText + copyOfText;
+                copyOfText = copyOfText.Substring(startIndex, endIndex - startIndex);
+                var x = copyOfText.Substring(startIndex, copyOfText.Length - startIndex);
             }
 
-            if (hasStart && hasEnd)
+            if (endIndex > -1 && startIndex > -1)
             {
                 return copyOfText;
             }
@@ -396,6 +398,54 @@ namespace TsadriuUtilities
             }
 
             return splittedValue;
+        }
+
+        /// <summary>
+        /// Splits the <paramref name="value"/> by upper-case characters.
+        /// </summary>
+        /// <param name="value">The value to be splitted.</param>
+        /// <param name="separator">The separator to use when a character is splitted.</param>
+        /// <returns>The <paramref name="value"/> splitted by upper-case characters.</returns>
+        public static string SplitByUpperCase(this string value, string separator = " ")
+        {
+            var charArray = value.ToCharArray();
+            var stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < charArray.Length; i++)
+            {
+                if (char.IsUpper(charArray[i]))
+                {
+                    stringBuilder.Append(separator);
+                }
+
+                stringBuilder.Append(charArray[i]);
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Splits the <paramref name="value"/> by lower-case characters.
+        /// </summary>
+        /// <param name="value">The value to be splitted.</param>
+        /// <param name="separator">The separator to use when a character is splitted.</param>
+        /// <returns>The <paramref name="value"/> splitted by lower-case characters.</returns>
+        public static string SplitByLowerCase(this string value, string separator = " ")
+        {
+            var charArray = value.ToCharArray();
+            var stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < charArray.Length; i++)
+            {
+                if (char.IsLower(charArray[i]))
+                {
+                    stringBuilder.Append(separator);
+                }
+
+                stringBuilder.Append(charArray[i]);
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }

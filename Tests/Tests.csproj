@@ -17,4 +17,8 @@
     <ProjectReference Include="..\TsadriuUtilities\TsadriuUtilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Files\" />
+  </ItemGroup>
+
 </Project>
