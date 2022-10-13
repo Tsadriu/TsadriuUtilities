@@ -401,12 +401,24 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Splits the <paramref name="value"/> by upper-case characters.
+        /// Separates the <paramref name="value"/> by upper-case characters.
         /// </summary>
         /// <param name="value">The value to be splitted.</param>
-        /// <param name="separator">The separator to use when a character is splitted.</param>
+        /// <param name="separator">The separator to use when a character is separated.</param>
         /// <returns>The <paramref name="value"/> splitted by upper-case characters.</returns>
+        [Obsolete("This method has the wrong name. Please use the method 'SeparateByUpperCase()'.", true)]
         public static string SplitByUpperCase(this string value, string separator = " ")
+        {
+            return value.SeparateByUpperCase(separator);
+        }
+
+        /// <summary>
+        /// Separates the <paramref name="value"/> by upper-case characters.
+        /// </summary>
+        /// <param name="value">The value to be separated.</param>
+        /// <param name="separator">The separator to use when a character is separated.</param>
+        /// <returns>The <paramref name="value"/> separated by upper-case characters.</returns>
+        public static string SeparateByUpperCase(this string value, string separator = " ")
         {
             var charArray = value.ToCharArray();
             var stringBuilder = new StringBuilder();
@@ -425,12 +437,24 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Splits the <paramref name="value"/> by lower-case characters.
+        /// Separates the <paramref name="value"/> by lower-case characters.
         /// </summary>
-        /// <param name="value">The value to be splitted.</param>
-        /// <param name="separator">The separator to use when a character is splitted.</param>
-        /// <returns>The <paramref name="value"/> splitted by lower-case characters.</returns>
+        /// <param name="value">The value to be separated.</param>
+        /// <param name="separator">The separator to use when a character is separated.</param>
+        /// <returns>The <paramref name="value"/> separated by lower-case characters.</returns>
+        [Obsolete("This method has the wrong name. Please use the method 'SeparateByLowerCase()'.", true)]
         public static string SplitByLowerCase(this string value, string separator = " ")
+        {
+            return value.SeparateByLowerCase(separator);
+        }
+
+        /// <summary>
+        /// Separates the <paramref name="value"/> by upper-case characters.
+        /// </summary>
+        /// <param name="value">The value to be separated.</param>
+        /// <param name="separator">The separator to use when a character is separated.</param>
+        /// <returns>The <paramref name="value"/> separated by upper-case characters.</returns>
+        public static string SeparateByLowerCase(this string value, string separator = " ")
         {
             var charArray = value.ToCharArray();
             var stringBuilder = new StringBuilder();
@@ -443,6 +467,62 @@ namespace TsadriuUtilities
                 }
 
                 stringBuilder.Append(charArray[i]);
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Reads the <paramref name="value"/>, returning the present upper-case letters.
+        /// </summary>
+        /// <param name="value">The value to get the upper-case letters.</param>
+        /// <param name="separator">The separator to use when appending the upper-case letters together.</param>
+        /// <returns>The upper-case letters present in the <paramref name="value"/> in a <see cref="string"/>.</returns>
+        public static string GetUpperCaseLetters(this string value, string separator = null)
+        {
+            var charArray = value.ToCharArray();
+            var stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < charArray.Length; i++)
+            {
+                if (char.IsUpper(charArray[i]))
+                {
+                    stringBuilder.Append(charArray[i]);
+
+                    if (i + 1 < charArray.Length && separator != null)
+                    {
+                        stringBuilder.Append(separator);
+                    }
+                }
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Reads the <paramref name="value"/>, returning the present lower-case letters.
+        /// </summary>
+        /// <param name="value">The value to get the lower-case letters.</param>
+        /// <param name="separator">The separator to use when appending the lower-case letters together.</param>
+        /// <returns>The lower-case letters present in the <paramref name="value"/> in a <see cref="string"/>.</returns>
+
+        public static string GetLowerCaseLetters(this string value, string separator = null)
+        {
+            var charArray = value.ToCharArray();
+            var stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < charArray.Length; i++)
+            {
+                if (char.IsLower(charArray[i]))
+                {
+                    stringBuilder.Append(charArray[i]);
+
+
+                    if (i + 1 < charArray.Length && separator != null)
+                    {
+                        stringBuilder.Append(separator);
+                    }
+                }
             }
 
             return stringBuilder.ToString();

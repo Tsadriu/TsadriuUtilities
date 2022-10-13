@@ -1,8 +1,5 @@
-
-
-
 # TsadriuUtilities
-### _A package with utilities that are useful while web scraping, to make it easier and save a little bit of time._
+### _A package with utilities that are useful for web scraping, to make it easier and save a little bit of time._
 
 
 TsadriuUtilities is a library that helps on dealing with
@@ -192,10 +189,14 @@ TsadriuUtilities is a library that helps on dealing with
     - Reverses a string.
 - **Split(string value, string separator, bool keepSplitValue)**
     - Splits the `value` based on the `separator`. Use `keepSplitValue` to keep the `separator` on the values.
-- **SplitByUpperCase(string value, string separator)**
-    -  Splits the `value` by upper-case characters.
-- **SplitByLowerCase(string value, string separator)**
-    -  Splits the `value` by lower-case characters.
+- **SeparateByUpperCase(string value, string separator)**
+    -  Separates the `value` by upper-case characters.
+- **SeparateByLowerCase(string value, string separator)**
+    -  Separates the `value` by lower-case characters.
+- **GetUpperCaseLetters(string value, string separator)**
+    -  Reads the `value`, returning the present upper-case letters.
+- **GetLowerCaseLetters(string value, string separator)**
+    -  Reads the `value`, returning the present lower-case letters.
 
 ### TTable:
 - **AddColumn(params string[] columnName)**:
@@ -241,6 +242,6 @@ TsadriuUtilities is a library that helps on dealing with
 - **RemoveData(params object[] values)**:
     - Removes all instances of `values`.
 	
-### TTableColumn:
+### XmlHelper:
 - **RemoveEmptyTags(string xml)**:
-	- Searches through the `xml`, removing empty tags that have the format of \<EmptyTag\>.
+	- Searches through the `xml`, removing empty tags that have the format of \<EmptyTag\\>.

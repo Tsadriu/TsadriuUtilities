@@ -1026,19 +1026,51 @@
         </member>
         <member name="M:TsadriuUtilities.StringHelper.SplitByUpperCase(System.String,System.String)">
             <summary>
-            Splits the <paramref name="value"/> by upper-case characters.
+            Separates the <paramref name="value"/> by upper-case characters.
             </summary>
             <param name="value">The value to be splitted.</param>
-            <param name="separator">The separator to use when a character is splitted.</param>
+            <param name="separator">The separator to use when a character is separated.</param>
             <returns>The <paramref name="value"/> splitted by upper-case characters.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.SeparateByUpperCase(System.String,System.String)">
+            <summary>
+            Separates the <paramref name="value"/> by upper-case characters.
+            </summary>
+            <param name="value">The value to be separated.</param>
+            <param name="separator">The separator to use when a character is separated.</param>
+            <returns>The <paramref name="value"/> separated by upper-case characters.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.SplitByLowerCase(System.String,System.String)">
             <summary>
-            Splits the <paramref name="value"/> by lower-case characters.
+            Separates the <paramref name="value"/> by lower-case characters.
             </summary>
-            <param name="value">The value to be splitted.</param>
-            <param name="separator">The separator to use when a character is splitted.</param>
-            <returns>The <paramref name="value"/> splitted by lower-case characters.</returns>
+            <param name="value">The value to be separated.</param>
+            <param name="separator">The separator to use when a character is separated.</param>
+            <returns>The <paramref name="value"/> separated by lower-case characters.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.SeparateByLowerCase(System.String,System.String)">
+            <summary>
+            Separates the <paramref name="value"/> by upper-case characters.
+            </summary>
+            <param name="value">The value to be separated.</param>
+            <param name="separator">The separator to use when a character is separated.</param>
+            <returns>The <paramref name="value"/> separated by upper-case characters.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.GetUpperCaseLetters(System.String,System.String)">
+            <summary>
+            Reads the <paramref name="value"/>, returning the present upper-case letters.
+            </summary>
+            <param name="value">The value to get the upper-case letters.</param>
+            <param name="separator">The separator to use when appending the upper-case letters together.</param>
+            <returns>The upper-case letters present in the <paramref name="value"/> in a <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.StringHelper.GetLowerCaseLetters(System.String,System.String)">
+            <summary>
+            Reads the <paramref name="value"/>, returning the present lower-case letters.
+            </summary>
+            <param name="value">The value to get the lower-case letters.</param>
+            <param name="separator">The separator to use when appending the lower-case letters together.</param>
+            <returns>The lower-case letters present in the <paramref name="value"/> in a <see cref="T:System.String"/>.</returns>
         </member>
         <member name="T:TsadriuUtilities.XmlHelper">
             <summary>

@@ -2,42 +2,26 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.9.0</Version>
+    <Version>1.10.0</Version>
     <Description>TsadriuUtilities is a library that helps on dealing with: Arrays, Chars, DateTime, Directories, Files, Lists, Numbers, Strings, Generic types and more. I hope this package will make your coding easier and save you a bit of time.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
     <PackageReleaseNotes>
-DateTimeHelper:
-- Improved comments of methods SetDay() and SetMonth().
-
-HtmlHelper:
-- Improved comment of method GetHrefLink().
-- Implemented method GetTable().
-- Implemented method GetMultipleTables().
-- Implemented method GetRowsFromTable().
-- Implemented method GetDataFromRows().
-- Implemented method GetMultipleDataFromTables().
-
-ListHelper:
-- Implemented method GetMultipleBetweenIndexes().
-
-NumberHelper:
-- Deprecated method Between(), please use the new method IsBetween().
-
 StringHelper:
-- Implemented method SplitByUpperCase().
-- Implemented method SplitByLowerCase().
-
-XmlHelper:
-- Implemented method RemoveEmptyTags().
+- Method SplitByUpperCase() has been deprecated. Please use the method SeparateByUpperCase().
+- Method SeparateByUpperCase() has been implemented.
+- Method SplitByLowerCase() has been deprecated. Please use the method SeparateByLowerCase().
+- Method SeparateByLowerCase() has been implemented.
+- Method GetUpperCaseLetters() has been implemented.
+- Method GetLowerCaseLetters() has been implemented.
 </PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
-    <AssemblyVersion>1.9.0</AssemblyVersion>
-    <FileVersion>1.9.0</FileVersion>
+    <AssemblyVersion>1.10.0</AssemblyVersion>
+    <FileVersion>1.10.0</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>TsadriuUtilities</PackageId>
     <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
