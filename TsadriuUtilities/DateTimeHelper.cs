@@ -12,15 +12,76 @@ namespace TsadriuUtilities
     public static class DateTimeHelper
     {
         /// <summary>
+        /// Default date formats. It is used when no date formats are passed on the method <see cref="ToDateTime(string, string, CultureInfo)"/>.
+        /// </summary>
+        private static readonly string[] defaultDateFormats = new string[]
+        {
+            "dd/MM/yyyy",
+            "MM/dd/yyyy",
+            "yyyy/MM/dd",
+            "dd MMMM yyyy",
+            "MM dd yyyy",
+            "yyyy MM dd",
+            "dd-MM-yyyy",
+            "MM-dd-yyyy",
+            "yyyy-MM-dd",
+            "dd_MM_yyyy",
+            "MM_dd_yyyy",
+            "yyyy_MM_dd",
+            "dd_MM_yyyy",
+            "MM_dd_yyyy",
+            "yyyy_MM_dd",
+            "ddMMyyyy",
+            "MMddyyyy",
+            "yyyyMMdd",
+            "dd/MM/yyyy HH:mm",
+            "MM/dd/yyyy HH:mm",
+            "yyyy/MM/dd HH:mm",
+            "dd MMMM yyyy HH:mm",
+            "MM dd yyyy HH:mm",
+            "yyyy MM dd HH:mm",
+            "dd-MM-yyyy HH:mm",
+            "MM-dd-yyyy HH:mm",
+            "yyyy-MM-dd HH:mm",
+            "dd_MM_yyyy HH:mm",
+            "MM_dd_yyyy HH:mm",
+            "yyyy_MM_dd HH:mm",
+            "dd_MM_yyyy HH:mm",
+            "MM_dd_yyyy HH:mm",
+            "yyyy_MM_dd HH:mm",
+            "ddMMyyyy HH:mm",
+            "MMddyyyy HH:mm",
+            "yyyyMMdd HH:mm",
+            "dd/MM/yyyy HH:mm:ss",
+            "MM/dd/yyyy HH:mm:ss",
+            "yyyy/MM/dd HH:mm:ss",
+            "dd MMMM yyyy HH:mm:ss",
+            "MM dd yyyy HH:mm:ss",
+            "yyyy MM dd HH:mm:ss",
+            "dd-MM-yyyy HH:mm:ss",
+            "MM-dd-yyyy HH:mm:ss",
+            "yyyy-MM-dd HH:mm:ss",
+            "dd_MM_yyyy HH:mm:ss",
+            "MM_dd_yyyy HH:mm:ss",
+            "yyyy_MM_dd HH:mm:ss",
+            "dd_MM_yyyy HH:mm:ss",
+            "MM_dd_yyyy HH:mm:ss",
+            "yyyy_MM_dd HH:mm:ss",
+            "ddMMyyyy HH:mm:ss",
+            "MMddyyyy HH:mm:ss",
+            "yyyyMMdd HH:mm:ss"
+        };
+
+        /// <summary>
         /// Tries to convert a date from a <see cref="string"/> to a type of <see cref="DateTime"/>.
         /// </summary>
         /// <param name="dateAsString">The date as a <see cref="string"/>. Examples: "23/03/2012", "11-02-2001", "06.12.2019".</param>
-        /// <param name="dateFormat">The date format. Examples: "dd/MM/yyyy", "MM/dd/yyyy".</param>
+        /// <param name="dateFormat">The date format. Examples: "dd/MM/yyyy", "MM/dd/yyyy". If nothing is passed, <see cref="defaultDateFormats"/> will be used.</param>
         /// <param name="dateCulture">The <see cref="CultureInfo"/> of the date (Is it an american date? Is it an italian date?).</param>
         /// <returns>If the parsing was successful, returns <see cref="DateTime"/>. If the parsing fails, returns <see cref="DateTime.MinValue"/>.</returns>
-        public static DateTime ToDateTime(this string dateAsString, string dateFormat, CultureInfo dateCulture = null)
+        public static DateTime ToDateTime(this string dateAsString, string dateFormat = null, CultureInfo dateCulture = null)
         {
-            return ToDateTime(dateAsString, new string[] { dateFormat }, dateCulture);
+            return ToDateTime(dateAsString, dateFormat == null ? defaultDateFormats : new string[] { dateFormat }, dateCulture);
         }
 
         /// <summary>
