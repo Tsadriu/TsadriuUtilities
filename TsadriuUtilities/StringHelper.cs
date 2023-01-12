@@ -3,8 +3,11 @@
 // </copyright>
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using System.Text.RegularExpressions;
+using TsadriuUtilities.Enums.BoolHelper;
+using TsadriuUtilities.Enums.StringHelper;
 
 namespace TsadriuUtilities
 {
@@ -101,31 +104,47 @@ namespace TsadriuUtilities
             {
                 if (AreEmpty(start, end))
                 {
-                    Console.WriteLine($"Parameters {nameof(start)} and {nameof(end)} cannot be empty. Either use method GetBetwee() or provide the necessary information to use this method.");
+                    Console.WriteLine($"Parameters {nameof(start)} and {nameof(end)} cannot be empty. Either use method GetBetween() or provide the necessary information to use this method.");
                 }
 
                 return list;
             }
 
-            var modifiedText = text;
+            List<string> elements = new List<string>();
+            int startIndex = 0;
 
-            while (modifiedText.Contains(start, StringComparison.OrdinalIgnoreCase))
+            while (startIndex > -1)
             {
-                var result = GetBetween(modifiedText, start, end, startEndIncluded);
-                if (IsEmpty(result))
+                startIndex = text.IndexOf(start, startIndex);
+                if (startIndex == -1)
                 {
                     break;
                 }
-                modifiedText = GetBetween(modifiedText, result, string.Empty, false);
-                list.Add(result);
+
+                if (!startEndIncluded)
+                {
+                    startIndex += start.Length;
+                }
+                int endIndex = text.IndexOf(end, startIndex);
+                if (endIndex == -1)
+                {
+                    break;
+                }
+
+                if (startEndIncluded)
+                {
+                    endIndex += end.Length;
+                }
+
+                elements.Add(text.Substring(startIndex, endIndex - startIndex));
+                startIndex = endIndex;
             }
 
-            return list;
+            return elements;
         }
 
         /// <summary>
-        /// <b>This method is unstable and unfinished. Using it will throw an <see cref="NotImplementedException"/>.</b>
-        /// Searches through the <paramref name="text"/>, using the <paramref name="end"/> as the end tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="start"/> tag is found.
+        /// Searches through the <paramref name="text"/>, using the <paramref name="end"/> as the start tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="start"/> tag is found.
         /// </summary>
         /// <param name="text">Text to search through.</param>
         /// <param name="end">From where the text ends.</param>
@@ -134,36 +153,21 @@ namespace TsadriuUtilities
         /// <returns>The first instance found between <paramref name="end"/> and <paramref name="start"/>. If both <paramref name="end"/> and <paramref name="start"/> are not found, returns a <see cref="string.Empty"/>.</returns>
         public static string GetBetweenReverse(this string text, string end = null, string start = null, bool startEndIncluded = false)
         {
-            throw new NotImplementedException("This method has not been implemented yet.");
-            
-            if (text.IsEmpty())
+            int startIndex = start.IsEmpty() ? 0 : text.LastIndexOf(start);
+            int endIndex = end.IsEmpty() ? text.Length : text.LastIndexOf(end);
+
+            if (startIndex == -1 || endIndex == -1)
             {
                 return string.Empty;
             }
 
-            var copyOfText = text;
-
-            var endIndex = copyOfText.LastIndexOf(end);
-
-            if (endIndex > -1)
+            if (!startEndIncluded)
             {
-                copyOfText = copyOfText.Substring(0, endIndex);
+                startIndex += start.Length;
+                endIndex += end.Length;
             }
 
-            var startIndex = copyOfText.LastIndexOf(start);
-
-            if (startIndex > -1)
-            {
-                copyOfText = copyOfText.Substring(startIndex, endIndex - startIndex);
-                var x = copyOfText.Substring(startIndex, copyOfText.Length - startIndex);
-            }
-
-            if (endIndex > -1 && startIndex > -1)
-            {
-                return copyOfText;
-            }
-
-            return string.Empty;
+            return text.Substring(startIndex, endIndex - startIndex + end.Length);
         }
 
         /// <summary>
@@ -177,7 +181,7 @@ namespace TsadriuUtilities
         {
             foreach (var value in values)
             {
-                if(!text.Contains(value, stringComparison))
+                if (!text.Contains(value, stringComparison))
                 {
                     return false;
                 }
@@ -401,15 +405,34 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Separates the <paramref name="value"/> by upper-case characters.
+        /// Splits the <paramref name="value"/> based on the <paramref name="splitType"/>.
         /// </summary>
-        /// <param name="value">The value to be splitted.</param>
-        /// <param name="separator">The separator to use when a character is separated.</param>
-        /// <returns>The <paramref name="value"/> splitted by upper-case characters.</returns>
-        [Obsolete("This method has the wrong name. Please use the method 'SeparateByUpperCase()'.", true)]
-        public static string SplitByUpperCase(this string value, string separator = " ")
+        /// <param name="value">The string value.</param>
+        /// <param name="splitType">The split type.</param>
+        /// <param name="keepSeparator">° <b>True</b> - Keeps the <paramref name="separator"/> after splitting.<br/>
+        /// ° <b>False</b> - Removes the <paramref name="separator"/> after splitting.</param>
+        /// <param name="separator">The seperator to use to split the <paramref name="value"/>. This is only used when <paramref name="splitType"/> is <see cref="SplitType.UserDefined"/>.</param>
+        /// <returns>A list of <see cref="string"/> that contains <paramref name="value"/> splitted by the <paramref name="splitType"/>.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static List<string> SplitBy(this string value, SplitType splitType, bool keepSeparator = false, string separator = null)
         {
-            return value.SeparateByUpperCase(separator);
+            switch (splitType)
+            {
+                case SplitType.Space:
+                    return value.Split(" ", keepSeparator);
+                case SplitType.NewLine:
+                    return value.Split("\n", keepSeparator);
+                case SplitType.Underscore:
+                    return value.Split("_", keepSeparator);
+                /*case SplitType.UpperCase:
+                    return value.SeparateByUpperCase().Split(" ").ToList();
+                case SplitType.LowerCase:
+                    return value.SeparateByLowerCase().Split(" ").ToList();*/
+                case SplitType.UserDefined:
+                    return value.Split(separator, keepSeparator);
+            }
+
+            throw new NotImplementedException($"Type '{splitType}' has not been implemented.");
         }
 
         /// <summary>
@@ -434,18 +457,6 @@ namespace TsadriuUtilities
             }
 
             return stringBuilder.ToString();
-        }
-
-        /// <summary>
-        /// Separates the <paramref name="value"/> by lower-case characters.
-        /// </summary>
-        /// <param name="value">The value to be separated.</param>
-        /// <param name="separator">The separator to use when a character is separated.</param>
-        /// <returns>The <paramref name="value"/> separated by lower-case characters.</returns>
-        [Obsolete("This method has the wrong name. Please use the method 'SeparateByLowerCase()'.", true)]
-        public static string SplitByLowerCase(this string value, string separator = " ")
-        {
-            return value.SeparateByLowerCase(separator);
         }
 
         /// <summary>

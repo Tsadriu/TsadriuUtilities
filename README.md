@@ -1,3 +1,4 @@
+
 # TsadriuUtilities
 ### _A package with utilities that are useful for web scraping, to make it easier and save a little bit of time._
 
@@ -30,6 +31,8 @@ TsadriuUtilities is a library that helps on dealing with
     - Iterates through the `stringArray`, keeping the content between `start` and `end`. If `startEndIncluded` is enabled, the indexes will keep the `start` and `end`. If `excludeEmptyIndexes` is enabled, empty indexes will be removed from the array.
 - **Exclude(string[] stringArray, string[] excludeStrings)**:
     - Iterates through the `stringArray`, excluding the indexes that contain `excludeStrings`.
+- **AddRange\<T\>(T[] currentArray, T[] arrayToAdd)**:
+    - Adds the `currentArray` into `arrayToAdd`.
 
 ### BoolHelper:
 - **ToBool(string value, SearchType searchType, string[] trueValue, string[] falseValue)**:
@@ -123,22 +126,28 @@ TsadriuUtilities is a library that helps on dealing with
     - Returns a list where all occasions of `valuesToRemove` have been removed from the elements of the `list`.
 - **ReplaceFromElements(List\<string\> list, string oldValue, string newValue)**
     - Returns a list where all occasions of `oldValue` have been replaced by `newValue` from the elements of the `list`.
-- **GetBetween(List<string> stringList, string start, string end, bool startEndIncluded)**:
+- **GetBetween(List\<string\> stringList, string start, string end, bool startEndIncluded)**:
     - Iterates through the `stringList`, returning the first instance where both `start` and `end` are found. If none of the indexes match `start` and `end`, a `string.Empty` is returned. Use `startEndIncluded` if you want to include `start` and `end` in the returning string.
-- **GetMultipleBetween(List<string> stringList, string start, string end, bool startEndIncluded)**:
+- **GetMultipleBetween(List\<string\> stringList, string start, string end, bool startEndIncluded)**:
     - Searches through the `stringList`, returning multiple instances found between `start` and `end`. Use `startEndIncluded` if you want to include `start` and `end` in the returning List<string>.
-- **KeepBetween(List<string> stringList, string start, string end, bool startEndIncluded, bool excludeEmptyIndexes)**:
+- **KeepBetween(List\<string\> stringList, string start, string end, bool startEndIncluded, bool excludeEmptyIndexes)**:
     - Iterates through the `stringList`, keeping the content between `start` and `end`. If `startEndIncluded` is enabled, the indexes will keep the `start` and `end`. If `excludeEmptyIndexes` is enabled, empty indexes will be removed from the list.
-- **Exclude(List<string> stringList, string[] excludeStrings)**:
+- **Exclude(List\<string\> stringList, string[] excludeStrings)**:
     - Iterates through the `stringList`, excluding the indexes that contain `excludeStrings`.
-- **GetMultipleBetweenIndexes(List<string> stringList, string start, string end, bool startEndIncluded)**:
+- **GetMultipleBetweenIndexes(List\<string\> stringList, string start, string end, bool startEndIncluded)**:
     - Searches through the `stringList`, returningmultiple instances found between `start` and `end` for each index. If you want only one instance per index, please use the method `GetMultipleBetween()`.
+- **SplitListIntoSubLists\<T\>(List\<T\> currentList, int elementsPerSubList)**:
+    - Splits a generic list into multiple sublists based on the number of elements you want to split, represented by `elementsPerSubList`.
 
 ### MultiHelper:
 - **ClampValue\<T\>(T currentValue, T minValue, T maxValue)**:
     - Clamps `currentValue` based on its' parameters. Returns `maxValue` if `currentValue` is higher than it and returns `minValue` if it is lower than it.
-- **AreNotNull<T>(params T[] objects)**:
+- **AreNotNull\<T\>(params T[] objects)**:
 	- Checks if all `objects` are **not** null. If all of `objects` are not null, returns `true`. Otherwise returns `false`.
+- **IsBetween\<T\>(T value, T minValue, T maxValue, bool inclusive)**:
+    - Checks if the `value` is in the range of `minValue` and `maxValue`. Setting `inclusive` to true will also include `minValue` and `maxValue` in the verification.
+- **IsEquivalentTo(Type type, Type[] validTypes)**:
+	- Determines whether `type` is equivalent to any `validTypes`.
 
 ### NumberHelper:
 - **ToDecimal(string value)**:
@@ -151,8 +160,6 @@ TsadriuUtilities is a library that helps on dealing with
     - Returns the highest number present in the `sequence`.
 - **Min\<T\>(T[] sequence)**:
     - Returns the lowest number present in the `sequence`.
-- **IsBetween\<T\>(T value, T minValue, T maxValue, bool inclusive)**:
-    - Checks if the `value` is in the range of `minValue` and `maxValue`. Setting `inclusive` to true will also include `minValue` and `maxValue` in the verification.
 - **IsNullOrZero\<T\>(T value)**:
     - Checks if `value` is a null or 0.
 
@@ -162,7 +169,7 @@ TsadriuUtilities is a library that helps on dealing with
 - **GetMultipleBetween(string text, string startTag, string endTag, bool tagsIncluded)**:
     - Searches through the `text`, returning multiple instances found between `start` and `end`. Use `startEndIncluded` if you want to include `start` and `end` in the returning List of string.
 - **GetBetweenReverse(string text, string start, string end, bool startEndIncluded)**:
-    - This method is unstable and unfinished. Using it will throw an `NotImplementedException`. Searches through the `text`, using the `start` as the **end tag** and then searches the `text` **backwards** until the `end` tag is found.
+    - Searches through the `text`, using the `start` as the **end tag** and then searches the `text` **backwards** until the `end` tag is found.
 - **AndContains(string text, StringComparison stringComparison, string[] values)**:
     - Checks a `string` if it has all instances of `values`. If that's the case, then it returns `true`, otherwise it returns `false`.
 - **OrContains(string text, StringComparison stringComparison, string[] values)**:
@@ -197,6 +204,8 @@ TsadriuUtilities is a library that helps on dealing with
     -  Reads the `value`, returning the present upper-case letters.
 - **GetLowerCaseLetters(string value, string separator)**
     -  Reads the `value`, returning the present lower-case letters.
+- **SplitBy(string value, SplitType splitType, bool keepSeparator, string separator)**
+    -  Splits the `value` based on the `splitType`.
 
 ### TTable:
 - **AddColumn(params string[] columnName)**:

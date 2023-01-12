@@ -1,8 +1,8 @@
 ﻿// <copyright file HtmlHelper.cs of solution TsadriuUtilities of developer Tsadriu>
 // Copyright 2022 (C) Tsadriu. All rights reserved.
 // </copyright>
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 
 namespace TsadriuUtilities
@@ -33,23 +33,37 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Checks the <paramref name="html"/> and tries to return the first link that is in between the <b><![CDATA[href=""]]></b>.
+        /// Checks the <paramref name="html"/> and tries to return the first link that is in between the <b><![CDATA[href=""]]></b> and <b><![CDATA[href='']]></b>.
         /// </summary>
         /// <param name="html">Html string with the link inside of it.</param>
-        /// <returns>The first link found in between the <b><![CDATA[href=""]]></b>. If the link is not found, returns a <see cref="string.Empty"/>.</returns>
+        /// <returns>The first link found in between the <b><![CDATA[href=""]]></b> and <b><![CDATA[href='']]></b>. If the link is not found, returns a <see cref="string.Empty"/>.</returns>
         public static string GetHrefLink(this string html)
         {
-            return html.GetBetween("href=\"", "\"");
+            var value = html.GetBetween("href=\"", "\"");
+
+            if (value.IsNotEmpty())
+            {
+                return value;
+            }
+
+            if (value.IsEmpty() || !value.OrContains(StringComparison.OrdinalIgnoreCase, "http", "https", "www"))
+            {
+                value = html.GetBetween("href='", "'");
+            }
+
+            return value;
         }
 
         /// <summary>
-        /// Checks the <paramref name="html"/> and tries to return multiple links that are in between the <b><![CDATA[href=""]]></b>.
+        /// Checks the <paramref name="html"/> and tries to return multiple links that are in between the <b><![CDATA[href=""]]></b> and <b><![CDATA[href='']]></b>.
         /// </summary>
         /// <param name="html">Html string with the links inside of it.</param>
-        /// <returns>The multiple links that are between the <b><![CDATA[href=""]]></b>. If no links are found, returns an empty <b><![CDATA[List<string>]]></b>.</returns>
+        /// <returns>The multiple links that are between the <b><![CDATA[href=""]]></b> and <b><![CDATA[href='']]></b>. If no links are found, returns an empty <b><![CDATA[List<string>]]></b>.</returns>
         public static List<string> GetMultipleHrefLinks(this string html)
         {
-            return html.GetMultipleBetween("href=\"", "\"");
+            var value = html.GetMultipleBetween("href=\"", "\"");
+            value.AddRange(html.GetMultipleBetween("href='", "'"));
+            return value;
         }
 
         /// <summary>

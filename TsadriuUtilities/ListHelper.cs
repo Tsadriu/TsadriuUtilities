@@ -377,5 +377,41 @@ namespace TsadriuUtilities
 
             return newList;
         }
+
+        /// <summary>
+        /// Splits a generic list into multiple sublists based on the number of elements you want to split, represented by <paramref name="elementsPerSubList"/>.<br/>
+        /// Example:<br/>
+        /// <paramref name="currentList"/> = <![CDATA[<1, 3, 5, 6, 7, 12, 24>]]>, <paramref name="elementsPerSubList"/> = 3.<br/>
+        /// returns: <![CDATA[<<1, 3, 5>, <6, 7, 12>, <24>>]]>.
+        /// </summary>
+        /// <typeparam name="T">Generic list type.</typeparam>
+        /// <param name="currentList">Current generic lsit.</param>
+        /// <param name="elementsPerSubList">Number of items for each subList.</param>
+        /// <returns>A generic list with multiple sublists based on the number of elements you want to split.</returns>
+        public static List<List<T>> SplitListIntoSubLists<T>(this List<T> currentList, int elementsPerSubList)
+        {
+            var newList = new List<List<T>>();
+            var elementsOfMainList = currentList.Count;
+
+            int currentIndex = 0;
+            while (elementsOfMainList > 0)
+            {
+                if (elementsOfMainList - currentIndex - elementsPerSubList >= 0)
+                {
+                    elementsOfMainList -= elementsPerSubList;
+                    newList.Add(currentList.GetRange(currentIndex, elementsPerSubList));
+                }
+                else
+                {
+                    var amount = currentIndex + elementsPerSubList < currentList.Count ? elementsPerSubList : elementsOfMainList;
+                    newList.Add(currentList.GetRange(currentIndex, currentIndex + elementsPerSubList < currentList.Count ? elementsPerSubList : elementsOfMainList));
+                    elementsOfMainList -= amount;
+                }
+
+                currentIndex += elementsPerSubList;
+            }
+
+            return newList;
+        }
     }
 }

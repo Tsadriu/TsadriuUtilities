@@ -11,14 +11,6 @@ namespace TsadriuUtilities
     /// </summary>
     public static class NumberHelper
     {
-        private static readonly Type longType = typeof(long);
-        private static readonly Type intType = typeof(int);
-        private static readonly Type shortType = typeof(short);
-        private static readonly Type byteType = typeof(byte);
-        private static readonly Type floatType = typeof(float);
-        private static readonly Type doubleType = typeof(double);
-        private static readonly Type decimalType = typeof(decimal);
-
         /// <summary>
         /// Converts a <see cref="string"/> into a <see cref="decimal"/>.
         /// </summary>
@@ -160,90 +152,10 @@ namespace TsadriuUtilities
         /// <param name="maxValue">Maximum value.</param>
         /// <param name="inclusive">Set to true to include <paramref name="minValue"/> and <paramref name="maxValue"/> in the verification.</param>
         /// <returns>True if <paramref name="value"/> is between <paramref name="minValue"/> and <paramref name="maxValue"/>. Otherwise returns false.</returns>
-        [Obsolete("Please use the method IsBetween", true)]
+        [Obsolete("Please use the method MultiHelper.IsBetween", true)]
         public static bool Between<T>(T value, T minValue, T maxValue, bool inclusive = true)
         {
-           return IsBetween(value, minValue, maxValue, inclusive);
-        }
-
-        /// <summary>
-        /// Checks if <paramref name="value"/> is in the range of <paramref name="minValue"/> and <paramref name="maxValue"/>. Setting <paramref name="inclusive"/> to true will also include <paramref name="minValue"/> and <paramref name="maxValue"/> in the verification.
-        /// </summary>
-        /// <typeparam name="T">Supported types: <see cref="long"/>, <see cref="int"/>, <see cref="short"/>, <see cref="byte"/>,
-        /// <see cref="float"/>, <see cref="double"/>, <see cref="decimal"/>.</typeparam>
-        /// <param name="value">The value to be checked on.</param>
-        /// <param name="minValue">Minimum value.</param>
-        /// <param name="maxValue">Maximum value.</param>
-        /// <param name="inclusive">Set to true to include <paramref name="minValue"/> and <paramref name="maxValue"/> in the verification.</param>
-        /// <returns>True if <paramref name="value"/> is between <paramref name="minValue"/> and <paramref name="maxValue"/>. Otherwise returns false.</returns>
-        public static bool IsBetween<T>(this T value, T minValue, T maxValue, bool inclusive = true)
-        {
-            var currentType = typeof(T);
-
-            if (currentType == longType)
-            {
-                var val = Convert.ToInt64(value);
-                var valMin = Convert.ToInt64(minValue);
-                var valMax = Convert.ToInt64(maxValue);
-
-                return inclusive ? val >= valMin && val <= valMax : val > valMin && val < valMax;
-            }
-
-            if (currentType == intType)
-            {
-                var val = Convert.ToInt32(value);
-                var valMin = Convert.ToInt32(minValue);
-                var valMax = Convert.ToInt32(maxValue);
-
-                return inclusive ? val >= valMin && val <= valMax : val > valMin && val < valMax;
-            }
-
-            if (currentType == shortType)
-            {
-                var val = Convert.ToInt16(value);
-                var valMin = Convert.ToInt16(minValue);
-                var valMax = Convert.ToInt16(maxValue);
-
-                return inclusive ? val >= valMin && val <= valMax : val > valMin && val < valMax;
-            }
-
-            if (currentType == byteType)
-            {
-                var val = Convert.ToByte(value);
-                var valMin = Convert.ToByte(minValue);
-                var valMax = Convert.ToByte(maxValue);
-
-                return inclusive ? val >= valMin && val <= valMax : val > valMin && val < valMax;
-            }
-
-            if (currentType == floatType)
-            {
-                var val = Convert.ToSingle(value);
-                var valMin = Convert.ToSingle(minValue);
-                var valMax = Convert.ToSingle(maxValue);
-
-                return inclusive ? val >= valMin && val <= valMax : val > valMin && val < valMax;
-            }
-
-            if (currentType == doubleType)
-            {
-                var val = Convert.ToDouble(value);
-                var valMin = Convert.ToDouble(minValue);
-                var valMax = Convert.ToDouble(maxValue);
-
-                return inclusive ? val >= valMin && val <= valMax : val > valMin && val < valMax;
-            }
-
-            if (currentType == decimalType)
-            {
-                var val = Convert.ToDecimal(value);
-                var valMin = Convert.ToDecimal(minValue);
-                var valMax = Convert.ToDecimal(maxValue);
-
-                return inclusive ? val >= valMin && val <= valMax : val > valMin && val < valMax;
-            }
-
-            throw new NotImplementedException("The type of " + typeof(T) + " is not supported.");
+           return MultiHelper.IsBetween(value, minValue, maxValue, inclusive);
         }
 
         /// <summary>
