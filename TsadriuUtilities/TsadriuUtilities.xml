@@ -117,6 +117,23 @@
             <param name="excludeStrings"><see cref="T:System.String"/> to exclude from the <paramref name="stringArray"/>. If <paramref name="excludeStrings"/> is found in any of the indexes of <paramref name="stringArray"/>, it will be removed.</param>
             <returns>New array where the indexes that had <paramref name="excludeStrings"/> were removed from the <paramref name="stringArray"/>.</returns>
         </member>
+        <member name="M:TsadriuUtilities.ArrayHelper.AddRange``1(``0[],``0[])">
+            <summary>
+            Adds the <paramref name="arrayToAdd"/> into <paramref name="currentArray"/>.
+            </summary>
+            <typeparam name="T">Generic type.</typeparam>
+            <param name="currentArray">Array where <paramref name="arrayToAdd"/> will be added into.</param>
+            <param name="arrayToAdd">Array of values.</param>
+            <returns>New array with <paramref name="currentArray"/> and <paramref name="arrayToAdd"/> combined.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.ArrayHelper.IndexOf``1(``0[],``0)">
+            <summary>
+            Searches for the specified object and returns the zero-based index of the first occurrence within the entire <see cref="T:System.Array"/>.
+            </summary>
+            <param name="array">The array to be searched on.</param>
+            <param name="item">The value that you want to get the index from the <paramref name="array"/>.</param>
+            <returns>The zero-based index of the first occurrence of <paramref name="item"/> within the entire <see cref="T:System.Array"/>, if found; otherwise, -1.</returns>
+        </member>
         <member name="T:TsadriuUtilities.BoolHelper">
             <summary>
             A class that helps on dealing with <see cref="T:System.Boolean"/>.
@@ -363,6 +380,11 @@
         <member name="F:TsadriuUtilities.Enums.BoolHelper.SearchType.Equals">
             <summary>
             Will search if the <see cref="T:System.String"/> you're searching for is equal to the text.
+            </summary>
+        </member>
+        <member name="T:TsadriuUtilities.Enums.StringHelper.SplitType">
+            <summary>
+            Enum to use when you're trying to split a <see cref="T:System.String"/>.
             </summary>
         </member>
         <member name="T:TsadriuUtilities.FileHelper">
@@ -628,6 +650,18 @@
             <param name="excludeStrings"><see cref="T:System.String"/> to exclude from the <paramref name="stringList"/>. If <paramref name="excludeStrings"/> is found in any of the indexes of <paramref name="stringList"/>, it will be removed.</param>
             <returns>New list where the indexes that had <paramref name="excludeStrings"/> were removed from the <paramref name="stringList"/>.</returns>
         </member>
+        <member name="M:TsadriuUtilities.ListHelper.SplitListIntoSubLists``1(System.Collections.Generic.List{``0},System.Int32)">
+            <summary>
+            Splits a generic list into multiple sublists based on the number of elements you want to split, represented by <paramref name="elementsPerSubList"/>.<br/>
+            Example:<br/>
+            <paramref name="currentList"/> = <![CDATA[<1, 3, 5, 6, 7, 12, 24>]]>, <paramref name="elementsPerSubList"/> = 3.<br/>
+            returns: <![CDATA[<<1, 3, 5>, <6, 7, 12>, <24>>]]>.
+            </summary>
+            <typeparam name="T">Generic list type.</typeparam>
+            <param name="currentList">Current generic lsit.</param>
+            <param name="elementsPerSubList">Number of items for each subList.</param>
+            <returns>A generic list with multiple sublists based on the number of elements you want to split.</returns>
+        </member>
         <member name="T:TsadriuUtilities.MultiHelper">
             <summary>
             A class that helps on dealing with multiple things.
@@ -653,7 +687,7 @@
             </summary>
             <typeparam name="T">The base item type.</typeparam>
             <param name="objects">Objects to check if they're not null.</param>
-            <returns>True if all <paramref name="objects"/>are not null. If even one of <paramref name="objects"/> is null, returns false.</returns>
+            <returns>True if all <paramref name="objects"/> <b>are not null</b>. If even one of <paramref name="objects"/> is null, returns false.</returns>
         </member>
         <member name="M:TsadriuUtilities.MultiHelper.GenerateGuid(System.String)">
             <summary>
@@ -661,6 +695,27 @@
             </summary>
             <param name="value">Value to generate a <see cref="T:System.Guid"/>.</param>
             <returns>Instance of <see cref="T:System.Guid"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.MultiHelper.IsBetween``1(``0,``0,``0,System.Boolean)">
+            <summary>
+            Checks if <paramref name="value"/> is in the range of <paramref name="minValue"/> and <paramref name="maxValue"/>. Setting <paramref name="inclusive"/> to true will also include <paramref name="minValue"/> and <paramref name="maxValue"/> in the verification.
+            </summary>
+            <typeparam name="T">Supported types: <see cref="T:System.DateTime"/>, <see cref="T:System.Int64"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/>,
+            <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Decimal"/>.</typeparam>
+            <param name="value">The value to be checked on.</param>
+            <param name="minValue">Minimum value.</param>
+            <param name="maxValue">Maximum value.</param>
+            <param name="inclusive">Set to true to include <paramref name="minValue"/> and <paramref name="maxValue"/> in the verification.</param>
+            <returns><b>True</b> if <paramref name="value"/> is between <paramref name="minValue"/> and <paramref name="maxValue"/>. If the <paramref name="value"/> is not between <paramref name="minValue"/> and/or <paramref name="maxValue"/> or either <paramref name="minValue"/> or <paramref name="maxValue"/> is null, it returns <b>false</b>.</returns>
+        </member>
+        <member name="M:TsadriuUtilities.MultiHelper.IsEquivalentTo(System.Type,System.Type[])">
+            <summary>
+            Determines whether <paramref name="type"/> is equivalent to any <paramref name="validTypes"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="validTypes">The valid types to check on <paramref name="type"/>.</param>
+            <returns>° <b>True</b> if <paramref name="type"/> is found in <paramref name="validTypes"/>.<br/>
+            ° <b>False</b> if <paramref name="type"/> is <b>not</b> found in <paramref name="validTypes"/>.</returns>
         </member>
         <member name="T:TsadriuUtilities.NumberHelper">
             <summary>
@@ -713,18 +768,6 @@
             <returns>The lowest number present in <paramref name="sequence"/>. If it's not found (or sequence is null or empty), returns 0.</returns>
         </member>
         <member name="M:TsadriuUtilities.NumberHelper.Between``1(``0,``0,``0,System.Boolean)">
-            <summary>
-            Checks if <paramref name="value"/> is in the range of <paramref name="minValue"/> and <paramref name="maxValue"/>. Setting <paramref name="inclusive"/> to true will also include <paramref name="minValue"/> and <paramref name="maxValue"/> in the verification.
-            </summary>
-            <typeparam name="T">Supported types: <see cref="T:System.Int64"/>, <see cref="T:System.Int32"/>, <see cref="T:System.Int16"/>, <see cref="T:System.Byte"/>,
-            <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Decimal"/>.</typeparam>
-            <param name="value">The value to be checked on.</param>
-            <param name="minValue">Minimum value.</param>
-            <param name="maxValue">Maximum value.</param>
-            <param name="inclusive">Set to true to include <paramref name="minValue"/> and <paramref name="maxValue"/> in the verification.</param>
-            <returns>True if <paramref name="value"/> is between <paramref name="minValue"/> and <paramref name="maxValue"/>. Otherwise returns false.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.NumberHelper.IsBetween``1(``0,``0,``0,System.Boolean)">
             <summary>
             Checks if <paramref name="value"/> is in the range of <paramref name="minValue"/> and <paramref name="maxValue"/>. Setting <paramref name="inclusive"/> to true will also include <paramref name="minValue"/> and <paramref name="maxValue"/> in the verification.
             </summary>
@@ -992,8 +1035,7 @@
         </member>
         <member name="M:TsadriuUtilities.StringHelper.GetBetweenReverse(System.String,System.String,System.String,System.Boolean)">
             <summary>
-            <b>This method is unstable and unfinished. Using it will throw an <see cref="T:System.NotImplementedException"/>.</b>
-            Searches through the <paramref name="text"/>, using the <paramref name="end"/> as the end tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="start"/> tag is found.
+            Searches through the <paramref name="text"/>, using the <paramref name="end"/> as the start tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="start"/> tag is found.
             </summary>
             <param name="text">Text to search through.</param>
             <param name="end">From where the text ends.</param>
@@ -1104,13 +1146,17 @@
             <param name="keepSeparator">Setting it to true, the <paramref name="separator"/> will be included in the result of the split.</param>
             <returns>A list of <see cref="T:System.String"/> that contains <paramref name="value"/> splitted by the <paramref name="separator"/>.</returns>
         </member>
-        <member name="M:TsadriuUtilities.StringHelper.SplitByUpperCase(System.String,System.String)">
+        <member name="M:TsadriuUtilities.StringHelper.SplitBy(System.String,TsadriuUtilities.Enums.StringHelper.SplitType,System.Boolean,System.String)">
             <summary>
-            Separates the <paramref name="value"/> by upper-case characters.
+            Splits the <paramref name="value"/> based on the <paramref name="splitType"/>.
             </summary>
-            <param name="value">The value to be splitted.</param>
-            <param name="separator">The separator to use when a character is separated.</param>
-            <returns>The <paramref name="value"/> splitted by upper-case characters.</returns>
+            <param name="value">The string value.</param>
+            <param name="splitType">The split type.</param>
+            <param name="keepSeparator">° <b>True</b> - Keeps the <paramref name="separator"/> after splitting.<br/>
+            ° <b>False</b> - Removes the <paramref name="separator"/> after splitting.</param>
+            <param name="separator">The seperator to use to split the <paramref name="value"/>. This is only used when <paramref name="splitType"/> is <see cref="F:TsadriuUtilities.Enums.StringHelper.SplitType.UserDefined"/>.</param>
+            <returns>A list of <see cref="T:System.String"/> that contains <paramref name="value"/> splitted by the <paramref name="splitType"/>.</returns>
+            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.SeparateByUpperCase(System.String,System.String)">
             <summary>
@@ -1119,14 +1165,6 @@
             <param name="value">The value to be separated.</param>
             <param name="separator">The separator to use when a character is separated.</param>
             <returns>The <paramref name="value"/> separated by upper-case characters.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.SplitByLowerCase(System.String,System.String)">
-            <summary>
-            Separates the <paramref name="value"/> by lower-case characters.
-            </summary>
-            <param name="value">The value to be separated.</param>
-            <param name="separator">The separator to use when a character is separated.</param>
-            <returns>The <paramref name="value"/> separated by lower-case characters.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.SeparateByLowerCase(System.String,System.String)">
             <summary>

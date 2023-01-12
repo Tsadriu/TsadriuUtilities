@@ -34,14 +34,7 @@ namespace TsadriuUtilities
                     TKey keyConverted = (TKey)Convert.ChangeType(invertKeyWithValue ? value : key, typeof(TKey));
                     TValue valueConverted = (TValue)Convert.ChangeType(invertKeyWithValue ? key : value, typeof(TValue));
 
-                    if (invertKeyWithValue)
-                    {
-                        dict.Add(keyConverted, valueConverted);
-                    }
-                    else
-                    {
-                        dict.Add(keyConverted, valueConverted);
-                    }
+                    dict.Add(keyConverted, valueConverted);
                 }
             }
 

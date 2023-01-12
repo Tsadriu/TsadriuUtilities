@@ -2,29 +2,46 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.10.0</Version>
+    <Version>1.11.0</Version>
     <Description>TsadriuUtilities is a library that helps on dealing with: Arrays, Chars, DateTime, Directories, Files, Lists, Numbers, Strings, Generic types and more. I hope this package will make your coding easier and save you a bit of time.</Description>
     <Copyright>Copyright 2022 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>
+    <PackageReleaseNotes>ArrayHelper:
+- Method AddRange() has been implemented.
+- Method IndexOf() has been implemented.
+
+DateTimeHelper:
+- Implemented additional default dateTime formats.
+
+HtmlHelper:
+- Fixed a bug where the method GetHrefLink() was not properly returning the link.
+
+ListHelper:
+- Method SplitListIntoSubLists() has been implemented.
+
+MultiHelper:
+- Method IsBetween() has been implemented.
+- Method IsEquivalentTo() has been implemented.
+
+NumberHelper:
+- Deprecated method Between().
+
 StringHelper:
-- Method SplitByUpperCase() has been deprecated. Please use the method SeparateByUpperCase().
-- Method SeparateByUpperCase() has been implemented.
-- Method SplitByLowerCase() has been deprecated. Please use the method SeparateByLowerCase().
-- Method SeparateByLowerCase() has been implemented.
-- Method GetUpperCaseLetters() has been implemented.
-- Method GetLowerCaseLetters() has been implemented.
-</PackageReleaseNotes>
+- Method GetBetweenReverse has been enabled and will no longer throw a NotImplementedException().
+- Method SplitBy() has been implemented.
+- Method SplitByUpperCase() has been removed.
+- Method SplitByLowerCase() has been removed.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
-    <AssemblyVersion>1.10.0</AssemblyVersion>
-    <FileVersion>1.10.0</FileVersion>
+    <AssemblyVersion>1.11.0</AssemblyVersion>
+    <FileVersion>1.11.0</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>TsadriuUtilities</PackageId>
     <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
+    <Title>TsadriuUtilities</Title>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

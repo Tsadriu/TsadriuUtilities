@@ -180,5 +180,40 @@ namespace TsadriuUtilities
         {
             return stringArray.ToList().Exclude(excludeStrings).ToArray();
         }
+
+        /// <summary>
+        /// Adds the <paramref name="arrayToAdd"/> into <paramref name="currentArray"/>.
+        /// </summary>
+        /// <typeparam name="T">Generic type.</typeparam>
+        /// <param name="currentArray">Array where <paramref name="arrayToAdd"/> will be added into.</param>
+        /// <param name="arrayToAdd">Array of values.</param>
+        /// <returns>New array with <paramref name="currentArray"/> and <paramref name="arrayToAdd"/> combined.</returns>
+        public static T[] AddRange<T>(this T[] currentArray, T[] arrayToAdd)
+        {
+            var newArray = new T[currentArray.Length + arrayToAdd.Length];
+
+            for (int i = 0; i < currentArray.Length; i++)
+            {
+                newArray[i] = currentArray[i];
+            }
+
+            for (int i = 0; i < arrayToAdd.Length; i++)
+            {
+                newArray[currentArray.Length + i] = arrayToAdd[i];
+            }
+
+            return newArray;
+        }
+
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the first occurrence within the entire <see cref="Array"/>.
+        /// </summary>
+        /// <param name="array">The array to be searched on.</param>
+        /// <param name="item">The value that you want to get the index from the <paramref name="array"/>.</param>
+        /// <returns>The zero-based index of the first occurrence of <paramref name="item"/> within the entire <see cref="Array"/>, if found; otherwise, -1.</returns>
+        public static int IndexOf<T>(this T[] array, T item)
+        {
+            return array.ToList().IndexOf(item);
+        }
     }
 }

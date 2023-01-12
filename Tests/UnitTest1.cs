@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TsadriuUtilities;
+using TsadriuUtilities.Enums.StringHelper;
 
 namespace Tests
 {
@@ -16,6 +17,22 @@ namespace Tests
             var dateTest = "20221014".ToDateTime();
             var dateTest2 = "22_03_1898".ToDateTime();
             var dateTest3 = "01/07/2007 23:59".ToDateTime();
+
+            // IsBetween()
+            var dateBetween1 = new DateTime(2022, 10, 26);
+            var dateBetween1Min = new DateTime(2020, 1, 1);
+            var dateBetween1Max = new DateTime(2022, 12, 31);
+            Assert.IsTrue(dateBetween1.IsBetween(dateBetween1Min, dateBetween1Max));
+
+            var dateBetween2 = new DateTime(2022, 10, 26);
+            var dateBetween2Min = new DateTime(2020, 1, 1);
+            var dateBetween2Max = new DateTime(2021, 1, 1);
+            Assert.IsFalse(dateBetween2.IsBetween(dateBetween2Min, dateBetween2Max));
+
+            DateTime dateBetween3 = new DateTime(2022, 10, 26);
+            DateTime? dateBetween3Min = null;
+            var dateBetween3Max = new DateTime(2022, 12, 31);
+            Assert.IsFalse(MultiHelper.IsBetween(dateBetween3, dateBetween3Min, dateBetween3Max));
         }
 
         [TestMethod]
@@ -27,7 +44,15 @@ namespace Tests
         [TestMethod]
         public void ListHelperTest()
         {
+            var list = new List<object>() { "Fabio", "Alessio", "Lorenzo", 4, "Giada", "Alessandro", 7, "Zina", null, "Simon", "Test" };
 
+            List<List<object>> subList = list.SplitListIntoSubLists(3);
+            Assert.IsTrue(subList.Count == 4);
+
+            var testFileContent = File.ReadAllText("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\Files\\test.xml");
+            List<string> getMultipleBetween = testFileContent.GetMultipleBetween("<si>", "</si>");
+            List<string> keepMultipleBetween = getMultipleBetween.KeepBetween(">", "<", false);
+            var result = testFileContent.GetBetweenReverse("Crescentino", string.Empty, true);
         }
 
         [TestMethod]
@@ -37,7 +62,7 @@ namespace Tests
             var result = html.GetBetween(null, "SManager", true);
 
             var html2 = File.ReadAllText("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\Files\\astienergy.txt");
-            var result2 = html2.GetMultipleBetween("<option value=", "</select>");
+            var result2 = html2.GetMultipleBetween("<option value=", "</option>", true);
 
             var upperCaseTest = "Chiarimenti di Alessandro di cui Zeno e Zinco vengono Ordinati.".GetUpperCaseLetters();
             var lowerCaseTest = "tHIS IS A tEST.".GetLowerCaseLetters();
@@ -47,6 +72,30 @@ namespace Tests
             var htmlTest = "1|#||4|3087|updatePanel|ctl06_upBody|\r\n        <div id=\"ctl06_pnlLoginBackground\" class=\"auth-acc-bkg\">\r\n\t\r\n                <div id=\"ctl06_pnlLoginForm\" class=\"auth-acc\">\r\n\t\t\r\n                    <div id=\"ctl06_pnlBody\" class=\"auth-acc-body\" style=\"display:none;\">\r\n\t\t\t\r\n                        \r\n                                <div id=\"ctl06_cLoginAccess_pnlHeader\" class=\"auth-lgn-acc flex-container-column\" onkeypress=\"javascript:return WebForm_FireDefaultButton(event, &#39;ctl06_cLoginAccess_btnLogin&#39;)\" style=\"height: inherit;\">\r\n\t\t\t\t\r\n    <div class=\"auth-lgn-header\">\r\n        <img id=\"ctl06_cLoginAccess_imgLogo\" class=\"img-circle\" src=\"Plugins/4.1.7.0/94/Images/empty.png\" />\r\n        <h2>Accedi con il tuo account</h2>\r\n    </div>\r\n    \r\n    <div class=\"ScrollContainer\">\r\n        <div class=\"auth-lgn-message\">\r\n            <span id=\"ctl06_cLoginAccess_msgError\" class=\"alert-danger\" data-toggle=\"tooltip\" data-html=\"true\" title=\"\"></span>\r\n        </div>\r\n        <div class=\"auth-lgn-content\">\r\n            <div class=\"auth-lgn-input\">\r\n                \r\n                <div id=\"ctl06_cLoginAccess_pnlInput\" class=\"row\">\r\n\t\t\t\t\t\r\n                    <div class=\"col-md-12 col-xs-12 form-group\">\r\n                        <input name=\"ctl06$cLoginAccess$txtUser\" type=\"text\" value=\"svento\" id=\"ctl06_cLoginAccess_txtUser\" class=\"form-control has-feedback-left\" placeholder=\"Identificativo\" />\r\n                        <span class=\"fa fa-user form-control-feedback left\"></span>\r\n                    </div>\r\n                    <div class=\"col-md-12 col-xs-12 form-group\">\r\n                        <input name=\"ctl06$cLoginAccess$txtPassword\" type=\"password\" id=\"ctl06_cLoginAccess_txtPassword\" class=\"form-control has-feedback-left\" autocomplete=\"off\" placeholder=\"Password\" />\r\n                        <span class=\"fa fa-lock form-control-feedback left\"></span>\r\n                    </div>\r\n                \r\n\t\t\t\t</div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-12 btn-group btn-group-justified\">\r\n                        \r\n                        <div id=\"ctl06_cLoginAccess_pnlLogin\" class=\"btn-group\">\r\n\t\t\t\t\t\r\n                            <a onclick=\"AuthFormLock(ctl06_pnlBody);\" id=\"ctl06_cLoginAccess_btnLogin\" class=\"btn btn-primary\" href=\"javascript:__doPostBack(&#39;ctl06$cLoginAccess$btnLogin&#39;,&#39;&#39;)\" style=\"display:inline-block;width:100%;\">Accedi</a>\r\n                        \r\n\t\t\t\t</div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"auth-lgn-footer\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-12 col-xs-12\">\r\n                        \r\n                        \r\n                        <a id=\"ctl06_cLoginAccess_btnRecover\" href=\"javascript:__doPostBack(&#39;ctl06$cLoginAccess$btnRecover&#39;,&#39;&#39;)\">Password dimenticata</a>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n\t\t\t</div>\r\n\r\n\r\n                            \r\n                     \r\n\t\t</div>\r\n                \r\n\t</div>\r\n            \r\n</div>\r\n    |0|hiddenField|__EVENTTARGET||0|hiddenField|__EVENTARGUMENT||8300|hiddenField|__VIEWSTATE|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|8|hiddenField|__VIEWSTATEGENERATOR|E77FE1E0|0|hiddenField|__VIEWSTATEENCRYPTED||192|hiddenField|__EVENTVALIDATION|0SHCriOrtPyUyWx03kSpa/AoFC8xEhb/QKo801+R7cy40CZBHPhxUiqp9aPWjRcULZuNbjikkD/h1xRgujjv0HHkLL9wUdvdf2c9IV2nqrrEbTDyM0CRDg40E85T3cmvNO5iz2q4FaSnB7PPSnlByXkQQWPqe+/G8PmA1fNkWq3IyCafxrrlrXMGSo7cmW8t|0|asyncPostBackControlIDs|||0|postBackControlIDs|||26|updatePanelIDs||tctl06$upBody,ctl06_upBody|0|childUpdatePanelIDs|||25|panelsToRefreshIDs||ctl06$upBody,ctl06_upBody|2|asyncPostBackTimeout||90|288|formAction||./auth_acc.m?mde=AUTH&lng=it-IT&app=RSN&dev=ALPERIA-FE01&prt=f&typ=login&sid=S-1-5-82-2043101682-2921023535-2032848362-699280915-2178232556&ret=https%3a%2f%2falperia-resellernext.4utility.cloud%2fIndex.aspx%3fp%3dlogin%26ReturnUrl%3d%252f&ip=9bQQ4671qwloXaH7BxRpSMpMviRQFLSR2w9T2JBEvI4%3d|389|scriptStartupBlock|ScriptContentNoTags|top.window.location.href='https://alperia-resellernext.4utility.cloud/Index.aspx?p=login&ReturnUrl=%2f&auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiIxMjA0NiIsInVuaXF1ZV9uYW1lIjoic3ZlbnRvIiwic3lzdCI6IkZvcm0iLCJsb2NhbGUiOiJpdC1JVCIsIm5vbmNlIjoibloxdTdRLU9FQXJJN2c5b3E2ZmlHbnczZTN6Tkd0cnZJSVlSUGdLYzd4VSIsImlzcyI6IlJTTiIsImF1ZCI6IkFVVEgifQ.Roc2e_VPrDXhPCRS6x06o3GeA9BlJ1nVqU2LeJUlh14';|";
             var href1 = htmlTest.GetBetween("href='", "'");
             var href2 = htmlTest.GetHrefLink();
+
+            // SplitBy test
+
+            string splitBySpaceText = "This is a beautiful day";
+            var splitBySpace = splitBySpaceText.SplitBy(SplitType.Space);
+            var splitBySpaceWithSeparator = splitBySpaceText.SplitBy(SplitType.Space, true);
+
+            string splitByNewLineText = "This\nis\na\nbeautiful\nday";
+            var splitByNewLine = splitByNewLineText.SplitBy(SplitType.NewLine);
+            var splitByNewLineWithSeparator = splitByNewLineText.SplitBy(SplitType.NewLine, true);
+
+            string splitByUnderText = "This_is_a_beautiful_day";
+            var splitByUnder = splitByUnderText.SplitBy(SplitType.Underscore);
+            var splitByUnderWithSeparator = splitByUnderText.SplitBy(SplitType.Underscore, true);
+
+            /*string splitByUpperText = "ThisIsABeautifulDay";
+            var splitByUpperLine = splitByUpperText.SplitBy(SplitType.UpperCase);
+            var splitByUpperWithSeparator = splitByUpperText.SplitBy(SplitType.UpperCase, true);
+
+            string splitByLowerText = "tHISiSabEAUTIFULdAY";
+            var splitByLowerLine = splitByLowerText.SplitBy(SplitType.LowerCase);
+            var splitByLowerWithSeparator = splitByLowerText.SplitBy(SplitType.LowerCase, true);*/
+            string xmlBitch = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<worksheet xmlns=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" mc:Ignorable=\"x14ac xr xr2 xr3\" xmlns:x14ac=\"http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac\" xmlns:xr=\"http://schemas.microsoft.com/office/spreadsheetml/2014/revision\" xmlns:xr2=\"http://schemas.microsoft.com/office/spreadsheetml/2015/revision2\" xmlns:xr3=\"http://schemas.microsoft.com/office/spreadsheetml/2016/revision3\" xr:uid=\"{C363E8D6-DDDB-4BEE-B2F0-23F2BA949B7B}\"><dimension ref=\"A1:E4\"/><sheetViews><sheetView tabSelected=\"1\" workbookViewId=\"0\"><selection activeCell=\"B6\" sqref=\"B6\"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight=\"15\" x14ac:dyDescent=\"0.25\"/><cols><col min=\"4\" max=\"4\" width=\"10.140625\" bestFit=\"1\" customWidth=\"1\"/><col min=\"5\" max=\"5\" width=\"10\" bestFit=\"1\" customWidth=\"1\"/></cols><sheetData><row r=\"1\" spans=\"1:5\" x14ac:dyDescent=\"0.25\"><c r=\"A1\" s=\"2\" t=\"s\"><v>0</v></c><c r=\"B1\" s=\"2\" t=\"s\"><v>2</v></c><c r=\"C1\" s=\"2\" t=\"s\"><v>3</v></c><c r=\"D1\" s=\"2\" t=\"s\"><v>4</v></c><c r=\"E1\" s=\"2\" t=\"s\"><v>7</v></c></row><row r=\"2\" spans=\"1:5\" x14ac:dyDescent=\"0.25\"><c r=\"A2\" s=\"4\" t=\"s\"><v>1</v></c><c r=\"B2\" s=\"3\"><v>19</v></c><c r=\"C2\" s=\"3\"><v>55.283782000000002</v></c><c r=\"D2\" s=\"1\"><v>44890</v></c><c r=\"E2\" t=\"s\"><v>7</v></c></row><row r=\"3\" spans=\"1:5\" x14ac:dyDescent=\"0.25\"><c r=\"A3\" s=\"4\" t=\"s\"><v>5</v></c><c r=\"B3\" s=\"3\"><v>2</v></c><c r=\"C3\" s=\"3\"><v>11.02</v></c><c r=\"D3\" s=\"1\" t=\"s\"><v>6</v></c><c r=\"E3\" t=\"s\"><v>8</v></c></row><row r=\"4\" spans=\"1:5\" x14ac:dyDescent=\"0.25\"><c r=\"A4\" t=\"s\"><v>17</v></c><c r=\"B4\" t=\"s\"><v>18</v></c></row></sheetData><pageMargins left=\"0.7\" right=\"0.7\" top=\"0.75\" bottom=\"0.75\" header=\"0.3\" footer=\"0.3\"/><pageSetup paperSize=\"9\" orientation=\"portrait\" r:id=\"rId1\"/></worksheet><sheetId=\"1\">";
+            var testXmlBitch = xmlBitch.GetMultipleBetween("<row", "</row>");
         }
 
         [TestMethod]
@@ -80,6 +129,23 @@ namespace Tests
             int[] test1 = new int[5].GenerateRandom();
             short[] test2 = new short[5].GenerateRandom(0, 200);
             byte[] test3 = new byte[5].GenerateRandom(0, 200000);
+
+            KeyValuePair<string, string>[] testArray = new KeyValuePair<string, string>[5]
+            {
+                new("__EVENTTARGET", string.Empty),
+                new("__EVENTARGUMENT", string.Empty),
+                new("__LASTFOCUS", string.Empty),
+                new("__SCROLLPOSITIONX", "0"),
+                new("__SCROLLPOSITIONY", "0")
+            };
+
+            KeyValuePair<string, string>[] testArray2 = new KeyValuePair<string, string>[2]
+            {
+                new("__VIEWSTATEENCRYPTED", " "),
+                new("txt_ricerca", ""),
+            };
+
+            var testNewArray = testArray.AddRange(testArray2);
         }
 
         [TestMethod]

@@ -41,6 +41,11 @@ namespace TsadriuUtilities
         {
             var value = html.GetBetween("href=\"", "\"");
 
+            if (value.IsNotEmpty())
+            {
+                return value;
+            }
+
             if (value.IsEmpty() || !value.OrContains(StringComparison.OrdinalIgnoreCase, "http", "https", "www"))
             {
                 value = html.GetBetween("href='", "'");
