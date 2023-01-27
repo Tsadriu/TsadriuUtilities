@@ -2,19 +2,19 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.12.0</Version>
+    <Version>1.12.1</Version>
     <Description>TsadriuUtilities is a library that helps on dealing with: Arrays, Chars, DateTime, Directories, Files, Lists, Numbers, Strings, Generic types and more. I hope this package will make your coding easier and save you a bit of time.</Description>
     <Copyright>Copyright 2023 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>CsvHelper:
- - This has been wrongly included in the latest release of the project. It will be released on another package in the future (TsadriuUtilities.Csv).</PackageReleaseNotes>
+    <PackageReleaseNotes>StringHelper:
+ - SplitBy method has more cases on the SplitType enum.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
-    <AssemblyVersion>1.12.0</AssemblyVersion>
-    <FileVersion>1.12.0</FileVersion>
+    <AssemblyVersion>1.12.1</AssemblyVersion>
+    <FileVersion>1.12.1</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>TsadriuUtilities</PackageId>
     <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
@@ -37,6 +37,13 @@
     <None Include="icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 

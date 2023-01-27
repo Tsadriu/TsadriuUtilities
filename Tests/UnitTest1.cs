@@ -167,12 +167,5 @@ namespace Tests
             var file = File.ReadAllText("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\Files\\nuovo 39.txt");
             var emptyText = file.RemoveEmptyTags();
         }
-
-        [TestMethod]
-        public void CsvHelperTest()
-        {
-            CsvColumn column = new CsvColumn("Student Names");
-            CsvTable table = new CsvTable("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\Files\\Non_esiste.csv");
-        }
     }
 }
