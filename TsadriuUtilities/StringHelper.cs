@@ -32,54 +32,62 @@ namespace TsadriuUtilities
             {
                 return string.Empty;
             }
-
-            start ??= string.Empty;
-            end ??= string.Empty;
             
-            bool hasFoundStart = true;
-            bool hasFoundEnd = true;
-            
-            int startIndex = text.IndexOf(start);
+            string copyOfText = text;
 
-            if (startIndex == -1)
+            int startIndex = -1;
+
+            if (start != null && start.Length > 0)
             {
-                start = string.Empty;
-                startIndex = 0;
-                hasFoundStart = false;
-            }
-            else
-            {
-                // This insures that the start character is also selected
-                startIndex++;
+                startIndex = text.IndexOf(start, StringComparison.OrdinalIgnoreCase);
             }
 
-            string copyOfText = text.Substring(startIndex);
-
-            int endIndex = copyOfText.IndexOf(end);
-
-            if (endIndex == -1)
+            if (startIndex > -1)
             {
-                end = string.Empty;
-                endIndex = copyOfText.Length;
-                hasFoundEnd = false;
-            }
-            else
-            {
-                // This insures that the end character is also selected
-                endIndex++;
+                startIndex += startEndIncluded ? 0 : start.Length;
+                copyOfText = text.Substring(startIndex + (startEndIncluded ? start.Length : 0));
             }
 
-            if (!hasFoundStart && !hasFoundEnd)
+            int endIndex = -1;
+
+            if (end != null && end.Length > 0)
             {
-                return string.Empty;
-            }
-            
-            if (startEndIncluded)
-            {
-                return start + copyOfText.Substring(endIndex) + end;
+                endIndex = (text.Length - copyOfText.Length);
+
+                int currentEndIndex = copyOfText.IndexOf(end, StringComparison.OrdinalIgnoreCase);
+
+                switch (currentEndIndex)
+                {
+                    case > -1:
+                        endIndex += copyOfText.IndexOf(end, StringComparison.OrdinalIgnoreCase);
+                        break;
+                    case -1:
+                        endIndex = -1;
+                        break;
+                }
             }
 
-            return copyOfText.Substring(endIndex);
+            if (endIndex > -1)
+            {
+                endIndex += startEndIncluded ? end.Length : 0;
+            }
+
+            if (endIndex > -1 && startIndex > -1)
+            {
+                return text.Substring(startIndex, endIndex - startIndex);
+            }
+
+            if (startIndex > -1 && end.IsEmpty())
+            {
+                return text.Substring(startIndex, text.Length - startIndex);
+            }
+
+            if (endIndex > -1 && start.IsEmpty())
+            {
+                return text.Substring(0, endIndex);
+            }
+
+            return string.Empty;
         }
 
         /// <summary>

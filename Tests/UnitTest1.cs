@@ -99,6 +99,9 @@ namespace Tests
 
             string fileName = "01341400198_01178580997_202211_SNM_20230209090114_4DP0013.xml";
             string codiceDispacciamento = fileName.GetBetweenReverse("?", "1", true);
+
+            string viewState = "id=\"__VIEWSTATEGENERATOR\" value=\"C2EE9ABB\" />";
+            string value = viewState.GetBetween("value=\"", "\"");
         }
 
         [TestMethod]
