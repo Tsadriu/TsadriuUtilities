@@ -2,19 +2,20 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.12.1</Version>
+    <Version>1.12.2</Version>
     <Description>TsadriuUtilities is a library that helps on dealing with: Arrays, Chars, DateTime, Directories, Files, Lists, Numbers, Strings, Generic types and more. I hope this package will make your coding easier and save you a bit of time.</Description>
     <Copyright>Copyright 2023 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
     <PackageReleaseNotes>StringHelper:
- - SplitBy method has more cases on the SplitType enum.</PackageReleaseNotes>
+ - Fixed method GetBetweenReverse().
+ - Changed the way the method GetBetween() works behind the scenes.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
-    <AssemblyVersion>1.12.1</AssemblyVersion>
-    <FileVersion>1.12.1</FileVersion>
+    <AssemblyVersion>1.12.2</AssemblyVersion>
+    <FileVersion>1.12.2</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>TsadriuUtilities</PackageId>
     <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>

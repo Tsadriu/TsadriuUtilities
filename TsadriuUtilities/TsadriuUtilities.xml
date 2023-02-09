@@ -1011,13 +1011,13 @@
         </member>
         <member name="M:TsadriuUtilities.StringHelper.GetBetweenReverse(System.String,System.String,System.String,System.Boolean)">
             <summary>
-            Searches through the <paramref name="text"/>, using the <paramref name="end"/> as the start tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="start"/> tag is found.
+            Searches through the <paramref name="text"/>, using the <paramref name="start"/> as the start tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="end"/> tag is found.
             </summary>
             <param name="text">Text to search through.</param>
-            <param name="end">From where the text ends.</param>
             <param name="start">From where the text starts.</param>
-            <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="end"/> and <paramref name="start"/> included.</param>
-            <returns>The first instance found between <paramref name="end"/> and <paramref name="start"/>. If both <paramref name="end"/> and <paramref name="start"/> are not found, returns a <see cref="F:System.String.Empty"/>.</returns>
+            <param name="end">From where the text ends.</param>
+            <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
+            <returns>The first instance found between <paramref name="start"/> and <paramref name="end"/>. If both <paramref name="start"/> and <paramref name="end"/> are not found, returns a <see cref="F:System.String.Empty"/>.</returns>
         </member>
         <member name="M:TsadriuUtilities.StringHelper.AndContains(System.String,System.StringComparison,System.String[])">
             <summary>

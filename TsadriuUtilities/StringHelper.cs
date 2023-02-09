@@ -28,66 +28,58 @@ namespace TsadriuUtilities
         /// <returns>Returns <see cref="string.Empty"/> if nothing is found.</returns>
         public static string GetBetween(this string text, string start = null, string end = null, bool startEndIncluded = false)
         {
-            string copyOfText = text;
-
-            if (copyOfText.IsEmpty())
+            if (text.IsEmpty())
             {
                 return string.Empty;
             }
 
-            int startIndex = -1;
+            start ??= string.Empty;
+            end ??= string.Empty;
+            
+            bool hasFoundStart = true;
+            bool hasFoundEnd = true;
+            
+            int startIndex = text.IndexOf(start);
 
-            if (start != null && start.Length > 0)
+            if (startIndex == -1)
             {
-                startIndex = text.IndexOf(start, StringComparison.OrdinalIgnoreCase);
+                start = string.Empty;
+                startIndex = 0;
+                hasFoundStart = false;
+            }
+            else
+            {
+                // This insures that the start character is also selected
+                startIndex++;
             }
 
-            if (startIndex > -1)
+            string copyOfText = text.Substring(startIndex);
+
+            int endIndex = copyOfText.IndexOf(end);
+
+            if (endIndex == -1)
             {
-                startIndex += startEndIncluded ? 0 : start.Length;
-                copyOfText = text.Substring(startIndex + (startEndIncluded ? start.Length : 0));
+                end = string.Empty;
+                endIndex = copyOfText.Length;
+                hasFoundEnd = false;
+            }
+            else
+            {
+                // This insures that the end character is also selected
+                endIndex++;
             }
 
-            int endIndex = -1;
-
-            if (end != null && end.Length > 0)
+            if (!hasFoundStart && !hasFoundEnd)
             {
-                endIndex = (text.Length - copyOfText.Length);
-
-                int currentEndIndex = copyOfText.IndexOf(end, StringComparison.OrdinalIgnoreCase);
-
-                switch (currentEndIndex)
-                {
-                    case > -1:
-                        endIndex += copyOfText.IndexOf(end, StringComparison.OrdinalIgnoreCase);
-                        break;
-                    case -1:
-                        endIndex = -1;
-                        break;
-                }
+                return string.Empty;
+            }
+            
+            if (startEndIncluded)
+            {
+                return start + copyOfText.Substring(endIndex) + end;
             }
 
-            if (endIndex > -1)
-            {
-                endIndex += startEndIncluded ? end.Length : 0;
-            }
-
-            if (endIndex > -1 && startIndex > -1)
-            {
-                return text.Substring(startIndex, endIndex - startIndex);
-            }
-
-            if (startIndex > -1 && end.IsEmpty())
-            {
-                return text.Substring(startIndex, text.Length - startIndex);
-            }
-
-            if (endIndex > -1 && start.IsEmpty())
-            {
-                return text.Substring(0, endIndex);
-            }
-
-            return string.Empty;
+            return copyOfText.Substring(endIndex);
         }
 
         /// <summary>
@@ -146,30 +138,67 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
-        /// Searches through the <paramref name="text"/>, using the <paramref name="end"/> as the start tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="start"/> tag is found.
+        /// Searches through the <paramref name="text"/>, using the <paramref name="start"/> as the start tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="end"/> tag is found.
         /// </summary>
         /// <param name="text">Text to search through.</param>
-        /// <param name="end">From where the text ends.</param>
         /// <param name="start">From where the text starts.</param>
-        /// <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="end"/> and <paramref name="start"/> included.</param>
-        /// <returns>The first instance found between <paramref name="end"/> and <paramref name="start"/>. If both <paramref name="end"/> and <paramref name="start"/> are not found, returns a <see cref="string.Empty"/>.</returns>
-        public static string GetBetweenReverse(this string text, string end = null, string start = null, bool startEndIncluded = false)
+        /// <param name="end">From where the text ends.</param>
+        /// <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
+        /// <returns>The first instance found between <paramref name="start"/> and <paramref name="end"/>. If both <paramref name="start"/> and <paramref name="end"/> are not found, returns a <see cref="string.Empty"/>.</returns>
+        public static string GetBetweenReverse(this string text, string start = null, string end = null, bool startEndIncluded = false)
         {
-            int startIndex = start.IsEmpty() ? 0 : text.LastIndexOf(start);
-            int endIndex = end.IsEmpty() ? text.Length : text.LastIndexOf(end);
-
-            if (startIndex == -1 || endIndex == -1)
+            if (text.IsEmpty())
             {
                 return string.Empty;
             }
 
-            if (!startEndIncluded)
+            start ??= string.Empty;
+            end ??= string.Empty;
+            
+            bool hasFoundStart = true;
+            bool hasFoundEnd = true;
+            
+            int startIndex = text.LastIndexOf(start);
+
+            if (startIndex == -1)
             {
-                startIndex += start.Length;
-                endIndex += end.Length;
+                start = string.Empty;
+                startIndex = text.Length;
+                hasFoundStart = false;
+            }
+            else
+            {
+                // This insures that the start character is also selected
+                startIndex++;
             }
 
-            return text.Substring(startIndex, endIndex - startIndex + end.Length);
+            string copyOfText = text.Substring(0, startIndex);
+
+            int endIndex = copyOfText.LastIndexOf(end);
+
+            if (endIndex == -1)
+            {
+                end = string.Empty;
+                endIndex = 0;
+                hasFoundEnd = false;
+            }
+            else
+            {
+                // This insures that the end character is also selected
+                 endIndex++;
+            }
+
+            if (!hasFoundStart && !hasFoundEnd)
+            {
+                return string.Empty;
+            }
+            
+            if (startEndIncluded)
+            {
+                return end + copyOfText.Substring(endIndex) + start;
+            }
+
+            return copyOfText.Substring(endIndex);
         }
 
         /// <summary>
@@ -313,9 +342,9 @@ namespace TsadriuUtilities
         /// <returns>A <see cref="string"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.</returns>
         public static string Remove(this string value, params string[] valuesToRemove)
         {
-            for (int i = 0; i < valuesToRemove.Length; i++)
+            foreach (string valueToRemove in valuesToRemove)
             {
-                value = value.Replace(valuesToRemove[i], string.Empty);
+                value = value.Replace(valueToRemove, string.Empty);
             }
 
             return value;
@@ -377,20 +406,22 @@ namespace TsadriuUtilities
         /// <returns>A list of <see cref="string"/> that contains <paramref name="value"/> split by the <paramref name="separator"/>.</returns>
         public static List<string> Split(this string value, string separator, bool keepSeparator = false)
         {
-            var splittedValue = value.Split(separator).ToList();
+            List<string> splitValue = value.Split(separator).ToList();
 
-            if (keepSeparator)
+            if (!keepSeparator)
             {
-                var stringBuilder = new StringBuilder();
-
-                for (int i = 1; i < splittedValue.Count; i++)
-                {
-                    splittedValue[i] = stringBuilder.Append(separator + splittedValue[i]).ToString();
-                    stringBuilder.Clear();
-                }
+                return splitValue;
             }
 
-            return splittedValue;
+            var stringBuilder = new StringBuilder();
+
+            for (int i = 1; i < splitValue.Count; i++)
+            {
+                splitValue[i] = stringBuilder.Append(separator + splitValue[i]).ToString();
+                stringBuilder.Clear();
+            }
+
+            return splitValue;
         }
 
         /// <summary>
@@ -417,7 +448,7 @@ namespace TsadriuUtilities
                 SplitType.Space => value.Split(" ", keepSeparator),
                 SplitType.Underscore => value.Split("_", keepSeparator),
                 SplitType.UserDefined => value.Split(separator, keepSeparator),
-                _ => throw new NotImplementedException($"Type '{splitType}' has not been implemented.")
+                _ => throw new NotImplementedException($"Type '{splitType}' has not been implemented."),
             };
 
         }
@@ -433,14 +464,14 @@ namespace TsadriuUtilities
             var charArray = value.ToCharArray();
             var stringBuilder = new StringBuilder();
 
-            for (int i = 0; i < charArray.Length; i++)
+            foreach (char character in charArray)
             {
-                if (char.IsUpper(charArray[i]))
+                if (char.IsUpper(character))
                 {
                     stringBuilder.Append(separator);
                 }
 
-                stringBuilder.Append(charArray[i]);
+                stringBuilder.Append(character);
             }
 
             return stringBuilder.ToString();
@@ -457,14 +488,14 @@ namespace TsadriuUtilities
             var charArray = value.ToCharArray();
             var stringBuilder = new StringBuilder();
 
-            for (int i = 0; i < charArray.Length; i++)
+            foreach (char character in charArray)
             {
-                if (char.IsLower(charArray[i]))
+                if (char.IsLower(character))
                 {
                     stringBuilder.Append(separator);
                 }
 
-                stringBuilder.Append(charArray[i]);
+                stringBuilder.Append(character);
             }
 
             return stringBuilder.ToString();
