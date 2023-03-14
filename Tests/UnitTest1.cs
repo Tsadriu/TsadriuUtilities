@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using TsadriuUtilities;
@@ -33,6 +34,10 @@ namespace Tests
             DateTime? dateBetween3Min = null;
             var dateBetween3Max = new DateTime(2022, 12, 31);
             Assert.IsFalse(MultiHelper.IsBetween(dateBetween3, dateBetween3Min, dateBetween3Max));
+            
+            string dateToConvert = "2023-03-13T09:06:50.589+00:00";
+
+            var convertedDate = dateToConvert.ToDateTime("yyyy-MM-ddTHH:mm:ss.tttzzz", CultureInfo.GetCultureInfoByIetfLanguageTag("it"));
         }
 
         [TestMethod]

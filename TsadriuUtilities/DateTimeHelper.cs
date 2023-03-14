@@ -102,10 +102,7 @@ namespace TsadriuUtilities
         /// <returns>If the parsing was successful, returns <see cref="DateTime"/>. If the parsing fails, returns <see cref="DateTime.MinValue"/>.</returns>
         public static DateTime ToDateTime(this string dateAsString, string[] dateFormats, CultureInfo dateCulture = null)
         {
-            if (dateCulture == null)
-            {
-                dateCulture = CultureInfo.InvariantCulture;
-            }
+            dateCulture ??= CultureInfo.InvariantCulture;
 
             if (dateAsString.IsEmpty())
             {
@@ -113,22 +110,29 @@ namespace TsadriuUtilities
                 return DateTime.MinValue;
             }
 
-            // Ignore the spaces in the date value.
-            var dateStyle = DateTimeStyles.AllowWhiteSpaces;
-            var dateValue = DateTime.MinValue;
-
-            for (int i = 0; i < dateFormats.Length; i++)
+            Array dateStyles = Enum.GetValues(typeof(DateTimeStyles));
+            var result = DateTime.MinValue;
+            
+            foreach (string format in dateFormats)
             {
-                var successConversion = DateTime.TryParseExact(dateAsString, dateFormats[i], dateCulture, dateStyle, out DateTime result);
-
-                if (successConversion)
+                for (int i = 0; i < dateStyles.Length; i++)
                 {
-                    return result;
+                    bool successConversion = DateTime.TryParseExact(dateAsString, format, dateCulture, (DateTimeStyles)i, out result);
+
+                    if (!successConversion)
+                    {
+                        successConversion = DateTime.TryParse(dateAsString, dateCulture, (DateTimeStyles)i, out result);
+                    }
+                    
+                    if (successConversion)
+                    {
+                        return result;
+                    }
                 }
             }
 
             Console.WriteLine("No valid date format to parse the date '" + dateAsString + "'.");
-            return dateValue;
+            return result;
         }
 
         /// <summary>
