@@ -166,18 +166,13 @@ namespace TsadriuUtilities
             bool hasFoundStart = true;
             bool hasFoundEnd = true;
             
-            int startIndex = text.LastIndexOf(start);
+            int startIndex = text.LastIndexOf(start, StringComparison.Ordinal);
 
+            // If the starting tag has not been found, we'll start from the end of the text
             if (startIndex == -1)
             {
-                start = string.Empty;
                 startIndex = text.Length;
                 hasFoundStart = false;
-            }
-            else
-            {
-                // This insures that the start character is also selected
-                startIndex++;
             }
 
             string copyOfText = text.Substring(0, startIndex);
