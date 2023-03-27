@@ -187,8 +187,7 @@ namespace TsadriuUtilities
             }
             else
             {
-                // This insures that the end character is also selected
-                 endIndex++;
+                endIndex += end.Length;
             }
 
             if (!hasFoundStart && !hasFoundEnd)

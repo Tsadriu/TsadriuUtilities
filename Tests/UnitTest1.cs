@@ -118,7 +118,7 @@ namespace Tests
             
             var siiHtml = File.ReadAllText("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Tests\\Files\\SiiPortal.html");
             
-            var siiGetReverse = siiHtml.GetBetweenReverse("Interrogazione RCU GAS</a>", "<a href=\"").GetHrefLink();
+            var siiGetReverse = siiHtml.GetBetweenReverse("Interrogazione RCU GAS</a>", "<a href=\"");
         }
 
         [TestMethod]
