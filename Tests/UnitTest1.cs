@@ -12,33 +12,6 @@ namespace Tests
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
-        public void DateTimeHelperTest()
-        {
-            var dateTest = "20221014".ToDateTime();
-            var dateTest2 = "22_03_1898".ToDateTime();
-            var dateTest3 = "01/07/2007 23:59".ToDateTime();
-
-            // IsBetween()
-            var dateBetween1 = new DateTime(2022, 10, 26);
-            var dateBetween1Min = new DateTime(2020, 1, 1);
-            var dateBetween1Max = new DateTime(2022, 12, 31);
-            Assert.IsTrue(dateBetween1.IsBetween(dateBetween1Min, dateBetween1Max));
-
-            var dateBetween2 = new DateTime(2022, 10, 26);
-            var dateBetween2Min = new DateTime(2020, 1, 1);
-            var dateBetween2Max = new DateTime(2021, 1, 1);
-            Assert.IsFalse(dateBetween2.IsBetween(dateBetween2Min, dateBetween2Max));
-
-            DateTime dateBetween3 = new DateTime(2022, 10, 26);
-            DateTime? dateBetween3Min = null;
-            var dateBetween3Max = new DateTime(2022, 12, 31);
-            Assert.IsFalse(MultiHelper.IsBetween(dateBetween3, dateBetween3Min, dateBetween3Max));
-            
-            string dateToConvert = "2023-03-13T09:06:50.589+00:00";
-
-            var convertedDate = dateToConvert.ToDateTime("yyyy-MM-ddTHH:mm:ss.tttzzz", CultureInfo.GetCultureInfoByIetfLanguageTag("it"));
-        }
 
         [TestMethod]
         public void MultiHelperTest()

@@ -40,26 +40,7 @@ TsadriuUtilities is a library that helps on dealing with
 
 ### CharHelper:
 - **ToChar(string value, int index)**:
-    - Converts the `value` into a char. If the length of value is higher than 1, it will return the first character of value or, if `index` is passed, the character of the desired `index`. 
-
-### DateTimeHelper:
-- **ToDateTime(string dateAsString, string dateFormat, CultureInfo cultureInfo)**:
-- **ToDateTime(string dateAsString, string[] dateFormats, CultureInfo cultureInfo)**:
-    - Tries to convert a `date` from a string to a type of `DateTime`.
-- **GetLastDayOfMonth(DateTime date)**:
-    - Parses the `date` to return with the last day of the month.
-- **SetDay(DateTime date, int day)**:
-    - Sets the `day` in the `date`. In case the `day` is higher than the month's max days, it will be clamped.
-- **SetMonth(DateTime date, int month)**:
-    - Sets the `month` in the `date`. In case the `month` is higher than the year's maximum months, it will be clamped.
-- **SetYear(DateTime date, int year)**:
-    - Sets the `year` in the `date`.
-- **RemoveDays(DateTime date, int days)**:
-    - Removes a specified number of `days` from `date`.
-- **RemoveMonths(DateTime date, int months)**:
-    - Removes a specified number of `months` from `date`.
-- **RemoveYears(DateTime date, int years)**:
-    - Removes a specified number of `years` from `date`.
+    - Converts the `value` into a char. If the length of value is higher than 1, it will return the first character of value or, if `index` is passed, the character of the desired `index`.
 
 ### DictionaryHelper:
 - **ToDictionary\<TKey, TValue\>(List\<string\> list, string separator, bool invertKeyWithValue)**:

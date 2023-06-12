@@ -1,15 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.12.6</Version>
-    <Description>TsadriuUtilities is a library that helps on dealing with: Arrays, Chars, DateTime, Directories, Files, Lists, Numbers, Strings, Generic types and more. I hope this package will make your coding easier and save you a bit of time.</Description>
+    <TargetFrameworks>net5.0;net6.0;net7.0</TargetFrameworks>
+    <Version>1.13</Version>
+    <Description>TsadriuUtilities is a library that helps on dealing with: Arrays, Chars, Directories, Files, Lists, Numbers, Strings, Generic types and more. I hope this package will make your coding easier and save you a bit of time.</Description>
     <Copyright>Copyright 2023 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>StringHelper:
- - GetBetweenReverse: Fixed an issue where the end parameter was not returning the correct index for the string.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support for .net 7.0
+DateTime:
+ - Removed DateTime from this library. This was moved to a new nuget package, TsadriuUtilities.DateTime</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
@@ -45,6 +46,10 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <PackageReference Include="TsadriuUtilities.DateTime" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

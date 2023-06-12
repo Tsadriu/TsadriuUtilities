@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TargetFrameworks>net7.0;net5.0;net6.0</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>1.0.2</Version>
+        <Title>TsadriuUtilities.DateTime</Title>
+        <Authors>Tsadriu</Authors>
+        <Description>TsadriuUtilities.DateTime is a library that helps on manipulating and managing DateTime types.</Description>
+        <Copyright>Tsadriu</Copyright>
+        <PackageProjectUrl>https://github.com/Tsadriu/TsadriuUtilities</PackageProjectUrl>
+        <PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
+        <PackageIcon>icon.png</PackageIcon>
+        <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <PackageTags>DateTime, DateTimeHelper</PackageTags>
+        <PackageReleaseNotes>Updated XML comments</PackageReleaseNotes>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\TsadriuUtilities.DateTime.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="icon.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+
+</Project>
