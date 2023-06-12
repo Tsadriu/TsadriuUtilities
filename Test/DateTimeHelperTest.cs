@@ -1,5 +1,5 @@
 using System.Globalization;
-using DateTimeHelper;
+using TsadriuUtilities;
 
 namespace Test
 {
@@ -15,6 +15,10 @@ namespace Test
             const string dateTwo = "2076/23/10";
             var dateTwoResult = dateTwo.ToDateTime(CultureInfo.InvariantCulture, "yyyy/dd/MM");
             Assert.That(dateTwoResult, Is.EqualTo(new DateTime(2076, 10, 23)));
+            
+            const string dateThree = "2123@25@02";
+            var dateThreeResult = dateThree.ToDateTime("yyyy@dd@MM");
+            Assert.That(dateThreeResult, Is.EqualTo(new DateTime(2123, 2, 25)));
         }
 
         [Test]
@@ -27,6 +31,10 @@ namespace Test
             const string dateTwo = "05202312";
             DateTime? dateTwoResult = dateTwo.ToNullableDateTime(CultureInfo.InvariantCulture, "ddyyyyMM");
             Assert.That(dateTwoResult, Is.EqualTo(new DateTime(2023, 12, 5)));
+            
+            const string dateThree = "31@4172@01";
+            DateTime? dateThreeResult = dateThree.ToNullableDateTime("dd@yyyy@MM");
+            Assert.That(dateThreeResult, Is.EqualTo(new DateTime(4172, 1, 31)));
         }
 
         [Test]

@@ -5,9 +5,9 @@ TsadriuUtilities.DateTime is a small library that helps on manipulating and mana
 ## > Features <
 
 ### DateTimeHelper:
-- **ToDateTime(string date, CultureInfo cultureInfo, DateTimeStyles? dateTimeStyle, params string[] formats)** + 1 overload:
+- **ToDateTime(string date, CultureInfo cultureInfo, DateTimeStyles? dateTimeStyle, params string[] formats)** + 2 overload:
     - Attempts to convert a date from a `string` to a `DateTime` object.
-- **ToNullableDateTime(string date, CultureInfo cultureInfo, DateTimeStyles? dateTimeStyle, params string[] formats)** + 1 overload:
+- **ToNullableDateTime(string date, CultureInfo cultureInfo, DateTimeStyles? dateTimeStyle, params string[] formats)** + 2 overload:
     - Attempts to convert a date from a `string` to a nullable `DateTime`.
 - **GetLastDayOfMonth(DateTime date)**:
     - Parses the `date` to return with the last day of the month.

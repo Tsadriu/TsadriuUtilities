@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace DateTimeHelper
+namespace TsadriuUtilities
 {
     /// <summary>
     /// Class that helps on dealing with <b><see cref="DateTime"/></b>.
@@ -69,6 +69,20 @@ namespace DateTimeHelper
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="date"/> is null or empty.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="date"/> could not be converted into a <see cref="DateTime"/> object.</exception>
         public static DateTime ToDateTime(this string date, CultureInfo cultureInfo, params string[] formats) => date.ToDateTime(cultureInfo, null, formats);
+
+        /// <summary>
+        /// Attempts to convert a date from a <see cref="string"/> to a <see cref="DateTime"/> object.<br/>
+        /// <b><see cref="CultureInfo.InvariantCulture"/></b> will be used for the culture.
+        /// </summary>
+        /// <param name="date">The date represented as a <see cref="string"/>.<br/>
+        /// Examples: "23/03/2012", "11-02-2001 23:12:04", "06.12.2019".</param>
+        /// <param name="formats">The date formats to use for parsing.<br/>
+        /// Examples: "dd/MM/yyyy", "MM/dd/yyyy".</param>
+        /// <returns>If the parsing was successful, returns the parsed <see cref="DateTime"/> object.<br/>
+        /// If the parsing fails, an <see cref="ArgumentException"/> is thrown.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="date"/> is null or empty.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="date"/> could not be converted into a <see cref="DateTime"/> object.</exception>
+        public static DateTime ToDateTime(this string date, params string[] formats) => date.ToDateTime(CultureInfo.InvariantCulture, null, formats);
         
         /// <summary>
         /// Attempts to convert a date from a <see cref="string"/> to a nullable <see cref="DateTime"/>.
@@ -126,6 +140,20 @@ namespace DateTimeHelper
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="date"/> is null or empty.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="date"/> could not be converted into a <see cref="DateTime"/> object.</exception>
         public static DateTime? ToNullableDateTime(this string date, CultureInfo cultureInfo, params string[] formats) => date.ToNullableDateTime(cultureInfo, null, formats);
+        
+        /// <summary>
+        /// Attempts to convert a date from a <see cref="string"/> to a nullable <see cref="DateTime"/>.<br/>
+        /// <b><see cref="CultureInfo.InvariantCulture"/></b> will be used for the culture.
+        /// </summary>
+        /// <param name="date">The date represented as a <see cref="string"/>.<br/>
+        /// Examples: "23/03/2012", "11-02-2001 23:12:04", "06.12.2019".</param>
+        /// <param name="formats">The date formats to use for parsing.<br/>
+        /// Examples: "dd/MM/yyyy", "MM/dd/yyyy".</param>
+        /// <returns>If the parsing was successful, returns the parsed <see cref="DateTime"/> object.<br/>
+        /// If the parsing fails (or the <paramref name="date"/> parameter is null or empty), it returns null.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="date"/> is null or empty.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="date"/> could not be converted into a <see cref="DateTime"/> object.</exception>
+        public static DateTime? ToNullableDateTime(this string date, params string[] formats) => date.ToNullableDateTime(CultureInfo.InvariantCulture, null, formats);
 
         /// <summary>
         /// Parses the date to return with the last day of the month.
