@@ -4,7 +4,7 @@
 
 
 TsadriuUtilities is a library that helps on dealing with
- - [Arrays](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/), [Chars](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char), [Date and Time](https://docs.microsoft.com/en-us/dotnet/api/system.datetime.date?view=net-6.0), [Directories](https://docs.microsoft.com/en-us/dotnet/api/system.io.directory?view=net-6.0), [Files](https://docs.microsoft.com/en-us/dotnet/api/system.io.file?view=net-6.0), [Lists](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1?view=net-6.0), [Numbers](https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/tutorials/numbers-in-csharp-local), [Strings](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=net-6.0), 
+ - [Arrays](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/), [Chars](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char), [Directories](https://docs.microsoft.com/en-us/dotnet/api/system.io.directory?view=net-6.0), [Files](https://docs.microsoft.com/en-us/dotnet/api/system.io.file?view=net-6.0), [Lists](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1?view=net-6.0), [Numbers](https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/tutorials/numbers-in-csharp-local), [Strings](https://docs.microsoft.com/en-us/dotnet/api/system.string?view=net-6.0), 
 [Generic types](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics) and more. I hope this package will make your coding easier and save you a bit of time. 
 
 ## > Features <

@@ -48,8 +48,4 @@ DateTime:
     </None>
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-    <PackageReference Include="TsadriuUtilities.DateTime" Version="1.0.0" />
-  </ItemGroup>
-
 </Project>
