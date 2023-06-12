@@ -6,20 +6,20 @@ TsadriuUtilities.DateTime is a small library that helps on manipulating and mana
 
 ### DateTimeHelper:
 - **ToDateTime(string date, CultureInfo cultureInfo, DateTimeStyles? dateTimeStyle, params string[] formats)** + 1 overload:
-    - This method attempts to convert a date from a `string` to a type of `DateTime`.
+    - Attempts to convert a date from a `string` to a `DateTime` object.
 - **ToNullableDateTime(string date, CultureInfo cultureInfo, DateTimeStyles? dateTimeStyle, params string[] formats)** + 1 overload:
-    - This method attempts to convert a date from a `string` to a nullable `DateTime`. If the parsing fails, it returns a null. If it succeeds, it returns a DateTime object.
+    - Attempts to convert a date from a `string` to a nullable `DateTime`.
 - **GetLastDayOfMonth(DateTime date)**:
     - Parses the `date` to return with the last day of the month.
 - **SetDay(DateTime date, int day)**:
-    - Sets the `day` in the `date`. In case the `day` is higher than the month's max days, it will be clamped.
+    - Sets the `day` of the month in the specified `date`.
 - **SetMonth(DateTime date, int month)**:
-    - Sets the `month` in the `date`. In case the `month` is higher than the year's maximum months, it will be clamped.
+    - Sets the `month` of the month in the specified `date`.
 - **SetYear(DateTime date, int year)**:
-    - Sets the `year` in the `date`.
+    - Sets the `year` of the month in the specified `date`.
 - **RemoveDays(DateTime date, int days)**:
-    - Removes a specified number of `days` from `date`.
+    - Removes the specified number of days from the given `days` and returns the resulting `date`.
 - **RemoveMonths(DateTime date, int months)**:
-    - Removes a specified number of `months` from `date`.
+    - Removes the specified number of months from the given `months` and returns the resulting `date`.
 - **RemoveYears(DateTime date, int years)**:
-    - Removes a specified number of `years` from `date`.
+    - Removes the specified number of years from the given `years` and returns the resulting `date`.

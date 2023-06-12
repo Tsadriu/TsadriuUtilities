@@ -6,7 +6,7 @@ namespace DateTimeHelper
     /// <summary>
     /// Class that helps on dealing with <b><see cref="DateTime"/></b>.
     /// </summary>
-    public static class Helper
+    public static class DateTimeHelper
     {
         /// <summary>
         /// All of the date styles possible from the <b><see cref="DateTimeStyles"/></b> enum.

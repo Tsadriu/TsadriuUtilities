@@ -14,8 +14,8 @@ DateTime:
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
-    <AssemblyVersion>1.12.6</AssemblyVersion>
-    <FileVersion>1.12.6</FileVersion>
+    <AssemblyVersion>1.13</AssemblyVersion>
+    <FileVersion>1.13</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>TsadriuUtilities</PackageId>
     <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
