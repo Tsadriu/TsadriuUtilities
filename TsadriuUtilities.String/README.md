@@ -19,5 +19,9 @@ TsadriuUtilities.String is a small library that helps on manipulating and managi
     - Replaces multiple occurrences of strings specified in **valuesToRemove** with **string.Empty** in the **value** string.
 - **TextCount(string value, string valueToCount)**:
     - Counts the number of occurrences of a specified **valueToCount** within the **value** string.
+- **ContainsAll(string text, StringComparison comparison, param string[] values)** + 1 overload:
+    - Checks whether a string contains all specified values, using the specified string comparison.
+- **ContainsAny(string text, StringComparison comparison, param string[] values)** + 1 overload:
+  - Checks whether a string contains any of the specified values, using the specified string comparison.
 - **SplitBy(string value, StringSplitByEnum splitByEnum, bool keepSeparator, string? separator)**:
     - Splits the specified **value** string based on the specified **splitByEnum**.

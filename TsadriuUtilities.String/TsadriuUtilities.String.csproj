@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0;net5.0;net6.0</TargetFrameworks>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <TargetFrameworks>net7.0;net5.0;net6.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>1.1.0</Version>
         <Title>TsadriuUtilities.String</Title>
         <Authors>Tsadriu</Authors>
         <Description>TsadriuUtilities.String is a library that helps on manipulating and managing String types.</Description>
@@ -16,9 +17,11 @@
         <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>String, StringHelper</PackageTags>
-        <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <FileVersion>1.0.0</FileVersion>
+        <PackageReleaseNotes>Implemented methods:
+ContainsAll()
+ContainsAny()</PackageReleaseNotes>
+        <AssemblyVersion>1.1.0</AssemblyVersion>
+        <FileVersion>1.1.0</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -30,6 +33,7 @@
             <Pack>True</Pack>
             <PackagePath></PackagePath>
         </None>
+
         <None Include="README.md">
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>

@@ -148,7 +148,7 @@ namespace Test
             // Assert
             Assert.That(result, Is.EqualTo(expected));
         }
-        
+
         [Test]
         public void GetBetweenReverse_ReturnsSubstringBetweenStartAndEnd()
         {
@@ -312,7 +312,7 @@ namespace Test
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.Empty);
         }
-        
+
         [Test]
         public void IsEmpty_When_String_Is_Null_Returns_True()
         {
@@ -364,7 +364,7 @@ namespace Test
             // Assert
             Assert.That(result, Is.False);
         }
-        
+
         [Test]
         public void IsNotEmpty_When_String_Is_Null_Returns_False()
         {
@@ -416,7 +416,7 @@ namespace Test
             // Assert
             Assert.That(result, Is.True);
         }
-        
+
         [Test]
         public void ReplaceManyWith_Replaces_Values_In_String()
         {
@@ -476,7 +476,7 @@ namespace Test
             // Assert
             Assert.That(result, Is.EqualTo(expected));
         }
-        
+
         [Test]
         public void TextCount_Returns_Correct_Count()
         {
@@ -521,7 +521,7 @@ namespace Test
             // Assert
             Assert.That(result, Is.EqualTo(expectedCount));
         }
-        
+
         [Test]
         public void SplitBy_Returns_Correct_List()
         {
@@ -581,6 +581,66 @@ namespace Test
 
             // Act & Assert
             Assert.Throws<NotImplementedException>(() => value.SplitBy(splitByEnum, keepSeparator));
+        }
+
+        [Test]
+        public void ContainsAll_ShouldReturnTrue_WhenAllValuesExistInText()
+        {
+            // Arrange
+            string text = "This is a sample text";
+            StringComparison comparison = StringComparison.OrdinalIgnoreCase;
+            string[] values = { "sample", "text" };
+
+            // Act
+            bool result = text.ContainsAll(comparison, values);
+
+            // Assert
+            Assert.That(result, Is.True);
+        }
+
+        [Test]
+        public void ContainsAll_ShouldReturnFalse_WhenAtLeastOneValueIsMissingInText()
+        {
+            // Arrange
+            string text = "This is a sample text";
+            StringComparison comparison = StringComparison.OrdinalIgnoreCase;
+            string[] values = { "sample", "missing" };
+
+            // Act
+            bool result = text.ContainsAll(comparison, values);
+
+            // Assert
+            Assert.That(result, Is.False);
+        }
+
+        [Test]
+        public void ContainsAny_ShouldReturnTrue_WhenAnyValueExistsInText()
+        {
+            // Arrange
+            string text = "This is a sample text";
+            StringComparison comparison = StringComparison.OrdinalIgnoreCase;
+            string[] values = { "sample", "missing" };
+
+            // Act
+            bool result = text.ContainsAny(comparison, values);
+
+            // Assert
+            Assert.That(result, Is.True);
+        }
+
+        [Test]
+        public void ContainsAny_ShouldReturnFalse_WhenNoValueExistsInText()
+        {
+            // Arrange
+            string text = "This is a sample text";
+            StringComparison comparison = StringComparison.OrdinalIgnoreCase;
+            string[] values = { "nonexistent", "missing" };
+
+            // Act
+            bool result = text.ContainsAny(comparison, values);
+
+            // Assert
+            Assert.That(result, Is.False);
         }
     }
 }

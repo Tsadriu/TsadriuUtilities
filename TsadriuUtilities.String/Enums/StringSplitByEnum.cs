@@ -15,11 +15,21 @@ namespace TsadriuUtilities.Enums
         /// Carriage return character <b>\r</b>.
         /// </summary>
         CarriageReturn,
+        
+        /// <summary>
+        /// Coma character <b>,</b>.
+        /// </summary>
+        Coma,
 
         /// <summary>
         /// Dash character <b>-</b>.
         /// </summary>
         Dash,
+
+        /// <summary>
+        /// Dot character <b>.</b>.
+        /// </summary>
+        Dot,
 
         /// <summary>
         /// Double quote character <b>"</b>.

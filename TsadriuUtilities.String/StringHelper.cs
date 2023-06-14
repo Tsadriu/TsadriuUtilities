@@ -102,7 +102,7 @@ namespace TsadriuUtilities
         /// If <b><paramref name="startEndIncluded"/></b> is true, the returned substring includes the <b><paramref name="start"/></b> and <b><paramref name="end"/></b> strings; otherwise, only the content between the <b><paramref name="start"/></b> and <b><paramref name="end"/></b> strings is returned.
         /// </returns>
         public static string GetBetween(this string? text, string? start, string? end, bool startEndIncluded = false) => GetBetween(text, start, end, StringComparison.OrdinalIgnoreCase, startEndIncluded);
-        
+
         /// <summary>
         /// Searches through the <paramref name="text"/>, using the <paramref name="start"/> as the start tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="end"/> tag is found.
         /// </summary>
@@ -272,6 +272,42 @@ namespace TsadriuUtilities
         }
 
         /// <summary>
+        /// Checks whether a string contains all specified values, using the specified string comparison.
+        /// </summary>
+        /// <param name="text">The string to search within.</param>
+        /// <param name="comparison">The string comparison to use when checking for the values.</param>
+        /// <param name="values">The values to check for in the string.</param>
+        /// <returns><c>true</c> if the string contains all specified values; otherwise, <c>false</c>.</returns>
+        public static bool ContainsAll(this string text, StringComparison comparison, params string[] values) => values.All(value => text.Contains(value, comparison));
+
+        /// <summary>
+        /// Checks whether a string contains all specified values.<br/>
+        /// <b><see cref="StringComparison.OrdinalIgnoreCase"/></b> is used when comparing strings.
+        /// </summary>
+        /// <param name="text">The string to search within.</param>
+        /// <param name="values">The values to check for in the string.</param>
+        /// <returns><c>true</c> if the string contains all specified values; otherwise, <c>false</c>.</returns>
+        public static bool ContainsAll(this string text, params string[] values) => text.ContainsAll(StringComparison.OrdinalIgnoreCase, values);
+
+        /// <summary>
+        /// Checks whether a string contains any of the specified values, using the specified string comparison.
+        /// </summary>
+        /// <param name="text">The string to search within.</param>
+        /// <param name="comparison">The string comparison to use when checking for the values.</param>
+        /// <param name="values">The values to check for in the string.</param>
+        /// <returns><c>true</c> if the string contains any of the specified values; otherwise, <c>false</c>.</returns>
+        public static bool ContainsAny(this string text, StringComparison comparison, params string[] values) => values.Any(value => text.Contains(value, comparison));
+        
+        /// <summary>
+        /// Checks whether a string contains any of the specified values.<br/>
+        /// <b><see cref="StringComparison.OrdinalIgnoreCase"/></b> is used when comparing strings.
+        /// </summary>
+        /// <param name="text">The string to search within.</param>
+        /// <param name="values">The values to check for in the string.</param>
+        /// <returns><c>true</c> if the string contains any of the specified values; otherwise, <c>false</c>.</returns>
+        public static bool ContainsAny(this string text, params string[] values) => text.ContainsAny(StringComparison.OrdinalIgnoreCase, values);
+
+        /// <summary>
         /// Splits the specified <b><paramref name="value"/></b> string based on the specified <b><paramref name="splitByEnum"/></b>.
         /// </summary>
         /// <param name="value">The string to split.</param>
@@ -285,7 +321,9 @@ namespace TsadriuUtilities
             return splitByEnum switch
             {
                 StringSplitByEnum.CarriageReturn => value.Split("\r", keepSeparator),
+                StringSplitByEnum.Coma => value.Split(",", keepSeparator),
                 StringSplitByEnum.Dash => value.Split("-", keepSeparator),
+                StringSplitByEnum.Dot => value.Split(".", keepSeparator),
                 StringSplitByEnum.DoubleQuote => value.Split("\"", keepSeparator),
                 StringSplitByEnum.EnvironmentNewLine => value.Split(Environment.NewLine, keepSeparator),
                 StringSplitByEnum.Equal => value.Split("=", keepSeparator),
