@@ -12,6 +12,7 @@
         <PackageProjectUrl>https://github.com/Tsadriu/TsadriuUtilities</PackageProjectUrl>
         <PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
         <PackageIcon>icon.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>String, StringHelper</PackageTags>

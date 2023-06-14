@@ -15,7 +15,7 @@ TsadriuUtilities.String is a small library that helps on manipulating and managi
     - Determines whether the specified string is empty, null or consists only of white-space characters.
 - **IsNotEmpty(string value)**:
     - Determines whether the specified string is not empty, not null and contains at least one non-white-space character.
-- **ReplaceManyWith(string value, params string[] valuesToRemove)**:
+- **RemoveMany(string value, params string[] valuesToRemove)**:
     - Replaces multiple occurrences of strings specified in **valuesToRemove** with **string.Empty** in the **value** string.
 - **TextCount(string value, string valueToCount)**:
     - Counts the number of occurrences of a specified **valueToCount** within the **value** string.
