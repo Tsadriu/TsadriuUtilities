@@ -1,10 +1,13 @@
-﻿using System;
+﻿// Author: Tsadriu
+// Date: 11/06/2023
+
+using System;
 using System.Globalization;
 
 namespace TsadriuUtilities
 {
     /// <summary>
-    /// Class that helps on dealing with <b><see cref="DateTime"/></b>.
+    /// Class that helps on manipulating and managing <b><see cref="DateTime"/></b> types.
     /// </summary>
     public static class DateTimeHelper
     {
@@ -39,14 +42,7 @@ namespace TsadriuUtilities
             {
                 for (int i = 0; i < currentDateStyles.Length; i++)
                 {
-                    bool successConversion = DateTime.TryParseExact(date, format, cultureInfo, (DateTimeStyles)i, out DateTime result);
-
-                    if (!successConversion)
-                    {
-                        successConversion = DateTime.TryParse(date, cultureInfo, (DateTimeStyles)i, out result);
-                    }
-
-                    if (successConversion)
+                    if (DateTime.TryParseExact(date, format, cultureInfo, (DateTimeStyles)i, out DateTime result))
                     {
                         return result;
                     }
@@ -110,14 +106,7 @@ namespace TsadriuUtilities
             {
                 for (int i = 0; i < currentDateStyles.Length; i++)
                 {
-                    bool successConversion = DateTime.TryParseExact(date, format, cultureInfo, (DateTimeStyles)i, out DateTime result);
-
-                    if (!successConversion)
-                    {
-                        successConversion = DateTime.TryParse(date, cultureInfo, (DateTimeStyles)i, out result);
-                    }
-
-                    if (successConversion)
+                    if (DateTime.TryParseExact(date, format, cultureInfo, (DateTimeStyles)i, out DateTime result))
                     {
                         return result;
                     }

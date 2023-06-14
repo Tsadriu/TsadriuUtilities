@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using TsadriuUtilitiesOld;
 
 namespace TsadriuUtilities
 {
@@ -19,7 +20,7 @@ namespace TsadriuUtilities
         /// <returns>Returns the extention of <paramref name="fileName"/>.</returns>
         public static string GetFileExtention(string fileName)
         {
-            return fileName.Split(".")[StringHelper.CharCount(fileName, ".")];
+            return fileName.Split(".")[fileName.CharCount(".")];
         }
 
         /// <summary>

@@ -2,20 +2,21 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0;net7.0</TargetFrameworks>
-    <Version>1.13</Version>
-    <Description>TsadriuUtilities is a library that helps on dealing with: Arrays, Chars, Directories, Files, Lists, Numbers, Strings, Generic types and more. I hope this package will make your coding easier and save you a bit of time.</Description>
+    <Version>1.13.1</Version>
+    <Description>TsadriuUtilities is a library that helps on dealing with: Arrays, Chars, DateTime, Directories, Files, Lists, Numbers, Strings, Generic types and more. I hope this package will make your coding easier and save you a bit of time.</Description>
     <Copyright>Copyright 2023 (C) Tsadriu</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
-    <PackageReleaseNotes>Added support for .net 7.0
-DateTime:
- - Removed DateTime from this library. This was moved to a new nuget package, TsadriuUtilities.DateTime</PackageReleaseNotes>
+    <PackageReleaseNotes>DateTimeHelper:
+ - Re-introduced old DateTime helper class. Now it is under the TsadriuUtilitiesOld namespace. This will no longer be maintained, so consider using the TsadriuUtilities.DateTime library as this class will be removed soon from this library.
+ StringHelper:
+  - Now it is under the TsadriuUtilitiesOld namespace. This will no longer be maintained, so consider using the TsadriuUtilities.String library as this class will be removed soon from this library.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageTags></PackageTags>
     <Authors>Tsadriu</Authors>
-    <AssemblyVersion>1.13</AssemblyVersion>
-    <FileVersion>1.13</FileVersion>
+    <AssemblyVersion>1.13.1</AssemblyVersion>
+    <FileVersion>1.13.1</FileVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>TsadriuUtilities</PackageId>
     <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>

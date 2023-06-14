@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <TargetFrameworks>net7.0;net5.0;net6.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.1.0</Version>
+        <Version>1.1.1</Version>
         <Title>TsadriuUtilities.DateTime</Title>
         <Authors>Tsadriu</Authors>
         <Description>TsadriuUtilities.DateTime is a library that helps on manipulating and managing DateTime types.</Description>
@@ -17,7 +17,9 @@
         <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>DateTime, DateTimeHelper</PackageTags>
-        <PackageReleaseNotes>Implemented additional overload for ToDateTime() and ToNullableDateTime() methods.</PackageReleaseNotes>
+        <PackageReleaseNotes>Updated XML docs.</PackageReleaseNotes>
+        <AssemblyVersion>1.1.1</AssemblyVersion>
+        <FileVersion>1.1.1</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

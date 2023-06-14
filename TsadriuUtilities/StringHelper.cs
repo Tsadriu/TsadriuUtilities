@@ -10,11 +10,12 @@ using System.Text.RegularExpressions;
 using TsadriuUtilities.Enums.BoolHelper;
 using TsadriuUtilities.Enums.StringHelper;
 
-namespace TsadriuUtilities
+namespace TsadriuUtilitiesOld
 {
     /// <summary>
     /// A class that helps on dealing with <see cref="string"/>.
     /// </summary>
+    [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
     public static class StringHelper
     {
         /// <summary>
@@ -26,13 +27,14 @@ namespace TsadriuUtilities
         /// <param name="end">The end tag.</param>
         /// <param name="startEndIncluded">If enabled, it will return a <see cref="string"/> with the <paramref name="start"/> and <paramref name="end"/> included in it.</param>
         /// <returns>Returns <see cref="string.Empty"/> if nothing is found.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static string GetBetween(this string text, string start = null, string end = null, bool startEndIncluded = false)
         {
             if (text.IsEmpty())
             {
                 return string.Empty;
             }
-            
+
             string copyOfText = text;
 
             int startIndex = -1;
@@ -98,6 +100,7 @@ namespace TsadriuUtilities
         /// <param name="end">Until where the text stops.</param>
         /// <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
         /// <returns>Multiple instances found between <paramref name="start"/> and <paramref name="end"/>. If nothing is found, or parameters <paramref name="text"/>, <paramref name="start"/> or <paramref name="end"/> are empty, returns an empty List of <see cref="string"/> .</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static List<string> GetMultipleBetween(this string text, string start, string end, bool startEndIncluded = false)
         {
             var list = new List<string>();
@@ -153,6 +156,7 @@ namespace TsadriuUtilities
         /// <param name="end">From where the text ends.</param>
         /// <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
         /// <returns>The first instance found between <paramref name="start"/> and <paramref name="end"/>. If both <paramref name="start"/> and <paramref name="end"/> are not found, returns a <see cref="string.Empty"/>.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static string GetBetweenReverse(this string text, string start = null, string end = null, bool startEndIncluded = false)
         {
             if (text.IsEmpty())
@@ -162,10 +166,10 @@ namespace TsadriuUtilities
 
             start ??= string.Empty;
             end ??= string.Empty;
-            
+
             bool hasFoundStart = true;
             bool hasFoundEnd = true;
-            
+
             int startIndex = text.LastIndexOf(start, StringComparison.Ordinal);
 
             // If the starting tag has not been found, we'll start from the end of the text
@@ -194,7 +198,7 @@ namespace TsadriuUtilities
             {
                 return string.Empty;
             }
-            
+
             if (startEndIncluded)
             {
                 return end + copyOfText.Substring(endIndex) + start;
@@ -210,6 +214,7 @@ namespace TsadriuUtilities
         /// <param name="stringComparison">The type of <see cref="StringComparison"/>.</param>
         /// <param name="values">The <paramref name="values"/> to search in the <paramref name="text"/>.</param>
         /// <returns>True if all <paramref name="values"/> are present in the <paramref name="text"/>. Otherwise returns false.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static bool AndContains(this string text, StringComparison stringComparison, params string[] values)
         {
             return values.All(value => text.Contains(value, stringComparison));
@@ -222,6 +227,7 @@ namespace TsadriuUtilities
         /// <param name="stringComparison">The type of <see cref="StringComparison"/>.</param>
         /// <param name="values">The <paramref name="values"/> to search in the <paramref name="text"/>.</param>
         /// <returns>True if at least one instance <paramref name="values"/> is present in the <paramref name="text"/>. Otherwise returns false.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static bool OrContains(this string text, StringComparison stringComparison, params string[] values)
         {
             return values.Any(value => text.Contains(value, stringComparison));
@@ -233,6 +239,7 @@ namespace TsadriuUtilities
         /// </summary>
         /// <param name="value">The value to check.</param>
         /// <returns>True if the <paramref name="value"/> is empty.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static bool IsEmpty(this string value)
         {
             return string.IsNullOrWhiteSpace(value);
@@ -243,6 +250,7 @@ namespace TsadriuUtilities
         /// </summary>
         /// <param name="value">The value to check.</param>
         /// <returns>True if the <paramref name="value"/> is not empty.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static bool IsNotEmpty(this string value)
         {
             return !IsEmpty(value);
@@ -253,6 +261,7 @@ namespace TsadriuUtilities
         /// </summary>
         /// <param name="values">The values to check.</param>
         /// <returns>Returns true if all instances of <paramref name="values"/> are null, <see cref="string.Empty"/> or white space ("", \n, \r, ...). Returns false if even one of them is <b>not</b> empty.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static bool AreEmpty(params string[] values)
         {
             foreach (var value in values)
@@ -271,6 +280,7 @@ namespace TsadriuUtilities
         /// </summary>
         /// <param name="values">The values to check.</param>
         /// <returns>Returns true if all instances of <paramref name="values"/> are not empty. Returns false if even one of them is empty.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static bool AreNotEmpty(params string[] values)
         {
             foreach (var value in values)
@@ -290,6 +300,7 @@ namespace TsadriuUtilities
         /// <param name="value">The value to change.</param>
         /// <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
         /// <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static string LetterUpperCase(this string value, int index = 0)
         {
             if (!IsNotEmpty(value))
@@ -317,6 +328,7 @@ namespace TsadriuUtilities
         /// <param name="value">The value to change.</param>
         /// <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
         /// <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static string LetterLowerCase(this string value, int index = 0)
         {
             if (IsNotEmpty(value))
@@ -342,6 +354,7 @@ namespace TsadriuUtilities
         /// <param name="value">The value to change.</param>
         /// <param name="valuesToRemove">The values to remove from <paramref name="value"/>.</param>
         /// <returns>A <see cref="string"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static string Remove(this string value, params string[] valuesToRemove)
         {
             foreach (string valueToRemove in valuesToRemove)
@@ -358,6 +371,7 @@ namespace TsadriuUtilities
         /// <param name="value">The value to be checked.</param>
         /// <param name="valueToCount">The value to be counted in <paramref name="value"/>.</param>
         /// <returns>Returns the count of <paramref name="valueToCount"/> present in <paramref name="value"/>.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static int CharCount(this string value, string valueToCount)
         {
             return value.Split(valueToCount).Length - 1;
@@ -370,6 +384,7 @@ namespace TsadriuUtilities
         /// <param name="value">The value where <paramref name="tags"/> will be removed.</param>
         /// <param name="tags">The tags to remove from <paramref name="value"/>.</param>
         /// Returns a <see cref="string"/> where all instances of <paramref name="tags"/> are removed.
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static string RemoveTags(this string value, params string[] tags)
         {
             foreach (string tag in tags)
@@ -387,6 +402,7 @@ namespace TsadriuUtilities
         /// </summary>
         /// <param name="value"><see cref="string"/> to be reversed.</param>
         /// <returns>Reversed <see cref="string"/>. If <paramref name="value"/> is null or <see cref="string.Empty"/>, it will return <see cref="string.Empty"/>.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static string Reverse(this string value)
         {
             if (value.IsEmpty())
@@ -406,6 +422,7 @@ namespace TsadriuUtilities
         /// <param name="separator">The separator.</param>
         /// <param name="keepSeparator">Setting it to true, the <paramref name="separator"/> will be included in the result of the split.</param>
         /// <returns>A list of <see cref="string"/> that contains <paramref name="value"/> split by the <paramref name="separator"/>.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static List<string> Split(this string value, string separator, bool keepSeparator = false)
         {
             List<string> splitValue = value.Split(separator).ToList();
@@ -436,6 +453,7 @@ namespace TsadriuUtilities
         /// <param name="separator">The separator to use to split the <paramref name="value"/>. This is only used when <paramref name="splitType"/> is <see cref="SplitType.UserDefined"/>.</param>
         /// <returns>A list of <see cref="string"/> that contains <paramref name="value"/> split by the <paramref name="splitType"/>.</returns>
         /// <exception cref="NotImplementedException"></exception>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static List<string> SplitBy(this string value, SplitType splitType, bool keepSeparator = false, string separator = null)
         {
             return splitType switch
@@ -461,9 +479,10 @@ namespace TsadriuUtilities
         /// <param name="value">The value to be separated.</param>
         /// <param name="separator">The separator to use when a character is separated.</param>
         /// <returns>The <paramref name="value"/> separated by upper-case characters.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static string SeparateByUpperCase(this string value, string separator = " ")
         {
-            var charArray = value.ToCharArray();
+            char[] charArray = value.ToCharArray();
             var stringBuilder = new StringBuilder();
 
             foreach (char character in charArray)
@@ -485,9 +504,10 @@ namespace TsadriuUtilities
         /// <param name="value">The value to be separated.</param>
         /// <param name="separator">The separator to use when a character is separated.</param>
         /// <returns>The <paramref name="value"/> separated by upper-case characters.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static string SeparateByLowerCase(this string value, string separator = " ")
         {
-            var charArray = value.ToCharArray();
+            char[] charArray = value.ToCharArray();
             var stringBuilder = new StringBuilder();
 
             foreach (char character in charArray)
@@ -509,21 +529,24 @@ namespace TsadriuUtilities
         /// <param name="value">The value to get the upper-case letters.</param>
         /// <param name="separator">The separator to use when appending the upper-case letters together.</param>
         /// <returns>The upper-case letters present in the <paramref name="value"/> in a <see cref="string"/>.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static string GetUpperCaseLetters(this string value, string separator = null)
         {
-            var charArray = value.ToCharArray();
+            char[] charArray = value.ToCharArray();
             var stringBuilder = new StringBuilder();
 
             for (int i = 0; i < charArray.Length; i++)
             {
-                if (char.IsUpper(charArray[i]))
+                if (!char.IsUpper(charArray[i]))
                 {
-                    stringBuilder.Append(charArray[i]);
+                    continue;
+                }
 
-                    if (i + 1 < charArray.Length && separator != null)
-                    {
-                        stringBuilder.Append(separator);
-                    }
+                stringBuilder.Append(charArray[i]);
+
+                if (i + 1 < charArray.Length && separator != null)
+                {
+                    stringBuilder.Append(separator);
                 }
             }
 
@@ -536,22 +559,24 @@ namespace TsadriuUtilities
         /// <param name="value">The value to get the lower-case letters.</param>
         /// <param name="separator">The separator to use when appending the lower-case letters together.</param>
         /// <returns>The lower-case letters present in the <paramref name="value"/> in a <see cref="string"/>.</returns>
+        [Obsolete("All methods in this class are obsolete, will not be maintained anymore and will be removed at some point. Consider using the TsadriuUtilities.String library.")]
         public static string GetLowerCaseLetters(this string value, string separator = null)
         {
-            var charArray = value.ToCharArray();
+            char[] charArray = value.ToCharArray();
             var stringBuilder = new StringBuilder();
 
             for (int i = 0; i < charArray.Length; i++)
             {
-                if (char.IsLower(charArray[i]))
+                if (!char.IsLower(charArray[i]))
                 {
-                    stringBuilder.Append(charArray[i]);
+                    continue;
+                }
 
+                stringBuilder.Append(charArray[i]);
 
-                    if (i + 1 < charArray.Length && separator != null)
-                    {
-                        stringBuilder.Append(separator);
-                    }
+                if (i + 1 < charArray.Length && separator != null)
+                {
+                    stringBuilder.Append(separator);
                 }
             }
 

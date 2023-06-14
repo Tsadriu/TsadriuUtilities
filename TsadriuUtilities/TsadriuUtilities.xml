@@ -900,189 +900,6 @@
             A class that helps on storing xml data.
             </summary>
         </member>
-        <member name="T:TsadriuUtilities.StringHelper">
-            <summary>
-            A class that helps on dealing with <see cref="T:System.String"/>.
-            </summary>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.GetBetween(System.String,System.String,System.String,System.Boolean)">
-            <summary>
-            Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>.
-            <br>Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="T:System.String"/>.</br>
-            </summary>
-            <param name="text">Text to search through.</param>
-            <param name="start">The start tag.</param>
-            <param name="end">The end tag.</param>
-            <param name="startEndIncluded">If enabled, it will return a <see cref="T:System.String"/> with the <paramref name="start"/> and <paramref name="end"/> included in it.</param>
-            <returns>Returns <see cref="F:System.String.Empty"/> if nothing is found.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.GetMultipleBetween(System.String,System.String,System.String,System.Boolean)">
-            <summary>
-            Searches through the <paramref name="text"/>, returning multiple instances found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning List of <see cref="T:System.String"/>.
-            </summary>
-            <param name="text">Text to search through.</param>
-            <param name="start">From where the text begins.</param>
-            <param name="end">Until where the text stops.</param>
-            <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
-            <returns>Multiple instances found between <paramref name="start"/> and <paramref name="end"/>. If nothing is found, or parameters <paramref name="text"/>, <paramref name="start"/> or <paramref name="end"/> are empty, returns an empty List of <see cref="T:System.String"/> .</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.GetBetweenReverse(System.String,System.String,System.String,System.Boolean)">
-            <summary>
-            Searches through the <paramref name="text"/>, using the <paramref name="start"/> as the start tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="end"/> tag is found.
-            </summary>
-            <param name="text">Text to search through.</param>
-            <param name="start">From where the text starts.</param>
-            <param name="end">From where the text ends.</param>
-            <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
-            <returns>The first instance found between <paramref name="start"/> and <paramref name="end"/>. If both <paramref name="start"/> and <paramref name="end"/> are not found, returns a <see cref="F:System.String.Empty"/>.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.AndContains(System.String,System.StringComparison,System.String[])">
-            <summary>
-            Checks a <see cref="T:System.String"/> if it has all instances of <paramref name="values"/>.
-            </summary>
-            <param name="text">Current <see cref="T:System.String"/>.</param>
-            <param name="stringComparison">The type of <see cref="T:System.StringComparison"/>.</param>
-            <param name="values">The <paramref name="values"/> to search in the <paramref name="text"/>.</param>
-            <returns>True if all <paramref name="values"/> are present in the <paramref name="text"/>. Otherwise returns false.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.OrContains(System.String,System.StringComparison,System.String[])">
-            <summary>
-            Checks a <see cref="T:System.String"/> if it has at least one instance of <paramref name="values"/>.
-            </summary>
-            <param name="text">Current <see cref="T:System.String"/>.</param>
-            <param name="stringComparison">The type of <see cref="T:System.StringComparison"/>.</param>
-            <param name="values">The <paramref name="values"/> to search in the <paramref name="text"/>.</param>
-            <returns>True if at least one instance <paramref name="values"/> is present in the <paramref name="text"/>. Otherwise returns false.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.IsEmpty(System.String)">
-            <summary>
-            Checks if the <paramref name="value"/> is null, <see cref="F:System.String.Empty"/> or a white space ("", \n, \r, ...).
-            </summary>
-            <param name="value">The value to check.</param>
-            <returns>True if the <paramref name="value"/> is empty.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.IsNotEmpty(System.String)">
-            <summary>
-            Checks if <paramref name="value"/> contains any kind of character.
-            </summary>
-            <param name="value">The value to check.</param>
-            <returns>True if the <paramref name="value"/> is not empty.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.AreEmpty(System.String[])">
-            <summary>
-            Iterates through <paramref name="values"/> and checks them if they are null, <see cref="F:System.String.Empty"/> or white space ("", \n, \r, ...).
-            </summary>
-            <param name="values">The values to check.</param>
-            <returns>Returns true if all instances of <paramref name="values"/> are null, <see cref="F:System.String.Empty"/> or white space ("", \n, \r, ...). Returns false if even one of them is <b>not</b> empty.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.AreNotEmpty(System.String[])">
-            <summary>
-            Checks if all instances of <paramref name="values"/> are not empty, returning true if all of them are not empty.
-            </summary>
-            <param name="values">The values to check.</param>
-            <returns>Returns true if all instances of <paramref name="values"/> are not empty. Returns false if even one of them is empty.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.LetterUpperCase(System.String,System.Int32)">
-            <summary>
-            Changes a lower-case letter to be upper-case. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.
-            </summary>
-            <param name="value">The value to change.</param>
-            <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
-            <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.LetterLowerCase(System.String,System.Int32)">
-            <summary>
-            Changes a upper-case letter to be lower-case. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.
-            </summary>
-            <param name="value">The value to change.</param>
-            <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
-            <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.Remove(System.String,System.String[])">
-            <summary>
-            Iterates through <paramref name="valuesToRemove"/> and removes them from <paramref name="value"/> (if they are present).
-            </summary>
-            <param name="value">The value to change.</param>
-            <param name="valuesToRemove">The values to remove from <paramref name="value"/>.</param>
-            <returns>A <see cref="T:System.String"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.CharCount(System.String,System.String)">
-            <summary>
-            Counts the number of <paramref name="valueToCount"/> present in <paramref name="value"/>.
-            </summary>
-            <param name="value">The value to be checked.</param>
-            <param name="valueToCount">The value to be counted in <paramref name="value"/>.</param>
-            <returns>Returns the count of <paramref name="valueToCount"/> present in <paramref name="value"/>.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.RemoveTags(System.String,System.String[])">
-            <summary>
-            Iterates through <paramref name="tags"/> and will remove them from the <paramref name="value"/>. <paramref name="tags"/> will only be removed
-            if they correspond to <![CDATA[<]]><paramref name="tags"/><![CDATA[>]]>, <![CDATA[</]]><paramref name="tags"/><![CDATA[>]]> or <![CDATA[<]]><paramref name="tags"/><![CDATA[/>]]>.
-            </summary>
-            <param name="value">The value where <paramref name="tags"/> will be removed.</param>
-            <param name="tags">The tags to remove from <paramref name="value"/>.</param>
-            Returns a <see cref="T:System.String"/> where all instances of <paramref name="tags"/> are removed.
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.Reverse(System.String)">
-            <summary>
-            Reverses a string.
-            </summary>
-            <param name="value"><see cref="T:System.String"/> to be reversed.</param>
-            <returns>Reversed <see cref="T:System.String"/>. If <paramref name="value"/> is null or <see cref="F:System.String.Empty"/>, it will return <see cref="F:System.String.Empty"/>.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.Split(System.String,System.String,System.Boolean)">
-            <summary>
-            Splits the <paramref name="value"/> based on the <paramref name="separator"/>.
-            </summary>
-            <param name="value">The value to be split.</param>
-            <param name="separator">The separator.</param>
-            <param name="keepSeparator">Setting it to true, the <paramref name="separator"/> will be included in the result of the split.</param>
-            <returns>A list of <see cref="T:System.String"/> that contains <paramref name="value"/> split by the <paramref name="separator"/>.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.SplitBy(System.String,TsadriuUtilities.Enums.StringHelper.SplitType,System.Boolean,System.String)">
-            <summary>
-            Splits the <paramref name="value"/> based on the <paramref name="splitType"/>.
-            </summary>
-            <param name="value">The string value.</param>
-            <param name="splitType">The split type.</param>
-            <param name="keepSeparator">° <b>True</b> - Keeps the <paramref name="separator"/> after splitting.<br/>
-            ° <b>False</b> - Removes the <paramref name="separator"/> after splitting.</param>
-            <param name="separator">The separator to use to split the <paramref name="value"/>. This is only used when <paramref name="splitType"/> is <see cref="F:TsadriuUtilities.Enums.StringHelper.SplitType.UserDefined"/>.</param>
-            <returns>A list of <see cref="T:System.String"/> that contains <paramref name="value"/> split by the <paramref name="splitType"/>.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.SeparateByUpperCase(System.String,System.String)">
-            <summary>
-            Separates the <paramref name="value"/> by upper-case characters.
-            </summary>
-            <param name="value">The value to be separated.</param>
-            <param name="separator">The separator to use when a character is separated.</param>
-            <returns>The <paramref name="value"/> separated by upper-case characters.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.SeparateByLowerCase(System.String,System.String)">
-            <summary>
-            Separates the <paramref name="value"/> by upper-case characters.
-            </summary>
-            <param name="value">The value to be separated.</param>
-            <param name="separator">The separator to use when a character is separated.</param>
-            <returns>The <paramref name="value"/> separated by upper-case characters.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.GetUpperCaseLetters(System.String,System.String)">
-            <summary>
-            Reads the <paramref name="value"/>, returning the present upper-case letters.
-            </summary>
-            <param name="value">The value to get the upper-case letters.</param>
-            <param name="separator">The separator to use when appending the upper-case letters together.</param>
-            <returns>The upper-case letters present in the <paramref name="value"/> in a <see cref="T:System.String"/>.</returns>
-        </member>
-        <member name="M:TsadriuUtilities.StringHelper.GetLowerCaseLetters(System.String,System.String)">
-            <summary>
-            Reads the <paramref name="value"/>, returning the present lower-case letters.
-            </summary>
-            <param name="value">The value to get the lower-case letters.</param>
-            <param name="separator">The separator to use when appending the lower-case letters together.</param>
-            <returns>The lower-case letters present in the <paramref name="value"/> in a <see cref="T:System.String"/>.</returns>
-        </member>
         <member name="T:TsadriuUtilities.XmlHelper">
             <summary>
             A class that helps on dealing with xml.
@@ -1094,6 +911,272 @@
             </summary>
             <param name="xml">The xml text.</param>
             <returns>The xml where the empty tags are removed.</returns>
+        </member>
+        <member name="T:TsadriuUtilitiesOld.DateTimeHelper">
+            <summary>
+            A class that helps on dealing with <see cref="T:System.DateTime"/>.
+            </summary>
+        </member>
+        <member name="F:TsadriuUtilitiesOld.DateTimeHelper.defaultDateFormats">
+            <summary>
+            Default date formats. It is used when no date formats are passed on the method <see cref="M:TsadriuUtilitiesOld.DateTimeHelper.ToDateTime(System.String,System.String,System.Globalization.CultureInfo)"/>.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.DateTimeHelper.ToDateTime(System.String,System.String,System.Globalization.CultureInfo)">
+            <summary>
+            Tries to convert a date from a <see cref="T:System.String"/> to a type of <see cref="T:System.DateTime"/>.
+            </summary>
+            <param name="dateAsString">The date as a <see cref="T:System.String"/>. Examples: "23/03/2012", "11-02-2001", "06.12.2019".</param>
+            <param name="dateFormat">The date format. Examples: "dd/MM/yyyy", "MM/dd/yyyy". If nothing is passed, <see cref="F:TsadriuUtilitiesOld.DateTimeHelper.defaultDateFormats"/> will be used.</param>
+            <param name="dateCulture">The <see cref="T:System.Globalization.CultureInfo"/> of the date (Is it an american date? Is it an italian date?).</param>
+            <returns>If the parsing was successful, returns <see cref="T:System.DateTime"/>. If the parsing fails, returns <see cref="F:System.DateTime.MinValue"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.DateTimeHelper.ToDateTime(System.String,System.String[],System.Globalization.CultureInfo)">
+            <summary>
+            Tries to convert a date from a <see cref="T:System.String"/> to a type of <see cref="T:System.DateTime"/>.
+            </summary>
+            <param name="dateAsString">The date as a <see cref="T:System.String"/>. Examples: "23/03/2012", "11-02-2001", "06.12.2019".</param>
+            <param name="dateFormats">The date format. The more formats are passed, the more parses the program will try to do.</param>
+            <param name="dateCulture">The <see cref="T:System.Globalization.CultureInfo"/> of the date (Is it an american date? Is it an italian date?).</param>
+            <returns>If the parsing was successful, returns <see cref="T:System.DateTime"/>. If the parsing fails, returns <see cref="F:System.DateTime.MinValue"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.DateTimeHelper.GetLastDayOfMonth(System.DateTime)">
+            <summary>
+            Parses the date to return with the last day of the month.
+            </summary>
+            <param name="date">Date to be checked on.</param>
+            <returns>Date with the last day of the month.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.DateTimeHelper.SetDay(System.DateTime,System.Int32)">
+            <summary>
+            Sets the <paramref name="day"/> in the <paramref name="date"/>.
+            </summary>
+            <param name="date">Current date.</param>
+            <param name="day">Day to set. In case <paramref name="day"/> is higher than the month's max days, it will be clamped to the month's max day.</param>
+            <returns>Date with the specified <paramref name="day"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.DateTimeHelper.SetMonth(System.DateTime,System.Int32)">
+            <summary>
+            Sets the <paramref name="month"/> in the <paramref name="date"/>.
+            </summary>
+            <param name="date">Current date.</param>
+            <param name="month">Month to set. In case <paramref name="month"/> is higher than the year's max months, it will be clamped to the year's max month.</param>
+            <returns>Date with the specified <paramref name="month"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.DateTimeHelper.SetYear(System.DateTime,System.Int32)">
+            <summary>
+            Sets the <paramref name="year"/> in the <paramref name="date"/>.
+            </summary>
+            <param name="date">Current date.</param>
+            <param name="year">Year to set.</param>
+            <returns>Date with the specified <paramref name="year"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.DateTimeHelper.RemoveDays(System.DateTime,System.Int32)">
+            <summary>
+            Removes a specified number of days from <paramref name="date"/>.
+            </summary>
+            <param name="date">Current date.</param>
+            <param name="days">Number of days to remove.</param>
+            <returns>Date with the specified number of days removed.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.DateTimeHelper.RemoveMonths(System.DateTime,System.Int32)">
+            <summary>
+            Removes a specified number of months from <paramref name="date"/>.
+            </summary>
+            <param name="date">Current date.</param>
+            <param name="months">Number of months to remove.</param>
+            <returns>Date with the specified number of months removed.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.DateTimeHelper.RemoveYears(System.DateTime,System.Int32)">
+            <summary>
+            Removes a specified number of years from <paramref name="date"/>.
+            </summary>
+            <param name="date">Current date.</param>
+            <param name="years">Number of years to remove.</param>
+            <returns>Date with the specified number of years removed.</returns>
+        </member>
+        <member name="T:TsadriuUtilitiesOld.StringHelper">
+            <summary>
+            A class that helps on dealing with <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.GetBetween(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Searches through the <paramref name="text"/>, returning the first instance found between <paramref name="start"/> and <paramref name="end"/>.
+            <br>Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning <see cref="T:System.String"/>.</br>
+            </summary>
+            <param name="text">Text to search through.</param>
+            <param name="start">The start tag.</param>
+            <param name="end">The end tag.</param>
+            <param name="startEndIncluded">If enabled, it will return a <see cref="T:System.String"/> with the <paramref name="start"/> and <paramref name="end"/> included in it.</param>
+            <returns>Returns <see cref="F:System.String.Empty"/> if nothing is found.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.GetMultipleBetween(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Searches through the <paramref name="text"/>, returning multiple instances found between <paramref name="start"/> and <paramref name="end"/>. Use <paramref name="startEndIncluded"/> if you want to include <paramref name="start"/> and <paramref name="end"/> in the returning List of <see cref="T:System.String"/>.
+            </summary>
+            <param name="text">Text to search through.</param>
+            <param name="start">From where the text begins.</param>
+            <param name="end">Until where the text stops.</param>
+            <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
+            <returns>Multiple instances found between <paramref name="start"/> and <paramref name="end"/>. If nothing is found, or parameters <paramref name="text"/>, <paramref name="start"/> or <paramref name="end"/> are empty, returns an empty List of <see cref="T:System.String"/> .</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.GetBetweenReverse(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Searches through the <paramref name="text"/>, using the <paramref name="start"/> as the start tag and then searches the <paramref name="text"/> <b>backwards</b> until the <paramref name="end"/> tag is found.
+            </summary>
+            <param name="text">Text to search through.</param>
+            <param name="start">From where the text starts.</param>
+            <param name="end">From where the text ends.</param>
+            <param name="startEndIncluded">If enabled, it will return the content with the <paramref name="start"/> and <paramref name="end"/> included.</param>
+            <returns>The first instance found between <paramref name="start"/> and <paramref name="end"/>. If both <paramref name="start"/> and <paramref name="end"/> are not found, returns a <see cref="F:System.String.Empty"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.AndContains(System.String,System.StringComparison,System.String[])">
+            <summary>
+            Checks a <see cref="T:System.String"/> if it has all instances of <paramref name="values"/>.
+            </summary>
+            <param name="text">Current <see cref="T:System.String"/>.</param>
+            <param name="stringComparison">The type of <see cref="T:System.StringComparison"/>.</param>
+            <param name="values">The <paramref name="values"/> to search in the <paramref name="text"/>.</param>
+            <returns>True if all <paramref name="values"/> are present in the <paramref name="text"/>. Otherwise returns false.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.OrContains(System.String,System.StringComparison,System.String[])">
+            <summary>
+            Checks a <see cref="T:System.String"/> if it has at least one instance of <paramref name="values"/>.
+            </summary>
+            <param name="text">Current <see cref="T:System.String"/>.</param>
+            <param name="stringComparison">The type of <see cref="T:System.StringComparison"/>.</param>
+            <param name="values">The <paramref name="values"/> to search in the <paramref name="text"/>.</param>
+            <returns>True if at least one instance <paramref name="values"/> is present in the <paramref name="text"/>. Otherwise returns false.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.IsEmpty(System.String)">
+            <summary>
+            Checks if the <paramref name="value"/> is null, <see cref="F:System.String.Empty"/> or a white space ("", \n, \r, ...).
+            </summary>
+            <param name="value">The value to check.</param>
+            <returns>True if the <paramref name="value"/> is empty.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.IsNotEmpty(System.String)">
+            <summary>
+            Checks if <paramref name="value"/> contains any kind of character.
+            </summary>
+            <param name="value">The value to check.</param>
+            <returns>True if the <paramref name="value"/> is not empty.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.AreEmpty(System.String[])">
+            <summary>
+            Iterates through <paramref name="values"/> and checks them if they are null, <see cref="F:System.String.Empty"/> or white space ("", \n, \r, ...).
+            </summary>
+            <param name="values">The values to check.</param>
+            <returns>Returns true if all instances of <paramref name="values"/> are null, <see cref="F:System.String.Empty"/> or white space ("", \n, \r, ...). Returns false if even one of them is <b>not</b> empty.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.AreNotEmpty(System.String[])">
+            <summary>
+            Checks if all instances of <paramref name="values"/> are not empty, returning true if all of them are not empty.
+            </summary>
+            <param name="values">The values to check.</param>
+            <returns>Returns true if all instances of <paramref name="values"/> are not empty. Returns false if even one of them is empty.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.LetterUpperCase(System.String,System.Int32)">
+            <summary>
+            Changes a lower-case letter to be upper-case. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.
+            </summary>
+            <param name="value">The value to change.</param>
+            <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
+            <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.LetterLowerCase(System.String,System.Int32)">
+            <summary>
+            Changes a upper-case letter to be lower-case. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.
+            </summary>
+            <param name="value">The value to change.</param>
+            <param name="index">The index of the letter to be changed. If <paramref name="index"/> is not passed, it will change the first letter of <paramref name="value"/>.</param>
+            <returns>Returns the new string with the changed value. Returns the same <paramref name="value"/> if it was empty or <paramref name="index"/> was invalid.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.Remove(System.String,System.String[])">
+            <summary>
+            Iterates through <paramref name="valuesToRemove"/> and removes them from <paramref name="value"/> (if they are present).
+            </summary>
+            <param name="value">The value to change.</param>
+            <param name="valuesToRemove">The values to remove from <paramref name="value"/>.</param>
+            <returns>A <see cref="T:System.String"/> where all occasions of <paramref name="valuesToRemove"/> have been removed from the <paramref name="value"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.CharCount(System.String,System.String)">
+            <summary>
+            Counts the number of <paramref name="valueToCount"/> present in <paramref name="value"/>.
+            </summary>
+            <param name="value">The value to be checked.</param>
+            <param name="valueToCount">The value to be counted in <paramref name="value"/>.</param>
+            <returns>Returns the count of <paramref name="valueToCount"/> present in <paramref name="value"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.RemoveTags(System.String,System.String[])">
+            <summary>
+            Iterates through <paramref name="tags"/> and will remove them from the <paramref name="value"/>. <paramref name="tags"/> will only be removed
+            if they correspond to <![CDATA[<]]><paramref name="tags"/><![CDATA[>]]>, <![CDATA[</]]><paramref name="tags"/><![CDATA[>]]> or <![CDATA[<]]><paramref name="tags"/><![CDATA[/>]]>.
+            </summary>
+            <param name="value">The value where <paramref name="tags"/> will be removed.</param>
+            <param name="tags">The tags to remove from <paramref name="value"/>.</param>
+            Returns a <see cref="T:System.String"/> where all instances of <paramref name="tags"/> are removed.
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.Reverse(System.String)">
+            <summary>
+            Reverses a string.
+            </summary>
+            <param name="value"><see cref="T:System.String"/> to be reversed.</param>
+            <returns>Reversed <see cref="T:System.String"/>. If <paramref name="value"/> is null or <see cref="F:System.String.Empty"/>, it will return <see cref="F:System.String.Empty"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.Split(System.String,System.String,System.Boolean)">
+            <summary>
+            Splits the <paramref name="value"/> based on the <paramref name="separator"/>.
+            </summary>
+            <param name="value">The value to be split.</param>
+            <param name="separator">The separator.</param>
+            <param name="keepSeparator">Setting it to true, the <paramref name="separator"/> will be included in the result of the split.</param>
+            <returns>A list of <see cref="T:System.String"/> that contains <paramref name="value"/> split by the <paramref name="separator"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.SplitBy(System.String,TsadriuUtilities.Enums.StringHelper.SplitType,System.Boolean,System.String)">
+            <summary>
+            Splits the <paramref name="value"/> based on the <paramref name="splitType"/>.
+            </summary>
+            <param name="value">The string value.</param>
+            <param name="splitType">The split type.</param>
+            <param name="keepSeparator">° <b>True</b> - Keeps the <paramref name="separator"/> after splitting.<br/>
+            ° <b>False</b> - Removes the <paramref name="separator"/> after splitting.</param>
+            <param name="separator">The separator to use to split the <paramref name="value"/>. This is only used when <paramref name="splitType"/> is <see cref="F:TsadriuUtilities.Enums.StringHelper.SplitType.UserDefined"/>.</param>
+            <returns>A list of <see cref="T:System.String"/> that contains <paramref name="value"/> split by the <paramref name="splitType"/>.</returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.SeparateByUpperCase(System.String,System.String)">
+            <summary>
+            Separates the <paramref name="value"/> by upper-case characters.
+            </summary>
+            <param name="value">The value to be separated.</param>
+            <param name="separator">The separator to use when a character is separated.</param>
+            <returns>The <paramref name="value"/> separated by upper-case characters.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.SeparateByLowerCase(System.String,System.String)">
+            <summary>
+            Separates the <paramref name="value"/> by upper-case characters.
+            </summary>
+            <param name="value">The value to be separated.</param>
+            <param name="separator">The separator to use when a character is separated.</param>
+            <returns>The <paramref name="value"/> separated by upper-case characters.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.GetUpperCaseLetters(System.String,System.String)">
+            <summary>
+            Reads the <paramref name="value"/>, returning the present upper-case letters.
+            </summary>
+            <param name="value">The value to get the upper-case letters.</param>
+            <param name="separator">The separator to use when appending the upper-case letters together.</param>
+            <returns>The upper-case letters present in the <paramref name="value"/> in a <see cref="T:System.String"/>.</returns>
+        </member>
+        <member name="M:TsadriuUtilitiesOld.StringHelper.GetLowerCaseLetters(System.String,System.String)">
+            <summary>
+            Reads the <paramref name="value"/>, returning the present lower-case letters.
+            </summary>
+            <param name="value">The value to get the lower-case letters.</param>
+            <param name="separator">The separator to use when appending the lower-case letters together.</param>
+            <returns>The lower-case letters present in the <paramref name="value"/> in a <see cref="T:System.String"/>.</returns>
         </member>
     </members>
 </doc>

@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TsadriuUtilities.DateTime\TsadriuUtilities.DateTime.csproj" />
+      <ProjectReference Include="..\TsadriuUtilities.String\TsadriuUtilities.String.csproj" />
     </ItemGroup>
 
 </Project>
