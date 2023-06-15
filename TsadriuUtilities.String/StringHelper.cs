@@ -15,21 +15,19 @@ namespace TsadriuUtilities
     public static class StringHelper
     {
         /// <summary>
-        /// Retrieves the substring between two specified strings within the given text, using the specified string comparison rules.
+        /// Retrieves the substring between two specified strings within the given text, using the specified string comparison.
         /// </summary>
         /// <param name="text">The text to search within.</param>
-        /// <param name="start">The starting string to search for. If null or empty, the search will start from the beginning of the text.</param>
-        /// <param name="end">The ending string to search for. If null or empty, the search will continue to the end of the text.</param>
-        /// <param name="comparison">The string comparison rules to use when searching for the start and end strings.</param>
-        /// <param name="startEndIncluded">Specifies whether the start and end strings should be included in the returned substring.</param>
+        /// <param name="start">The starting string (exclusive) to search for.</param>
+        /// <param name="end">The ending string (exclusive) to search for.</param>
+        /// <param name="comparison">The string comparison to use when searching for the start and end strings.</param>
+        /// <param name="startEndIncluded">Specifies whether the start and end strings should be included in the result.</param>
         /// <returns>
-        /// The substring between the <b><paramref name="start"/></b> and <b><paramref name="end"/></b> strings if both are found; otherwise, an empty string.<br/>
-        /// If <b><paramref name="start"/></b> and <b><paramref name="end"/></b> are null or empty, the entire <b><paramref name="text"/></b> is returned.<br/>
-        /// If <b><paramref name="start"/></b> was not found and <b><paramref name="end"/></b> is null or empty, an empty string is returned.<br/>
-        /// If <b><paramref name="end"/></b> was not found and <b><paramref name="start"/></b> is null or empty, an empty string is returned.<br/>
-        /// If both <b><paramref name="start"/></b> and <b><paramref name="end"/></b> parameters were not found, an empty string is returned.<br/>
-        /// If <b><paramref name="startEndIncluded"/></b> is true, the returned substring includes the <b><paramref name="start"/></b> and <b><paramref name="end"/></b> strings; otherwise, only the content between the <b><paramref name="start"/></b> and <b><paramref name="end"/></b> strings is returned.
+        /// The substring between the start and end strings, or an empty string if the start or end strings are not found.
         /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when both the <paramref name="start"/> and <paramref name="end"/> parameters are null or empty.
+        /// </exception>
         public static string GetBetween(this string? text, string? start, string? end, StringComparison comparison, bool startEndIncluded = false)
         {
             if (string.IsNullOrEmpty(text))
@@ -49,48 +47,35 @@ namespace TsadriuUtilities
             string copyOfText = text;
 
             // Just give the indexes -2 in case the start/end params are null/empty
-            int startIndex = isStartNull ? -2 : copyOfText.IndexOf(start!, comparison);
+            int startIndex = isStartNull ? 0 : copyOfText.IndexOf(start!, comparison);
 
-            // Only valid if the index is found
-            if (startIndex > 0)
-            {
-                copyOfText = copyOfText.Substring(startIndex + start!.Length);
-            }
-
-            int endIndex = isEndNull ? -2 : copyOfText.IndexOf(end!, comparison);
-
-            // Only valid if the index is found
-            if (endIndex > 0)
-            {
-                copyOfText = copyOfText.Substring(0, endIndex);
-            }
-
-            // If both tags were not found, then return empty, which is different
-            // of the case when the user inputs empty/null tags
-            if (startIndex == -1 && endIndex == -1)
+            /* If the start tag was given but not found, exit immediately with a string.Empty
+             * Example case:
+             * text = "Hello this is a beautiful day."
+             * text.GetBetween("Good morning", "day") = string.Empty;
+             */
+            if (startIndex == -1 && !isStartNull)
             {
                 return string.Empty;
             }
 
-            // If the user gave a start input, but it was not found and the end tag is empty,
-            // then we just return empty.
-            if ((startIndex == -1 && !isStartNull) && isEndNull)
+            // Get the section of the text
+            copyOfText = copyOfText.Substring(startIndex + start!.Length);
+
+            int endIndex = isEndNull ? copyOfText.Length : copyOfText.IndexOf(end!, comparison);
+
+            /* If the end tag was given but not found, exit immediately with a string.Empty
+             * Example case:
+             * text = "Hello this is a beautiful day."
+             * text.GetBetween("Hello", "How are you?") = string.Empty;
+             */
+            if (endIndex == -1 && !isEndNull)
             {
                 return string.Empty;
             }
 
-            // Same case here, if the user gave an end input, but it was not found and
-            // the start tag is empty, then we just return empty.
-            if (isStartNull && (endIndex == -1 && !isEndNull))
-            {
-                return string.Empty;
-            }
-
-            // None of the inputs given were found, return empty.
-            if ((startIndex == -1 && !isStartNull) && (endIndex == -1 && !isEndNull))
-            {
-                return string.Empty;
-            }
+            // Get the section of the text
+            copyOfText = copyOfText.Substring(0, endIndex);
 
             if (!startEndIncluded)
             {
@@ -109,21 +94,21 @@ namespace TsadriuUtilities
 
             return copyOfText;
         }
-
+        
         /// <summary>
-        /// Retrieves the substring between two specified strings within the given text.<br/>
+        /// Retrieves the substring between two specified strings within the given text, using the specified string comparison.
         /// <b><see cref="StringComparison.OrdinalIgnoreCase"/></b> is used when comparing strings.
         /// </summary>
         /// <param name="text">The text to search within.</param>
-        /// <param name="start">The starting string to search for. If null or empty, the search will start from the beginning of the text.</param>
-        /// <param name="end">The ending string to search for. If null or empty, the search will continue to the end of the text.</param>
-        /// <param name="startEndIncluded">Specifies whether the start and end strings should be included in the returned substring.</param>
+        /// <param name="start">The starting string (exclusive) to search for.</param>
+        /// <param name="end">The ending string (exclusive) to search for.</param>
+        /// <param name="startEndIncluded">Specifies whether the start and end strings should be included in the result.</param>
         /// <returns>
-        /// The substring between the <b><paramref name="start"/></b> and <b><paramref name="end"/></b> strings if both are found; otherwise, an empty string.<br/>
-        /// If <b><paramref name="start"/></b> and <b><paramref name="end"/></b> are null or empty, the entire <b><paramref name="text"/></b> is returned.<br/>
-        /// If <b><paramref name="start"/></b> or <b><paramref name="end"/></b> is not found, an empty string is returned.<br/>
-        /// If <b><paramref name="startEndIncluded"/></b> is true, the returned substring includes the <b><paramref name="start"/></b> and <b><paramref name="end"/></b> strings; otherwise, only the content between the <b><paramref name="start"/></b> and <b><paramref name="end"/></b> strings is returned.
+        /// The substring between the start and end strings, or an empty string if the start or end strings are not found.
         /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when both the <paramref name="start"/> and <paramref name="end"/> parameters are null or empty.
+        /// </exception>
         public static string GetBetween(this string? text, string? start, string? end, bool startEndIncluded = false) => GetBetween(text, start, end, StringComparison.OrdinalIgnoreCase, startEndIncluded);
 
         /// <summary>
@@ -224,7 +209,7 @@ namespace TsadriuUtilities
             }
 
             return text
-                   .Split(start)
+                   .SplitBy(StringSplitByEnum.UserDefined, true, start)
                    .Skip(1)
                    .Select(value => value.GetBetween(start, end, comparison))
                    .Select(value => startEndIncluded ? string.Concat(start, value, end) : value)

@@ -7,6 +7,23 @@ namespace Test
     public class StringHelperTest
     {
         [Test]
+        public void GetBetween_StartNotFoundButEndWasFound_ReturnsStringEmpty()
+        {
+            // Arrange
+            string text = "Quota assicurazione gas delibera Aeeg 191/2013/R/GAS e s.m.i. 1O 221,85";
+            string start = "1K";
+            string end = " ";
+            StringComparison comparison = StringComparison.Ordinal;
+            bool startEndIncluded = false;
+
+            // Act
+            string result = text.GetBetween(start, end, comparison, startEndIncluded);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(string.Empty));
+        }
+
+        [Test]
         public void GetBetween_StartHasValueAndEndIsWhiteSpace_ReturnsSubstring()
         {
             // Arrange
@@ -55,9 +72,6 @@ namespace Test
 
             // Assert
             Assert.That(result, Is.EqualTo(" is a beautiful day."));
-
-            bool caseSix = text.GetBetween(string.Empty, "How are you?") == string.Empty;
-            bool caseSeven = text.GetBetween("Good morning", "How are you?") == string.Empty;
         }
 
         [Test]
@@ -298,13 +312,25 @@ namespace Test
         }
 
         [Test]
-        public void GetManyBetween_Returns_Substrings_Between_Start_And_End_On_Xml_File()
+        public void GetManyBetween_ReturnsSubstringsWithTags_BetweenStartAndEnd_OnXmlFile()
         {
+            // Arrange
             string xmlFile = File.ReadAllText("C:\\Users\\foliveira\\Documents\\GitHub\\TsadriuUtilities\\Test\\Files\\StringHelper\\06724610966_09328470159_202305_TGL_20230606000200_01_M.XML");
-            IEnumerable<string> listOfRaccolte = xmlFile.GetManyBetween("<Raccolta>", "</Raccolta>", StringComparison.OrdinalIgnoreCase).ToList();
 
-            Assert.That(listOfRaccolte, Is.Not.Null);
-            Assert.That(listOfRaccolte.Count, Is.EqualTo(723));
+            // Act
+            List<string> result = xmlFile.GetManyBetween("<Raccolta>", "</Raccolta>", true).ToList();
+
+            // Assert
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Has.Count.EqualTo(723));
+            Assert.Multiple(() =>
+            {
+                foreach (string item in result)
+                {
+                    Assert.That(item, Does.Contain("<Raccolta>"));
+                    Assert.That(item, Does.Contain("</Raccolta>"));
+                }
+            });
         }
 
         [Test]
