@@ -7,146 +7,193 @@ namespace Test
     public class StringHelperTest
     {
         [Test]
-        public void GetBetween_Should_Return_Substring_Between_Start_And_End_Strings()
+        public void GetBetween_BothStartAndEndFound_ReturnsSubstring()
         {
             // Arrange
-            string text = "Hello[World]!";
+            string text = "Hello [world].";
             string start = "[";
             string end = "]";
             StringComparison comparison = StringComparison.Ordinal;
             bool startEndIncluded = false;
-            string expected = "World";
 
             // Act
             string result = text.GetBetween(start, end, comparison, startEndIncluded);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.EqualTo("world"));
         }
 
         [Test]
-        public void GetBetween_Should_Return_Empty_String_When_Text_Is_Null()
+        public void GetBetween_StartFoundAndEndIsEmpty_ReturnsSubstringFromStartParamUntilEndOfText()
         {
             // Arrange
-            string? text = null;
-            string start = "[";
-            string end = "]";
+            string text = "Hello this is a beautiful day.";
+            string start = "this";
+            string end = string.Empty;
             StringComparison comparison = StringComparison.Ordinal;
             bool startEndIncluded = false;
-            string expected = string.Empty;
 
             // Act
             string result = text.GetBetween(start, end, comparison, startEndIncluded);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.EqualTo(" is a beautiful day."));
+
+            bool caseSix = text.GetBetween(string.Empty, "How are you?") == string.Empty;
+            bool caseSeven = text.GetBetween("Good morning", "How are you?") == string.Empty;
         }
 
         [Test]
-        public void GetBetween_Should_Return_Substring_When_Start_String_Is_Not_Found()
+        public void GetBetween_StartIsEmptyAndEndIsFound_ReturnsSubstringFromStartOfTextUntilEndParam()
         {
             // Arrange
-            string text = "Hello [World]!";
-            string start = "{";
-            string end = "]";
+            string text = "Hello this is a beautiful day.";
+            string start = string.Empty;
+            string end = "day";
             StringComparison comparison = StringComparison.Ordinal;
             bool startEndIncluded = false;
-            string expected = "Hello [World";
 
             // Act
             string result = text.GetBetween(start, end, comparison, startEndIncluded);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.EqualTo("Hello this is a beautiful "));
         }
 
         [Test]
-        public void GetBetween_Should_Return_Substring_When_End_String_Is_Not_Found()
+        public void GetBetween_StartAndEndAreEmpty_ThrowsArgumentNullException()
         {
             // Arrange
-            string text = "Hello [World]!";
-            string start = "[";
-            string end = "}";
+            string text = "Hello this is a beautiful day.";
+            string start = string.Empty;
+            string end = string.Empty;
             StringComparison comparison = StringComparison.Ordinal;
             bool startEndIncluded = false;
-            string expected = "World]!";
-
-            // Act
-            string result = text.GetBetween(start, end, comparison, startEndIncluded);
-
-            // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                text.GetBetween(string.Empty, string.Empty, comparison, startEndIncluded);
+            });
         }
-
+        
         [Test]
-        public void GetBetween_Should_Return_Substring_With_Start_And_End_Strings_Included()
+        public void GetBetween_StartIsNotFoundAndEndIsEmpty_ReturnsEmptyString()
         {
             // Arrange
-            string text = "Hello [World]!";
-            string start = "[";
-            string end = "]";
+            string text = "Hello this is a beautiful day.";
+            string start = "Good morning";
+            string end = string.Empty;
             StringComparison comparison = StringComparison.Ordinal;
-            bool startEndIncluded = true;
-            string expected = "[World]";
-
-            // Act
-            string result = text.GetBetween(start, end, comparison, startEndIncluded);
-
-            // Assert
-            Assert.That(result, Is.EqualTo(expected));
-        }
-
-        [Test]
-        public void GetBetween_Should_Return_Empty_String_When_Start_And_End_Strings_Are_Not_Found()
-        {
-            // Arrange
-            string text = "Hello [World]!";
-            string start = "{";
-            string end = "}";
-            StringComparison comparison = StringComparison.Ordinal;
-            bool startEndIncluded = true;
-            string expected = string.Empty;
-
-            // Act
-            string result = text.GetBetween(start, end, comparison, startEndIncluded);
-
-            // Assert
-            Assert.That(result, Is.EqualTo(expected));
-        }
-
-        [Test]
-        public void GetBetween_Should_Return_Substring_When_Start_Is_Null_And_End_Has_Value()
-        {
-            // Arrange
-            string text = "This is a sample text that contains a substring.";
-            string? start = null;
-            string end = "substring";
-            StringComparison comparison = StringComparison.OrdinalIgnoreCase;
             bool startEndIncluded = false;
-            string expected = "This is a sample text that contains a ";
-
+            
             // Act
             string result = text.GetBetween(start, end, comparison, startEndIncluded);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.EqualTo(string.Empty));
+        }
+        
+        [Test]
+        public void GetBetween_StartIsEmptyAndEndIsNotFound_ReturnsEmptyString()
+        {
+            // Arrange
+            string text = "Hello this is a beautiful day.";
+            string start = string.Empty;
+            string end = "How are you?";
+            StringComparison comparison = StringComparison.Ordinal;
+            bool startEndIncluded = false;
+            
+            // Act
+            string result = text.GetBetween(start, end, comparison, startEndIncluded);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(string.Empty));
+        }
+        
+        [Test]
+        public void GetBetween_StartAndEndAreNotFound_ReturnsEmptyString()
+        {
+            // Arrange
+            string text = "Hello this is a beautiful day.";
+            string start = "Good morning";
+            string end = "How are you?";
+            StringComparison comparison = StringComparison.Ordinal;
+            bool startEndIncluded = false;
+            
+            // Act
+            string result = text.GetBetween(start, end, comparison, startEndIncluded);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(string.Empty));
         }
 
         [Test]
-        public void GetBetween_Should_Return_Substring_When_Start_Has_Value_And_End_Is_Null()
+        public void GetBetween_StartNotFoundAndEndNull_ReturnsEmptyString()
         {
             // Arrange
-            string text = "This is a sample text that contains a substring.";
-            string start = "Sample";
+            string text = "Hello world.";
+            string start = "foo";
             string? end = null;
+            StringComparison comparison = StringComparison.Ordinal;
             bool startEndIncluded = false;
-            string expected = " text that contains a substring.";
 
             // Act
-            string result = text.GetBetween(start, end, startEndIncluded);
+            string result = text.GetBetween(start, end, comparison, startEndIncluded);
 
             // Assert
-            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.EqualTo(string.Empty));
+        }
+
+        [Test]
+        public void GetBetween_EndNotFoundAndStartEmpty_ReturnsEmptyString()
+        {
+            // Arrange
+            string text = "Hello world.";
+            string start = "";
+            string end = "bar";
+            StringComparison comparison = StringComparison.Ordinal;
+            bool startEndIncluded = false;
+
+            // Act
+            string result = text.GetBetween(start, end, comparison, startEndIncluded);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(string.Empty));
+        }
+
+        [Test]
+        public void GetBetween_BothStartAndEndNotFound_ReturnsEmptyString()
+        {
+            // Arrange
+            string text = "Hello world.";
+            string start = "foo";
+            string end = "bar";
+            StringComparison comparison = StringComparison.Ordinal;
+            bool startEndIncluded = false;
+
+            // Act
+            string result = text.GetBetween(start, end, comparison, startEndIncluded);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(string.Empty));
+        }
+
+        [Test]
+        public void GetBetween_StartEndIncluded_ReturnsSubstringWithTags()
+        {
+            // Arrange
+            string text = "Hello [world].";
+            string start = "[";
+            string end = "]";
+            StringComparison comparison = StringComparison.Ordinal;
+            bool startEndIncluded = true;
+
+            // Act
+            string result = text.GetBetween(start, end, comparison, startEndIncluded);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("[world]"));
         }
 
         [Test]

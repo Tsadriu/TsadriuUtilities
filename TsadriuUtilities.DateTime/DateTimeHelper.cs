@@ -40,9 +40,9 @@ namespace TsadriuUtilities
 
             foreach (string format in formats)
             {
-                for (int i = 0; i < currentDateStyles.Length; i++)
+                foreach (DateTimeStyles dateStyle in currentDateStyles)
                 {
-                    if (DateTime.TryParseExact(date, format, cultureInfo, (DateTimeStyles)i, out DateTime result))
+                    if (DateTime.TryParseExact(date, format, cultureInfo, dateStyle, out DateTime result))
                     {
                         return result;
                     }
@@ -104,9 +104,9 @@ namespace TsadriuUtilities
 
             foreach (string format in formats)
             {
-                for (int i = 0; i < currentDateStyles.Length; i++)
+                foreach (DateTimeStyles dateStyle in currentDateStyles)
                 {
-                    if (DateTime.TryParseExact(date, format, cultureInfo, (DateTimeStyles)i, out DateTime result))
+                    if (DateTime.TryParseExact(date, format, cultureInfo, dateStyle, out DateTime result))
                     {
                         return result;
                     }

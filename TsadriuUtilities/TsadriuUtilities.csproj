@@ -24,11 +24,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\foliveira\Documents\GitHub\TsadriuUtilities\TsadriuUtilities\TsadriuUtilities.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Users\foliveira\Documents\GitHub\TsadriuUtilities\TsadriuUtilities\TsadriuUtilities\TsadriuUtilities.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\foliveira\Documents\GitHub\TsadriuUtilities\TsadriuUtilities\TsadriuUtilities.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

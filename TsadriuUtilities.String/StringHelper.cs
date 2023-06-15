@@ -25,7 +25,9 @@ namespace TsadriuUtilities
         /// <returns>
         /// The substring between the <b><paramref name="start"/></b> and <b><paramref name="end"/></b> strings if both are found; otherwise, an empty string.<br/>
         /// If <b><paramref name="start"/></b> and <b><paramref name="end"/></b> are null or empty, the entire <b><paramref name="text"/></b> is returned.<br/>
-        /// If <b><paramref name="start"/></b> or <b><paramref name="end"/></b> is not found, an empty string is returned.<br/>
+        /// If <b><paramref name="start"/></b> was not found and <b><paramref name="end"/></b> is null or empty, an empty string is returned.<br/>
+        /// If <b><paramref name="end"/></b> was not found and <b><paramref name="start"/></b> is null or empty, an empty string is returned.<br/>
+        /// If both <b><paramref name="start"/></b> and <b><paramref name="end"/></b> parameters were not found, an empty string is returned.<br/>
         /// If <b><paramref name="startEndIncluded"/></b> is true, the returned substring includes the <b><paramref name="start"/></b> and <b><paramref name="end"/></b> strings; otherwise, only the content between the <b><paramref name="start"/></b> and <b><paramref name="end"/></b> strings is returned.
         /// </returns>
         public static string GetBetween(this string? text, string? start, string? end, StringComparison comparison, bool startEndIncluded = false)
@@ -41,12 +43,13 @@ namespace TsadriuUtilities
             // If the user does not use valid values (sends null or string.empty), return the entire text back
             if (isStartNull && isEndNull)
             {
-                return text;
+                throw new ArgumentNullException(nameof(start), $"Either the {nameof(start)} or {nameof(end)} parameter has to have a value.");
             }
 
             string copyOfText = text;
 
-            int startIndex = isStartNull ? 0 : copyOfText.IndexOf(start!, comparison);
+            // Just give the indexes -2 in case the start/end params are null/empty
+            int startIndex = isStartNull ? -2 : copyOfText.IndexOf(start!, comparison);
 
             // Only valid if the index is found
             if (startIndex > 0)
@@ -54,10 +57,10 @@ namespace TsadriuUtilities
                 copyOfText = copyOfText.Substring(startIndex + start!.Length);
             }
 
-            int endIndex = isEndNull ? copyOfText.Length : copyOfText.IndexOf(end!, comparison);
+            int endIndex = isEndNull ? -2 : copyOfText.IndexOf(end!, comparison);
 
             // Only valid if the index is found
-            if (endIndex > 0 && endIndex != copyOfText.Length)
+            if (endIndex > 0)
             {
                 copyOfText = copyOfText.Substring(0, endIndex);
             }
@@ -65,6 +68,26 @@ namespace TsadriuUtilities
             // If both tags were not found, then return empty, which is different
             // of the case when the user inputs empty/null tags
             if (startIndex == -1 && endIndex == -1)
+            {
+                return string.Empty;
+            }
+
+            // If the user gave a start input, but it was not found and the end tag is empty,
+            // then we just return empty.
+            if ((startIndex == -1 && !isStartNull) && isEndNull)
+            {
+                return string.Empty;
+            }
+
+            // Same case here, if the user gave an end input, but it was not found and
+            // the start tag is empty, then we just return empty.
+            if (isStartNull && (endIndex == -1 && !isEndNull))
+            {
+                return string.Empty;
+            }
+
+            // None of the inputs given were found, return empty.
+            if ((startIndex == -1 && !isStartNull) && (endIndex == -1 && !isEndNull))
             {
                 return string.Empty;
             }
@@ -180,17 +203,17 @@ namespace TsadriuUtilities
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="start"/> or <paramref name="end"/> is null or empty.</exception>
         public static List<string> GetManyBetween(this string? text, string? start, string? end, StringComparison comparison, bool startEndIncluded = false)
         {
-            if (string.IsNullOrWhiteSpace(text))
+            if (string.IsNullOrEmpty(text))
             {
                 return new List<string>();
             }
 
-            if (string.IsNullOrWhiteSpace(start))
+            if (string.IsNullOrEmpty(start))
             {
                 throw new ArgumentNullException(nameof(start), $"The {nameof(start)} parameter cannot be null or empty!");
             }
 
-            if (string.IsNullOrWhiteSpace(end))
+            if (string.IsNullOrEmpty(end))
             {
                 throw new ArgumentNullException(nameof(end), $"The {nameof(end)} parameter cannot be null or empty!");
             }
@@ -297,7 +320,7 @@ namespace TsadriuUtilities
         /// <param name="values">The values to check for in the string.</param>
         /// <returns><c>true</c> if the string contains any of the specified values; otherwise, <c>false</c>.</returns>
         public static bool ContainsAny(this string text, StringComparison comparison, params string[] values) => values.Any(value => text.Contains(value, comparison));
-        
+
         /// <summary>
         /// Checks whether a string contains any of the specified values.<br/>
         /// <b><see cref="StringComparison.OrdinalIgnoreCase"/></b> is used when comparing strings.

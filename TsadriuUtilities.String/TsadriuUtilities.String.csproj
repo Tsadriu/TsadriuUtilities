@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <TargetFrameworks>net7.0;net5.0;net6.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.1.0</Version>
+        <Version>1.1.1</Version>
         <Title>TsadriuUtilities.String</Title>
         <Authors>Tsadriu</Authors>
         <Description>TsadriuUtilities.String is a library that helps on manipulating and managing String types.</Description>
@@ -17,15 +17,18 @@
         <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>String, StringHelper</PackageTags>
-        <PackageReleaseNotes>Implemented methods:
-ContainsAll()
-ContainsAny()</PackageReleaseNotes>
-        <AssemblyVersion>1.1.0</AssemblyVersion>
-        <FileVersion>1.1.0</FileVersion>
+        <PackageReleaseNotes>Fixed an issue where the GetBetween method was not returning an empty string when one of the tags were not found.
+Fixed an issue where the method GetManyBetween would throw an exception when "\n", "\r" and such white-space characters were used. Now it only throws an exception when either one of the tags is empty "" or null.</PackageReleaseNotes>
+        <AssemblyVersion>1.1.1</AssemblyVersion>
+        <FileVersion>1.1.1</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
       <DocumentationFile>bin\Release\TsadriuUtilities.String.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile>bin\Debug\TsadriuUtilities.String.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
