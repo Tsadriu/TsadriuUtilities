@@ -32,13 +32,13 @@ namespace TsadriuUtilities
         /// </returns>
         public static string GetBetween(this string? text, string? start, string? end, StringComparison comparison, bool startEndIncluded = false)
         {
-            if (string.IsNullOrWhiteSpace(text))
+            if (string.IsNullOrEmpty(text))
             {
                 return string.Empty;
             }
 
-            bool isStartNull = string.IsNullOrWhiteSpace(start);
-            bool isEndNull = string.IsNullOrWhiteSpace(end);
+            bool isStartNull = string.IsNullOrEmpty(start);
+            bool isEndNull = string.IsNullOrEmpty(end);
 
             // If the user does not use valid values (sends null or string.empty), return the entire text back
             if (isStartNull && isEndNull)

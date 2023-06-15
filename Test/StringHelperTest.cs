@@ -7,6 +7,23 @@ namespace Test
     public class StringHelperTest
     {
         [Test]
+        public void GetBetween_StartHasValueAndEndIsWhiteSpace_ReturnsSubstring()
+        {
+            // Arrange
+            string text = "N. 21DVI04646 DEL 10/06/2021\nPeriodo di riferimento: 01/05/2021 - 31/05/2021\nQuantitï¿½ Vettoriata (smc): 3.490,228166\nDettaglio Voci Fattura Rif. IVA Importo";
+            string start = "Quantit";
+            string end = "\n";
+            StringComparison comparison = StringComparison.Ordinal;
+            bool startEndIncluded = false;
+
+            // Act
+            string result = text.GetBetween(start, end, comparison, startEndIncluded);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("ï¿½ Vettoriata (smc): 3.490,228166"));
+        }
+
+        [Test]
         public void GetBetween_BothStartAndEndFound_ReturnsSubstring()
         {
             // Arrange
@@ -69,14 +86,14 @@ namespace Test
             string end = string.Empty;
             StringComparison comparison = StringComparison.Ordinal;
             bool startEndIncluded = false;
-            
+
             // Act & Assert
             Assert.Throws<ArgumentNullException>(() =>
             {
-                text.GetBetween(string.Empty, string.Empty, comparison, startEndIncluded);
+                text.GetBetween(start, end, comparison, startEndIncluded);
             });
         }
-        
+
         [Test]
         public void GetBetween_StartIsNotFoundAndEndIsEmpty_ReturnsEmptyString()
         {
@@ -86,14 +103,14 @@ namespace Test
             string end = string.Empty;
             StringComparison comparison = StringComparison.Ordinal;
             bool startEndIncluded = false;
-            
+
             // Act
             string result = text.GetBetween(start, end, comparison, startEndIncluded);
 
             // Assert
             Assert.That(result, Is.EqualTo(string.Empty));
         }
-        
+
         [Test]
         public void GetBetween_StartIsEmptyAndEndIsNotFound_ReturnsEmptyString()
         {
@@ -103,14 +120,14 @@ namespace Test
             string end = "How are you?";
             StringComparison comparison = StringComparison.Ordinal;
             bool startEndIncluded = false;
-            
+
             // Act
             string result = text.GetBetween(start, end, comparison, startEndIncluded);
 
             // Assert
             Assert.That(result, Is.EqualTo(string.Empty));
         }
-        
+
         [Test]
         public void GetBetween_StartAndEndAreNotFound_ReturnsEmptyString()
         {
@@ -120,7 +137,7 @@ namespace Test
             string end = "How are you?";
             StringComparison comparison = StringComparison.Ordinal;
             bool startEndIncluded = false;
-            
+
             // Act
             string result = text.GetBetween(start, end, comparison, startEndIncluded);
 
