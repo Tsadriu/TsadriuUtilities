@@ -30,6 +30,10 @@
       <DocumentationFile>bin\Debug\TsadriuUtilities.DateTime.xml</DocumentationFile>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+    
     <ItemGroup>
         <None Include="icon.png">
             <Pack>True</Pack>
