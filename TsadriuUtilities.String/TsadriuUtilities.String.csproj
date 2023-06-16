@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <TargetFrameworks>net5.0;net6.0;net7.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.1.4</Version>
+        <Version>1.1.5</Version>
         <Title>TsadriuUtilities.String</Title>
         <Authors>Tsadriu</Authors>
         <Description>TsadriuUtilities.String is a library that helps on manipulating and managing String types.</Description>
@@ -17,9 +17,9 @@
         <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>String, StringHelper</PackageTags>
-        <PackageReleaseNotes>Fixed an issue where GetBetween() would sometimes fail to return an empty string when one of the given tags would not be found in the text.</PackageReleaseNotes>
-        <AssemblyVersion>1.1.4</AssemblyVersion>
-        <FileVersion>1.1.4</FileVersion>
+        <PackageReleaseNotes>Fixed an issue where GetManyBetween would sometimes return invalid elements.</PackageReleaseNotes>
+        <AssemblyVersion>1.1.5</AssemblyVersion>
+        <FileVersion>1.1.5</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

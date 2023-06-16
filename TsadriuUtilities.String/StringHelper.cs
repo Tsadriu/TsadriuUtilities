@@ -94,7 +94,7 @@ namespace TsadriuUtilities
 
             return copyOfText;
         }
-        
+
         /// <summary>
         /// Retrieves the substring between two specified strings within the given text, using the specified string comparison.
         /// <b><see cref="StringComparison.OrdinalIgnoreCase"/></b> is used when comparing strings.
@@ -208,12 +208,17 @@ namespace TsadriuUtilities
                 return new List<string>();
             }
 
-            return text
-                   .SplitBy(StringSplitByEnum.UserDefined, true, start)
-                   .Skip(1)
-                   .Select(value => value.GetBetween(start, end, comparison))
-                   .Select(value => startEndIncluded ? string.Concat(start, value, end) : value)
-                   .ToList();
+            List<string> textSplit = text.SplitBy(StringSplitByEnum.UserDefined, true, start).Skip(1).ToList();
+
+            return (
+                    from item in textSplit
+                    select item.GetBetween(start, end, comparison)
+                    into value
+                    where !string.IsNullOrEmpty(value)
+                    select startEndIncluded
+                        ? string.Concat(start, value, end)
+                        : value)
+                .ToList();
         }
 
         /// <summary>
