@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using TsadriuUtilities;
 using TsadriuUtilities.Enums;
 
@@ -731,6 +732,92 @@ namespace Test
 
             // Assert
             Assert.That(result, Is.False);
+        }
+        
+        [Test]
+        [TestCase("", ExpectedResult = "")]
+        [TestCase("Hello World", ExpectedResult = "HW")]
+        [TestCase("IdUm", ExpectedResult = "IU")]
+        [TestCase("12345", ExpectedResult = "")]
+        [TestCase("UPPERCASE", ExpectedResult = "UPPERCASE")]
+        public string GetUppercaseLettersTest(string input)
+        {
+            return input.GetUppercaseLetters();
+        }
+
+        [Test]
+        [TestCase("", ExpectedResult = "")]
+        [TestCase("Hello World", ExpectedResult = "elloorld")]
+        [TestCase("IdUm", ExpectedResult = "dm")]
+        [TestCase("12345", ExpectedResult = "")]
+        [TestCase("lowercase", ExpectedResult = "lowercase")]
+        public string GetLowercaseLettersTest(string input)
+        {
+            return input.GetLowercaseLetters();
+        }
+
+        [Test]
+        [TestCase("", -1, -1, ExpectedResult = "")]
+        [TestCase(null, -1, -1, ExpectedResult = null)]
+        [TestCase("Hello World", -1, -1, ExpectedResult = "hello world")]
+        [TestCase("Hello World", 0, 4, ExpectedResult = "hello World")]
+        [TestCase("Hello World", 6, 10, ExpectedResult = "Hello world")]
+        [TestCase("Hello World", 6, 100, ExpectedResult = "Hello World")]
+        public string ToLower_StartEndIndex(string input, int startIndex, int endIndex)
+        {
+            return input.ToLower(startIndex, endIndex);
+        }
+
+        [Test]
+        [TestCase("Hello World", -1, 3)]
+        public void ToLower_StartEndIndex_Throws(string input, int startIndex, int endIndex)
+        {
+            // Act & Assert
+            Assert.Throws<Exception>(() => input.ToLower(startIndex, endIndex));
+        }
+
+        [Test]
+        [TestCase("", -1, -1, ExpectedResult = "")]
+        [TestCase(null, -1, -1, ExpectedResult = null)]
+        [TestCase("Hello World", -1, -1, ExpectedResult = "HELLO WORLD")]
+        [TestCase("Hello World", 0, 4, ExpectedResult = "HELLO World")]
+        [TestCase("Hello World", 6, 10, ExpectedResult = "Hello WORLD")]
+        [TestCase("Hello World", 6, 100, ExpectedResult = "Hello World")]
+        public string ToUpper_StartEndIndex(string input, int startIndex, int endIndex)
+        {
+            return input.ToUpper(startIndex, endIndex);
+        }
+
+        [Test]
+        [TestCase("Hello World", 2, -1)]
+        public void ToUpper_StartEndIndex_Throws(string input, int startIndex, int endIndex)
+        {
+            // Act & Assert
+            Assert.Throws<Exception>(() => input.ToUpper(startIndex, endIndex));
+        }
+
+        [Test]
+        [TestCase("", -1, ExpectedResult = "")]
+        [TestCase(null, -1, ExpectedResult = null)]
+        [TestCase("Hello World", -1, ExpectedResult = "hello world")]
+        [TestCase("Hello World", 0, ExpectedResult = "hello World")]
+        [TestCase("Hello World", 6, ExpectedResult = "Hello world")]
+        [TestCase("Hello World", 100, ExpectedResult = "Hello World")]
+        public string ToLower_Index(string input, int index)
+        {
+            return input.ToLower(index);
+        }
+
+        [Test]
+        [TestCase("", -1, ExpectedResult = "")]
+        [TestCase(null, -1, ExpectedResult = null)]
+        [TestCase("Hello World", -1, ExpectedResult = "HELLO WORLD")]
+        [TestCase("hello world", 0, ExpectedResult = "Hello world")]
+        [TestCase("hello world", 6, ExpectedResult = "hello World")]
+        [TestCase("Hello World", 100, ExpectedResult = "Hello World")]
+        public string ToUpper_Index(string input, int index)
+        {
+            return input.ToUpper(index);
         }
     }
 }

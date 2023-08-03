@@ -234,6 +234,178 @@ namespace TsadriuUtilities
         public static List<string> GetManyBetween(this string? text, string? start, string? end, bool startEndIncluded = false) => GetManyBetween(text, start, end, StringComparison.OrdinalIgnoreCase, startEndIncluded);
 
         /// <summary>
+        /// Returns a copy of this string converted to lowercase.<br/>
+        /// If an <paramref name="index"/> is provided, only the character at that position will be converted to be lowercase.
+        /// </summary>
+        /// <param name="text">The text to be altered.</param>
+        /// <param name="index">The desired character to be altered (default is -1, which means the whole string will be lowercase).</param>
+        /// <returns>The lowercase equivalent of the current string.<br/>
+        /// If an <paramref name="index"/> is provided, only the character at that position will be converted to be lowercase.</returns>
+        public static string ToLower(this string? text, int index = -1) => ToLower(text, index == -1 ? null : new Range(index, index));
+        
+        /// <summary>
+        /// Returns a copy of this string converted to lowercase in a specified range. Example:<br/>
+        /// "Hello WORLD".ToLower(6, 10) -> "Hello world".<br/>
+        /// If both <paramref name="startIndex"/> and <paramref name="endIndex"/> are -1, the entire string will be converted to be lowercase.
+        /// </summary>
+        /// <remarks>If one index is -1, the other one must also be -1.</remarks>
+        /// <param name="text">The text to be altered.</param>
+        /// <param name="startIndex">The start index of the character to be altered (inclusive).</param>
+        /// <param name="endIndex">The end index of the character to be altered (inclusive).</param>
+        /// <returns>The lowercase equivalent of the current string based on the specified range.<br/>
+        /// If both indexes are -1, the whole string will be converted in lowercase.</returns>
+        public static string ToLower(this string? text, int startIndex, int endIndex)
+        {
+            // If one of the indexes is -1, the other one must be of the same value to avoid unexpected results
+            if ((startIndex == -1 && endIndex != -1) || (startIndex != -1 && endIndex == -1))
+            {
+                throw new Exception("If one of the indexes provided is -1, the other index must also be -1 to avoid unexpected results!");
+            }
+            
+            return text.ToLower(startIndex == -1 && endIndex == -1 ? null : new Range(startIndex, endIndex));   
+        }
+        
+        /// <summary>
+        /// Returns a new string with the characters in the specified range converted to lowercase.<br/>
+        /// If the input string is null or empty, the original string is returned.<br/>
+        /// If no range is provided, the entire string is converted to lowercase.<br/>
+        /// If the provided range is out of range for the input string, the original string is returned.
+        /// </summary>
+        /// <param name="text">The input string to modify.</param>
+        /// <param name="range">An optional range indicating the characters to convert to lowercase. If null, the entire string is converted.<br/>
+        /// Both <see cref="Range.Start"/> and <see cref="Range.End"/> numbers are inclusive.</param>
+        /// <returns>
+        /// A new string with the characters in the specified range converted to lowercase,
+        /// or the entire string converted to lowercase if no range is provided,
+        /// or the original string if the input string is null, empty, or the provided range is out of range.
+        /// </returns>
+        public static string ToLower(this string? text, Range? range = null)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return text;
+            }
+
+            if (range is null)
+            {
+                return text.ToLower();
+            }
+
+            var currentRange = (Range)range;
+
+            if (currentRange.Start.Value >= text.Length || currentRange.End.Value >= text.Length)
+            {
+                return text;
+            }
+
+            char[] charArray = text.ToCharArray();
+            int charsToAlter = (currentRange.End.Value - currentRange.Start.Value) + 1;
+
+            for (int i = 0; i < charsToAlter; i++)
+            {
+                charArray[currentRange.Start.Value + i] = char.ToLower(charArray[currentRange.Start.Value + i]);
+            }
+
+            var builder = new StringBuilder(text.Length);
+            builder.Append(charArray);
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Returns a copy of this string converted to uppercase.<br/>
+        /// If an <paramref name="index"/> is provided, only the character at that position will be converted to be uppercase.
+        /// </summary>
+        /// <param name="text">The text to be altered.</param>
+        /// <param name="index">The desired character to be altered (default is -1, which means the whole string will be uppercase).</param>
+        /// <returns>The uppercase equivalent of the current string.<br/>
+        /// If an <paramref name="index"/> is provided, only the character at that position will be converted to be uppercase.</returns>
+        public static string ToUpper(this string? text, int index = -1) => ToUpper(text, index == -1 ? null : new Range(index, index));
+        
+        /// <summary>
+        /// Returns a copy of this string converted to uppercase in a specified range. Example:<br/>
+        /// "Hello world".ToUpper(6, 10) -> "Hello WORLD".<br/>
+        /// If both <paramref name="startIndex"/> and <paramref name="endIndex"/> are -1, the entire string will be converted to be uppercase.
+        /// </summary>
+        /// <remarks>If one index is -1, the other one must also be -1.</remarks>
+        /// <param name="text">The text to be altered.</param>
+        /// <param name="startIndex">The start index of the character to be altered (inclusive).</param>
+        /// <param name="endIndex">The end index of the character to be altered (inclusive).</param>
+        /// <returns>The uppercase equivalent of the current string based on the specified range.<br/>
+        /// If both indexes are -1, the whole string will be converted in uppercase.</returns>
+        public static string ToUpper(this string? text, int startIndex, int endIndex)
+        {
+            // If one of the indexes is -1, the other one must be of the same value to avoid unexpected results
+            if ((startIndex == -1 && endIndex != -1) || (startIndex != -1 && endIndex == -1))
+            {
+                throw new Exception("If one of the indexes provided is -1, the other index must also be -1 to avoid unexpected results!");
+            }
+            
+            return text.ToUpper(startIndex == -1 && endIndex == -1 ? null : new Range(startIndex, endIndex));   
+        }
+
+        /// <summary>
+        /// Returns a new string with the characters in the specified range converted to uppercase.<br/>
+        /// If the input string is null or empty, the original string is returned.<br/>
+        /// If no range is provided, the entire string is converted to uppercase.<br/>
+        /// If the provided range is out of range for the input string, the original string is returned.
+        /// </summary>
+        /// <param name="text">The input string to modify.</param>
+        /// <param name="range">An optional range indicating the characters to convert to uppercase. If null, the entire string is converted.<br/>
+        /// Both <see cref="Range.Start"/> and <see cref="Range.End"/> numbers are inclusive.</param>
+        /// <returns>
+        /// A new string with the characters in the specified range converted to uppercase,
+        /// or the entire string converted to uppercase if no range is provided,
+        /// or the original string if the input string is null, empty, or the provided range is out of range.
+        /// </returns>
+        public static string ToUpper(this string? text, Range? range = null)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return text;
+            }
+
+            if (range is null)
+            {
+                return text.ToUpper();
+            }
+
+            var currentRange = (Range)range;
+
+            if (currentRange.Start.Value >= text.Length || currentRange.End.Value >= text.Length)
+            {
+                return text;
+            }
+
+            char[] charArray = text.ToCharArray();
+            int charsToAlter = (currentRange.End.Value - currentRange.Start.Value) + 1;
+
+            for (int i = 0; i < charsToAlter; i++)
+            {
+                charArray[currentRange.Start.Value + i] = char.ToUpper(charArray[currentRange.Start.Value + i]);
+            }
+
+            var builder = new StringBuilder(text.Length);
+            builder.Append(charArray);
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Retrieves all uppercase letters from the input string.
+        /// </summary>
+        /// <param name="text">The input string from which to extract uppercase letters.</param>
+        /// <returns>A new string containing only the uppercase letters present in the input string.</returns>
+        /// <exception cref="Exception">Throw when <paramref name="text"/> is null.</exception>
+        public static string GetUppercaseLetters(this string text) => text is null ? throw new Exception("The value cannot be null.") : string.Concat(text.Where(char.IsUpper));
+
+        /// <summary>
+        /// Retrieves all lowercase letters from the input string.
+        /// </summary>
+        /// <param name="text">The input string from which to extract lowercase letters.</param>
+        /// <returns>A new string containing only the lowercase letters present in the input string.</returns>
+        /// <exception cref="Exception">Throw when <paramref name="text"/> is null.</exception>
+        public static string GetLowercaseLetters(this string text) => text is null ? throw new Exception("The value cannot be null.") : string.Concat(text.Where(char.IsLower));
+
+        /// <summary>
         /// Determines whether the specified string is empty or consists only of white-space characters.
         /// </summary>
         /// <param name="value">The string to test.</param>
@@ -333,7 +505,7 @@ namespace TsadriuUtilities
         {
             return splitByEnum switch
             {
-                StringSplitByEnum.CarriageReturn => value.Split("\r", keepSeparator),
+                StringSplitByEnum.CarriageReturn or StringSplitByEnum.NewLineMacOs => value.Split("\r", keepSeparator),
                 StringSplitByEnum.Coma => value.Split(",", keepSeparator),
                 StringSplitByEnum.Dash => value.Split("-", keepSeparator),
                 StringSplitByEnum.Dot => value.Split(".", keepSeparator),
@@ -341,6 +513,8 @@ namespace TsadriuUtilities
                 StringSplitByEnum.EnvironmentNewLine => value.Split(Environment.NewLine, keepSeparator),
                 StringSplitByEnum.Equal => value.Split("=", keepSeparator),
                 StringSplitByEnum.NewLine => value.Split("\n", keepSeparator),
+                StringSplitByEnum.NewLineNonUnix => value.Split("\r\n", keepSeparator),
+                StringSplitByEnum.NewLineUnix => value.Split("\n", keepSeparator),
                 StringSplitByEnum.SingleQuote => value.Split("'", keepSeparator),
                 StringSplitByEnum.Space => value.Split(" ", keepSeparator),
                 StringSplitByEnum.Underscore => value.Split("_", keepSeparator),
