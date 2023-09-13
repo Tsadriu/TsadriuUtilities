@@ -208,17 +208,34 @@ namespace TsadriuUtilities
                 return new List<string>();
             }
 
-            List<string> textSplit = text.SplitBy(StringSplitByEnum.UserDefined, true, start).Skip(1).ToList();
+            var result = new List<string>();
+            int startLength = start.Length;
+            int endLength = end.Length;
 
-            return (
-                    from item in textSplit
-                    select item.GetBetween(start, end, comparison)
-                    into value
-                    where !string.IsNullOrEmpty(value)
-                    select startEndIncluded
-                        ? string.Concat(start, value, end)
-                        : value)
-                .ToList();
+            ReadOnlySpan<char> span = text.AsSpan();
+
+            while (true)
+            {
+                int sliceStart = span.IndexOf(start, comparison);
+                if (sliceStart == -1)
+                {
+                    break;
+                }
+
+                int sliceEnd = span.Slice(sliceStart + startLength).IndexOf(end, comparison);
+                if (sliceEnd == -1)
+                {
+                    break;
+                }
+
+                ReadOnlySpan<char> slice = span.Slice(startLength + sliceStart, sliceEnd);
+
+                result.Add(startEndIncluded ? $"{start}{slice.ToString()}{end}" : slice.ToString());
+
+                span = span.Slice(sliceEnd + endLength + sliceStart + startLength);
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -242,7 +259,7 @@ namespace TsadriuUtilities
         /// <returns>The lowercase equivalent of the current string.<br/>
         /// If an <paramref name="index"/> is provided, only the character at that position will be converted to be lowercase.</returns>
         public static string ToLower(this string? text, int index = -1) => ToLower(text, index == -1 ? null : new Range(index, index));
-        
+
         /// <summary>
         /// Returns a copy of this string converted to lowercase in a specified range. Example:<br/>
         /// "Hello WORLD".ToLower(6, 10) -> "Hello world".<br/>
@@ -261,10 +278,10 @@ namespace TsadriuUtilities
             {
                 throw new Exception("If one of the indexes provided is -1, the other index must also be -1 to avoid unexpected results!");
             }
-            
-            return text.ToLower(startIndex == -1 && endIndex == -1 ? null : new Range(startIndex, endIndex));   
+
+            return text.ToLower(startIndex == -1 && endIndex == -1 ? null : new Range(startIndex, endIndex));
         }
-        
+
         /// <summary>
         /// Returns a new string with the characters in the specified range converted to lowercase.<br/>
         /// If the input string is null or empty, the original string is returned.<br/>
@@ -283,7 +300,7 @@ namespace TsadriuUtilities
         {
             if (string.IsNullOrEmpty(text))
             {
-                return text;
+                return text!;
             }
 
             if (range is null)
@@ -320,7 +337,7 @@ namespace TsadriuUtilities
         /// <returns>The uppercase equivalent of the current string.<br/>
         /// If an <paramref name="index"/> is provided, only the character at that position will be converted to be uppercase.</returns>
         public static string ToUpper(this string? text, int index = -1) => ToUpper(text, index == -1 ? null : new Range(index, index));
-        
+
         /// <summary>
         /// Returns a copy of this string converted to uppercase in a specified range. Example:<br/>
         /// "Hello world".ToUpper(6, 10) -> "Hello WORLD".<br/>
@@ -339,8 +356,8 @@ namespace TsadriuUtilities
             {
                 throw new Exception("If one of the indexes provided is -1, the other index must also be -1 to avoid unexpected results!");
             }
-            
-            return text.ToUpper(startIndex == -1 && endIndex == -1 ? null : new Range(startIndex, endIndex));   
+
+            return text.ToUpper(startIndex == -1 && endIndex == -1 ? null : new Range(startIndex, endIndex));
         }
 
         /// <summary>
@@ -361,7 +378,7 @@ namespace TsadriuUtilities
         {
             if (string.IsNullOrEmpty(text))
             {
-                return text;
+                return text!;
             }
 
             if (range is null)

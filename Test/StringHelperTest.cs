@@ -403,6 +403,23 @@ namespace Test
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.Empty);
         }
+        
+        [Test]
+        public void GetManyBetween_Returns_Variables_Correctly()
+        {
+            // Arrange
+            string text = "javascript:downloadAllineamentoDati('090205f491003f7e','EXP41102_TERZ_20230525065814_FL1_E150_ELE_12883450152_02465700033_202370100006842_L.zip','SI')";
+            string start = "\'";
+            string end = "\'";
+            StringComparison comparison = StringComparison.Ordinal;
+
+            // Act
+            IEnumerable<string> result = text.GetManyBetween(start, end, comparison).ToList();
+
+            // Assert
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Count(), Is.EqualTo(3));
+        }
 
         [Test]
         public void IsEmpty_When_String_Is_Null_Returns_True()
