@@ -7,11 +7,6 @@ namespace TsadriuUtilities.Enums
     public enum StringUnicodeEscapeSequenceEnum
     {
         /// <summary>
-        /// All of the types defined in this enum, besides <see cref="UserDefined"/>.
-        /// </summary>
-        All,
-        
-        /// <summary>
         /// Defines a specific Unicode escape sequence that has not been mapped in the enum.
         /// </summary>
         UserDefined,
