@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <TargetFrameworks>net5.0;net6.0;net7.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.1.7</Version>
+        <Version>1.2.0</Version>
         <Title>TsadriuUtilities.String</Title>
         <Authors>Tsadriu</Authors>
         <Description>TsadriuUtilities.String is a library that helps on manipulating and managing String types.</Description>
@@ -17,9 +17,15 @@
         <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>String, StringHelper</PackageTags>
-        <PackageReleaseNotes>Improved performance of the GetManyBetween() method.</PackageReleaseNotes>
-        <AssemblyVersion>1.1.7</AssemblyVersion>
-        <FileVersion>1.1.7</FileVersion>
+        <PackageReleaseNotes>Implemented method RemoveUnicodeEscapeSequences().
+The method will remove '\u0000' like characters from an input string, the list of these defined unicode escape sequences can be retrieved by invoking the UnicodeEscapeSequence.GetDefaultUnitcodeEscapeSequences() method.
+The user can also add new characters that may have not been mapped, by casting the IReadonlyList to a List and adding a new element like this:
+new UnicodeEscapeSequence() {
+    UnicodeEscapeSequenceEnum = StringUnicodeEscapeSequenceEnum.UserDefined,
+    EscapeSequence = "YourSequenceCharacter"
+}</PackageReleaseNotes>
+        <AssemblyVersion>1.2.0</AssemblyVersion>
+        <FileVersion>1.2.0</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

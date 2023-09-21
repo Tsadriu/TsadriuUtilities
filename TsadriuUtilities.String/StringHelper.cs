@@ -15,6 +15,40 @@ namespace TsadriuUtilities
     public static class StringHelper
     {
         /// <summary>
+        /// Defines a dictionary to map unicode escape sequences to their equivalent string representations.
+        /// </summary>
+        private static readonly Dictionary<StringUnicodeEscapeSequenceEnum, string> unicodeEscapeSequenceDictionary = new Dictionary<StringUnicodeEscapeSequenceEnum, string>()
+        {
+            { StringUnicodeEscapeSequenceEnum.ENQ, "\u0005" }, // ENQ (enquiry)
+            { StringUnicodeEscapeSequenceEnum.ACK, "\u0006" }, // ACK (acknowledge)
+            { StringUnicodeEscapeSequenceEnum.BEL, "\u0007" }, // BEL (bell)
+            { StringUnicodeEscapeSequenceEnum.BS, "\u0008" }, // BS  (backspace)
+            { StringUnicodeEscapeSequenceEnum.TAB, "\u0009" }, // TAB (horizontal tab)
+            { StringUnicodeEscapeSequenceEnum.LF, "\u000A" }, // LF  (NL line feed, new line)
+            { StringUnicodeEscapeSequenceEnum.VT, "\u000B" }, // VT  (vertical tab)
+            { StringUnicodeEscapeSequenceEnum.FF, "\u000C" }, // FF  (NP form feed, new page)
+            { StringUnicodeEscapeSequenceEnum.CR, "\u000D" }, // CR  (carriage return)
+            { StringUnicodeEscapeSequenceEnum.SO, "\u000E" }, // SO  (shift out)
+            { StringUnicodeEscapeSequenceEnum.SI, "\u000F" }, // SI  (shift in)
+            { StringUnicodeEscapeSequenceEnum.DLE, "\u0010" }, // DLE (data link escape)
+            { StringUnicodeEscapeSequenceEnum.DC1, "\u0011" }, // DC1 (device control 1)
+            { StringUnicodeEscapeSequenceEnum.DC2, "\u0012" }, // DC2 (device control 2)
+            { StringUnicodeEscapeSequenceEnum.DC3, "\u0013" }, // DC3 (device control 3)
+            { StringUnicodeEscapeSequenceEnum.DC4, "\u0014" }, // DC4 (device control 4)
+            { StringUnicodeEscapeSequenceEnum.NAK, "\u0015" }, // NAK (negative acknowledge)
+            { StringUnicodeEscapeSequenceEnum.SYN, "\u0016" }, // SYN (synchronous idle)
+            { StringUnicodeEscapeSequenceEnum.ETB, "\u0017" }, // ETB (end of trans. block)
+            { StringUnicodeEscapeSequenceEnum.CAN, "\u0018" }, // CAN (cancel)
+            { StringUnicodeEscapeSequenceEnum.EM, "\u0019" }, // EM  (end of medium)
+            { StringUnicodeEscapeSequenceEnum.SUB, "\u001A" }, // SUB (substitute)
+            { StringUnicodeEscapeSequenceEnum.ESC, "\u001B" }, // ESC (escape)
+            { StringUnicodeEscapeSequenceEnum.FS, "\u001C" }, // FS  (file separator)
+            { StringUnicodeEscapeSequenceEnum.GS, "\u001D" }, // GS  (group separator)
+            { StringUnicodeEscapeSequenceEnum.RS, "\u001E" }, // RS  (record separator)
+            { StringUnicodeEscapeSequenceEnum.US, "\u001F" }, // US  (unit separator)
+        };
+
+        /// <summary>
         /// Retrieves the substring between two specified strings within the given text, using the specified string comparison.
         /// </summary>
         /// <param name="text">The text to search within.</param>
@@ -538,6 +572,28 @@ namespace TsadriuUtilities
                 StringSplitByEnum.UserDefined => value.Split(separator, keepSeparator),
                 _ => throw new NotImplementedException($"Type '{splitByEnum}' has not been implemented."),
             };
+        }
+
+        /// <summary>
+        /// Removes the Unicode Escape sequences from the specified string.
+        /// </summary>
+        /// <param name="text">The source string from which the Unicode escape sequences are to be removed.</param>
+        /// <param name="unicodeEscapeSequences">A list of Unicode escape sequences to be removed from the string. 
+        /// If this argument is not specified then the default Unicode escape sequences are used by invoking the <see cref="UnicodeEscapeSequence.GetDefaultUnicodeEscapeSequences"/> method.</param>
+        /// <returns>A string with all the specified Unicode escape sequences removed.</returns>
+        public static string RemoveUnicodeEscapeSequences(this string text, IReadOnlyList<UnicodeEscapeSequence>? unicodeEscapeSequences = null)
+        {
+            if (unicodeEscapeSequences is null || !unicodeEscapeSequences.Any())
+            {
+                unicodeEscapeSequences = UnicodeEscapeSequence.GetDefaultUnicodeEscapeSequences();
+            }
+
+            foreach (UnicodeEscapeSequence unicodeEscapeSequence in unicodeEscapeSequences)
+            {
+                text = text.Replace(unicodeEscapeSequence.EscapeSequence, unicodeEscapeSequence.ReplaceTo);
+            }
+
+            return text;
         }
 
         /// <summary>

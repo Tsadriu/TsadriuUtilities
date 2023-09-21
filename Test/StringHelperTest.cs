@@ -1,3 +1,4 @@
+using System.Text;
 using NUnit.Framework.Internal;
 using TsadriuUtilities;
 using TsadriuUtilities.Enums;
@@ -403,7 +404,7 @@ namespace Test
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.Empty);
         }
-        
+
         [Test]
         public void GetManyBetween_Returns_Variables_Correctly()
         {
@@ -750,7 +751,7 @@ namespace Test
             // Assert
             Assert.That(result, Is.False);
         }
-        
+
         [Test]
         [TestCase("", ExpectedResult = "")]
         [TestCase("Hello World", ExpectedResult = "HW")]
@@ -835,6 +836,72 @@ namespace Test
         public string ToUpper_Index(string input, int index)
         {
             return input.ToUpper(index);
+        }
+        
+        [Test]
+        public void RemoveUnicodeEscapeSequences_PassesNullList_UsesDefaultSequences()
+        {
+            // Arrange
+            var text = "\u00C0\u00C1";
+
+            // Invoke
+            var result = text.RemoveUnicodeEscapeSequences();
+
+            // Assert
+            Assert.That(result, Is.EqualTo("AA"));
+        }
+
+        [Test]
+        public void RemoveUnicodeEscapeSequences_PassesEmptyList_UsesDefaultSequences()
+        {
+            // Arrange
+            var text = "\u00C0\u00C1";
+            var emptyList = new List<UnicodeEscapeSequence>();
+
+            // Invoke
+            var result = text.RemoveUnicodeEscapeSequences(emptyList);
+
+            // Assert
+            Assert.That(result, Is.EqualTo("AA"));
+        }
+        
+        [Test]
+        public void RemoveUnicodeEscapeSequences_RemovesSpecifiedSequences()
+        {
+            // Arrange
+            var text = "\u00C0\u00C1\u00C1\u00C0";
+
+            // Invoke
+            var result = text.RemoveUnicodeEscapeSequences();
+
+            // Assert
+            Assert.That(result, Is.EqualTo("AAAA"));
+        }
+        
+        [Test]
+        public void RemoveUnicodeEscapeSequences_LeavesNonEscapeSequenceCharactersAlone()
+        {
+            // Arrange
+            var text = "This is a test.";
+
+            // Invoke
+            var result = text.RemoveUnicodeEscapeSequences();
+
+            // Assert
+            Assert.That(result, Is.EqualTo("This is a test."));
+        }
+        
+        [Test]
+        public void RemoveUnicodeEscapeSequences_ReturnsTextWithoutUnicodeEscapeSequences()
+        {
+            // Arrange
+            var text = "\"CodiceClienteFattura\";\"CodiceSDI\";\"PEC Destinatario\";\"Denominazione\";\"IdFiscaleIVA-SiglaInterStato\";\"CodiceFiscale\";\"CodicePartIVA\";\"IndirizzoCliente\";\"CAP\";\"LocalitÃ\u00a0Cliente\";\"SiglaInterStato\";\"TipoDocumento\";\"Divisa\";\"DataCompetFattura\";\"NumeroFattura\";\"ImportoTotDocumento\";\"NumeroRiga\";\"TipoCessionePrestazione\";\"CodiceTipo-CodiceValore\";\"CodiceArticolo-CodiceValore\";\"Descrizione\";\"QuantitÃ\u00a0\";\"PrezzoUnitario\";\"PrezzoTotale\";\"AliquotaIVA\";\"Natura\";\"ImponibileImporto\";\"Imposta\";\"RiferimentoNormativo\";\"Causale/DDI\";\"NumeroDDT\";\"DataDDT\";\"TipoDato\";\"AltriDatiGestionali\";\"TipoDato\";\"AltriDatiGestionali\";\"RiferimentoPDF\"\n\"C001\";\"TNVJRCB\";\"\";\"DOLCE & GABBANA SRL\";\"IT\";\"09297890155\";\"09297890155\";\"VIA C. GOLDONI 10\";\"20129\";\"MILANO\";\"IT\";\"TD01\";\"EUR\";\"2023-09-15\";\"A 00002\";\"15789.24\";\"1\";\"\";\"a\";\"AFFITTO\";\"Immobile sito in PORTOFINO PIAZZA MARTIRI DELL'OLIVETTA 54\";\"1.00\";\"12942.0000\";\"12942.00\";\"0.22\";\"\";\"12942.00\";\"2847.24\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"FT_XCL_2023-09-12_A 00002.pdf\"\n\u001a";
+
+            // Invoke
+            var result = text.RemoveUnicodeEscapeSequences();
+
+            // Assert
+            Assert.That(result, Is.EqualTo("\"CodiceClienteFattura\";\"CodiceSDI\";\"PEC Destinatario\";\"Denominazione\";\"IdFiscaleIVA-SiglaInterStato\";\"CodiceFiscale\";\"CodicePartIVA\";\"IndirizzoCliente\";\"CAP\";\"LocalitACliente\";\"SiglaInterStato\";\"TipoDocumento\";\"Divisa\";\"DataCompetFattura\";\"NumeroFattura\";\"ImportoTotDocumento\";\"NumeroRiga\";\"TipoCessionePrestazione\";\"CodiceTipo-CodiceValore\";\"CodiceArticolo-CodiceValore\";\"Descrizione\";\"QuantitA\";\"PrezzoUnitario\";\"PrezzoTotale\";\"AliquotaIVA\";\"Natura\";\"ImponibileImporto\";\"Imposta\";\"RiferimentoNormativo\";\"Causale/DDI\";\"NumeroDDT\";\"DataDDT\";\"TipoDato\";\"AltriDatiGestionali\";\"TipoDato\";\"AltriDatiGestionali\";\"RiferimentoPDF\"\"C001\";\"TNVJRCB\";\"\";\"DOLCE & GABBANA SRL\";\"IT\";\"09297890155\";\"09297890155\";\"VIA C. GOLDONI 10\";\"20129\";\"MILANO\";\"IT\";\"TD01\";\"EUR\";\"2023-09-15\";\"A 00002\";\"15789.24\";\"1\";\"\";\"a\";\"AFFITTO\";\"Immobile sito in PORTOFINO PIAZZA MARTIRI DELL'OLIVETTA 54\";\"1.00\";\"12942.0000\";\"12942.00\";\"0.22\";\"\";\"12942.00\";\"2847.24\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"\";\"FT_XCL_2023-09-12_A 00002.pdf\""));
         }
     }
 }
