@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsadriuUtilities.String", "TsadriuUtilities.String\TsadriuUtilities.String.csproj", "{AD30B169-BDC1-47DA-A4A5-0475539CB6B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsadriuUtilities.Collections", "TsadriuUtilities.Collections\TsadriuUtilities.Collections.csproj", "{CA5D5CCC-B524-40B9-A349-313E442C8858}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{AD30B169-BDC1-47DA-A4A5-0475539CB6B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD30B169-BDC1-47DA-A4A5-0475539CB6B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD30B169-BDC1-47DA-A4A5-0475539CB6B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA5D5CCC-B524-40B9-A349-313E442C8858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA5D5CCC-B524-40B9-A349-313E442C8858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA5D5CCC-B524-40B9-A349-313E442C8858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA5D5CCC-B524-40B9-A349-313E442C8858}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
