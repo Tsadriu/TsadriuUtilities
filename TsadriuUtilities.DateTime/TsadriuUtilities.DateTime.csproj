@@ -3,9 +3,9 @@
     <PropertyGroup>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <TargetFrameworks>net7.0;net5.0;net6.0</TargetFrameworks>
+        <TargetFrameworks>net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.1.2</Version>
+        <Version>1.2.0</Version>
         <Title>TsadriuUtilities.DateTime</Title>
         <Authors>Tsadriu</Authors>
         <Description>TsadriuUtilities.DateTime is a library that helps on manipulating and managing DateTime types.</Description>
@@ -17,9 +17,9 @@
         <RepositoryUrl>https://github.com/Tsadriu/TsadriuUtilities</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageTags>DateTime, DateTimeHelper</PackageTags>
-        <PackageReleaseNotes>Fixed an issue where the ToDateTime() and ToNullableDateTime() methods would not take in consideration the DateStyle provided.</PackageReleaseNotes>
-        <AssemblyVersion>1.1.2</AssemblyVersion>
-        <FileVersion>1.1.2</FileVersion>
+        <PackageReleaseNotes>Update the DateTimeHelper class by including methods for Unix timestamp conversion and write corresponding tests. Also, expand the target frameworks of the project to include .NET 8.0. The additional methods convert Unix timestamps to DateTime and vice versa, handling different cases such as local time zone, UTC, and optional TimeSpan, as well as specific exceptions.</PackageReleaseNotes>
+        <AssemblyVersion>1.2.0</AssemblyVersion>
+        <FileVersion>1.2.0</FileVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

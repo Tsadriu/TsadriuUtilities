@@ -79,7 +79,7 @@ namespace TsadriuUtilities
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="date"/> is null or empty.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="date"/> could not be converted into a <see cref="DateTime"/> object.</exception>
         public static DateTime ToDateTime(this string date, params string[] formats) => date.ToDateTime(CultureInfo.InvariantCulture, null, formats);
-        
+
         /// <summary>
         /// Attempts to convert a date from a <see cref="string"/> to a nullable <see cref="DateTime"/>.
         /// </summary>
@@ -115,7 +115,7 @@ namespace TsadriuUtilities
 
             return null;
         }
-        
+
         /// <summary>
         /// Attempts to convert a date from a <see cref="string"/> to a nullable <see cref="DateTime"/>.
         /// </summary>
@@ -129,7 +129,7 @@ namespace TsadriuUtilities
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="date"/> is null or empty.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="date"/> could not be converted into a <see cref="DateTime"/> object.</exception>
         public static DateTime? ToNullableDateTime(this string date, CultureInfo cultureInfo, params string[] formats) => date.ToNullableDateTime(cultureInfo, null, formats);
-        
+
         /// <summary>
         /// Attempts to convert a date from a <see cref="string"/> to a nullable <see cref="DateTime"/>.<br/>
         /// <b><see cref="CultureInfo.InvariantCulture"/></b> will be used for the culture.
@@ -213,5 +213,61 @@ namespace TsadriuUtilities
         /// <param name="years">The number of years to remove.</param>
         /// <returns>The resulting date after removing the specified number of years.</returns>
         public static DateTime RemoveYears(this DateTime date, int years) => date.AddYears(-Math.Abs(years));
+
+        /// <summary>
+        /// Converts a Unix timestamp to a <see cref="DateTime"/> in the local time zone.
+        /// </summary>
+        /// <param name="unixTime">The Unix timestamp to convert.</param>
+        /// <returns>A <see cref="DateTime"/> equivalent to the provided Unix timestamp in the local time zone.</returns>
+        public static DateTime FromUnixTimeToDateTime(this long unixTime)
+        {
+            if (unixTime < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(unixTime), "The Unix time cannot be negative.");
+            }
+            
+            if (unixTime >= DateTimeOffset.MaxValue.ToUnixTimeSeconds())
+            {
+                throw new ArgumentOutOfRangeException(nameof(unixTime), "The Unix time is too large to be converted to a DateTime object.");
+            }
+
+            return DateTimeOffset.FromUnixTimeSeconds(unixTime).DateTime.ToLocalTime();
+        }
+
+        /// <summary>
+        /// Converts a Unix timestamp to a DateTime object in UTC.
+        /// </summary>
+        /// <param name="unixTime">The Unix timestamp to convert.</param>
+        /// <returns>The equivalent DateTime object in UTC.</returns>
+        public static DateTime FromUnixTimeToDateTimeUtc(this long unixTime)
+        {
+            if (unixTime < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(unixTime), "The Unix time cannot be negative.");
+            }
+
+            if (unixTime >= DateTimeOffset.MaxValue.ToUnixTimeSeconds())
+            {
+                throw new ArgumentOutOfRangeException(nameof(unixTime), "The Unix time is too large to be converted to a DateTime object.");
+            }
+
+            return DateTimeOffset.FromUnixTimeSeconds(unixTime).ToUniversalTime().DateTime;
+        }
+
+        /// <summary>
+        /// Converts a <see cref="DateTime"/> to Unix time.
+        /// </summary>
+        /// <param name="dateTime">The <see cref="DateTime"/> to convert.</param>
+        /// <param name="timeSpan">An optional <see cref="TimeSpan"/> to specify the offset from UTC.</param>
+        /// <returns>The Unix time (number of seconds since January 1, 1970).</returns>
+        public static long FromDateTimeToUnixTime(this DateTime dateTime, TimeSpan? timeSpan = null) => timeSpan != null ? new DateTimeOffset(dateTime, timeSpan.Value).ToUnixTimeSeconds() : new DateTimeOffset(dateTime).ToUnixTimeSeconds();
+
+        /// <summary>
+        /// Converts a <see cref="DateTime"/> value to a Unix timestamp in UTC.
+        /// </summary>
+        /// <param name="dateTime">The <see cref="DateTime"/> value to convert.</param>
+        /// <param name="timeSpan">An optional <see cref="TimeSpan"/> value to specify the time zone offset. If not provided, the local time zone offset will be used.</param>
+        /// <returns>The Unix timestamp representing the provided <paramref name="dateTime"/> value in UTC.</returns>
+        public static long FromDateTimeToUnixTimeUtc(this DateTime dateTime, TimeSpan? timeSpan = null) => timeSpan != null ? new DateTimeOffset(dateTime, timeSpan.Value).ToUniversalTime().ToUnixTimeSeconds() : new DateTimeOffset(dateTime, TimeSpan.Zero).ToUniversalTime().ToUnixTimeSeconds();
     }
 }

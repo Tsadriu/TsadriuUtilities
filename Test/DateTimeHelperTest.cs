@@ -665,5 +665,74 @@ namespace Test
             // Assert
             Assert.That(result, Is.EqualTo(expectedDate));
         }
+
+        [Test]
+        public void FromUnixTimeToDateTime_ConvertsCorrectly()
+        {
+            long unixTime = 1609459200;// January 1, 2021 UTC
+            var expectedDateTime = new DateTime(2021, 1, 1, 0, 0, 0).ToLocalTime();
+
+            var convertedDateTime = unixTime.FromUnixTimeToDateTime();
+
+            Assert.AreEqual(expectedDateTime, convertedDateTime);
+        }
+
+        [Test]
+        public void FromUnixTimeToDateTimeUtc_ConvertsCorrectly()
+        {
+            long unixTime = 1609459200;// January 1, 2021 UTC
+            var expectedDateTime = new DateTime(2021, 1, 1, 0, 0, 0);
+
+            var convertedDateTime = unixTime.FromUnixTimeToDateTimeUtc();
+
+            Assert.AreEqual(expectedDateTime, convertedDateTime);
+        }
+
+        [Test]
+        public void FromDateTimeToUnixTime_Utc_ConvertsCorrectly()
+        {
+            var dateTime = new DateTime(2021, 1, 1, 0, 0, 0);
+            var expectedUnixTime = 1609459200;
+
+            var convertedUnixTime = dateTime.FromDateTimeToUnixTimeUtc();
+
+            Assert.AreEqual(expectedUnixTime, convertedUnixTime);
+        }
+
+        [Test]
+        public void FromDateTimeToUnixTime_TimeSpanProvided_ConvertsCorrectly()
+        {
+            var dateTime = new DateTime(2021, 1, 1, 0, 0, 0);
+            var timeSpan = TimeSpan.FromHours(3);
+            var expectedUnixTime = 1609459200 - 3 * 60 * 60;// Subtract 3 hours in seconds
+
+            var convertedUnixTime = dateTime.FromDateTimeToUnixTime(timeSpan);
+
+            Assert.AreEqual(expectedUnixTime, convertedUnixTime);
+        }
+
+        [TestCase(-1)]
+        [TestCase(long.MaxValue)]
+        public void FromUnixTimeToDateTime_ErroneousInputs_ThrowsArgumentOutOfRangeException(long inputUnixTime)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => inputUnixTime.FromUnixTimeToDateTime());
+        }
+
+        [TestCase(-1)]
+        [TestCase(long.MaxValue)]
+        public void FromUnixTimeToDateTimeUtc_ErroneousInputs_ThrowsArgumentOutOfRangeException(long inputUnixTime)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => inputUnixTime.FromUnixTimeToDateTimeUtc());
+        }
+
+        [Test]
+        public void FromDateTimeToUnixTime_ErroneousInputs_ThrowsArgumentException()
+        {
+            var dateTime = new DateTime(2100, 12, 31);
+            // Larger than int.MaxValue
+            var longTimespan = new TimeSpan(long.MaxValue);
+
+            Assert.Throws<ArgumentException>(() => dateTime.FromDateTimeToUnixTime(longTimespan));
+        }
     }
 }
